@@ -6,6 +6,7 @@
 //  Copyright © 2017 Kristie Huang. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class ViewController: UIViewController {

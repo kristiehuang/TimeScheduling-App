@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9EC3DD491F0DF4B300A933F2 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EC3DD481F0DF4B300A933F2 /* Login.storyboard */; };
+		9EC3DD4B1F0DF4C200A933F2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC3DD4A1F0DF4C200A933F2 /* LoginViewController.swift */; };
+		9EC3DD4D1F0DF57400A933F2 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9EC3DD4C1F0DF57400A933F2 /* Fonts */; };
 		9EF4498A1F09A8C8002EA988 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF449891F09A8C8002EA988 /* AppDelegate.swift */; };
 		9EF4498C1F09A8C8002EA988 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF4498B1F09A8C8002EA988 /* ViewController.swift */; };
 		9EF4498F1F09A8C8002EA988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EF4498D1F09A8C8002EA988 /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9EC3DD481F0DF4B300A933F2 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		9EC3DD4A1F0DF4C200A933F2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9EC3DD4C1F0DF57400A933F2 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		9EF449861F09A8C8002EA988 /* Time-Scheduling-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time-Scheduling-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EF449891F09A8C8002EA988 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EF4498B1F09A8C8002EA988 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +60,7 @@
 		9EF449881F09A8C8002EA988 /* Time-Scheduling-App */ = {
 			isa = PBXGroup;
 			children = (
+				9EC3DD4C1F0DF57400A933F2 /* Fonts */,
 				9EF449891F09A8C8002EA988 /* AppDelegate.swift */,
 				9EF4499C1F09AA82002EA988 /* ViewControllers */,
 				9EF4499B1F09AA7E002EA988 /* Storyboards */,
@@ -68,6 +75,7 @@
 			children = (
 				9EF449921F09A8C8002EA988 /* LaunchScreen.storyboard */,
 				9EF4498D1F09A8C8002EA988 /* Main.storyboard */,
+				9EC3DD481F0DF4B300A933F2 /* Login.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -76,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				9EF4498B1F09A8C8002EA988 /* ViewController.swift */,
+				9EC3DD4A1F0DF4C200A933F2 /* LoginViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -140,6 +149,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EC3DD4D1F0DF57400A933F2 /* Fonts in Resources */,
+				9EC3DD491F0DF4B300A933F2 /* Login.storyboard in Resources */,
 				9EF449941F09A8C8002EA988 /* LaunchScreen.storyboard in Resources */,
 				9EF449911F09A8C8002EA988 /* Assets.xcassets in Resources */,
 				9EF4498F1F09A8C8002EA988 /* Main.storyboard in Resources */,
@@ -153,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EC3DD4B1F0DF4C200A933F2 /* LoginViewController.swift in Sources */,
 				9EF4498C1F09A8C8002EA988 /* ViewController.swift in Sources */,
 				9EF4498A1F09A8C8002EA988 /* AppDelegate.swift in Sources */,
 			);
@@ -320,6 +332,7 @@
 				9EF4499A1F09A8C8002EA988 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
