@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SMN-Qv-0xy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFText-Regular.otf">
+            <string>SFUIText-Regular</string>
+        </array>
+        <array key="SFText-Semibold.otf">
+            <string>SFUIText-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="M0A-eQ-d9H">
@@ -20,12 +28,78 @@
                     <view key="view" contentMode="scaleToFill" id="eAN-aF-d6y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="phY-ps-vmB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bs4-1Z-DTa">
+                                <rect key="frame" x="50" y="423.5" width="275" height="50"/>
+                                <color key="backgroundColor" red="0.29411764705882354" green="0.62352941176470589" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="quw-Nh-10I"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="25"/>
+                                <color key="tintColor" red="0.29514700174331665" green="0.62262469530105591" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Register or Log In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonTapped:" destination="SMN-Qv-0xy" eventType="touchUpInside" id="6Ye-UW-fg0"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WH7-rB-jZu">
+                                <rect key="frame" x="50" y="154" width="275" height="229.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Friends icon" translatesAutoresizingMaskIntoConstraints="NO" id="rZJ-t0-OcK">
+                                        <rect key="frame" x="89.5" y="0.0" width="96" height="72"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLT-Pw-HUG">
+                                        <rect key="frame" x="51" y="92" width="173" height="36"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="A I R T I M E">
+                                                <attributes>
+                                                    <font key="NSFont" size="30" name="SFUIText-Semibold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coordinate times between friends &amp; family to meet. Event scheduling as lightweight, quick, and free as air." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgz-P4-e2T">
+                                        <rect key="frame" x="0.0" y="148" width="275" height="81.5"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WH7-rB-jZu" firstAttribute="leading" secondItem="eAN-aF-d6y" secondAttribute="leading" constant="50" id="0xv-2W-p7N"/>
+                            <constraint firstItem="bs4-1Z-DTa" firstAttribute="width" secondItem="WH7-rB-jZu" secondAttribute="width" id="67U-K3-Z7O"/>
+                            <constraint firstAttribute="trailing" secondItem="WH7-rB-jZu" secondAttribute="trailing" constant="50" id="8QE-th-2H0"/>
+                            <constraint firstItem="WH7-rB-jZu" firstAttribute="top" secondItem="TLx-k2-1q1" secondAttribute="bottom" constant="134" id="8UK-uw-GOB"/>
+                            <constraint firstItem="Kov-OO-7fi" firstAttribute="top" secondItem="phY-ps-vmB" secondAttribute="bottom" id="Aia-Pt-TJ1"/>
+                            <constraint firstItem="phY-ps-vmB" firstAttribute="top" secondItem="eAN-aF-d6y" secondAttribute="top" id="Os0-UE-lhh"/>
+                            <constraint firstAttribute="trailing" secondItem="phY-ps-vmB" secondAttribute="trailing" id="VKQ-Ih-Qzv"/>
+                            <constraint firstItem="phY-ps-vmB" firstAttribute="leading" secondItem="eAN-aF-d6y" secondAttribute="leading" id="Z5s-1r-g92"/>
+                            <constraint firstItem="bs4-1Z-DTa" firstAttribute="top" secondItem="WH7-rB-jZu" secondAttribute="bottom" constant="40" id="bKt-nY-gLf"/>
+                            <constraint firstAttribute="trailing" secondItem="bs4-1Z-DTa" secondAttribute="trailing" constant="50" id="d3C-iO-4Az"/>
+                            <constraint firstItem="bs4-1Z-DTa" firstAttribute="leading" secondItem="eAN-aF-d6y" secondAttribute="leading" constant="50" id="wWv-6d-411"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="bs4-1Z-DTa" id="4eh-Tu-emH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NIk-jj-Bpi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="455" y="-173"/>
+            <point key="canvasLocation" x="453.60000000000002" y="-173.16341829085459"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Background" width="1125" height="2001"/>
+        <image name="Friends icon" width="96" height="72"/>
+    </resources>
 </document>
