@@ -10,7 +10,6 @@
 		19D53A496CFADDE3B9A5F724 /* Pods_Time_Scheduling_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8A20C59D56D69287C0AE01 /* Pods_Time_Scheduling_App.framework */; };
 		9E1A599D1F0E006100792D24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A599C1F0E006100792D24 /* AppDelegate.swift */; };
 		9E1A599F1F0E006900792D24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A599E1F0E006900792D24 /* Assets.xcassets */; };
-		9E1A59A11F0E007100792D24 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59A01F0E007100792D24 /* Fonts */; };
 		9E1A59A81F0E00A500792D24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */; };
 		9E1A59A91F0E00A500792D24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59A71F0E00A500792D24 /* Main.storyboard */; };
 		9E1A59B31F0E00DF00792D24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A59B21F0E00DF00792D24 /* ViewController.swift */; };
@@ -18,6 +17,14 @@
 		9E1A59C11F0E020E00792D24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59BF1F0E020E00792D24 /* GoogleService-Info.plist */; };
 		9E1A59C41F0E028C00792D24 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A59C31F0E028C00792D24 /* LoginViewController.swift */; };
 		9E1A59C51F0E037900792D24 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59C01F0E020E00792D24 /* Info.plist */; };
+		9E758A051F1181A800D2745C /* SFDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */; };
+		9E758A061F1181A800D2745C /* SFDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */; };
+		9E758A071F1181A800D2745C /* SFDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FF1F1181A800D2745C /* SFDisplay-Regular.otf */; };
+		9E758A081F1181A800D2745C /* SFText-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E758A001F1181A800D2745C /* SFText-HeavyItalic.otf */; };
+		9E758A091F1181A800D2745C /* SFText-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E758A011F1181A800D2745C /* SFText-Light.otf */; };
+		9E758A0A1F1181A800D2745C /* SFText-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E758A021F1181A800D2745C /* SFText-Medium.otf */; };
+		9E758A0B1F1181A800D2745C /* SFText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E758A031F1181A800D2745C /* SFText-Regular.otf */; };
+		9E758A0C1F1181A800D2745C /* SFText-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E758A041F1181A800D2745C /* SFText-Semibold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +33,6 @@
 		8550BE00F5A683265232E74B /* Pods-Time-Scheduling-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time-Scheduling-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Time-Scheduling-App/Pods-Time-Scheduling-App.debug.xcconfig"; sourceTree = "<group>"; };
 		9E1A599C1F0E006100792D24 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E1A599E1F0E006900792D24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9E1A59A01F0E007100792D24 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E1A59A71F0E00A500792D24 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
 		9E1A59B21F0E00DF00792D24 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +40,14 @@
 		9E1A59BF1F0E020E00792D24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9E1A59C01F0E020E00792D24 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E1A59C31F0E028C00792D24 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Light.otf"; path = "Fonts/SFDisplay-Light.otf"; sourceTree = "<group>"; };
+		9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Medium.otf"; path = "Fonts/SFDisplay-Medium.otf"; sourceTree = "<group>"; };
+		9E7589FF1F1181A800D2745C /* SFDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Regular.otf"; path = "Fonts/SFDisplay-Regular.otf"; sourceTree = "<group>"; };
+		9E758A001F1181A800D2745C /* SFText-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-HeavyItalic.otf"; path = "Fonts/SFText-HeavyItalic.otf"; sourceTree = "<group>"; };
+		9E758A011F1181A800D2745C /* SFText-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Light.otf"; path = "Fonts/SFText-Light.otf"; sourceTree = "<group>"; };
+		9E758A021F1181A800D2745C /* SFText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Medium.otf"; path = "Fonts/SFText-Medium.otf"; sourceTree = "<group>"; };
+		9E758A031F1181A800D2745C /* SFText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Regular.otf"; path = "Fonts/SFText-Regular.otf"; sourceTree = "<group>"; };
+		9E758A041F1181A800D2745C /* SFText-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Semibold.otf"; path = "Fonts/SFText-Semibold.otf"; sourceTree = "<group>"; };
 		9EF449861F09A8C8002EA988 /* Time-Scheduling-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time-Scheduling-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -86,6 +100,21 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		9E758A0D1F1181B000D2745C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */,
+				9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */,
+				9E7589FF1F1181A800D2745C /* SFDisplay-Regular.otf */,
+				9E758A001F1181A800D2745C /* SFText-HeavyItalic.otf */,
+				9E758A011F1181A800D2745C /* SFText-Light.otf */,
+				9E758A021F1181A800D2745C /* SFText-Medium.otf */,
+				9E758A031F1181A800D2745C /* SFText-Regular.otf */,
+				9E758A041F1181A800D2745C /* SFText-Semibold.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		9EF4497D1F09A8C8002EA988 = {
 			isa = PBXGroup;
 			children = (
@@ -109,7 +138,7 @@
 			children = (
 				9E1A599C1F0E006100792D24 /* AppDelegate.swift */,
 				9E1A599E1F0E006900792D24 /* Assets.xcassets */,
-				9E1A59A01F0E007100792D24 /* Fonts */,
+				9E758A0D1F1181B000D2745C /* Fonts */,
 				9E1A59AA1F0E00AB00792D24 /* Storyboards */,
 				9E1A59B41F0E00E300792D24 /* View Controllers */,
 				9E1A59AF1F0E00C800792D24 /* Supporting */,
@@ -189,13 +218,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E758A0B1F1181A800D2745C /* SFText-Regular.otf in Resources */,
 				9E1A59C51F0E037900792D24 /* Info.plist in Resources */,
 				9E1A59A81F0E00A500792D24 /* LaunchScreen.storyboard in Resources */,
+				9E758A071F1181A800D2745C /* SFDisplay-Regular.otf in Resources */,
 				9E1A599F1F0E006900792D24 /* Assets.xcassets in Resources */,
 				9E1A59B61F0E010400792D24 /* Login.storyboard in Resources */,
-				9E1A59A11F0E007100792D24 /* Fonts in Resources */,
+				9E758A091F1181A800D2745C /* SFText-Light.otf in Resources */,
+				9E758A081F1181A800D2745C /* SFText-HeavyItalic.otf in Resources */,
+				9E758A0A1F1181A800D2745C /* SFText-Medium.otf in Resources */,
+				9E758A061F1181A800D2745C /* SFDisplay-Medium.otf in Resources */,
 				9E1A59A91F0E00A500792D24 /* Main.storyboard in Resources */,
+				9E758A051F1181A800D2745C /* SFDisplay-Light.otf in Resources */,
 				9E1A59C11F0E020E00792D24 /* GoogleService-Info.plist in Resources */,
+				9E758A0C1F1181A800D2745C /* SFText-Semibold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
