@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SMN-Qv-0xy">
-    <device id="retina4_0" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rKO-Mh-LPA">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,32 +25,32 @@
                         <viewControllerLayoutGuide type="bottom" id="Kov-OO-7fi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eAN-aF-d6y">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="phY-ps-vmB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WH7-rB-jZu">
-                                <rect key="frame" x="50" y="135" width="220" height="299.5"/>
+                                <rect key="frame" x="50" y="184" width="275" height="299.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Friends icon" translatesAutoresizingMaskIntoConstraints="NO" id="rZJ-t0-OcK">
-                                        <rect key="frame" x="62" y="0.0" width="96" height="72"/>
+                                        <rect key="frame" x="89.5" y="0.0" width="96" height="72"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A I R T I M E" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLT-Pw-HUG">
-                                        <rect key="frame" x="23.5" y="92" width="173" height="36"/>
+                                        <rect key="frame" x="51" y="92" width="173" height="36"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coordinate times between friends &amp; family to meet. Event scheduling as lightweight, quick, and free as air." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgz-P4-e2T">
-                                        <rect key="frame" x="2" y="148" width="216" height="81.5"/>
+                                        <rect key="frame" x="0.0" y="148" width="275" height="81.5"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bs4-1Z-DTa">
-                                        <rect key="frame" x="0.0" y="249.5" width="220" height="50"/>
+                                        <rect key="frame" x="0.0" y="249.5" width="275" height="50"/>
                                         <color key="backgroundColor" red="0.29411764705882354" green="0.62352941176470589" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="quw-Nh-10I"/>
@@ -82,11 +81,104 @@
                             <constraint firstItem="phY-ps-vmB" firstAttribute="leading" secondItem="eAN-aF-d6y" secondAttribute="leading" id="Z5s-1r-g92"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="spS-uD-DXz"/>
                     <connections>
                         <outlet property="loginButton" destination="bs4-1Z-DTa" id="4eh-Tu-emH"/>
+                        <segue destination="GZv-Om-Qya" kind="show" identifier="toDisplayName" id="i8s-Nr-dvt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NIk-jj-Bpi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1392.8" y="-173.16341829085459"/>
+        </scene>
+        <!--Display Name View Controller-->
+        <scene sceneID="k9s-MA-qE3">
+            <objects>
+                <viewController id="GZv-Om-Qya" customClass="DisplayNameViewController" customModule="Time_Scheduling_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R8v-et-YRN"/>
+                        <viewControllerLayoutGuide type="bottom" id="3hR-WO-9dA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nTs-fr-r32">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uC5-OB-B36">
+                                <rect key="frame" x="50" y="120" width="275" height="231"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSR-jv-ta5">
+                                        <rect key="frame" x="53.5" y="0.0" width="168" height="30"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is the name that you will be displayed as. Choose wisely; you can't change this!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAx-vS-URK">
+                                        <rect key="frame" x="3.5" y="50" width="268" height="61"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ex. Kristie H." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oy6-35-vT1">
+                                        <rect key="frame" x="0.0" y="131" width="275" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ub-oN-mB8">
+                                        <rect key="frame" x="0.0" y="181" width="275" height="50"/>
+                                        <color key="backgroundColor" red="0.29411764709999999" green="0.62352941179999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="nXp-fv-wss"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="25"/>
+                                        <color key="tintColor" red="0.29514700170000002" green="0.62262469529999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="GZv-Om-Qya" eventType="touchUpInside" id="z6H-0t-zwI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7ub-oN-mB8" firstAttribute="width" secondItem="uC5-OB-B36" secondAttribute="width" id="6Pm-Nb-kPx"/>
+                                    <constraint firstItem="oy6-35-vT1" firstAttribute="width" secondItem="uC5-OB-B36" secondAttribute="width" id="Vo7-rW-B4v"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="uC5-OB-B36" secondAttribute="trailing" constant="50" id="fSY-gA-2Zx"/>
+                            <constraint firstItem="uC5-OB-B36" firstAttribute="leading" secondItem="nTs-fr-r32" secondAttribute="leading" constant="50" id="mib-Cu-Or4"/>
+                            <constraint firstItem="uC5-OB-B36" firstAttribute="top" secondItem="R8v-et-YRN" secondAttribute="bottom" constant="100" id="mwS-oa-muM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="oy6-35-vT1" id="14Z-te-vXH"/>
+                        <outlet property="nextButton" destination="7ub-oN-mB8" id="Kee-h1-Pu8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U1c-2H-l0f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2156" y="-174.06296851574214"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FXk-NG-s6n">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="rKO-Mh-LPA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bZP-Du-5ow">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SMN-Qv-0xy" kind="relationship" relationship="rootViewController" id="Atf-2o-Wfz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PNt-eU-i0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="453.60000000000002" y="-173.16341829085459"/>
         </scene>

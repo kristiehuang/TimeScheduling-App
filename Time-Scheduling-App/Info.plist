@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Time-Scheduling-App</string>
+	<string>Airtime</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -22,6 +22,17 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SFDisplay-Light.otf</string>
+		<string>SFDisplay-Medium.otf</string>
+		<string>SFDisplay-Regular.otf</string>
+		<string>SFText-HeavyItalic.otf</string>
+		<string>SFText-Light.otf</string>
+		<string>SFText-Medium.otf</string>
+		<string>SFText-Regular.otf</string>
+		<string>SFText-Semibold.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -35,17 +46,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SFDisplay-Light.otf</string>
-		<string>SFDisplay-Medium.otf</string>
-		<string>SFDisplay-Regular.otf</string>
-		<string>SFText-HeavyItalic.otf</string>
-		<string>SFText-Light.otf</string>
-		<string>SFText-Medium.otf</string>
-		<string>SFText-Regular.otf</string>
-		<string>SFText-Semibold.otf</string>
 	</array>
 </dict>
 </plist>
