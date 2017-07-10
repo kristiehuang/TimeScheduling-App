@@ -11,5 +11,6 @@ target 'Time-Scheduling-App' do
   pod 'FirebaseUI/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
+  pod 'JTAppleCalendar', '~> 6.0'
 
 end
