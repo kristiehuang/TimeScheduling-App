@@ -104,7 +104,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uC5-OB-B36">
-                                <rect key="frame" x="50" y="120" width="275" height="231"/>
+                                <rect key="frame" x="50" y="80" width="275" height="231"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSR-jv-ta5">
                                         <rect key="frame" x="53.5" y="0.0" width="168" height="30"/>
@@ -150,7 +150,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uC5-OB-B36" secondAttribute="trailing" constant="50" id="fSY-gA-2Zx"/>
                             <constraint firstItem="uC5-OB-B36" firstAttribute="leading" secondItem="nTs-fr-r32" secondAttribute="leading" constant="50" id="mib-Cu-Or4"/>
-                            <constraint firstItem="uC5-OB-B36" firstAttribute="top" secondItem="R8v-et-YRN" secondAttribute="bottom" constant="100" id="mwS-oa-muM"/>
+                            <constraint firstItem="uC5-OB-B36" firstAttribute="top" secondItem="R8v-et-YRN" secondAttribute="bottom" constant="60" id="mwS-oa-muM"/>
                         </constraints>
                     </view>
                     <connections>
@@ -169,7 +169,7 @@
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bZP-Du-5ow">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bZP-Du-5ow">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

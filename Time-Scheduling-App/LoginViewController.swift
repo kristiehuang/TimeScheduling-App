@@ -50,9 +50,11 @@ extension LoginViewController: FUIAuthDelegate {
         let userRef = Database.database().reference().child("users").child(user.uid)
         
         
-        userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        userRef.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
             if let user = User(snapshot: snapshot) {
                 print("\(user.name) already exists")
+                
+                User.setCurrent(user)
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: .main)
                 

@@ -24,6 +24,9 @@ class DisplayNameViewController: UIViewController {
             
             print("created new user: \(user.name)")
             
+            User.setCurrent(user)
+            
+            
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
             
             if let initialViewController = storyboard.instantiateInitialViewController() {
