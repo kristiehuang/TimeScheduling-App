@@ -1,20 +1,36 @@
 //
 //  UIScrollViewDelegates.swift
-//  Pods
 //
-//  Created by JayT on 2016-05-12.
+//  Copyright (c) 2016-2017 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 //
 
 extension JTAppleCalendarView: UIScrollViewDelegate {
     /// Inform the scrollViewDidEndDecelerating
     /// function that scrolling just occurred
     public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        scrollViewDidEndDecelerating(calendarView)
+        scrollViewDidEndDecelerating(self)
     }
 
     public func saveLastContentOffset(_ offset: CGPoint) {
-        lastSavedContentOffset = scrollDirection == .horizontal ? offset.x : offset.y
+        self.lastSavedContentOffset = scrollDirection == .horizontal ? offset.x : offset.y
     }
     
     /// Tells the delegate when the user finishes scrolling the content.
@@ -23,13 +39,13 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
             return
         }
         
-        let cachedDecelerationRate = calendarView.decelerationRate
-    
+        let cachedDecelerationRate = decelerationRate
+        
         let contentSizeEndOffset: CGFloat
         var contentOffset: CGFloat = 0,
         theTargetContentOffset: CGFloat = 0,
         directionVelocity: CGFloat = 0
-        let calendarLayout = calendarViewLayout
+        let calendarLayout = self.calendarViewLayout
         if scrollDirection == .horizontal {
             contentOffset = scrollView.contentOffset.x
             theTargetContentOffset = targetContentOffset.pointee.x
@@ -51,10 +67,9 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
             return
         }
         if directionVelocity == 0.0 {
-            calendarView.decelerationRate =
-                UIScrollViewDecelerationRateFast
+            decelerationRate = UIScrollViewDecelerationRateFast
         }
-
+        
         let setTargetContentOffset = {
             (finalOffset: CGFloat) -> Void in
             if self.scrollDirection == .horizontal {
@@ -63,7 +78,7 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
                 targetContentOffset.pointee.y = finalOffset
             }
         }
-
+        
         let calculatedCurrentFixedContentOffsetFrom = {(interval: CGFloat) -> CGFloat in
             if isScrollingForward() {
                 return ceil(contentOffset / interval) * interval
@@ -71,9 +86,8 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
                 return floor(contentOffset / interval) * interval
             }
         }
-
-        let recalculateOffset = {
-            (diff: CGFloat, interval: CGFloat) -> CGFloat in
+        
+        let recalculateOffset = {(diff: CGFloat, interval: CGFloat) -> CGFloat in
             if isScrollingForward() {
                 let recalcOffsetAfterResistanceApplied = theTargetContentOffset - diff
                 return ceil(recalcOffsetAfterResistanceApplied / interval) * interval
@@ -82,7 +96,7 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
                 return floor(recalcOffsetAfterResistanceApplied / interval) * interval
             }
         }
-
+        
         let scrollViewShouldStopAtBeginning = {() -> Bool in
             return contentOffset < 0 && theTargetContentOffset == 0 ?
                 true : false
@@ -93,12 +107,11 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
         }
         switch scrollingMode {
         case let .stopAtEach(customInterval: interval):
-            let calculatedOffset =
-                calculatedCurrentFixedContentOffsetFrom(interval)
+            let calculatedOffset = calculatedCurrentFixedContentOffsetFrom(interval)
             setTargetContentOffset(calculatedOffset)
         case .stopAtEachCalendarFrameWidth:
             #if os(tvOS)
-                let interval = scrollDirection == .horizontal ? scrollView.frame.width : scrollView.frame.height
+                let interval = self.scrollDirection == .horizontal ? scrollView.frame.width : scrollView.frame.height
                 let calculatedOffset =
                     calculatedCurrentFixedContentOffsetFrom(interval)
                 setTargetContentOffset(calculatedOffset)
@@ -106,7 +119,7 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
             break
         case .stopAtEachSection:
             var calculatedOffSet: CGFloat = 0
-            if scrollDirection == .horizontal || (scrollDirection == .vertical && !thereAreHeaders) {
+            if scrollDirection == .horizontal || (scrollDirection == .vertical && !calendarViewLayout.thereAreHeaders) {
                 // Horizontal has a fixed width.
                 // Vertical with no header has fixed height
                 let interval = calendarLayout.sizeOfContentForSection(theCurrentSection)
@@ -151,7 +164,7 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
                 }
                 setTargetContentOffset(calculatedOffSet)
             case let .nonStopToCell(resistance):
-                let interval = calendarLayout.cellCache[targetSection]![0].frame.width
+                let interval = calendarLayout.cellCache[targetSection]![0].4
                 let diffResistance = diff * resistance
                 if scrollDirection == .horizontal {
                     if scrollViewShouldStopAtBeginning() {
@@ -172,15 +185,15 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
                     }
                     let pathPoint = CGPoint( x: targetContentOffset.pointee.x, y: calculatedOffSet)
                     let attribPath = IndexPath(item: 0, section: stopSection)
-                    if contentOffset > 0, let path = calendarView.indexPathForItem(at: pathPoint) {
-                        let attrib = calendarView.layoutAttributesForItem(at: path)!
+                    if contentOffset > 0, let path = indexPathForItem(at: pathPoint) {
+                        guard let attrib = calendarViewLayout.layoutAttributesForItem(at: path) else { return }
                         if isScrollingForward() {
                             calculatedOffSet = attrib.frame.origin.y + attrib.frame.size.height
                         } else {
                             calculatedOffSet = attrib.frame.origin.y
                         }
-                    } else if thereAreHeaders,
-                        let attrib = calendarView.layoutAttributesForSupplementaryElement(ofKind: UICollectionElementKindSectionHeader, at: attribPath) {
+                    } else if calendarViewLayout.thereAreHeaders,
+                        let attrib = layoutAttributesForSupplementaryElement(ofKind: UICollectionElementKindSectionHeader, at: attribPath) { // JT101 this was changed
                         // change the final value to the end of the header
                         if isScrollingForward() {
                             calculatedOffSet = attrib.frame.origin.y + attrib.frame.size.height
@@ -203,17 +216,18 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
         }
         saveLastContentOffset(CGPoint(x: targetContentOffset.pointee.x, y: targetContentOffset.pointee.y))
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-            self.calendarView.decelerationRate = cachedDecelerationRate
+            self.decelerationRate = cachedDecelerationRate
         }
         
         DispatchQueue.main.async {
-            self.delegate?.scrollDidEndDecelerating(for: self)
+            self.calendarDelegate?.scrollDidEndDecelerating(for: self)
         }
     }
-
+    
     /// Tells the delegate when a scrolling
     /// animation in the scroll view concludes.
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        isScrollInProgress = false
         if
             let shouldTrigger = triggerScrollToDateDelegate,
             shouldTrigger == true {
@@ -221,17 +235,14 @@ extension JTAppleCalendarView: UIScrollViewDelegate {
             triggerScrollToDateDelegate = nil
         }
         executeDelayedTasks()
-        // A scroll was just completed.
-        scrollInProgress = false
         saveLastContentOffset(scrollView.contentOffset)
     }
-
+    
     /// Tells the delegate that the scroll view has
     /// ended decelerating the scrolling movement.
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         visibleDates { [unowned self] dates in
-            self.delegate?.calendar(self, didScrollToDateSegmentWith: dates)
+            self.calendarDelegate?.calendar(self, didScrollToDateSegmentWith: dates)
         }
     }
-
 }

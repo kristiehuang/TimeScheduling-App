@@ -1,56 +1,49 @@
 //
 //  JTAppleCalendarDelegateProtocol.swift
-//  JTAppleCalendar
 //
-//  Created by JayT on 2016-09-19.
+//  Copyright (c) 2016-2017 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
 
 protocol JTAppleCalendarDelegateProtocol: class {
-    var itemSize: CGFloat? {get set}
-    var registeredHeaderViews: [JTAppleCalendarViewSource] {get set}
+    // Variables
+    var allowsDateCellStretching: Bool {get set}
     var cachedConfiguration: ConfigurationParameters! {get set}
+    var calendarDataSource: JTAppleCalendarViewDataSource? {get set}
+    var cellSize: CGFloat {get set}
+    var initialScrollDate: Date? {get set}
+    var isCalendarLayoutLoaded: Bool {get}
+    var minimumInteritemSpacing: CGFloat  {get set}
+    var minimumLineSpacing: CGFloat {get set}
     var monthInfo: [Month] {get set}
     var monthMap: [Int: Int] {get set}
+    var scrollDirection: UICollectionViewScrollDirection! {get set}
+    var sectionInset: UIEdgeInsets {get set}
     var totalDays: Int {get}
-    var lastIndexOffset: (IndexPath, UICollectionElementCategory)? {get set}
-    var allowsDateCellStretching: Bool {get set}
-    
-    func numberOfRows() -> Int
-    func hasStrictBoundaries() -> Bool
-    func cachedDate() -> (start: Date, end: Date, calendar: Calendar)
-    func numberOfMonthsInCalendar() -> Int
-    func referenceSizeForHeaderInSection(_ section: Int) -> CGSize
-    func rowsAreStatic() -> Bool
+    // Functions
+
+    func firstContentOffset() -> CGPoint
+    func pathsFromDates(_ dates: [Date]) -> [IndexPath]
+    func sizeOfDecorationView(indexPath: IndexPath) -> CGRect
+    func sizesForMonthSection() -> [AnyHashable:CGFloat]
+    func targetPointForItemAt(indexPath: IndexPath) -> CGPoint?
 }
 
-extension JTAppleCalendarView: JTAppleCalendarDelegateProtocol {
-
-    func cachedDate() -> (start: Date, end: Date, calendar: Calendar) {
-        return (start: startDateCache,
-                end: endDateCache,
-                calendar: calendar)
-    }
-    
-    func hasStrictBoundaries() -> Bool {
-        return cachedConfiguration.hasStrictBoundaries
-    }
-
-    func numberOfRows() -> Int {
-        return cachedConfiguration.numberOfRows
-    }
-
-    func numberOfMonthsInCalendar() -> Int {
-        return numberOfMonths
-    }
-
-    func referenceSizeForHeaderInSection(_ section: Int) -> CGSize {
-        return calendarViewHeaderSizeForSection(section)
-    }
-
-    func rowsAreStatic() -> Bool {
-        // jt101 is the inDateCellGeneration check needed? because tillEndOfGrid will always compenste
-        return cachedConfiguration.generateInDates != .off && cachedConfiguration.generateOutDates == .tillEndOfGrid
-    }
-}
+extension JTAppleCalendarView: JTAppleCalendarDelegateProtocol { }

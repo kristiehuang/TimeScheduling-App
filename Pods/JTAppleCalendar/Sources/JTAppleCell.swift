@@ -1,5 +1,5 @@
 //
-//  JTAppleCalendarLayoutProtocol.swift
+//  JTAppleCell.swift
 //
 //  Copyright (c) 2016-2017 JTAppleCalendar (https://github.com/patchthecode/JTAppleCalendar)
 //
@@ -22,15 +22,26 @@
 //  THE SOFTWARE.
 //
 
+/// The JTAppleCell class defines the attributes and
+/// behavior of the cells that appear in JTAppleCalendarView objects.
+open class JTAppleCell: UICollectionViewCell {
+        
+    /// Cell view that will be customized
+	public override init(frame: CGRect) {
+		super.init(frame: frame)
+	}
 
-protocol JTAppleCalendarLayoutProtocol: class {
-    var minimumInteritemSpacing: CGFloat {get set}
-    var minimumLineSpacing: CGFloat {get set}
-    var sectionInset: UIEdgeInsets {get set}
-    var scrollDirection: UICollectionViewScrollDirection {get set}
-    func targetContentOffsetForProposedContentOffset(_ proposedContentOffset: CGPoint) -> CGPoint
-    func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes?
+	/// Returns an object initialized from data in a given unarchiver.
+	required public init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+    
+    /// Prepares the receiver for service after it has been loaded from an Interface Builder archive, or nib file.
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.contentView.frame = self.bounds
+        self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+
 }
-
-extension UICollectionViewFlowLayout: JTAppleCalendarLayoutProtocol {}
-
