@@ -63,7 +63,7 @@
                                 <rect key="frame" x="0.0" y="176" width="414" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="Si9-Ru-AIF">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="Si9-Ru-AIF" customClass="EventTableViewCell" customModule="Time_Scheduling_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Si9-Ru-AIF" id="WTM-aU-P7T">
@@ -96,6 +96,11 @@
                                                 </view>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="eventDetailsLabel" destination="U3D-cX-JuQ" id="WQZ-xR-hW9"/>
+                                            <outlet property="eventNameLabel" destination="z1R-Kl-dbW" id="5ky-bs-MsL"/>
+                                            <outlet property="eventStatusIndicator" destination="dXF-hT-JOY" id="7SO-gt-83P"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -190,6 +195,10 @@
                                 <state key="normal" title="&lt;">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="wG8-hb-EXV"/>
+                                    <segue destination="5qq-3R-ohd" kind="unwind" identifier="backButtonSegue" unwindAction="unwindToHome:" id="ceA-yz-BdA"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="When are you available to attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-kX-fF3">
                                 <rect key="frame" x="28" y="128" width="358" height="24"/>
@@ -347,6 +356,9 @@
                                         <state key="normal" title="Next">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="hxR-1L-nIV"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQP-rh-1Wb">
                                         <rect key="frame" x="0.0" y="85" width="342" height="45"/>
@@ -359,6 +371,10 @@
                                         <state key="normal" title="Save &amp; Close">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="saveCloseButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="Ln5-vT-XTl"/>
+                                            <segue destination="5qq-3R-ohd" kind="unwind" identifier="saveCloseSegue" unwindAction="unwindToHome:" id="XuU-Ek-3z3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -382,10 +398,12 @@
                     </view>
                     <connections>
                         <outlet property="calendarView" destination="WSU-13-p91" id="oWK-c2-94H"/>
+                        <outlet property="eventNameTextField" destination="pjd-0b-C2c" id="X3S-Qj-hL1"/>
                         <outlet property="monthYearLabel" destination="JEa-yP-irL" id="BAN-YV-6NG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m6W-Pv-QWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5qq-3R-ohd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="388.40579710144931" y="124.72826086956523"/>
         </scene>

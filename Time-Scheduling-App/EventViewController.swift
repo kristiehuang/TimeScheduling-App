@@ -15,6 +15,17 @@ class EventViewController: UIViewController {
     
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var monthYearLabel: UILabel!
+    @IBOutlet weak var eventNameTextField: UITextField!
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+    }
+
+    @IBAction func nextButtonTapped(_ sender: Any) {
+    }
+
+    @IBAction func saveCloseButtonTapped(_ sender: Any) {
+    }
+    
     
     let outsideMonthColor = UIColor(colorWithHexValue: 0x7FAEE7) //cell date label color in indates/outdates
     let monthColor = UIColor.white //cell date label color in this month
@@ -22,6 +33,7 @@ class EventViewController: UIViewController {
     let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
     
     let formatter = DateFormatter()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +88,27 @@ class EventViewController: UIViewController {
         
         self.formatter.dateFormat = "MMMM yyyy"
         self.monthYearLabel.text = self.formatter.string(from: date)
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "backButtonSegue" {
+                print("Transitioning back to home/back")
+            }
+            else if identifier == "saveCloseSegue" {
+                print("Transitioning back to home/save")
+                
+                print(eventNameTextField.text ?? "Untitled Event")
+//                let event = Event(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date())
+                //event data
+                
+                EventService.createEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date())
+                
+                //add to notes array
+            }
+        }
     }
     
 }

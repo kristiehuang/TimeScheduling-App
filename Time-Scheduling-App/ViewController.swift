@@ -15,19 +15,27 @@ class ViewController: UIViewController {
     @IBAction func newButtonTapped(_ sender: Any) {
     }
     
+    @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+
+    var events: [Event] = []
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "showNewEvent" {
                 print("Transitioning to the new event")
+                
             }
         }
     }
     
 }
+
 
