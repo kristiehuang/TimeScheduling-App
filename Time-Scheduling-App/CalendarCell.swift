@@ -11,6 +11,7 @@ import JTAppleCalendar
 
 class CalendarCell: JTAppleCell {
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var selectedView: UIView!
 
     /*
     // Only override draw() if you perform custom drawing.
