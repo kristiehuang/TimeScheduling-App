@@ -17,6 +17,9 @@
         <array key="SFDisplay-Regular.otf">
             <string>SFUIDisplay-Regular</string>
         </array>
+        <array key="SFText-Light.otf">
+            <string>SFUIText-Light</string>
+        </array>
         <array key="SFText-Regular.otf">
             <string>SFUIText-Regular</string>
         </array>
@@ -85,6 +88,11 @@
                                                     <rect key="frame" x="338" y="33" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.2274419367313385" green="0.86620205640792847" blue="0.34066462516784668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="50"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -102,6 +110,11 @@
                                 <state key="normal" title="+">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="newButtonTapped:" destination="5Ks-4I-hcT" eventType="touchUpInside" id="C7y-YG-ry8"/>
                                     <segue destination="0iu-06-dBK" kind="show" identifier="showNewEvent" id="nra-iM-xQK"/>
@@ -178,10 +191,16 @@
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="When are you available to attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-kX-fF3">
+                                <rect key="frame" x="28" y="128" width="358" height="24"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
+                                <color key="textColor" red="0.7175678014755249" green="0.7176927924156189" blue="0.71755987405776978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ek2-zb-HYR">
                                 <rect key="frame" x="28" y="162" width="358" height="370"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="month Year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-yP-irL">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   month Year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-yP-irL">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="55"/>
                                         <color key="backgroundColor" red="0.63373094799999996" green="0.7851242423" blue="0.96810156110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -350,7 +369,9 @@
                             <constraint firstItem="ek2-zb-HYR" firstAttribute="top" secondItem="syG-0g-AOE" secondAttribute="bottom" constant="50" id="Ccx-3u-VkP"/>
                             <constraint firstItem="ek2-zb-HYR" firstAttribute="leading" secondItem="yJZ-CT-a3x" secondAttribute="leading" constant="28" id="Ij0-Y6-xMJ"/>
                             <constraint firstItem="aDY-ed-dmU" firstAttribute="leading" secondItem="yJZ-CT-a3x" secondAttribute="leading" constant="26" id="Kdz-bK-rPU"/>
+                            <constraint firstItem="ek2-zb-HYR" firstAttribute="top" secondItem="KN1-kX-fF3" secondAttribute="bottom" constant="10" id="OBI-ef-rSd"/>
                             <constraint firstAttribute="trailing" secondItem="syG-0g-AOE" secondAttribute="trailing" constant="26" id="QXN-q1-Gzd"/>
+                            <constraint firstItem="KN1-kX-fF3" firstAttribute="width" secondItem="ek2-zb-HYR" secondAttribute="width" id="Qvp-48-M8B"/>
                             <constraint firstItem="syG-0g-AOE" firstAttribute="top" secondItem="ewv-9b-tFZ" secondAttribute="bottom" constant="39" id="SCA-Bm-eIp"/>
                             <constraint firstAttribute="trailing" secondItem="ek2-zb-HYR" secondAttribute="trailing" constant="28" id="UZc-9l-fwU"/>
                             <constraint firstItem="uGH-Ri-JfR" firstAttribute="leading" secondItem="yJZ-CT-a3x" secondAttribute="leading" constant="36" id="fqm-g7-eSc"/>
