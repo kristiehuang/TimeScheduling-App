@@ -34,9 +34,9 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventTableViewCell", for: indexPath) as! EventTableViewCell
-//        let row = indexPath.row
-//        let event = self.events[row]
-//        cell.eventNameLabel.text = event.name
+        let row = indexPath.row
+        let event = self.events[row]
+        cell.eventNameLabel.text = event.name
 //creation date + host
         return cell
 

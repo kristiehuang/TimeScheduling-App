@@ -29,12 +29,7 @@ struct EventService {
         
         let eventRef = Database.database().reference().child("events").child(currentUser.uid).childByAutoId()
         eventRef.updateChildValues(dict)
-        
-        //save to array
-//        var eventsArray = createEventArray()
-//        self.eventsArray.append(event)
-//        
-//        print(self.eventsArray.count)
+         
         return event
 
 
