@@ -10,45 +10,42 @@ import Foundation
 import UIKit
 
 class EventTableViewController: UITableViewController {
+
+    @IBOutlet var uiTableView: UITableView!
     
-    //var events: [Event] = []
-    var events = [Event]() {
-        didSet {
-            tableView.reloadData()
-        }
+    var events = [Event]() //{
+//        didSet {
+//            tableView.reloadData()
+//        }
+//    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        print("events enumergeated : \(events.enumerated())")
     }
     
-    override func viewDidLoad() {
-
-        //1. need array to display on table
-        
-        //2. table reload
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        UserService.events(for: User.current) { (events) in
+            self.events = events
+            self.tableView.reloadData()
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventTableViewCell", for: indexPath) as! EventTableViewCell
-        let row = indexPath.row
-        let event = self.events[row]
-        cell.eventNameLabel.text = event.name
+//        let row = indexPath.row
+//        let event = self.events[row]
+//        cell.eventNameLabel.text = event.name
 //creation date + host
         return cell
 
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //events.count = 0 for now since creating new array
+        return events.count
+    }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let identifier = segue.identifier {
-//            if identifier == "showNewEvent" {
-//                print("Table view cell tapped")
-//
-//                let indexPath = tableView.indexPathForSelectedRow!
-//                let eventTapped = events[indexPath.row]
-//                let eventViewController = segue.destination as! EventViewController
-//                print(eventTapped.name)
-//
-//            }
-//
-//        }
-//    }
+
 }

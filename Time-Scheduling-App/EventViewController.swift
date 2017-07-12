@@ -32,7 +32,7 @@ class EventViewController: UIViewController {
     let selectedMonthColor = UIColor(colorWithHexValue: 0xA3C9F6) //color of selected date label text
     let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
     
-    let event = Event(name: "", creationDate: Date(), host: User.current)
+//    let event = Event(name: "", creationDate: Date(), host: User.current)
     
     let formatter = DateFormatter()
 
@@ -45,11 +45,12 @@ class EventViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-            eventNameTextField.text = event.name
-    }
+    //for existing events
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//            eventNameTextField.text = event.name
+//    }
     
     func setUpCalendarView() {
         calendarView.minimumLineSpacing = 0
@@ -98,10 +99,17 @@ class EventViewController: UIViewController {
         self.monthYearLabel.text = self.formatter.string(from: date)
     }
     
+    
+    
+    
+    
+    
+    
+    
     var events: [Event] = []
+        //EventService.createEventArray()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let viewController = segue.destination as! ViewController
         if let identifier = segue.identifier {
             if identifier == "backButtonSegue" {
                 print("Transitioning back to home/back")
@@ -116,16 +124,22 @@ class EventViewController: UIViewController {
                 print(eventNameTextField.text ?? "")
 
 
-                //save to database in EventService createEvent
-                self.events = EventService.createEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date())
-                print("this is my array item \(String(describing: self.events[0].name))")
+                //save to database + create array (everytime, for now) in EventService createEvent
+                
+//                let event = Event(name: "", creationDate: Date(), host: User.current)
+
+                let event = EventService.addEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date())
+                events.append(event)
+                print(events.count)
+
                 
                 let eventTableViewController = segue.destination as? EventTableViewController
                 eventTableViewController?.events = self.events
                 eventTableViewController?.tableView.reloadData()
+                //issue: event cell not showing in table view
                 
-                
-                
+//                print("this is my array item \(String(describing: self.events[0].name))")
+
                 //if event exists, save. if else, new event = Event(sdfaf)
             }
         }

@@ -13,24 +13,34 @@ import FirebaseStorage
 
 struct EventService {
 
+//    static func createEventArray() -> [Event] {
+//        var events: [Event] = []
+//        return events
+//    }
     
-    static func createEvent(name: String, creationDate: Date) -> [Event] {
-        var events: [Event] = []
-
+    //just add event to database
+    static func addEvent(name: String, creationDate: Date) -> Event {
         let currentUser = User.current
         print("current user is \(currentUser.name)")
         
         //save to database
         let event = Event(name: name, creationDate: creationDate, host: currentUser)
         let dict = event.dictValue
-
+        
         let eventRef = Database.database().reference().child("events").child(currentUser.uid).childByAutoId()
         eventRef.updateChildValues(dict)
         
         //save to array
-        events.append(event)
-        
-        return events
+//        var eventsArray = createEventArray()
+//        self.eventsArray.append(event)
+//        
+//        print(self.eventsArray.count)
+        return event
+
+
     }
+    
+    
+    
     
 }

@@ -22,10 +22,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UIView!
     
     
-    //var eventTableViewController: EventTableViewController?
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -34,8 +30,6 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTableSegue" {
             print("showing container view tablezzz")
-//            let eventTableViewController = segue.destination as? EventTableViewController
-//            eventTableViewController?.tableView.reloadData()
 
         }
         

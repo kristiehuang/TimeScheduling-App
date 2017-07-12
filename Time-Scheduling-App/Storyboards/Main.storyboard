@@ -32,12 +32,12 @@
         <scene sceneID="Sh1-sB-Vsz">
             <objects>
                 <tableViewController id="Ry8-7Q-GeY" customClass="EventTableViewController" customModule="Time_Scheduling_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ESh-ly-C0I">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" id="ESh-ly-C0I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="560"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="DQ8-H4-nFn" customClass="EventTableViewCell" customModule="Time_Scheduling_App" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventTableViewCell" rowHeight="92" id="DQ8-H4-nFn" customClass="EventTableViewCell" customModule="Time_Scheduling_App" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DQ8-H4-nFn" id="gUy-n4-Lew">
@@ -64,7 +64,7 @@
                                             <color key="backgroundColor" red="0.22744193670000001" green="0.86620205640000003" blue="0.34066462520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="50"/>
+                                                    <integer key="value" value="12"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
@@ -78,10 +78,13 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="Ry8-7Q-GeY" id="60Z-PB-DGV"/>
+                            <outlet property="dataSource" destination="Ry8-7Q-GeY" id="OMo-sZ-uFO"/>
                             <outlet property="delegate" destination="Ry8-7Q-GeY" id="adc-pd-R8L"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="uiTableView" destination="ESh-ly-C0I" id="4Xc-3B-VBi"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chp-3H-tH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -146,7 +149,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="50"/>
+                                        <real key="value" value="56.5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -195,13 +198,13 @@
                                 <rect key="frame" x="85" y="59" width="303" height="53"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pjd-0b-C2c">
-                                        <rect key="frame" x="0.0" y="0.0" width="254" height="53"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="255.33333333333331" height="53"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lh-8C-YEt">
-                                        <rect key="frame" x="274" y="0.0" width="29" height="53"/>
+                                        <rect key="frame" x="275.33333333333326" y="0.0" width="27.666666666666686" height="53"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -223,7 +226,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="When are you available to attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-kX-fF3">
-                                <rect key="frame" x="28" y="128.66666666666663" width="358" height="23.333333333333343"/>
+                                <rect key="frame" x="28" y="128" width="358" height="24"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
                                 <color key="textColor" red="0.7175678014755249" green="0.7176927924156189" blue="0.71755987405776978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
