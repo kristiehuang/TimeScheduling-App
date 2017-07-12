@@ -28,6 +28,65 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Event Table View Controller-->
+        <scene sceneID="Sh1-sB-Vsz">
+            <objects>
+                <tableViewController id="Ry8-7Q-GeY" customClass="EventTableViewController" customModule="Time_Scheduling_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ESh-ly-C0I">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="560"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="DQ8-H4-nFn" customClass="EventTableViewCell" customModule="Time_Scheduling_App" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="92"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DQ8-H4-nFn" id="gUy-n4-Lew">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Host | 14 Invites | Finalized" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGO-22-LCq">
+                                            <rect key="frame" x="17" y="51" width="227" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYS-UV-O18">
+                                            <rect key="frame" x="17" y="12" width="162" height="34"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Cn-SQ-Ntx">
+                                            <rect key="frame" x="338" y="33" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.22744193670000001" green="0.86620205640000003" blue="0.34066462520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="eventDetailsLabel" destination="GGO-22-LCq" id="Kw3-7t-Lsk"/>
+                                    <outlet property="eventNameLabel" destination="XYS-UV-O18" id="YTs-iy-h8P"/>
+                                    <outlet property="eventStatusIndicator" destination="5Cn-SQ-Ntx" id="PWC-0q-Qbv"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Ry8-7Q-GeY" id="60Z-PB-DGV"/>
+                            <outlet property="delegate" destination="Ry8-7Q-GeY" id="adc-pd-R8L"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Chp-3H-tH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-401" y="-251"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="188-Pf-4LO">
             <objects>
@@ -59,53 +118,23 @@
                                     <constraint firstAttribute="height" constant="66" id="weC-fj-3lq"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sKs-M5-755">
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRd-O8-Rpw">
+                                <rect key="frame" x="0.0" y="127" width="414" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Hosting" id="G9l-VJ-6gH"/>
+                                    <tabBarItem tag="1" title="Attending" id="yHe-ti-gTa"/>
+                                    <tabBarItem tag="2" title="Past" id="VfU-kK-Xih"/>
+                                </items>
+                            </tabBar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YxS-qF-Wmo">
                                 <rect key="frame" x="0.0" y="176" width="414" height="560"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="Si9-Ru-AIF" customClass="EventTableViewCell" customModule="Time_Scheduling_App" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="92"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Si9-Ru-AIF" id="WTM-aU-P7T">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Host | 14 Invites | Finalized" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3D-cX-JuQ">
-                                                    <rect key="frame" x="17" y="51" width="227" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="20"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1R-Kl-dbW">
-                                                    <rect key="frame" x="17" y="12" width="162" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dXF-hT-JOY">
-                                                    <rect key="frame" x="338" y="33" width="24" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.2274419367313385" green="0.86620205640792847" blue="0.34066462516784668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="50"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="eventDetailsLabel" destination="U3D-cX-JuQ" id="WQZ-xR-hW9"/>
-                                            <outlet property="eventNameLabel" destination="z1R-Kl-dbW" id="5ky-bs-MsL"/>
-                                            <outlet property="eventStatusIndicator" destination="dXF-hT-JOY" id="7SO-gt-83P"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
+                                <connections>
+                                    <segue destination="Ry8-7Q-GeY" kind="embed" identifier="showTableSegue" id="j2c-Di-8P3"/>
+                                </connections>
+                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZJ-5n-WZb">
-                                <rect key="frame" x="150.66666666666669" y="598" width="113.00000000000006" height="113"/>
+                                <rect key="frame" x="150" y="598" width="113" height="113"/>
                                 <color key="backgroundColor" red="0.31192976236343384" green="0.6307607889175415" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="113" id="NFA-Jb-ucP"/>
@@ -125,37 +154,27 @@
                                     <segue destination="0iu-06-dBK" kind="show" identifier="showNewEvent" id="nra-iM-xQK"/>
                                 </connections>
                             </button>
-                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRd-O8-Rpw">
-                                <rect key="frame" x="0.0" y="127" width="414" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem title="Hosting" id="G9l-VJ-6gH"/>
-                                    <tabBarItem tag="1" title="Attending" id="yHe-ti-gTa"/>
-                                    <tabBarItem tag="2" title="Past" id="VfU-kK-Xih"/>
-                                </items>
-                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fek-Fw-FWo" firstAttribute="top" secondItem="FEQ-UY-A1U" secondAttribute="bottom" constant="23" id="4Jx-mc-0NW"/>
-                            <constraint firstAttribute="trailing" secondItem="sKs-M5-755" secondAttribute="trailing" id="FdT-nL-kO2"/>
+                            <constraint firstItem="YxS-qF-Wmo" firstAttribute="top" secondItem="SRd-O8-Rpw" secondAttribute="bottom" id="IX0-0l-KbW"/>
+                            <constraint firstItem="Lds-xG-FZs" firstAttribute="top" secondItem="YxS-qF-Wmo" secondAttribute="bottom" id="TPz-DO-4YV"/>
                             <constraint firstItem="fek-Fw-FWo" firstAttribute="leading" secondItem="Ms5-jh-aC7" secondAttribute="leading" constant="16" id="V9c-xm-Csr"/>
+                            <constraint firstAttribute="trailing" secondItem="YxS-qF-Wmo" secondAttribute="trailing" id="bYW-Nu-d1H"/>
                             <constraint firstItem="SRd-O8-Rpw" firstAttribute="top" secondItem="fek-Fw-FWo" secondAttribute="bottom" constant="18" id="dEv-Jg-VQd"/>
                             <constraint firstItem="SRd-O8-Rpw" firstAttribute="leading" secondItem="Ms5-jh-aC7" secondAttribute="leading" id="df6-tC-ES9"/>
-                            <constraint firstItem="sKs-M5-755" firstAttribute="leading" secondItem="Ms5-jh-aC7" secondAttribute="leading" id="f8D-Eg-OEl"/>
                             <constraint firstItem="rZJ-5n-WZb" firstAttribute="centerX" secondItem="Ms5-jh-aC7" secondAttribute="centerX" id="g1i-O2-m5F"/>
+                            <constraint firstItem="YxS-qF-Wmo" firstAttribute="leading" secondItem="Ms5-jh-aC7" secondAttribute="leading" id="iVW-of-K8P"/>
                             <constraint firstAttribute="trailing" secondItem="SRd-O8-Rpw" secondAttribute="trailing" id="jHw-ed-FZn"/>
                             <constraint firstItem="Lds-xG-FZs" firstAttribute="top" secondItem="rZJ-5n-WZb" secondAttribute="bottom" constant="25" id="pWf-gc-k25"/>
-                            <constraint firstItem="Lds-xG-FZs" firstAttribute="top" secondItem="sKs-M5-755" secondAttribute="bottom" id="qQq-1c-pMG"/>
-                            <constraint firstItem="sKs-M5-755" firstAttribute="top" secondItem="SRd-O8-Rpw" secondAttribute="bottom" id="qhP-nh-aP7"/>
-                            <constraint firstItem="sKs-M5-755" firstAttribute="top" secondItem="SRd-O8-Rpw" secondAttribute="bottom" id="w9k-5h-mUi"/>
                             <constraint firstAttribute="trailing" secondItem="fek-Fw-FWo" secondAttribute="trailing" constant="16" id="xNa-fV-M4e"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZq-AI-1xw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-522" y="127"/>
+            <point key="canvasLocation" x="-1167" y="136"/>
         </scene>
         <!--Ib Calendar Data Source-->
         <scene sceneID="q9C-47-y5j">
@@ -405,7 +424,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m6W-Pv-QWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5qq-3R-ohd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="388.40579710144931" y="124.72826086956523"/>
+            <point key="canvasLocation" x="409" y="210"/>
         </scene>
     </scenes>
     <resources>

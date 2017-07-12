@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class ViewController: UIViewController {
-    
     //main page
     @IBAction func newButtonTapped(_ sender: Any) {
     }
@@ -19,23 +18,25 @@ class ViewController: UIViewController {
         
     }
     
+    //var eventTableViewController: EventTableViewController?
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTableSegue" {
+            print("showing container view tablezzz")
+//            let eventTableViewController = segue.destination as? EventTableViewController
+//            eventTableViewController?.tableView.reloadData()
+
+        }
+        
         
     }
     
-
-    var events: [Event] = []
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            if identifier == "showNewEvent" {
-                print("Transitioning to the new event")
-                
-            }
-        }
-    }
     
 }
-
-

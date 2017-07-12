@@ -11,7 +11,7 @@ import UIKit
 import JTAppleCalendar
 
 class EventViewController: UIViewController {
-    //event page
+ //event page
     
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var monthYearLabel: UILabel!
@@ -32,6 +32,8 @@ class EventViewController: UIViewController {
     let selectedMonthColor = UIColor(colorWithHexValue: 0xA3C9F6) //color of selected date label text
     let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
     
+    let event = Event(name: "", creationDate: Date(), host: User.current)
+    
     let formatter = DateFormatter()
 
     
@@ -41,6 +43,12 @@ class EventViewController: UIViewController {
         calendarView.visibleDates { visibleDates in
             self.setupViewsOfCalendar(from: visibleDates)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+            eventNameTextField.text = event.name
     }
     
     func setUpCalendarView() {
@@ -90,9 +98,10 @@ class EventViewController: UIViewController {
         self.monthYearLabel.text = self.formatter.string(from: date)
     }
     
-    
+    var events: [Event] = []
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let viewController = segue.destination as! ViewController
         if let identifier = segue.identifier {
             if identifier == "backButtonSegue" {
                 print("Transitioning back to home/back")
@@ -100,13 +109,24 @@ class EventViewController: UIViewController {
             else if identifier == "saveCloseSegue" {
                 print("Transitioning back to home/save")
                 
-                print(eventNameTextField.text ?? "Untitled Event")
-//                let event = Event(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date())
-                //event data
+                if (eventNameTextField.text?.isEmpty)! {
+                    eventNameTextField.text? = "Untitled Event"
+                }
                 
-                EventService.createEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date())
+                print(eventNameTextField.text ?? "")
+
+
+                //save to database in EventService createEvent
+                self.events = EventService.createEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date())
+                print("this is my array item \(String(describing: self.events[0].name))")
                 
-                //add to notes array
+                let eventTableViewController = segue.destination as? EventTableViewController
+                eventTableViewController?.events = self.events
+                eventTableViewController?.tableView.reloadData()
+                
+                
+                
+                //if event exists, save. if else, new event = Event(sdfaf)
             }
         }
     }

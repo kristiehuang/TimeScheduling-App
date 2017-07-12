@@ -14,6 +14,7 @@ class Event {
     
     var name: String?
     var creationDate: Date
+    var host: User
     
     //turn event objects into dictionary type
     var dictValue: [String: Any] {
@@ -23,9 +24,10 @@ class Event {
                 "created_at": createdAgo]
     }
     
-    init(name: String, creationDate: Date) {
+    init(name: String, creationDate: Date, host: User) {
         self.name = name
         self.creationDate = Date()
+        self.host = User.current
     }
     
     
