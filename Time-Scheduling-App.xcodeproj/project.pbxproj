@@ -12,6 +12,7 @@
 		9E0C0B941F1570F80026307C /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B931F1570F80026307C /* EventService.swift */; };
 		9E0C0B961F1578B80026307C /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B951F1578B80026307C /* EventTableViewCell.swift */; };
 		9E0C0B9A1F1588850026307C /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B991F1588850026307C /* EventTableViewController.swift */; };
+		9E0C0B9E1F15F5A20026307C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E0C0B9D1F15F5A20026307C /* Info.plist */; };
 		9E1A599D1F0E006100792D24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A599C1F0E006100792D24 /* AppDelegate.swift */; };
 		9E1A599F1F0E006900792D24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A599E1F0E006900792D24 /* Assets.xcassets */; };
 		9E1A59A81F0E00A500792D24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */; };
@@ -20,7 +21,6 @@
 		9E1A59B61F0E010400792D24 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59B51F0E010400792D24 /* Login.storyboard */; };
 		9E1A59C11F0E020E00792D24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59BF1F0E020E00792D24 /* GoogleService-Info.plist */; };
 		9E1A59C41F0E028C00792D24 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A59C31F0E028C00792D24 /* LoginViewController.swift */; };
-		9E1A59C51F0E037900792D24 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59C01F0E020E00792D24 /* Info.plist */; };
 		9E758A051F1181A800D2745C /* SFDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */; };
 		9E758A061F1181A800D2745C /* SFDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */; };
 		9E758A071F1181A800D2745C /* SFDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FF1F1181A800D2745C /* SFDisplay-Regular.otf */; };
@@ -44,6 +44,7 @@
 		9E0C0B931F1570F80026307C /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		9E0C0B951F1578B80026307C /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9E0C0B991F1588850026307C /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
+		9E0C0B9D1F15F5A20026307C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E1A599C1F0E006100792D24 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E1A599E1F0E006900792D24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		9E1A59B21F0E00DF00792D24 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9E1A59B51F0E010400792D24 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		9E1A59BF1F0E020E00792D24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9E1A59C01F0E020E00792D24 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E1A59C31F0E028C00792D24 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Light.otf"; path = "Fonts/SFDisplay-Light.otf"; sourceTree = "<group>"; };
 		9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Medium.otf"; path = "Fonts/SFDisplay-Medium.otf"; sourceTree = "<group>"; };
@@ -103,8 +103,8 @@
 		9E1A59AF1F0E00C800792D24 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				9E0C0B9D1F15F5A20026307C /* Info.plist */,
 				9E1A59BF1F0E020E00792D24 /* GoogleService-Info.plist */,
-				9E1A59C01F0E020E00792D24 /* Info.plist */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -270,12 +270,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E758A0B1F1181A800D2745C /* SFText-Regular.otf in Resources */,
-				9E1A59C51F0E037900792D24 /* Info.plist in Resources */,
 				9E1A59A81F0E00A500792D24 /* LaunchScreen.storyboard in Resources */,
 				9E758A071F1181A800D2745C /* SFDisplay-Regular.otf in Resources */,
 				9E1A599F1F0E006900792D24 /* Assets.xcassets in Resources */,
 				9E1A59B61F0E010400792D24 /* Login.storyboard in Resources */,
 				9E758A091F1181A800D2745C /* SFText-Light.otf in Resources */,
+				9E0C0B9E1F15F5A20026307C /* Info.plist in Resources */,
 				9E758A081F1181A800D2745C /* SFText-HeavyItalic.otf in Resources */,
 				9E758A0A1F1181A800D2745C /* SFText-Medium.otf in Resources */,
 				9E758A061F1181A800D2745C /* SFDisplay-Medium.otf in Resources */,

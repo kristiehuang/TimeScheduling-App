@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DQ8-H4-nFn" id="gUy-n4-Lew">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Host | 14 Invites | Finalized" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGO-22-LCq">
@@ -150,7 +150,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="newButtonTapped:" destination="5Ks-4I-hcT" eventType="touchUpInside" id="C7y-YG-ry8"/>
+                                    <action selector="newButtonTapped:" destination="5Ks-4I-hcT" eventType="touchUpInside" id="9Sf-Ah-dIx"/>
                                     <segue destination="0iu-06-dBK" kind="show" identifier="showNewEvent" id="nra-iM-xQK"/>
                                 </connections>
                             </button>
@@ -171,6 +171,9 @@
                             <constraint firstAttribute="trailing" secondItem="fek-Fw-FWo" secondAttribute="trailing" constant="16" id="xNa-fV-M4e"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="YxS-qF-Wmo" id="B2Z-jZ-gWf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZq-AI-1xw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -192,13 +195,13 @@
                                 <rect key="frame" x="85" y="59" width="303" height="53"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pjd-0b-C2c">
-                                        <rect key="frame" x="0.0" y="0.0" width="255.33333333333331" height="53"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="254" height="53"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lh-8C-YEt">
-                                        <rect key="frame" x="275.33333333333326" y="0.0" width="27.666666666666686" height="53"/>
+                                        <rect key="frame" x="274" y="0.0" width="29" height="53"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -220,7 +223,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="When are you available to attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-kX-fF3">
-                                <rect key="frame" x="28" y="128" width="358" height="24"/>
+                                <rect key="frame" x="28" y="128.66666666666663" width="358" height="23.333333333333343"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
                                 <color key="textColor" red="0.7175678014755249" green="0.7176927924156189" blue="0.71755987405776978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>

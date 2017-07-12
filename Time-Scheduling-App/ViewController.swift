@@ -11,12 +11,16 @@ import UIKit
 
 class ViewController: UIViewController {
     //main page
+
     @IBAction func newButtonTapped(_ sender: Any) {
     }
     
     @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {
         
     }
+    
+    @IBOutlet weak var tableView: UIView!
+    
     
     //var eventTableViewController: EventTableViewController?
     
