@@ -225,7 +225,7 @@
                                     <segue destination="5qq-3R-ohd" kind="unwind" identifier="backButtonSegue" unwindAction="unwindToHome:" id="ceA-yz-BdA"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="When are you available to attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-kX-fF3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When are you available to attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-kX-fF3">
                                 <rect key="frame" x="28" y="128" width="358" height="24"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
                                 <color key="textColor" red="0.7175678014755249" green="0.7176927924156189" blue="0.71755987405776978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -330,7 +330,7 @@
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="15"/>
+                                                                    <integer key="value" value="18"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
@@ -381,6 +381,11 @@
                                         <state key="normal" title="Next">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="nextButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="hxR-1L-nIV"/>
                                         </connections>
@@ -396,6 +401,11 @@
                                         <state key="normal" title="Save &amp; Close">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="9"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="saveCloseButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="Ln5-vT-XTl"/>
                                             <segue destination="5qq-3R-ohd" kind="unwind" identifier="saveCloseSegue" unwindAction="unwindToHome:" id="XuU-Ek-3z3"/>
@@ -415,6 +425,7 @@
                             <constraint firstItem="KN1-kX-fF3" firstAttribute="width" secondItem="ek2-zb-HYR" secondAttribute="width" id="Qvp-48-M8B"/>
                             <constraint firstItem="syG-0g-AOE" firstAttribute="top" secondItem="ewv-9b-tFZ" secondAttribute="bottom" constant="39" id="SCA-Bm-eIp"/>
                             <constraint firstAttribute="trailing" secondItem="ek2-zb-HYR" secondAttribute="trailing" constant="28" id="UZc-9l-fwU"/>
+                            <constraint firstItem="KN1-kX-fF3" firstAttribute="centerX" secondItem="yJZ-CT-a3x" secondAttribute="centerX" id="cqP-Uh-hCn"/>
                             <constraint firstItem="uGH-Ri-JfR" firstAttribute="leading" secondItem="yJZ-CT-a3x" secondAttribute="leading" constant="36" id="fqm-g7-eSc"/>
                             <constraint firstItem="uGH-Ri-JfR" firstAttribute="top" secondItem="ek2-zb-HYR" secondAttribute="bottom" constant="24" id="qul-l2-foC"/>
                             <constraint firstItem="aDY-ed-dmU" firstAttribute="top" secondItem="ewv-9b-tFZ" secondAttribute="bottom" constant="39" id="vfw-vi-BSR"/>
@@ -422,6 +433,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="availableDatesLabel" destination="KN1-kX-fF3" id="dfg-la-bH3"/>
                         <outlet property="calendarView" destination="WSU-13-p91" id="oWK-c2-94H"/>
                         <outlet property="eventNameTextField" destination="pjd-0b-C2c" id="X3S-Qj-hL1"/>
                         <outlet property="monthYearLabel" destination="JEa-yP-irL" id="BAN-YV-6NG"/>

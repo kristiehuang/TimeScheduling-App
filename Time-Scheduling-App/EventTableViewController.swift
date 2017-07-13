@@ -13,11 +13,8 @@ class EventTableViewController: UITableViewController {
 
     @IBOutlet var uiTableView: UITableView!
     
-    var events = [Event]() //{
-//        didSet {
-//            tableView.reloadData()
-//        }
-//    }
+    var events = [Event]()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
