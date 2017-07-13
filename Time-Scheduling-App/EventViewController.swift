@@ -143,13 +143,17 @@ class EventViewController: UIViewController {
                 
 
                 
-                var dictItem = [Int: Date]()
+                var dictItem = [String: String]()
+//                var datesString: String = ""
                 
                 for (index, date) in datesChosen.enumerated() {
                     //create dictionary entry
-                    dictItem.updateValue(date, forKey: index)
+                    dictItem.updateValue("\(date)", forKey: "\(index)")
+//                    datesString += String(describing: date) + ","
                 }
-                print("print all dates in event \(dictItem)")
+//                print("print all dates in event \(dictItem)")
+//                print("print all dates in String \(datesString)")
+//                
                 
                 let event = EventService.addEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date(), dates: dictItem)
                 events.append(event)

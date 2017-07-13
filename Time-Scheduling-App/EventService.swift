@@ -15,7 +15,8 @@ struct EventService {
 
     
     //just add event to database
-    static func addEvent(name: String, creationDate: Date, dates: [Int : Date]) -> Event {
+//    static func addEvent(name: String, creationDate: Date, dates: [Int : Date]) -> Event {
+    static func addEvent(name: String, creationDate: Date, dates: [String : String]) -> Event {
         let currentUser = User.current
 
 
@@ -25,17 +26,25 @@ struct EventService {
         
         //save to database
         let event = Event(name: name, creationDate: creationDate, dates: dates)
-        let dict1 = event.dictValue
-        
+        let dict = event.dictValue
+
         
         let eventRef = Database.database().reference().child("events").child(currentUser.uid).childByAutoId()
-//        eventRef.updateChildValues(event)
-        
-        eventRef.child("dates").updateChildValues(dict1)
 
+//        let eventRef = Database.database().reference().child("events").child(currentUser.uid)
+ print(dict)
+
+        eventRef.updateChildValues(dict)
         
+//        let refref = eventRef.childByAutoId().key
+//        let evnet = ["dates": dates as [Int: Date],
+//                    "created_at": creationDate,
+//                    "name": name] as [String : Any]
+//        let childUpdates = ["/events/\(refref)": evnet]
+//        eventRef.updateChildValues(childUpdates)
+//        
+        print("adfaf")
         return event
-
 
     }
     
