@@ -40,7 +40,8 @@ class EventViewController: UIViewController {
     
     var numberOfDates:Int = 0
     var datesChosen: [Date] = []
-    
+    var events: [Event] = []
+
     
     
     override func viewDidLoad() {
@@ -111,67 +112,37 @@ class EventViewController: UIViewController {
         self.monthYearLabel.text = "   \(self.formatter.string(from: date))"
         
     }
+
     
     
-    
-    
-    
-    
-    
-    
-    var events: [Event] = []
-    //EventService.createEventArray()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
+            let eventTableViewController = segue.destination as? EventTableViewController
+            
             if identifier == "backButtonSegue" {
                 print("Transitioning back to home/back")
             }
             else if identifier == "saveCloseSegue" {
                 print("Transitioning back to home/save")
                 
-                if (eventNameTextField.text?.isEmpty)! {
-                    eventNameTextField.text? = "Untitled Event"
-                }
-                
                 print(eventNameTextField.text ?? "")
-                
-                
-                //save to database + create array (everytime, for now) in EventService createEvent
-                
-                //                let event = Event(name: "", creationDate: Date(), host: User.current)
-                
-
-                
-                var dictItem = [String: String]()
-//                var datesString: String = ""
+                var dictItem = [String]()
                 
                 for (index, date) in datesChosen.enumerated() {
                     //create dictionary entry
-                    dictItem.updateValue("\(date)", forKey: "\(index)")
-//                    datesString += String(describing: date) + ","
+                    //dictItem.updateValue("\(date)", forKey: "\(index)")
+                    dictItem.append("\(date)")
                 }
-//                print("print all dates in event \(dictItem)")
-//                print("print all dates in String \(datesString)")
-//                
+
+                //set tableview events to events in Firebase
                 
                 let event = EventService.addEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date(), dates: dictItem)
-                events.append(event)
-                print(events.count)
+
+//                eventTableViewController?.events.append(event)
+
                 
-                //                DateService.datesToDatabase(Auth.auth().currentUser!, dates: datesChosen, completion: { (dates) in
-                //                    guard let date = dates
-                //                        else { return }
-                //                    print("created new date: \(date)")
-                //                })
-                
-                
-                let eventTableViewController = segue.destination as? EventTableViewController
-                eventTableViewController?.events = self.events
-                eventTableViewController?.tableView.reloadData()
                 //issue: event cell not showing in table view
-                
-                //                print("this is my array item \(String(describing: self.events[0].name))")
                 
                 //if event exists, save. if else, new event = Event(sdfaf)
             }

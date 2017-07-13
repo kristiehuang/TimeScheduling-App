@@ -31,7 +31,7 @@ struct UserService {
     
     
     
-    
+
     static func events(for user: User, completion: @escaping ([Event]) -> Void) {
         let ref = Database.database().reference().child("events").child(user.uid)
         
@@ -39,8 +39,11 @@ struct UserService {
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
                 return completion([])
             }
+            print(snapshot)
             
             let events = snapshot.reversed().flatMap(Event.init)
+            
+            print("amt of events i have according to firebase: \(events.count)")
             completion(events)
         })
     }

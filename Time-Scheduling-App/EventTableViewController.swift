@@ -13,30 +13,41 @@ class EventTableViewController: UITableViewController {
 
     @IBOutlet var uiTableView: UITableView!
     
-    var events = [Event]()
+     var events = [Event]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("events enumergeated : \(events.enumerated())")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
         UserService.events(for: User.current) { (events) in
             self.events = events
             self.tableView.reloadData()
+        }
+        print("events enumergeated : \(events.enumerated())")
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !(events.isEmpty) {
+            print("Tableview's \(events[0].name)")
+        } else {
+            print("empty array")
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventTableViewCell", for: indexPath) as! EventTableViewCell
-        let row = indexPath.row
-        let event = self.events[row]
-        cell.eventNameLabel.text = event.name
-//creation date + host
+//                let row = indexPath.row
+//                let event = self.events[row]
+//                cell.eventNameLabel.text = event.name
+        //creation date.convertToString() + host
         return cell
-
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
