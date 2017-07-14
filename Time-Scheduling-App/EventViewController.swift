@@ -129,9 +129,7 @@ class EventViewController: UIViewController {
                 print(eventNameTextField.text ?? "")
                 var dictItem = [String]()
                 
-                for (index, date) in datesChosen.enumerated() {
-                    //create dictionary entry
-                    //dictItem.updateValue("\(date)", forKey: "\(index)")
+                for date in datesChosen.enumerated() {
                     dictItem.append("\(date)")
                 }
 
