@@ -15,4 +15,5 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var eventDetailsLabel: UILabel!
     @IBOutlet weak var eventStatusIndicator: UIView!
     
+    
 }

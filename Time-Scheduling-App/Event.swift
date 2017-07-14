@@ -14,6 +14,7 @@ class Event {
     
     var name: String?
     var creationDate: Date
+    
 //    var host: User
     var key: String?
     
@@ -34,7 +35,6 @@ class Event {
     
     
     init?(snapshot: DataSnapshot) {
-        print(snapshot)
         guard let dict = snapshot.value as? [String: Any]
             else { return nil }
 
@@ -44,7 +44,6 @@ class Event {
         guard let createdAgo = dict["created_at"] as? TimeInterval
             else { return nil }
 
-        print(dict["dates"])
         guard let dates = dict["dates"] as? [String]
             else { return nil }
         

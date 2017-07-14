@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 import JTAppleCalendar
 
 class EventViewController: UIViewController {
@@ -41,7 +42,12 @@ class EventViewController: UIViewController {
     var numberOfDates:Int = 0
     var datesChosen: [Date] = []
     var events: [Event] = []
-
+    
+    static var event: Event?
+    
+    static func getEvent () -> Event {
+        return event!
+    }
     
     
     override func viewDidLoad() {
@@ -57,12 +63,16 @@ class EventViewController: UIViewController {
         availableDatesLabel.text = "\(numberOfDates) dates chosen"
     }
     
-    //for existing events
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //
-    //            eventNameTextField.text = event.name
-    //    }
+    //    for existing events
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let event = EventViewController.event {
+            eventNameTextField.text = event.name
+        } else {
+            eventNameTextField.text = ""
+        }
+    }
     
     func setUpCalendarView() {
         calendarView.minimumLineSpacing = 0
@@ -112,37 +122,78 @@ class EventViewController: UIViewController {
         self.monthYearLabel.text = "   \(self.formatter.string(from: date))"
         
     }
-
-    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
-            let eventTableViewController = segue.destination as? EventTableViewController
-            
             if identifier == "backButtonSegue" {
                 print("Transitioning back to home/back")
             }
             else if identifier == "saveCloseSegue" {
+                
                 print("Transitioning back to home/save")
                 
-                print(eventNameTextField.text ?? "")
-                var dictItem = [String]()
                 
-                for date in datesChosen.enumerated() {
-                    dictItem.append("\(date)")
+                //if event already exists
+                if let event = EventViewController.event {
+                    
+                    let eventTableViewController = EventTableViewController()
+                    event.name = eventNameTextField.text ?? ""
+                    
+                    print(event.name ?? "")
+                    
+                    let eventRef = Database.database().reference().child("events").child(User.current.uid).child(event.key!)
+                    eventRef.child("name").setValue(event.name)
+                    //changes name only
+                    
+                    
+                    eventTableViewController.tableView.reloadData()
+                    
+
+                    
+                    //setvalue to database too
+                    
+                    
+                    //dateschosen is dates form
+                    //datesarr is string form (to put into firebase)
+                    
+                    //create new array of all merged dates,, use this array here
+                    //create users. add users to indiv events.
+                    
+                    var counts: [Date: Int] = [:]
+                    for date in datesChosen {
+                        counts[date] = (counts[date] ?? 0) + 1
+                    }
+                    
+                    //sort array by count value, then display only top three
+                    print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
+                    for (key, value) in counts {
+                        print("\(value) of people prefer the \(key) date")
+                    }
+                    
                 }
-
-                //set tableview events to events in Firebase
                 
-                let event = EventService.addEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date(), dates: dictItem)
+            
+                else {
+                    print("new event")
+                    
+                    print(eventNameTextField.text ?? "")
+                    var datesArr = [String]()
+                    
+                    for date in datesChosen.enumerated() {
+                        datesArr.append("\(date)")
+                    }
+                    
+                    print("dates chosen: \(datesChosen)")
+                    print("dates array: \(datesArr)")
+ 
+                    
+                    EventViewController.event = EventService.addEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date(), dates: datesArr)
 
-//                eventTableViewController?.events.append(event)
-
+                    
+                    
+                }
                 
-                //issue: event cell not showing in table view
-                
-                //if event exists, save. if else, new event = Event(sdfaf)
             }
         }
     }
@@ -155,9 +206,10 @@ extension EventViewController: JTAppleCalendarViewDataSource {
         formatter.dateFormat = "yyyy MM dd"
         formatter.timeZone = Calendar.current.timeZone
         formatter.locale = Calendar.current.locale
+        formatter.dateStyle = .medium
         
-        let startDate = formatter.date(from: "2017 07 01")! //current month
-        let endDate = formatter.date(from: "2018 12 31")!
+        let startDate = formatter.date(from: "Jan 1, 2017")! //current month
+        let endDate = formatter.date(from: "Dec 31, 2018")!
         
         
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate)
@@ -189,9 +241,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
     
     
     
-    
-    
-    
+
     //display the cell
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell

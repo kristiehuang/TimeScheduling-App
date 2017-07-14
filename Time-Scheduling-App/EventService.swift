@@ -12,14 +12,13 @@ import FirebaseDatabase
 import FirebaseStorage
 
 struct EventService {
-
+    
     
     //just add event to database
-//    static func addEvent(name: String, creationDate: Date, dates: [Int : Date]) -> Event {
     static func addEvent(name: String, creationDate: Date, dates: [String]) -> Event {
         let currentUser = User.current
-
-
+        
+        
         print(dates)
         
         print("current user is \(currentUser.name)")
@@ -27,15 +26,17 @@ struct EventService {
         //save to database
         let event = Event(name: name, creationDate: creationDate, dates: dates)
         let dict = event.dictValue
-
+        
         
         let eventRef = Database.database().reference().child("events").child(currentUser.uid).childByAutoId()
         print(dict)
-
+        
         eventRef.updateChildValues(dict)
+        
         return event
-
+                
     }
+    
     
     
     

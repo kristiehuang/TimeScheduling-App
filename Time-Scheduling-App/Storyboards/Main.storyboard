@@ -74,6 +74,7 @@
                                     <outlet property="eventDetailsLabel" destination="GGO-22-LCq" id="Kw3-7t-Lsk"/>
                                     <outlet property="eventNameLabel" destination="XYS-UV-O18" id="YTs-iy-h8P"/>
                                     <outlet property="eventStatusIndicator" destination="5Cn-SQ-Ntx" id="PWC-0q-Qbv"/>
+                                    <segue destination="0iu-06-dBK" kind="show" identifier="showEvent" id="Mgr-lc-Qhe"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -191,11 +192,11 @@
                         <viewControllerLayoutGuide type="bottom" id="O1c-EW-PpT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" id="yJZ-CT-a3x">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="560"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="syG-0g-AOE">
-                                <rect key="frame" x="85" y="59" width="303" height="53"/>
+                                <rect key="frame" x="85" y="39" width="303" height="53"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pjd-0b-C2c">
                                         <rect key="frame" x="0.0" y="0.0" width="255.33333333333331" height="53"/>
@@ -226,13 +227,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When are you available to attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-kX-fF3">
-                                <rect key="frame" x="28" y="128" width="358" height="24"/>
+                                <rect key="frame" x="28" y="108" width="358" height="24"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
                                 <color key="textColor" red="0.7175678014755249" green="0.7176927924156189" blue="0.71755987405776978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ek2-zb-HYR">
-                                <rect key="frame" x="28" y="162" width="358" height="370"/>
+                                <rect key="frame" x="28" y="142" width="358" height="370"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   month Year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-yP-irL">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="55"/>
@@ -368,7 +369,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uGH-Ri-JfR">
-                                <rect key="frame" x="36" y="556" width="342" height="130"/>
+                                <rect key="frame" x="36" y="536" width="342" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hoz-Fr-PMW">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="75"/>
@@ -448,4 +449,7 @@
     <resources>
         <image name="Background" width="1125" height="2001"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Mgr-lc-Qhe"/>
+    </inferredMetricsTieBreakers>
 </document>

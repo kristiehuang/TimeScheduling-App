@@ -10,53 +10,61 @@ import Foundation
 import UIKit
 
 class EventTableViewController: UITableViewController {
-
+    
     @IBOutlet var uiTableView: UITableView!
     
-     var events = [Event]() {
+    var events = [Event]() {
         didSet {
             tableView.reloadData()
         }
     }
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
         print("events enumergeated : \(events.enumerated())")
         
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
+
         UserService.events(for: User.current) { (events) in
             self.events = events
             self.tableView.reloadData()
         }
         
-        if !(events.isEmpty) {
-            print("Tableview's \(String(describing: events[0].name))")
-        } else {
-            print("empty array")
-        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventTableViewCell", for: indexPath) as! EventTableViewCell
-                let row = indexPath.row
-                let event = self.events[row]
-                cell.eventNameLabel.text = event.name
+        let row = indexPath.row
+        let event = self.events[row]
+        cell.eventNameLabel.text = event.name
+        cell.eventDetailsLabel.text = "Host | \(String(describing: event.creationDate)) | 14 Invites | Finalized"
         //creation date.convertToString() + host
         return cell
         
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //events.count = 0 for now since creating new array
         return events.count
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "showEvent" {
+                print("Table view cell tapped")
+                
+                let indexPath = tableView.indexPathForSelectedRow!
+                let event = events[indexPath.row]
+//                let eventViewController = segue.destination as! EventViewController
+                EventViewController.event = event
+            }
+        }
+        
+    }
 }
