@@ -15,6 +15,7 @@
 		9E0C0B9E1F15F5A20026307C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E0C0B9D1F15F5A20026307C /* Info.plist */; };
 		9E0C0BA41F16C3330026307C /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0BA31F16C3330026307C /* DateService.swift */; };
 		9E0C0BA61F16C4C50026307C /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0BA51F16C4C50026307C /* Dates.swift */; };
+		9E0E041B1F1D33C90038705D /* BestDatesEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */; };
 		9E1A599D1F0E006100792D24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A599C1F0E006100792D24 /* AppDelegate.swift */; };
 		9E1A599F1F0E006900792D24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A599E1F0E006900792D24 /* Assets.xcassets */; };
 		9E1A59A81F0E00A500792D24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */; };
@@ -49,6 +50,7 @@
 		9E0C0B9D1F15F5A20026307C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E0C0BA31F16C3330026307C /* DateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		9E0C0BA51F16C4C50026307C /* Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
+		9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestDatesEventViewController.swift; sourceTree = "<group>"; };
 		9E1A599C1F0E006100792D24 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E1A599E1F0E006900792D24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				9E1A59B21F0E00DF00792D24 /* ViewController.swift */,
 				9E0C0B991F1588850026307C /* EventTableViewController.swift */,
 				9EE3912F1F142DE400C41503 /* EventViewController.swift */,
+				9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				9E0C0B941F1570F80026307C /* EventService.swift in Sources */,
 				9E0C0BA61F16C4C50026307C /* Dates.swift in Sources */,
 				9E0C0B9A1F1588850026307C /* EventTableViewController.swift in Sources */,
+				9E0E041B1F1D33C90038705D /* BestDatesEventViewController.swift in Sources */,
 				9E1A599D1F0E006100792D24 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

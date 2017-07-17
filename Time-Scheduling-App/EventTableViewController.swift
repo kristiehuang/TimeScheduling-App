@@ -13,17 +13,17 @@ class EventTableViewController: UITableViewController {
     
     @IBOutlet var uiTableView: UITableView!
     
+
+    
     var events = [Event]() {
         didSet {
-            tableView.reloadData()
+            tableView.reloadData()            
         }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         print("events enumergeated : \(events.enumerated())")
         
     }
@@ -31,12 +31,12 @@ class EventTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         UserService.events(for: User.current) { (events) in
+            print(events)
             self.events = events
             self.tableView.reloadData()
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -44,8 +44,8 @@ class EventTableViewController: UITableViewController {
         let row = indexPath.row
         let event = self.events[row]
         cell.eventNameLabel.text = event.name
-        cell.eventDetailsLabel.text = "Host | \(String(describing: event.creationDate)) | 14 Invites | Finalized"
-        //creation date.convertToString() + host
+        cell.eventDetailsLabel.text = "Host | 14 Invites | Date Chosen"
+        //host + number of invites + date (if finalized then date, else if not finalized then "Date pending"
         return cell
         
     }
@@ -59,11 +59,16 @@ class EventTableViewController: UITableViewController {
             if identifier == "showEvent" {
                 print("Table view cell tapped")
                 
+                
+                //if event already exists, DISPLAY info
+                //if new event, display empty
+                
                 let indexPath = tableView.indexPathForSelectedRow!
                 let event = events[indexPath.row]
-//                let eventViewController = segue.destination as! EventViewController
                 EventViewController.event = event
             }
+            
+            
         }
         
     }

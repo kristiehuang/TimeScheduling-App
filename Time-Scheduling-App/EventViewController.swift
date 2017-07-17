@@ -29,6 +29,9 @@ class EventViewController: UIViewController {
     @IBAction func saveCloseButtonTapped(_ sender: Any) {
     }
     
+    @IBAction func unwindToPage1(_ segue: UIStoryboardSegue) {
+        
+    }
     
     let outsideMonthColor = UIColor(colorWithHexValue: 0x7FAEE7) //cell date label color in indates/outdates
     let monthColor = UIColor.white //cell date label color in this month
@@ -123,82 +126,138 @@ class EventViewController: UIViewController {
         
     }
     
+    private func showError(bigErrorMsg: String, smallErrorMsg: String){
+        let alertController = UIAlertController(title: "\(bigErrorMsg)", message:
+            "\(smallErrorMsg)", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func newEvent(){
+        //if event already exists, SAVE to existing
+        
+        if let event = EventViewController.event {
+            let eventTableViewController = EventTableViewController()
+            event.name = eventNameTextField.text ?? ""
+            
+            print(event.name ?? "")
+            var isFound = false
+            UserService.events(for: User.current, completion: { (events:[Event]) in
+            
+                for eventz in events {
+                    if event.key == eventz.key {
+                        
+                        var datesArr = [String]()
+                        for date in self.datesChosen.enumerated() {
+                            datesArr.append("\(date)")
+                        }
+                        print("dates chosen: \(self.datesChosen)")
+                        print("dates array: \(datesArr)")
+                        
+                        if datesArr.isEmpty {
+                            self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
+                            return
+                        }
+                        
+                        
+                        let eventRef = Database.database().reference().child("events").child(User.current.uid).child(event.key!)
+                        eventRef.child("name").setValue(event.name)
+                        eventRef.child("dates").setValue(datesArr)
+                        //changes name only
+                        //set DATES to database too
+                        eventTableViewController.tableView.reloadData()
+                        isFound = true
+                        
+                    }
+                    
+                }
+                
+                if isFound == false {
+                    print("new event")
+                    print(self.eventNameTextField.text ?? "")
+                    
+                    var datesArr = [String]()
+                    for date in self.datesChosen.enumerated() {
+                        datesArr.append("\(date)")
+                    }
+                    print("dates chosen: \(self.datesChosen)")
+                    print("dates array: \(datesArr)")
+                    
+                    if datesArr.isEmpty {
+                        self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
+                        return
+                    }
+                    
+                    EventService.addEvent(name: event.name!, creationDate: event.creationDate, dates: datesArr)
+                    
+                    UserService.events(for: User.current) { (events) in
+                        //5
+                        print(events)
+                        eventTableViewController.events = events
+                        eventTableViewController.tableView.reloadData()
+                        self.viewWillAppear(true)
+                    }
+                    
+                    eventTableViewController.tableView.reloadData()
+                }
+                
+            })
+            
+            
+            
+            
+            
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "backButtonSegue" {
                 print("Transitioning back to home/back")
             }
+            else if identifier == "nextSegue" {
+                print("Transitioning to next")
+            }
             else if identifier == "saveCloseSegue" {
-                
+                newEvent()
                 print("Transitioning back to home/save")
-                
-                
-                //if event already exists
-                if let event = EventViewController.event {
-                    
-                    let eventTableViewController = EventTableViewController()
-                    event.name = eventNameTextField.text ?? ""
-                    
-                    print(event.name ?? "")
-                    
-                    let eventRef = Database.database().reference().child("events").child(User.current.uid).child(event.key!)
-                    eventRef.child("name").setValue(event.name)
-                    //changes name only
-                    
-                    
-                    eventTableViewController.tableView.reloadData()
-                    
 
-                    
-                    //setvalue to database too
-                    
-                    
-                    //dateschosen is dates form
-                    //datesarr is string form (to put into firebase)
-                    
-                    //create new array of all merged dates,, use this array here
-                    //create users. add users to indiv events.
-                    
-                    var counts: [Date: Int] = [:]
-                    for date in datesChosen {
-                        counts[date] = (counts[date] ?? 0) + 1
-                    }
-                    
-                    //sort array by count value, then display only top three
-                    print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
-                    for (key, value) in counts {
-                        print("\(value) of people prefer the \(key) date")
-                    }
-                    
+                
+                //dateschosen is dates form
+                //datesarr is string form (to put into firebase)
+                
+                //create new array of all merged dates,, use this array here
+                //create users. add users to indiv events.
+                
+                var counts: [Date: Int] = [:]
+                for date in datesChosen {
+                    counts[date] = (counts[date] ?? 0) + 1
                 }
                 
-            
-                else {
-                    print("new event")
-                    
-                    print(eventNameTextField.text ?? "")
-                    var datesArr = [String]()
-                    
-                    for date in datesChosen.enumerated() {
-                        datesArr.append("\(date)")
-                    }
-                    
-                    print("dates chosen: \(datesChosen)")
-                    print("dates array: \(datesArr)")
- 
-                    
-                    EventViewController.event = EventService.addEvent(name: eventNameTextField.text ?? "Untitled Event", creationDate: Date(), dates: datesArr)
-
-                    
-                    
+                //sort array by count value, then display only top three
+                print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
+                for (key, value) in counts {
+                    print("\(value) of people prefer the \(key) date")
                 }
+                
+                //print dates in order of increasing preference
+                //change label to dates in order of increasing preference
+                
                 
             }
+            
+            
+            
+            
         }
     }
-    
 }
+
+
+
+
 
 extension EventViewController: JTAppleCalendarViewDataSource {
     
@@ -229,19 +288,22 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         case .full, .left, .right:
             calendarCell.selectedView.isHidden = false
             calendarCell.selectedView.backgroundColor = UIColor.white // Or you can put what ever you like for your rounded corners, and your stand-alone selected cell
+            calendarCell.isSelected = true
         case .middle:
             calendarCell.selectedView.isHidden = false
             calendarCell.selectedView.backgroundColor = UIColor.white // Or what ever you want for your dates that land in the middle
+            calendarCell.isSelected = true
+            
         default:
             calendarCell.selectedView.isHidden = true
             calendarCell.selectedView.backgroundColor = nil // Have no selection when a cell is not selected
+            calendarCell.isSelected = false
         }
         
     }
     
     
     
-
     //display the cell
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
@@ -275,6 +337,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         let dateSelected = date
         datesChosen.append(dateSelected)
         print("dates chosen array are \(datesChosen.enumerated())")
+        
         
         
         

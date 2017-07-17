@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     //main page
 
     @IBAction func newButtonTapped(_ sender: Any) {
+        print("new button tapped")
+        //reset event to new
     }
     
     @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {
@@ -28,13 +30,20 @@ class ViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showTableSegue" {
-            print("showing container view tablezzz")
+        if let identifier = segue.identifier {
+            if identifier == "showTableSegue" {
+                print("showing container view tablezzz")
 
+            }
+            else if identifier == "showNewEvent" {
+                print("+ button tapped")
+                let newEvent = Event(name: "", creationDate: Date(), dates: [])
+                EventViewController.event = newEvent
+                
+                
+                }
         }
-        
-        
     }
-    
+
     
 }

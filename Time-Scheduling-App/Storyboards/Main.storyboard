@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DQ8-H4-nFn" id="gUy-n4-Lew">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Host | 14 Invites | Finalized" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGO-22-LCq">
@@ -89,7 +89,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chp-3H-tH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-401" y="-251"/>
+            <point key="canvasLocation" x="-403" y="-250"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="188-Pf-4LO">
@@ -155,7 +155,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="newButtonTapped:" destination="5Ks-4I-hcT" eventType="touchUpInside" id="9Sf-Ah-dIx"/>
-                                    <segue destination="0iu-06-dBK" kind="show" identifier="showNewEvent" id="nra-iM-xQK"/>
+                                    <segue destination="0iu-06-dBK" kind="show" identifier="showNewEvent" id="JpJ-Bc-8o5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -192,11 +192,11 @@
                         <viewControllerLayoutGuide type="bottom" id="O1c-EW-PpT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" id="yJZ-CT-a3x">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="560"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="syG-0g-AOE">
-                                <rect key="frame" x="85" y="39" width="303" height="53"/>
+                                <rect key="frame" x="85" y="59" width="303" height="53"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pjd-0b-C2c">
                                         <rect key="frame" x="0.0" y="0.0" width="255.33333333333331" height="53"/>
@@ -227,13 +227,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When are you available to attend?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-kX-fF3">
-                                <rect key="frame" x="28" y="108" width="358" height="24"/>
+                                <rect key="frame" x="28" y="128" width="358" height="24"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
                                 <color key="textColor" red="0.7175678014755249" green="0.7176927924156189" blue="0.71755987405776978" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ek2-zb-HYR">
-                                <rect key="frame" x="28" y="142" width="358" height="370"/>
+                                <rect key="frame" x="28" y="162" width="358" height="370"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   month Year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEa-yP-irL">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="55"/>
@@ -369,7 +369,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uGH-Ri-JfR">
-                                <rect key="frame" x="36" y="536" width="342" height="130"/>
+                                <rect key="frame" x="36" y="556" width="342" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hoz-Fr-PMW">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="75"/>
@@ -389,6 +389,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="nextButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="hxR-1L-nIV"/>
+                                            <segue destination="CP3-VW-hQj" kind="show" identifier="nextSegue" id="MMc-2p-cBt"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQP-rh-1Wb">
@@ -443,13 +444,82 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m6W-Pv-QWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5qq-3R-ohd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="409" y="210"/>
+            <point key="canvasLocation" x="349" y="135"/>
+        </scene>
+        <!--Best Dates Event View Controller-->
+        <scene sceneID="zlH-jd-8oE">
+            <objects>
+                <viewController id="CP3-VW-hQj" customClass="BestDatesEventViewController" customModule="Time_Scheduling_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UEq-Kl-Mr4"/>
+                        <viewControllerLayoutGuide type="bottom" id="hKe-K0-Gnm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tLZ-Sb-RFT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8i-un-stN">
+                                <rect key="frame" x="59" y="70" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="&lt;">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton1:" destination="CP3-VW-hQj" eventType="touchUpInside" id="aEj-1u-j2t"/>
+                                    <action selector="backButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="pxr-S5-tqf"/>
+                                    <segue destination="JkN-Ms-UV3" kind="unwind" identifier="backButton1" unwindAction="unwindToPage1:" id="q1W-xh-qT1"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUg-bG-YX6">
+                                <rect key="frame" x="20" y="353" width="374" height="30"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="YPY-pO-Aez">
+                                <rect key="frame" x="153" y="59" width="193.66666666666666" height="53"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vtM-Aw-q8m">
+                                        <rect key="frame" x="0.0" y="0.0" width="146" height="53"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JD9-r4-2AT">
+                                        <rect key="frame" x="166" y="0.0" width="27.666666666666657" height="53"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="jQq-T3-k0s"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="NUg-bG-YX6" secondAttribute="trailing" constant="20" id="EPc-u6-Etz"/>
+                            <constraint firstItem="NUg-bG-YX6" firstAttribute="centerX" secondItem="tLZ-Sb-RFT" secondAttribute="centerX" id="dqP-nO-PE0"/>
+                            <constraint firstItem="NUg-bG-YX6" firstAttribute="leading" secondItem="tLZ-Sb-RFT" secondAttribute="leading" constant="20" id="hFh-fi-dJD"/>
+                            <constraint firstItem="NUg-bG-YX6" firstAttribute="centerY" secondItem="tLZ-Sb-RFT" secondAttribute="centerY" id="y5N-z1-10C"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bestDatesLabel" destination="NUg-bG-YX6" id="63s-c9-dWS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cQi-7U-fNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="JkN-Ms-UV3" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1096" y="135"/>
         </scene>
     </scenes>
     <resources>
         <image name="Background" width="1125" height="2001"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Mgr-lc-Qhe"/>
+        <segue reference="JpJ-Bc-8o5"/>
     </inferredMetricsTieBreakers>
 </document>

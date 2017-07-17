@@ -42,9 +42,12 @@ struct UserService {
             let events = snapshot.reversed().flatMap(Event.init)
             
             //events returned in array
+            print("these are my events: \(events)")
             
             print("amt of events i have according to firebase: \(events.count)")
+            
             completion(events)
+
         })
     }
     
