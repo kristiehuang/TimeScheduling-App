@@ -46,6 +46,9 @@ class EventViewController: UIViewController {
     var datesChosen: [Date] = []
     var events: [Event] = []
     
+    var newOrderedDict = NSMutableDictionary()
+    
+    
     static var event: Event?
     
     static func getEvent () -> Event {
@@ -145,7 +148,7 @@ class EventViewController: UIViewController {
             print(event.name ?? "")
             var isFound = false
             UserService.events(for: User.current, completion: { (events:[Event]) in
-            
+                
                 for eventz in events {
                     if event.key == eventz.key {
                         
@@ -212,7 +215,32 @@ class EventViewController: UIViewController {
         }
     }
     
+    
+    func countDates() {
+        var counts: [Date: Int] = [:]
+        var array: [Int] = []
+        for date in datesChosen {
+            counts[date] = (counts[date] ?? 0) + 1
+        }
+        //sort array by count value, then display only top three
+        print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
+        
+        for (key, value) in counts {
+            print("\(value) of people prefer the \(key) date")
+            array.append(value)
+            //value is int
+            
+            for var item in array.sorted() {
+                item = value
+                newOrderedDict[key] = item
+                print("THIS IS NEW ORDERED DICT \(newOrderedDict)")
+            }
+        }
+
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let identifier = segue.identifier {
             if identifier == "backButtonSegue" {
                 print("Transitioning back to home/back")
@@ -220,36 +248,27 @@ class EventViewController: UIViewController {
             else if identifier == "nextSegue" {
                 print("Transitioning to next")
             }
+                
             else if identifier == "saveCloseSegue" {
                 newEvent()
                 print("Transitioning back to home/save")
-
                 
                 //dateschosen is dates form
                 //datesarr is string form (to put into firebase)
                 
-                //create new array of all merged dates,, use this array here
+                //merge all user's Counts dictionaries = mergedCounts
+                //used mergedCounts instead
                 //create users. add users to indiv events.
                 
-                var counts: [Date: Int] = [:]
-                for date in datesChosen {
-                    counts[date] = (counts[date] ?? 0) + 1
-                }
-                
-                //sort array by count value, then display only top three
-                print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
-                for (key, value) in counts {
-                    print("\(value) of people prefer the \(key) date")
-                }
-                
-                //print dates in order of increasing preference
-                //change label to dates in order of increasing preference
-                
-                
+                countDates()
+
             }
             
-            
-            
+            if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
+                countDates()
+                print(newOrderedDict)
+                bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
+            }
             
         }
     }
