@@ -58,17 +58,24 @@ class EventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpCalendarView()
         calendarView.visibleDates { visibleDates in
             self.setupViewsOfCalendar(from: visibleDates)
         }
-        
+        let currentDate = Date()
+        calendarView.scrollToDate(currentDate)
         calendarView.allowsMultipleSelection  = true
         calendarView.isRangeSelectionUsed = true
         
-        availableDatesLabel.text = "\(numberOfDates) dates chosen"
+        availableDatesLabel.text = "\(numberOfDates) dates chosen | Press & hold to select a range"
         
-        
+        //longpress to select range
+        calendarView.allowsMultipleSelection = true
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didStartRangeSelecting(gesture:)))
+        gesture.minimumPressDuration = 0.5
+        calendarView.addGestureRecognizer(gesture)
+        calendarView.isRangeSelectionUsed = true
         
         //dismiss keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
@@ -247,6 +254,38 @@ class EventViewController: UIViewController {
         }
         
     }
+    
+    //longpress gesture func!!
+    var rangeSelectedDates: [Date] = []
+    func didStartRangeSelecting(gesture: UILongPressGestureRecognizer) {
+        let point = gesture.location(in: gesture.view!)
+        rangeSelectedDates = calendarView.selectedDates
+        if let cellState = calendarView.cellStatus(at: point) {
+            let date = cellState.date
+            if !rangeSelectedDates.contains(date) {
+                let dateRange = calendarView.generateDateRange(from: rangeSelectedDates.first ?? date, to: date)
+                for aDate in dateRange {
+                    if !rangeSelectedDates.contains(aDate) {
+                        rangeSelectedDates.append(aDate)
+                    }
+                }
+                calendarView.selectDates(from: rangeSelectedDates.first!, to: date, keepSelectionIfMultiSelectionAllowed: true)
+            } else {
+                let indexOfNewlySelectedDate = rangeSelectedDates.index(of: date)! + 1
+                let lastIndex = rangeSelectedDates.endIndex
+                let calendar = Calendar(identifier: .gregorian)
+                let followingDay = calendar.date(byAdding: .day, value: 1, to: date)!
+                calendarView.selectDates(from: followingDay, to: rangeSelectedDates.last!, keepSelectionIfMultiSelectionAllowed: false)
+                rangeSelectedDates.removeSubrange(indexOfNewlySelectedDate..<lastIndex)
+            }
+        }
+        
+        if gesture.state == .ended {
+            rangeSelectedDates.removeAll()
+        }
+    }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

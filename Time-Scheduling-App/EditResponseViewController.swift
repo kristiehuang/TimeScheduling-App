@@ -54,15 +54,15 @@ class EditResponseViewController: UIViewController {
         calendarView.visibleDates { visibleDates in
             self.setupViewsOfCalendar(from: visibleDates)
         }
-        
+        let currentDate = Date()
+        calendarView.scrollToDate(currentDate)
         calendarView.allowsMultipleSelection  = true
         calendarView.isRangeSelectionUsed = true
         
         availableDatesLabel.text = "\(numberOfDates) dates chosen"
         invitedAsLabel.text = "Invited as: \(User.current.name)"
         
-        
-        
+
         //dismiss keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
@@ -240,7 +240,7 @@ class EditResponseViewController: UIViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let identifier = segue.identifier {
             if identifier == "backButtonSegue" {
