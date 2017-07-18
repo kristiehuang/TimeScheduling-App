@@ -10,6 +10,7 @@
 		19D53A496CFADDE3B9A5F724 /* Pods_Time_Scheduling_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8A20C59D56D69287C0AE01 /* Pods_Time_Scheduling_App.framework */; };
 		9E0653FB1F1E6E520031E4F5 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0653FA1F1E6E520031E4F5 /* AddNoteViewController.swift */; };
 		9E0653FD1F1EA35A0031E4F5 /* EditResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0653FC1F1EA3590031E4F5 /* EditResponseViewController.swift */; };
+		9E0653FF1F1EBA250031E4F5 /* Storyboard+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0653FE1F1EBA250031E4F5 /* Storyboard+Utility.swift */; };
 		9E0C0B921F156C480026307C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B911F156C480026307C /* Event.swift */; };
 		9E0C0B941F1570F80026307C /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B931F1570F80026307C /* EventService.swift */; };
 		9E0C0B961F1578B80026307C /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B951F1578B80026307C /* EventTableViewCell.swift */; };
@@ -46,6 +47,7 @@
 		8550BE00F5A683265232E74B /* Pods-Time-Scheduling-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time-Scheduling-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Time-Scheduling-App/Pods-Time-Scheduling-App.debug.xcconfig"; sourceTree = "<group>"; };
 		9E0653FA1F1E6E520031E4F5 /* AddNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		9E0653FC1F1EA3590031E4F5 /* EditResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditResponseViewController.swift; sourceTree = "<group>"; };
+		9E0653FE1F1EBA250031E4F5 /* Storyboard+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storyboard+Utility.swift"; sourceTree = "<group>"; };
 		9E0C0B911F156C480026307C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		9E0C0B931F1570F80026307C /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		9E0C0B951F1578B80026307C /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				9E0C0B9D1F15F5A20026307C /* Info.plist */,
 				9E1A59BF1F0E020E00792D24 /* GoogleService-Info.plist */,
+				9E0653FE1F1EBA250031E4F5 /* Storyboard+Utility.swift */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				9EE391331F14439E00C41503 /* CalendarCell.swift in Sources */,
 				9E0C0B921F156C480026307C /* Event.swift in Sources */,
 				9E1A59C41F0E028C00792D24 /* LoginViewController.swift in Sources */,
+				9E0653FF1F1EBA250031E4F5 /* Storyboard+Utility.swift in Sources */,
 				9EE391301F142DE400C41503 /* EventViewController.swift in Sources */,
 				9E0653FB1F1E6E520031E4F5 /* AddNoteViewController.swift in Sources */,
 				9E1A59B31F0E00DF00792D24 /* ViewController.swift in Sources */,

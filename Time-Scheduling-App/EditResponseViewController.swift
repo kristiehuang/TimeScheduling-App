@@ -59,6 +59,7 @@ class EditResponseViewController: UIViewController {
         calendarView.isRangeSelectionUsed = true
         
         availableDatesLabel.text = "\(numberOfDates) dates chosen"
+        invitedAsLabel.text = "Invited as: \(User.current.name)"
         
         
         
@@ -368,6 +369,7 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         
         
     }
+    
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         
         handleCellSelected(view: cell, cellState: cellState)

@@ -44,6 +44,7 @@ extension LoginViewController: FUIAuthDelegate {
             return
         }
         
+
         //check user does exist
         guard let user = user
             else { return }
@@ -54,7 +55,7 @@ extension LoginViewController: FUIAuthDelegate {
             if let user = User(snapshot: snapshot) {
                 print("\(user.name) already exists")
                 
-                User.setCurrent(user)
+                User.setCurrent(user, writeToUserDefaults: true)
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: .main)
                 
