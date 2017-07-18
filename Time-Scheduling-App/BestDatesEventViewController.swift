@@ -13,23 +13,32 @@ class BestDatesEventViewController: UIViewController {
 
     
     @IBOutlet weak var bestDatesLabel: UILabel!
+    @IBOutlet weak var eventNameLabel: UILabel!
+    
+    @IBOutlet weak var invitedAsLabel: UILabel!
+    
     
     @IBAction func backButton1(_ sender: Any) {
     }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {        
+    }
+    
     var orderedDict: [Date: Int] = [:]
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bestDatesLabel.text = "\(String(describing: orderedDict))"
+        var dates: [Date] = []
+        for (date, int) in orderedDict {
+            dates.append(date)
+        }
+        bestDatesLabel.text = "\(String(describing: dates))"
+        eventNameLabel.text = "\(String(describing: EventViewController.event?.name ?? "Untitled Event"))"
+        invitedAsLabel.text = "Invited as: \(User.current.name)"
     }
-//    
-//    func formatDict() {
-//        for (date, int) in orderedDict {
-//            
-//        }
-//    }
-    
+
+
     
 }

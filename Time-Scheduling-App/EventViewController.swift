@@ -41,6 +41,7 @@ class EventViewController: UIViewController {
     //    let event = Event(name: "", creationDate: Date(), host: User.current)
     
     let formatter = DateFormatter()
+    let dateFormatter = DateFormatter()
     
     var numberOfDates:Int = 0
     var datesChosen: [Date] = []
@@ -67,6 +68,13 @@ class EventViewController: UIViewController {
         calendarView.isRangeSelectionUsed = true
         
         availableDatesLabel.text = "\(numberOfDates) dates chosen"
+        
+        
+        
+        //dismiss keyboard
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
     }
     
     //    for existing events
@@ -124,8 +132,8 @@ class EventViewController: UIViewController {
     func setupViewsOfCalendar(from visibleDates: DateSegmentInfo) {
         let date = visibleDates.monthDates.first!.date
         
-        self.formatter.dateFormat = "MMMM yyyy"
-        self.monthYearLabel.text = "   \(self.formatter.string(from: date))"
+        self.dateFormatter.dateFormat = "MMMM yyyy"
+        self.monthYearLabel.text = "   \(self.dateFormatter.string(from: date))"
         
     }
     
@@ -168,8 +176,6 @@ class EventViewController: UIViewController {
                         let eventRef = Database.database().reference().child("events").child(User.current.uid).child(event.key!)
                         eventRef.child("name").setValue(event.name)
                         eventRef.child("dates").setValue(datesArr)
-                        //changes name only
-                        //set DATES to database too
                         eventTableViewController.tableView.reloadData()
                         isFound = true
                         
@@ -247,6 +253,7 @@ class EventViewController: UIViewController {
             }
             else if identifier == "nextSegue" {
                 print("Transitioning to next")
+                countDates()
             }
                 
             else if identifier == "saveCloseSegue" {
@@ -281,13 +288,19 @@ class EventViewController: UIViewController {
 extension EventViewController: JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        formatter.dateFormat = "yyyy MM dd"
-        formatter.timeZone = Calendar.current.timeZone
-        formatter.locale = Calendar.current.locale
-        formatter.dateStyle = .medium
         
-        let startDate = formatter.date(from: "Jan 1, 2017")! //current month
-        let endDate = formatter.date(from: "Dec 31, 2018")!
+        
+//        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        
+//        dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+
+        dateFormatter.timeZone = Calendar.current.timeZone
+        dateFormatter.locale = Calendar.current.locale
+        dateFormatter.dateStyle = .medium
+    
+        let startDate = dateFormatter.date(from: "Jan 01, 2017")! //current month
+        let endDate = dateFormatter.date(from: "Dec 31, 2018")!
         
         
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate)
@@ -302,6 +315,7 @@ extension EventViewController: JTAppleCalendarViewDataSource {
 extension EventViewController: JTAppleCalendarViewDelegate {
     
     func handleSelection(cell: JTAppleCell?, cellState: CellState) {
+        
         let calendarCell = cell as! CalendarCell // You created the cell view if you followed the tutorial
         switch cellState.selectedPosition() {
         case .full, .left, .right:
@@ -337,6 +351,8 @@ extension EventViewController: JTAppleCalendarViewDelegate {
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        
+
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         
@@ -349,10 +365,6 @@ extension EventViewController: JTAppleCalendarViewDelegate {
             availableDatesLabel.text = "\(numberOfDates) dates chosen"
         }
         
-        //        selected date = date in selected cell
-        //        if cellstate = selected, find date
-        //        append to datesChosen the selected date
-        
         let dateSelected = date
         datesChosen.append(dateSelected)
         print("dates chosen array are \(datesChosen.enumerated())")
@@ -362,6 +374,9 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
     }
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
+
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         handleSelection(cell: cell, cellState: cellState)
@@ -384,8 +399,8 @@ extension EventViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         let date = visibleDates.monthDates.first!.date
         
-        formatter.dateFormat = "MMMM yyyy"
-        monthYearLabel.text = "   \(formatter.string(from: date))"
+        dateFormatter.dateFormat = "MMMM yyyy"
+        monthYearLabel.text = "   \(dateFormatter.string(from: date))"
     }
 }
 
