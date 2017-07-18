@@ -1,8 +1,8 @@
 //
-//  EventViewController.swift
+//  EditResponseViewController.swift
 //  Time-Scheduling-App
 //
-//  Created by Kristie Huang on 7/10/17.
+//  Created by Kristie Huang on 7/18/17.
 //  Copyright © 2017 Kristie Huang. All rights reserved.
 //
 
@@ -12,26 +12,18 @@ import FirebaseAuth
 import FirebaseDatabase
 import JTAppleCalendar
 
-class EventViewController: UIViewController {
+class EditResponseViewController: UIViewController {
     //event page
-    
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var monthYearLabel: UILabel!
-    @IBOutlet weak var eventNameTextField: UITextField!
+    @IBOutlet weak var eventNameTextField: UILabel!
+    @IBOutlet weak var invitedAsLabel: UILabel!
     @IBOutlet weak var availableDatesLabel: UILabel!
     
-    @IBAction func backButtonTapped(_ sender: Any) {
+    @IBAction func SaveButtonTapped(_ sender: Any) {
     }
     
-    @IBAction func nextButtonTapped(_ sender: Any) {
-    }
     
-    @IBAction func saveCloseButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func unwindToPage1(_ segue: UIStoryboardSegue) {
-        
-    }
     
     let outsideMonthColor = UIColor(colorWithHexValue: 0x7FAEE7) //cell date label color in indates/outdates
     let monthColor = UIColor.white //cell date label color in this month
@@ -80,7 +72,7 @@ class EventViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let event = EventViewController.event {
+        if let event = EditResponseViewController.event {
             eventNameTextField.text = event.name
         } else {
             eventNameTextField.text = ""
@@ -148,9 +140,9 @@ class EventViewController: UIViewController {
     func newEvent(){
         //if event already exists, SAVE to existing
         
-        if let event = EventViewController.event {
+        if let event = EditResponseViewController.event {
             let eventTableViewController = EventTableViewController()
-
+            
             event.name = self.eventNameTextField.text ?? ""
             
             print(event.name ?? "")
@@ -161,10 +153,10 @@ class EventViewController: UIViewController {
                     if event.key == eventz.key {
                         
                         var datesArr = [String]()
-                        for date in EventViewController.datesChosen.enumerated() {
+                        for date in EditResponseViewController.datesChosen.enumerated() {
                             datesArr.append("\(date)")
                         }
-                        print("dates chosen: \(EventViewController.datesChosen)")
+                        print("dates chosen: \(EditResponseViewController.datesChosen)")
                         print("dates array: \(datesArr)")
                         
                         if datesArr.isEmpty {
@@ -190,10 +182,10 @@ class EventViewController: UIViewController {
                     print(self.eventNameTextField.text ?? "")
                     
                     var datesArr = [String]()
-                    for date in EventViewController.datesChosen.enumerated() {
+                    for date in EditResponseViewController.datesChosen.enumerated() {
                         datesArr.append("\(date)")
                     }
-                    print("dates chosen: \(EventViewController.datesChosen)")
+                    print("dates chosen: \(EditResponseViewController.datesChosen)")
                     print("dates array: \(datesArr)")
                     
                     if datesArr.isEmpty {
@@ -205,7 +197,6 @@ class EventViewController: UIViewController {
                     
                     UserService.events(for: User.current) { (events) in
                         //5
-                        print(events)
                         eventTableViewController.events = events
                         eventTableViewController.tableView.reloadData()
                         self.viewWillAppear(true)
@@ -239,10 +230,10 @@ class EventViewController: UIViewController {
             //value is int
             
             for var item in array.sorted() {
-                let eventViewController = EventViewController()
+                let editResponseViewController = EditResponseViewController()
                 item = value
-                eventViewController.newOrderedDict[key] = item
-                print("THIS IS NEW ORDERED DICT \(eventViewController.newOrderedDict)")
+                editResponseViewController.newOrderedDict[key] = item
+                print("THIS IS NEW ORDERED DICT \(editResponseViewController.newOrderedDict)")
             }
         }
         
@@ -257,15 +248,13 @@ class EventViewController: UIViewController {
             else if identifier == "nextSegue" {
                 print("Transitioning to next & save")
                 newEvent()
-                EventViewController.countDates()
+                EditResponseViewController.countDates()
                 
-                let inviteEventViewController = segue.destination as! InviteEventViewController
-                inviteEventViewController.event = EventViewController.event
                 
-//                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
-//                    print(self.newOrderedDict)
-//                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
-//                }
+                //                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
+                //                    print(self.newOrderedDict)
+                //                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
+                //                }
             }
                 
             else if identifier == "saveCloseSegue" {
@@ -279,10 +268,10 @@ class EventViewController: UIViewController {
                 //used mergedCounts instead
                 //create users. add users to indiv events.
                 
-                EventViewController.countDates()
+                EditResponseViewController.countDates()
                 
             }
-                        
+            
         }
     }
 }
@@ -291,7 +280,7 @@ class EventViewController: UIViewController {
 
 
 
-extension EventViewController: JTAppleCalendarViewDataSource {
+extension EditResponseViewController: JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         
@@ -318,7 +307,7 @@ extension EventViewController: JTAppleCalendarViewDataSource {
     
 }
 
-extension EventViewController: JTAppleCalendarViewDelegate {
+extension EditResponseViewController: JTAppleCalendarViewDelegate {
     
     func handleSelection(cell: JTAppleCell?, cellState: CellState) {
         
@@ -372,15 +361,15 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         }
         
         let dateSelected = date
-        EventViewController.datesChosen.append(dateSelected)
-        print("dates chosen array are \(EventViewController.datesChosen.enumerated())")
+        EditResponseViewController.datesChosen.append(dateSelected)
+        print("dates chosen array are \(EditResponseViewController.datesChosen.enumerated())")
         
         
         
         
     }
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-                
+        
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         handleSelection(cell: cell, cellState: cellState)
@@ -394,9 +383,9 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         }
         
         let dateDeselected = date
-        EventViewController.datesChosen = EventViewController.datesChosen.filter { $0 != dateDeselected }
+        EditResponseViewController.datesChosen = EditResponseViewController.datesChosen.filter { $0 != dateDeselected }
         
-        print("dates chosen array are \(EventViewController.datesChosen.enumerated())")
+        print("dates chosen array are \(EditResponseViewController.datesChosen.enumerated())")
         
     }
     
@@ -405,16 +394,5 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
         dateFormatter.dateFormat = "MMMM yyyy"
         monthYearLabel.text = "   \(dateFormatter.string(from: date))"
-    }
-}
-
-extension UIColor {
-    convenience init(colorWithHexValue value: Int, alpha: CGFloat = 1.0) {
-        self.init(
-            red: CGFloat((value & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((value & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(value & 0x0000FF) / 255.0,
-            alpha: alpha
-        )
     }
 }

@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		19D53A496CFADDE3B9A5F724 /* Pods_Time_Scheduling_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8A20C59D56D69287C0AE01 /* Pods_Time_Scheduling_App.framework */; };
+		9E0653FB1F1E6E520031E4F5 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0653FA1F1E6E520031E4F5 /* AddNoteViewController.swift */; };
+		9E0653FD1F1EA35A0031E4F5 /* EditResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0653FC1F1EA3590031E4F5 /* EditResponseViewController.swift */; };
 		9E0C0B921F156C480026307C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B911F156C480026307C /* Event.swift */; };
 		9E0C0B941F1570F80026307C /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B931F1570F80026307C /* EventService.swift */; };
 		9E0C0B961F1578B80026307C /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B951F1578B80026307C /* EventTableViewCell.swift */; };
 		9E0C0B9A1F1588850026307C /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C0B991F1588850026307C /* EventTableViewController.swift */; };
 		9E0C0B9E1F15F5A20026307C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E0C0B9D1F15F5A20026307C /* Info.plist */; };
 		9E0E041B1F1D33C90038705D /* BestDatesEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */; };
-		9E0E041D1F1D78DB0038705D /* finalEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0E041C1F1D78DB0038705D /* finalEventViewController.swift */; };
+		9E0E041D1F1D78DB0038705D /* InviteEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0E041C1F1D78DB0038705D /* InviteEventViewController.swift */; };
 		9E1A599D1F0E006100792D24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A599C1F0E006100792D24 /* AppDelegate.swift */; };
 		9E1A599F1F0E006900792D24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A599E1F0E006900792D24 /* Assets.xcassets */; };
 		9E1A59A81F0E00A500792D24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */; };
@@ -42,13 +44,15 @@
 		4D8A20C59D56D69287C0AE01 /* Pods_Time_Scheduling_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Time_Scheduling_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DE9ABF71C259D8E2080AB87 /* Pods-Time-Scheduling-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time-Scheduling-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Time-Scheduling-App/Pods-Time-Scheduling-App.release.xcconfig"; sourceTree = "<group>"; };
 		8550BE00F5A683265232E74B /* Pods-Time-Scheduling-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time-Scheduling-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Time-Scheduling-App/Pods-Time-Scheduling-App.debug.xcconfig"; sourceTree = "<group>"; };
+		9E0653FA1F1E6E520031E4F5 /* AddNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
+		9E0653FC1F1EA3590031E4F5 /* EditResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditResponseViewController.swift; sourceTree = "<group>"; };
 		9E0C0B911F156C480026307C /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		9E0C0B931F1570F80026307C /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		9E0C0B951F1578B80026307C /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9E0C0B991F1588850026307C /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 		9E0C0B9D1F15F5A20026307C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestDatesEventViewController.swift; sourceTree = "<group>"; };
-		9E0E041C1F1D78DB0038705D /* finalEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = finalEventViewController.swift; sourceTree = "<group>"; };
+		9E0E041C1F1D78DB0038705D /* InviteEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteEventViewController.swift; sourceTree = "<group>"; };
 		9E1A599C1F0E006100792D24 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E1A599E1F0E006900792D24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -121,8 +125,10 @@
 				9E1A59B21F0E00DF00792D24 /* ViewController.swift */,
 				9E0C0B991F1588850026307C /* EventTableViewController.swift */,
 				9EE3912F1F142DE400C41503 /* EventViewController.swift */,
-				9E0E041C1F1D78DB0038705D /* finalEventViewController.swift */,
+				9E0E041C1F1D78DB0038705D /* InviteEventViewController.swift */,
+				9E0653FA1F1E6E520031E4F5 /* AddNoteViewController.swift */,
 				9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */,
+				9E0653FC1F1EA3590031E4F5 /* EditResponseViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -355,11 +361,13 @@
 				9E0C0B921F156C480026307C /* Event.swift in Sources */,
 				9E1A59C41F0E028C00792D24 /* LoginViewController.swift in Sources */,
 				9EE391301F142DE400C41503 /* EventViewController.swift in Sources */,
+				9E0653FB1F1E6E520031E4F5 /* AddNoteViewController.swift in Sources */,
 				9E1A59B31F0E00DF00792D24 /* ViewController.swift in Sources */,
 				9E0C0B941F1570F80026307C /* EventService.swift in Sources */,
-				9E0E041D1F1D78DB0038705D /* finalEventViewController.swift in Sources */,
+				9E0E041D1F1D78DB0038705D /* InviteEventViewController.swift in Sources */,
 				9E0C0B9A1F1588850026307C /* EventTableViewController.swift in Sources */,
 				9E0E041B1F1D33C90038705D /* BestDatesEventViewController.swift in Sources */,
+				9E0653FD1F1EA35A0031E4F5 /* EditResponseViewController.swift in Sources */,
 				9E1A599D1F0E006100792D24 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

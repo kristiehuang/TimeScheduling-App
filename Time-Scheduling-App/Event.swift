@@ -19,6 +19,7 @@ class Event {
     var key: String?
     
     var dates: [String]
+//    var invites: [User]
     
     //turn event objects into dictionary type
     var dictValue: [String: Any] {        

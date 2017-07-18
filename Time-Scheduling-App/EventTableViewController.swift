@@ -13,11 +13,11 @@ class EventTableViewController: UITableViewController {
     
     @IBOutlet var uiTableView: UITableView!
     
-
+    
     
     var events = [Event]() {
         didSet {
-            tableView.reloadData()            
+            tableView.reloadData()
         }
     }
     
@@ -54,22 +54,25 @@ class EventTableViewController: UITableViewController {
         return events.count
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
-            if identifier == "showEvent" {
+
+            if identifier == "showEventResults" {
                 print("Table view cell tapped")
-                
-                
-                //if event already exists, DISPLAY info
-                //if new event, display empty
-                
+
                 let indexPath = tableView.indexPathForSelectedRow!
                 let event = events[indexPath.row]
                 EventViewController.event = event
+                
+//                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
+//                    EventViewController.countDates()
+//                    print(newOrderedDict)
+//                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
+//                }
             }
             
             
         }
-        
     }
 }
