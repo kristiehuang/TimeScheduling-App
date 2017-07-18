@@ -35,6 +35,7 @@ class finalEventViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //back button triggers this too
         if let eventViewController = segue.destination as? EventViewController {
             eventViewController.newEvent()
         }

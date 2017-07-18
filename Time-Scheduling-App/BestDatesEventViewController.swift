@@ -18,27 +18,47 @@ class BestDatesEventViewController: UIViewController {
     @IBOutlet weak var invitedAsLabel: UILabel!
     
     
+    
     @IBAction func backButton1(_ sender: Any) {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {        
     }
     
+    
     var orderedDict: [Date: Int] = [:]
 
-
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let eventViewController = segue.destination as? EventViewController {
+//            let newOrderedDict = eventViewController.newOrderedDict
+//            print(newOrderedDict)
+//            orderedDict = newOrderedDict as! [Date : Int]
+//        }
+//
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var dates: [Date] = []
+//        var dates: [String] = []
+        var displayDates = ""
         for (date, int) in orderedDict {
-            dates.append(date)
+            let dateString = getDateString(date: date)
+//            dates.append(dateString)
+//            print(dates)
+            displayDates += "\(dateString)"
         }
-        bestDatesLabel.text = "\(String(describing: dates))"
-        eventNameLabel.text = "\(String(describing: EventViewController.event?.name ?? "Untitled Event"))"
+        bestDatesLabel.text = "\(displayDates))"
+        eventNameLabel.text = "Event: \(String(describing: EventViewController.event?.name))"
         invitedAsLabel.text = "Invited as: \(User.current.name)"
     }
 
-
+    func getDateString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "en_US")
+        return dateFormatter.string(from: date)
+    }
     
 }

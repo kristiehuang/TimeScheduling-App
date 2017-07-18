@@ -40,7 +40,6 @@ class EventViewController: UIViewController {
     
     //    let event = Event(name: "", creationDate: Date(), host: User.current)
     
-    let formatter = DateFormatter()
     let dateFormatter = DateFormatter()
     
     var numberOfDates:Int = 0
@@ -242,7 +241,7 @@ class EventViewController: UIViewController {
                 print("THIS IS NEW ORDERED DICT \(newOrderedDict)")
             }
         }
-
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -254,6 +253,11 @@ class EventViewController: UIViewController {
             else if identifier == "nextSegue" {
                 print("Transitioning to next")
                 countDates()
+                
+                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
+                    print(self.newOrderedDict)
+                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
+                }
             }
                 
             else if identifier == "saveCloseSegue" {
@@ -268,7 +272,7 @@ class EventViewController: UIViewController {
                 //create users. add users to indiv events.
                 
                 countDates()
-
+                
             }
             
             if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
@@ -290,15 +294,15 @@ extension EventViewController: JTAppleCalendarViewDataSource {
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         
         
-//        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        //        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
-//        dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-
+        //        dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
+        dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
+        
         dateFormatter.timeZone = Calendar.current.timeZone
         dateFormatter.locale = Calendar.current.locale
         dateFormatter.dateStyle = .medium
-    
+        
         let startDate = dateFormatter.date(from: "Jan 01, 2017")! //current month
         let endDate = dateFormatter.date(from: "Dec 31, 2018")!
         
@@ -352,7 +356,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         
-
+        
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         
@@ -374,9 +378,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
     }
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        
-        dateFormatter.dateFormat = "MMMM dd, yyyy"
-
+                
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         handleSelection(cell: cell, cellState: cellState)
