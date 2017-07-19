@@ -25,9 +25,9 @@ class EventTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("events enumergeated : \(events.enumerated())")
+
         
         UserService.events(for: User.current) { (events) in
-            print(events)
             self.events = events
             self.tableView.reloadData()
         }
@@ -39,7 +39,6 @@ class EventTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         UserService.events(for: User.current) { (events) in
-            print(events)
             self.events = events
             self.tableView.reloadData()
         }

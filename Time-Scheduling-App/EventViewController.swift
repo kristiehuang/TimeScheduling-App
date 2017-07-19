@@ -217,8 +217,6 @@ class EventViewController: UIViewController {
                     EventService.addEvent(name: event.name!, creationDate: event.creationDate, dates: datesArr)
                     
                     UserService.events(for: User.current) { (events) in
-                        //5
-                        print(events)
                         eventTableViewController.events = events
                         eventTableViewController.tableView.reloadData()
                         self.viewWillAppear(true)

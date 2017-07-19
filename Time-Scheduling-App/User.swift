@@ -13,7 +13,8 @@ class User: NSObject {
     
     let uid: String
     let name: String
-    
+    var isFriended = false
+
 
     
     init(uid: String, name: String) {
