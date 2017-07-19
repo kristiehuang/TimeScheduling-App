@@ -8,12 +8,18 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 import FirebaseAuth.FIRUser
 import FirebaseDatabase
 
 struct UserService {
-    static func createDatabase(_ firUser: FIRUser, name: String, completion: @escaping (User?) -> Void) {
-        let userAttrs = ["name": name]
+
+    
+    
+    static func createDatabase(_ firUser: FIRUser, name: String, email: String, completion: @escaping (User?) -> Void) {
+        let userAttrs = ["name": name, "email": email]
+        
+        
         
         let ref = Database.database().reference().child("users").child(firUser.uid)
         ref.setValue(userAttrs) { (error, ref) in

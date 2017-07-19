@@ -12,16 +12,14 @@ import UIKit
 class FindFriendsViewController: UIViewController {
 
     var users = [User]()
-
+    
     @IBOutlet weak var tableView: UITableView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("view did load")
         
-        // remove separators for empty cells
-        tableView.tableFooterView = UIView()
-        tableView.rowHeight = 71
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,9 +43,11 @@ extension FindFriendsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FindFriendsCell") as! FindFriendsCell
+        cell.delegate = self
         configure(cell: cell, atIndexPath: indexPath)
         
         return cell
@@ -57,8 +57,27 @@ extension FindFriendsViewController: UITableViewDataSource {
         let friend = users[indexPath.row]
         
         cell.friendNameLabel.text = friend.name
-        
         cell.addButton.isSelected = friend.isFriended
         
+    }
+}
+
+extension FindFriendsViewController: FindFriendsCellDelegate {
+    func didTapAddButton(_ addButton: UIButton, on cell: FindFriendsCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        
+        addButton.isUserInteractionEnabled = false
+        let friender = users[indexPath.row]
+        
+        FriendService.setIsFriending(!friender.isFriended, fromCurrentUserTo: friender) { (success) in
+            defer {
+                addButton.isUserInteractionEnabled = true
+            }
+            
+            guard success else { return }
+            
+            friender.isFriended = !friender.isFriended
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
     }
 }

@@ -16,9 +16,9 @@ class DisplayNameViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
-        guard let FIRUser = Auth.auth().currentUser, let name = nameTextField.text, !name.isEmpty else { return }
+        guard let FIRUser = Auth.auth().currentUser, let name = nameTextField.text, let email = Auth.auth().currentUser?.email, !name.isEmpty else { return }
         
-        UserService.createDatabase(FIRUser, name: name) { (user) in
+        UserService.createDatabase(FIRUser, name: name, email: email) { (user) in
             guard let user = user
                 else { return }
             

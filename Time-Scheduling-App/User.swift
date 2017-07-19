@@ -7,38 +7,44 @@
 //
 
 import Foundation
+import FirebaseAuth
 import FirebaseDatabase.FIRDataSnapshot
 
 class User: NSObject {
     
     let uid: String
     let name: String
-    var isFriended = false
-
-
+    var email: String = (Auth.auth().currentUser?.email)!
     
-    init(uid: String, name: String) {
+    var isFriended = false
+    
+    
+    
+    init(uid: String, name: String, email: String) {
         self.uid = uid
         self.name = name
+        self.email = email
         super.init()
-
+        
     }
     
     init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String
+        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String, let email = dict["email"] as? String
             else { return nil }
         self.uid = snapshot.key
         self.name = name
+        self.email = email
         super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
         guard let uid = aDecoder.decodeObject(forKey: "uid") as? String,
-            let name = aDecoder.decodeObject(forKey: "name") as? String
+            let name = aDecoder.decodeObject(forKey: "name") as? String, let email = aDecoder.decodeObject(forKey: "email") as? String
             else { return nil }
         
         self.uid = uid
         self.name = name
+        self.email = email
         
         super.init()
     }
@@ -73,5 +79,6 @@ extension User: NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(uid, forKey: "uid")
         aCoder.encode(name, forKey: "name")
+        aCoder.encode(email, forKey: "email")
     }
 }

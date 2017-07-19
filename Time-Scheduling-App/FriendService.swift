@@ -29,7 +29,7 @@ struct FriendService {
         let friendData = ["friends/\(currentUID)/\(user.uid)": NSNull()]
         
         let ref = Database.database().reference()
-        ref.setValue(friendData) { (error, ref) in
+        ref.updateChildValues(friendData) { (error, ref) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
             }
@@ -40,7 +40,7 @@ struct FriendService {
     static func setIsFriending(_ isFriending: Bool, fromCurrentUserTo friender: User, success: @escaping (Bool) -> Void) {
         //friender = user who is doing the friending
         
-        if isFriending {
+        if isFriending == true {
             friendUser(friender, forCurrentUserWithSuccess: success)
         } else {
             unfriendUser(friender, forCurrentUserWithSuccess: success)

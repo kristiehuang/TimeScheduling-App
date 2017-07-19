@@ -21,12 +21,14 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonTapped(_ sender: Any) {
         print("login button tapped")
         
+        
         guard let authUI = FUIAuth.defaultAuthUI()
             else { return }
         authUI.delegate = self
         let authViewController = authUI.authViewController()
         present(authViewController, animated: true)
         //redesign auth page https://github.com/firebase/FirebaseUI-Android/issues/229
+        
     }
     //google login doesnt work yet
     
