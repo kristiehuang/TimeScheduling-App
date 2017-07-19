@@ -24,9 +24,7 @@ class AddNoteViewController: UIViewController {
         super.viewDidLoad()
         
         eventNameLabel.text = EventViewController.event?.name
- 
-        noteTextView.layer.borderWidth = 1.0
-        
+         
         //dismiss keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false

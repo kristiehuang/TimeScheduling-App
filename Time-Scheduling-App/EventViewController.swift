@@ -63,8 +63,7 @@ class EventViewController: UIViewController {
         calendarView.visibleDates { visibleDates in
             self.setupViewsOfCalendar(from: visibleDates)
         }
-        let currentDate = Date()
-        calendarView.scrollToDate(currentDate)
+
         calendarView.allowsMultipleSelection  = true
         calendarView.isRangeSelectionUsed = true
         
@@ -86,6 +85,9 @@ class EventViewController: UIViewController {
     //    for existing events
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let currentDate = Date()
+        calendarView.scrollToDate(currentDate)
         
         if let event = EventViewController.event {
             eventNameTextField.text = event.name

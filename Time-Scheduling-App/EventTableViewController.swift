@@ -26,6 +26,12 @@ class EventTableViewController: UITableViewController {
         super.viewDidLoad()
         print("events enumergeated : \(events.enumerated())")
         
+        UserService.events(for: User.current) { (events) in
+            print(events)
+            self.events = events
+            self.tableView.reloadData()
+        }
+        
     }
     
     
