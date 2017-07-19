@@ -21,6 +21,7 @@ class EditResponseViewController: UIViewController {
     @IBOutlet weak var availableDatesLabel: UILabel!
     
     @IBAction func SaveButtonTapped(_ sender: Any) {
+        EditResponseViewController.countDates()
     }
     
     
@@ -41,11 +42,11 @@ class EditResponseViewController: UIViewController {
     var newOrderedDict = NSMutableDictionary()
     
     
-    static var event: Event?
+    var event: Event?
     
-    static func getEvent () -> Event {
-        return event!
-    }
+//    static func getEvent () -> Event {
+//        return event!
+//    }
     
     
     override func viewDidLoad() {
@@ -59,10 +60,14 @@ class EditResponseViewController: UIViewController {
         calendarView.allowsMultipleSelection  = true
         calendarView.isRangeSelectionUsed = true
         
+        if (self.eventNameTextField.text?.isEmpty)! {
+            eventNameTextField.text = "Untitled Event"
+        }
+        eventNameTextField.text = "\(event?.name)"
         availableDatesLabel.text = "\(numberOfDates) dates chosen"
         invitedAsLabel.text = "Invited as: \(User.current.name)"
         
-
+        
         //dismiss keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
@@ -73,8 +78,8 @@ class EditResponseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let event = EditResponseViewController.event {
-            eventNameTextField.text = event.name
+        if let thisEvent = event {
+            eventNameTextField.text = thisEvent.name
         } else {
             eventNameTextField.text = ""
         }
@@ -141,17 +146,17 @@ class EditResponseViewController: UIViewController {
     func newEvent(){
         //if event already exists, SAVE to existing
         
-        if let event = EditResponseViewController.event {
+        if let thisEvent = event {
             let eventTableViewController = EventTableViewController()
             
-            event.name = self.eventNameTextField.text ?? ""
+            thisEvent.name = self.eventNameTextField.text ?? ""
             
-            print(event.name ?? "")
+            print(thisEvent.name ?? "")
             var isFound = false
             UserService.events(for: User.current, completion: { (events:[Event]) in
                 
                 for eventz in events {
-                    if event.key == eventz.key {
+                    if thisEvent.key == eventz.key {
                         
                         var datesArr = [String]()
                         for date in EditResponseViewController.datesChosen.enumerated() {
@@ -166,8 +171,8 @@ class EditResponseViewController: UIViewController {
                         }
                         
                         
-                        let eventRef = Database.database().reference().child("events").child(User.current.uid).child(event.key!)
-                        eventRef.child("name").setValue(event.name)
+                        let eventRef = Database.database().reference().child("events").child(User.current.uid).child(thisEvent.key!)
+                        eventRef.child("name").setValue(thisEvent.name)
                         eventRef.child("dates").setValue(datesArr)
                         eventTableViewController.tableView.reloadData()
                         isFound = true
@@ -194,7 +199,7 @@ class EditResponseViewController: UIViewController {
                         return
                     }
                     
-                    EventService.addEvent(name: event.name!, creationDate: event.creationDate, dates: datesArr)
+                    EventService.addEvent(name: thisEvent.name!, creationDate: thisEvent.creationDate, dates: datesArr)
                     
                     UserService.events(for: User.current) { (events) in
                         //5
@@ -240,26 +245,14 @@ class EditResponseViewController: UIViewController {
         
     }
     
-      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let identifier = segue.identifier {
             if identifier == "backButtonSegue" {
                 print("Transitioning back to home/back")
             }
-            else if identifier == "nextSegue" {
-                print("Transitioning to next & save")
-                newEvent()
-                EditResponseViewController.countDates()
-                
-                
-                //                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
-                //                    print(self.newOrderedDict)
-                //                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
-                //                }
-            }
                 
             else if identifier == "saveCloseSegue" {
-                newEvent()
                 print("Transitioning back to home/save")
                 
                 //dateschosen is dates form
@@ -269,12 +262,14 @@ class EditResponseViewController: UIViewController {
                 //used mergedCounts instead
                 //create users. add users to indiv events.
                 
-                EditResponseViewController.countDates()
                 
             }
             
         }
     }
+    
+
+    
 }
 
 

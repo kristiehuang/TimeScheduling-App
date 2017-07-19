@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class BestDatesEventViewController: UIViewController {
-
+    
     
     @IBOutlet weak var bestDatesLabel: UILabel!
     @IBOutlet weak var eventNameLabel: UILabel!
@@ -23,27 +23,21 @@ class BestDatesEventViewController: UIViewController {
     @IBAction func backButton1(_ sender: Any) {
     }
     
-    @IBAction func saveButtonTapped(_ sender: Any) {        
+    @IBAction func saveButtonTapped(_ sender: Any) {
     }
     
     
     var orderedDict: [Date: Int] = [:]
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let eventViewController = segue.destination as? EventViewController {
-            let newOrderedDict = eventViewController.newOrderedDict
-            print(newOrderedDict)
-            orderedDict = newOrderedDict as! [Date : Int]
-        }
-
-    }
+    var thisEvent : Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let event = EventViewController.event {
             
-           // var dates: [String] = []
+            thisEvent = event
+            
+            // var dates: [String] = []
             var displayDates = ""
             for (date, _) in orderedDict {
                 let dateString = getDateString(date: date)
@@ -54,13 +48,28 @@ class BestDatesEventViewController: UIViewController {
             bestDatesLabel.text = "\(displayDates))"
             eventNameLabel.text = "\(event.name ?? "Untitled Event")"
             invitedAsLabel.text = "Invited as: \(User.current.name)"
-
+            
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let eventViewController = segue.destination as? EventViewController {
+            let newOrderedDict = eventViewController.newOrderedDict
+            print(newOrderedDict)
+            orderedDict = newOrderedDict as! [Date : Int]
+        }
+        if let identifier = segue.identifier {
+            if identifier == "editResponse" {
+                
+                let editResponseViewController = segue.destination as! EditResponseViewController
+                editResponseViewController.event = thisEvent
+                
+            }
         }
         
-//
-        
     }
-
+    
     func getDateString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -69,5 +78,28 @@ class BestDatesEventViewController: UIViewController {
         return dateFormatter.string(from: date)
     }
     
+    static func countDates() {
+        var counts: [Date: Int] = [:]
+        var array: [Int] = []
+        for date in EditResponseViewController.datesChosen {
+            counts[date] = (counts[date] ?? 0) + 1
+        }
+        //sort array by count value, then display only top three
+        print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
+        
+        for (key, value) in counts {
+            print("\(value) of people prefer the \(key) date")
+            array.append(value)
+            //value is int
+            
+            for var item in array.sorted() {
+                let editResponseViewController = EditResponseViewController()
+                item = value
+                editResponseViewController.newOrderedDict[key] = item
+                print("THIS IS NEW ORDERED DICT \(editResponseViewController.newOrderedDict)")
+            }
+        }
+        
+    }
     
 }

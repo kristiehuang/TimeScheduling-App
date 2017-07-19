@@ -92,7 +92,7 @@ class EventViewController: UIViewController {
         if let event = EventViewController.event {
             eventNameTextField.text = event.name
         } else {
-            eventNameTextField.text = ""
+            eventNameTextField.text = "Untitled Event"
         }
     }
     
@@ -160,9 +160,13 @@ class EventViewController: UIViewController {
         if let event = EventViewController.event {
             let eventTableViewController = EventTableViewController()
 
-            event.name = self.eventNameTextField.text ?? ""
+            if (self.eventNameTextField.text?.isEmpty)! {
+                eventNameTextField.text = "Untitled Event"
+            }
+            event.name = self.eventNameTextField.text ?? "Untitled Event"
             
-            print(event.name ?? "")
+            
+            print(event.name ?? "Untitled Event")
             var isFound = false
             UserService.events(for: User.current, completion: { (events:[Event]) in
                 
@@ -183,7 +187,7 @@ class EventViewController: UIViewController {
                         
                         
                         let eventRef = Database.database().reference().child("events").child(User.current.uid).child(event.key!)
-                        eventRef.child("name").setValue(event.name)
+                        eventRef.child("name").setValue(event.name ?? "Untitled Event")
                         eventRef.child("dates").setValue(datesArr)
                         eventTableViewController.tableView.reloadData()
                         isFound = true
@@ -196,7 +200,7 @@ class EventViewController: UIViewController {
                 if isFound == false {
                     print(isFound)
                     print("new event")
-                    print(self.eventNameTextField.text ?? "")
+                    print(self.eventNameTextField.text ?? "Untitled Event")
                     
                     var datesArr = [String]()
                     for date in EventViewController.datesChosen.enumerated() {
