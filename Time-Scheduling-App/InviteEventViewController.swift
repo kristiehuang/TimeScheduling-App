@@ -14,26 +14,32 @@ import FirebaseDatabase
 class InviteEventViewController: UIViewController {
     
     var event: Event?
-
+    var invitees: [String]?
+    
     @IBOutlet weak var eventNameLabel: UILabel!
     
     //add contacts output
     
     @IBOutlet weak var inviteesTableView: UITableView!
     
-    
     @IBAction func unwindToInvite(_ segue: UIStoryboardSegue) {
-        
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //back button triggers this too
-        if let eventViewController = segue.destination as? EventViewController {
+        
+        if let inviteFriendsViewController = segue.destination as? InviteFriendsViewController {
+            invitees = inviteFriendsViewController.invitees
+            inviteFriendsViewController.event = event
+            print(inviteFriendsViewController.event)
+            print(event)
+        }
+        if let addNoteViewController = segue.destination as? AddNoteViewController {
+            
         }
     }
     
+    
     @IBAction func sendInvitesButtonTapped(_ sender: Any) {
-        //send invites
         sendInvites()
     }
     
@@ -64,7 +70,7 @@ class InviteEventViewController: UIViewController {
     }
     
     
-
+    
     
     func sendInvites() {
         //

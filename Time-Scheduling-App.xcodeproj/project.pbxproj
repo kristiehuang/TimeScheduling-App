@@ -27,6 +27,8 @@
 		9E1A59C11F0E020E00792D24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1A59BF1F0E020E00792D24 /* GoogleService-Info.plist */; };
 		9E1A59C41F0E028C00792D24 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A59C31F0E028C00792D24 /* LoginViewController.swift */; };
 		9E519EAD1F1FE14300E19E75 /* FindFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */; };
+		9E519EAF1F20103700E19E75 /* InviteFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */; };
+		9E519EB11F20134B00E19E75 /* InviteesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EB01F20134B00E19E75 /* InviteesCell.swift */; };
 		9E758A051F1181A800D2745C /* SFDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */; };
 		9E758A061F1181A800D2745C /* SFDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */; };
 		9E758A071F1181A800D2745C /* SFDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FF1F1181A800D2745C /* SFDisplay-Regular.otf */; };
@@ -68,6 +70,8 @@
 		9E1A59BF1F0E020E00792D24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9E1A59C31F0E028C00792D24 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsCell.swift; sourceTree = "<group>"; };
+		9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsCell.swift; sourceTree = "<group>"; };
+		9E519EB01F20134B00E19E75 /* InviteesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteesCell.swift; sourceTree = "<group>"; };
 		9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Light.otf"; path = "Fonts/SFDisplay-Light.otf"; sourceTree = "<group>"; };
 		9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Medium.otf"; path = "Fonts/SFDisplay-Medium.otf"; sourceTree = "<group>"; };
 		9E7589FF1F1181A800D2745C /* SFDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Regular.otf"; path = "Fonts/SFDisplay-Regular.otf"; sourceTree = "<group>"; };
@@ -131,19 +135,51 @@
 		9E1A59B41F0E00E300792D24 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9E1A59C31F0E028C00792D24 /* LoginViewController.swift */,
-				9EB5118F1F13F5DB0097659A /* DisplayNameViewController.swift */,
-				9E1A59B21F0E00DF00792D24 /* ViewController.swift */,
-				9E0C0B991F1588850026307C /* EventTableViewController.swift */,
+				9E519EB21F20182900E19E75 /* Login Auth */,
+				9E519EB31F20183300E19E75 /* Home View */,
 				9EE3912F1F142DE400C41503 /* EventViewController.swift */,
-				9E0E041C1F1D78DB0038705D /* InviteEventViewController.swift */,
+				9E519EB41F20184000E19E75 /* Invite Friends */,
 				9E0653FA1F1E6E520031E4F5 /* AddNoteViewController.swift */,
-				9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */,
-				9E0653FC1F1EA3590031E4F5 /* EditResponseViewController.swift */,
-				9EB893821F1FD2CB000F3904 /* InviteFriendsViewController.swift */,
-				9EB893861F1FD7EA000F3904 /* FindFriendsViewController.swift */,
+				9E519EB51F20185100E19E75 /* Invited to Event */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		9E519EB21F20182900E19E75 /* Login Auth */ = {
+			isa = PBXGroup;
+			children = (
+				9E1A59C31F0E028C00792D24 /* LoginViewController.swift */,
+				9EB5118F1F13F5DB0097659A /* DisplayNameViewController.swift */,
+			);
+			name = "Login Auth";
+			sourceTree = "<group>";
+		};
+		9E519EB31F20183300E19E75 /* Home View */ = {
+			isa = PBXGroup;
+			children = (
+				9E1A59B21F0E00DF00792D24 /* ViewController.swift */,
+				9E0C0B991F1588850026307C /* EventTableViewController.swift */,
+				9EB893861F1FD7EA000F3904 /* FindFriendsViewController.swift */,
+			);
+			name = "Home View";
+			sourceTree = "<group>";
+		};
+		9E519EB41F20184000E19E75 /* Invite Friends */ = {
+			isa = PBXGroup;
+			children = (
+				9E0E041C1F1D78DB0038705D /* InviteEventViewController.swift */,
+				9EB893821F1FD2CB000F3904 /* InviteFriendsViewController.swift */,
+			);
+			name = "Invite Friends";
+			sourceTree = "<group>";
+		};
+		9E519EB51F20185100E19E75 /* Invited to Event */ = {
+			isa = PBXGroup;
+			children = (
+				9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */,
+				9E0653FC1F1EA3590031E4F5 /* EditResponseViewController.swift */,
+			);
+			name = "Invited to Event";
 			sourceTree = "<group>";
 		};
 		9E758A0D1F1181B000D2745C /* Fonts */ = {
@@ -186,6 +222,8 @@
 				9E0C0B951F1578B80026307C /* EventTableViewCell.swift */,
 				9EE391321F14439E00C41503 /* CalendarCell.swift */,
 				9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */,
+				9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */,
+				9E519EB01F20134B00E19E75 /* InviteesCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -382,6 +420,7 @@
 				9E0653FB1F1E6E520031E4F5 /* AddNoteViewController.swift in Sources */,
 				9EB893831F1FD2CB000F3904 /* InviteFriendsViewController.swift in Sources */,
 				9E1A59B31F0E00DF00792D24 /* ViewController.swift in Sources */,
+				9E519EAF1F20103700E19E75 /* InviteFriendsCell.swift in Sources */,
 				9EB893851F1FD301000F3904 /* FriendService.swift in Sources */,
 				9E0C0B941F1570F80026307C /* EventService.swift in Sources */,
 				9E0E041D1F1D78DB0038705D /* InviteEventViewController.swift in Sources */,
@@ -389,6 +428,7 @@
 				9E0E041B1F1D33C90038705D /* BestDatesEventViewController.swift in Sources */,
 				9E0653FD1F1EA35A0031E4F5 /* EditResponseViewController.swift in Sources */,
 				9E1A599D1F0E006100792D24 /* AppDelegate.swift in Sources */,
+				9E519EB11F20134B00E19E75 /* InviteesCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

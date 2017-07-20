@@ -19,19 +19,21 @@ class Event {
     var key: String?
     
     var dates: [String]
-//    var invites: [User]
+    var invitees: [String]
     
     //turn event objects into dictionary type
     var dictValue: [String: Any] {        
-        return ["name": name ?? "Untitled Event",
+        return ["name": name ?? "Untitled Event", "invitees": invitees,
                 "created_at": creationDate.timeIntervalSince1970, "dates": dates]
     }
     
-    init(name: String, creationDate: Date, dates: [String]) {
+    init(name: String, invitees: [String], creationDate: Date, dates: [String]) {
         self.name = name
         self.creationDate = Date()
 //        self.host = User.current
         self.dates = dates
+        self.invitees = invitees
+        
     }
     
     
@@ -48,6 +50,9 @@ class Event {
         guard let dates = dict["dates"] as? [String]
             else { return nil }
         
+        guard let invitees = dict["invitees"] as? [String]
+            else { return nil }
+        
         self.key = snapshot.key
         self.name = name
         //self.host = host
@@ -56,6 +61,7 @@ class Event {
 //            self.dates.append(date)
 //        }
         self.dates = dates
+        self.invitees = invitees
     }
 
 

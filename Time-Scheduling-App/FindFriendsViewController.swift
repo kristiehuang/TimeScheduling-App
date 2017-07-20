@@ -57,6 +57,7 @@ extension FindFriendsViewController: UITableViewDataSource {
         let friend = users[indexPath.row]
         
         cell.friendNameLabel.text = friend.name
+        cell.friendEmailLabel.text = friend.email
         cell.addButton.isSelected = friend.isFriended
         
     }

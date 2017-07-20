@@ -17,6 +17,7 @@ class User: NSObject {
     var email: String = (Auth.auth().currentUser?.email)!
     
     var isFriended = false
+    var isInvited = false
     
     
     

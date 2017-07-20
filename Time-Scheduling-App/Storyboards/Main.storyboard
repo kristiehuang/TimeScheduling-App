@@ -884,7 +884,7 @@
                                     </connections>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="rav-4O-BKr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteFriendsCell" rowHeight="92" id="rav-4O-BKr" customClass="InviteFriendsCell" customModule="Time_Scheduling_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rav-4O-BKr" id="4Gg-gG-vgz">
@@ -905,6 +905,9 @@
                                                             <real key="value" value="15.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="inviteButtonTapped:" destination="rav-4O-BKr" eventType="touchUpInside" id="UBy-6F-1uo"/>
+                                                    </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3JX-Q9-dcX">
                                                     <rect key="frame" x="13" y="15.666666666666668" width="137" height="60.333333333333329"/>
@@ -931,10 +934,16 @@
                                                 <constraint firstItem="l2q-S3-vZ3" firstAttribute="centerY" secondItem="4Gg-gG-vgz" secondAttribute="centerY" id="v7o-xL-hWo"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="friendEmailLabel" destination="0UD-hP-pTI" id="TjR-Yi-hbH"/>
+                                            <outlet property="friendNameLabel" destination="3Vs-PT-Edp" id="GcZ-AV-Hwa"/>
+                                            <outlet property="inviteButton" destination="l2q-S3-vZ3" id="eqr-xU-FPl"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="pHR-du-C9V" id="ooD-Lp-jSR"/>
+                                    <outlet property="delegate" destination="pHR-du-C9V" id="Jhf-wz-7Xd"/>
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHz-ab-FWd">
@@ -943,20 +952,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6a-FS-N3Z">
-                                <rect key="frame" x="329" y="30" width="54" height="41"/>
-                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="24"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <segue destination="9hr-9f-znd" kind="unwind" unwindAction="unwindToInvite:" id="5fA-o1-Zhx"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clu-CU-bxc">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="gG7-zX-Dxo"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6a-FS-N3Z">
+                                <rect key="frame" x="329" y="30" width="54" height="41"/>
+                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="24"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <segue destination="9hr-9f-znd" kind="unwind" unwindAction="unwindToInvite:" id="lav-Ab-mo0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -976,6 +985,7 @@
                     </view>
                     <connections>
                         <outlet property="searchDisplayController" destination="2yx-iu-nwc" id="8GD-Q4-vlj"/>
+                        <outlet property="tableView" destination="DHV-lP-n2I" id="wDQ-lR-cqY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Oj-dk-p20" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1129,7 +1139,7 @@
                                                 <rect key="frame" x="296" y="4" width="46" height="45"/>
                                                 <state key="normal" image="friendinvite button"/>
                                                 <connections>
-                                                    <segue destination="pHR-du-C9V" kind="presentation" id="njR-4r-v8b"/>
+                                                    <segue destination="pHR-du-C9V" kind="show" id="bSl-rO-RVc"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1138,7 +1148,7 @@
                                         <rect key="frame" x="0.0" y="97" width="342" height="325"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="inviteCell" rowHeight="67" id="GXQ-jb-kas">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteesCell" rowHeight="67" id="GXQ-jb-kas" customClass="InviteesCell" customModule="Time_Scheduling_App" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="342" height="67"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GXQ-jb-kas" id="fqf-cd-dmN">
@@ -1175,6 +1185,9 @@
                                                                     <real key="value" value="15.5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="inviteeButtonTapped:" destination="GXQ-jb-kas" eventType="touchUpInside" id="UEK-Dv-2Xa"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -1182,6 +1195,11 @@
                                                         <constraint firstAttribute="trailing" secondItem="vyP-9d-P0W" secondAttribute="trailing" constant="17" id="ylH-6D-bmo"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="inviteeButton" destination="vyP-9d-P0W" id="T7w-ej-F3B"/>
+                                                    <outlet property="inviteeEmailLabel" destination="VB4-iT-Maf" id="1MS-9f-V3c"/>
+                                                    <outlet property="inviteeNameLabel" destination="GcP-Vv-dw3" id="Usi-9d-yzh"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>

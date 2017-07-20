@@ -47,9 +47,11 @@ class EventViewController: UIViewController {
     var events: [Event] = []
     
     var newOrderedDict = NSMutableDictionary()
-    
+    static let dispatchGroup = DispatchGroup()
+
     
     static var event: Event?
+    static var invitees: [String] = ["\(User.current)"]
     
     static func getEvent () -> Event {
         return event!
@@ -63,7 +65,7 @@ class EventViewController: UIViewController {
         calendarView.visibleDates { visibleDates in
             self.setupViewsOfCalendar(from: visibleDates)
         }
-
+        
         calendarView.allowsMultipleSelection  = true
         calendarView.isRangeSelectionUsed = true
         
@@ -155,53 +157,25 @@ class EventViewController: UIViewController {
     }
     
     func newEvent(){
+        
         //if event already exists, SAVE to existing
         
-        if let event = EventViewController.event {
-            let eventTableViewController = EventTableViewController()
+        let eventTableViewController = EventTableViewController()
+        
+        if (self.eventNameTextField.text?.isEmpty)! {
+            eventNameTextField.text = "Untitled Event"
+        }
+        EventViewController.event?.name = self.eventNameTextField.text ?? "Untitled Event"
+        
+        
+        print(EventViewController.event?.name ?? "Untitled Event")
+        var isFound = false
+        UserService.events(for: User.current, completion: { (events:[Event]) in
 
-            if (self.eventNameTextField.text?.isEmpty)! {
-                eventNameTextField.text = "Untitled Event"
-            }
-            event.name = self.eventNameTextField.text ?? "Untitled Event"
-            
-            
-            print(event.name ?? "Untitled Event")
-            var isFound = false
-            UserService.events(for: User.current, completion: { (events:[Event]) in
-                
-                for eventz in events {
-                    if event.key == eventz.key {
-                        
-                        var datesArr = [String]()
-                        for date in EventViewController.datesChosen.enumerated() {
-                            datesArr.append("\(date)")
-                        }
-                        print("dates chosen: \(EventViewController.datesChosen)")
-                        print("dates array: \(datesArr)")
-                        
-                        if datesArr.isEmpty {
-                            self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
-                            return
-                        }
-                        
-                        
-                        let eventRef = Database.database().reference().child("events").child(User.current.uid).child(event.key!)
-                        eventRef.child("name").setValue(event.name ?? "Untitled Event")
-                        eventRef.child("dates").setValue(datesArr)
-                        eventTableViewController.tableView.reloadData()
-                        isFound = true
-                        print(isFound)
-                        
-                    }
-                    
-                }
-                
-                if isFound == false {
-                    print(isFound)
-                    print("new event")
-                    print(self.eventNameTextField.text ?? "Untitled Event")
-                    
+
+            for eventz in events {
+                if EventViewController.event?.key == eventz.key {
+
                     var datesArr = [String]()
                     for date in EventViewController.datesChosen.enumerated() {
                         datesArr.append("\(date)")
@@ -213,25 +187,48 @@ class EventViewController: UIViewController {
                         self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
                         return
                     }
-                    
-                    EventService.addEvent(name: event.name!, creationDate: event.creationDate, dates: datesArr)
-                    
-                    UserService.events(for: User.current) { (events) in
-                        eventTableViewController.events = events
-                        eventTableViewController.tableView.reloadData()
-                        self.viewWillAppear(true)
-                    }
-                    
+                    let eventRef = Database.database().reference().child("events").child(User.current.uid).child((EventViewController.event?.key!)!)
+                    eventRef.child("name").setValue(EventViewController.event?.name ?? "Untitled Event")
+                    eventRef.child("dates").setValue(datesArr)
                     eventTableViewController.tableView.reloadData()
+                    isFound = true
+                    print(isFound)
+
                 }
+
+            }
+            if isFound == false {
+                print(isFound)
+                print("new event")
+                print(self.eventNameTextField.text ?? "Untitled Event")
                 
-            })
-            
-            
-            
-            
-            
-        }
+                var datesArr = [String]()
+                for date in EventViewController.datesChosen.enumerated() {
+                    datesArr.append("\(date)")
+                }
+                print("dates chosen: \(EventViewController.datesChosen)")
+                print("dates array: \(datesArr)")
+                
+                if datesArr.isEmpty {
+                    self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
+                    return
+                }
+                EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr)
+                
+                UserService.events(for: User.current) { (events) in
+                    eventTableViewController.events = events
+                    eventTableViewController.tableView.reloadData()
+                    self.viewWillAppear(true)
+                }
+                eventTableViewController.tableView.reloadData()
+                
+                
+            }
+            EventViewController.dispatchGroup.leave()
+            print("dispatch group run")
+
+        })
+
     }
     
     
@@ -299,16 +296,24 @@ class EventViewController: UIViewController {
             }
             else if identifier == "nextSegue" {
                 print("Transitioning to next & save")
+                
+                EventViewController.dispatchGroup.enter()
                 newEvent()
-                EventViewController.countDates()
+                EventViewController.dispatchGroup.notify(queue: .main, execute: {
+                    EventViewController.countDates()
+                    
+                    let inviteEventViewController = segue.destination as! InviteEventViewController
+                    inviteEventViewController.event = EventViewController.event
+                    print(EventViewController.event)
+                    print(inviteEventViewController.event)
+                })
+
                 
-                let inviteEventViewController = segue.destination as! InviteEventViewController
-                inviteEventViewController.event = EventViewController.event
                 
-//                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
-//                    print(self.newOrderedDict)
-//                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
-//                }
+                //                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
+                //                    print(self.newOrderedDict)
+                //                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
+                //                }
             }
                 
             else if identifier == "saveCloseSegue" {
@@ -325,7 +330,7 @@ class EventViewController: UIViewController {
                 EventViewController.countDates()
                 
             }
-                        
+            
         }
     }
 }
@@ -423,7 +428,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
     }
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-                
+        
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         handleSelection(cell: cell, cellState: cellState)

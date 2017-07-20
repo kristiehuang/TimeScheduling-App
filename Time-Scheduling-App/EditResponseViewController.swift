@@ -63,7 +63,7 @@ class EditResponseViewController: UIViewController {
         if (self.eventNameTextField.text?.isEmpty)! {
             eventNameTextField.text = "Untitled Event"
         }
-        eventNameTextField.text = "\(event?.name)"
+        eventNameTextField.text = "\(String(describing: event?.name))"
         availableDatesLabel.text = "\(numberOfDates) dates chosen"
         invitedAsLabel.text = "Invited as: \(User.current.name)"
         
@@ -199,7 +199,7 @@ class EditResponseViewController: UIViewController {
                         return
                     }
                     
-                    EventService.addEvent(name: thisEvent.name!, creationDate: thisEvent.creationDate, dates: datesArr)
+                    EventService.addEvent(name: thisEvent.name!, invitees: [], creationDate: thisEvent.creationDate, dates: datesArr)
                     
                     UserService.events(for: User.current) { (events) in
                         //5
