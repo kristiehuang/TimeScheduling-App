@@ -201,7 +201,7 @@ class EditResponseViewController: UIViewController {
                     
                     UserService.events(for: User.current) { (events) in
                         //5
-                        eventTableViewController.events = events
+                        eventTableViewController.displayedEvents = events
                         eventTableViewController.tableView.reloadData()
                         self.viewWillAppear(true)
                     }

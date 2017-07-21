@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
 
 class EventTableViewController: UITableViewController {
     
@@ -15,7 +16,9 @@ class EventTableViewController: UITableViewController {
     
     
     
-    var events = [Event]() {
+    
+    var displayedEvents = [Event]() {
+        
         didSet {
             tableView.reloadData()
         }
@@ -24,11 +27,10 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("events enumergeated : \(events.enumerated())")
-
+        
         
         UserService.events(for: User.current) { (events) in
-            self.events = events
+            self.displayedEvents = events
             self.tableView.reloadData()
         }
         
@@ -38,16 +40,44 @@ class EventTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //my events
         UserService.events(for: User.current) { (events) in
-            self.events = events
+            self.displayedEvents = events
             self.tableView.reloadData()
         }
+        //invited events
+        UserService.readInvitedEvents(for: User.current) { (invitedEvents) in
+            
+            for invitedEvent in invitedEvents {
+                self.displayedEvents.append(invitedEvent)
+            }
+        }
+        
+        //displayed Events already contains user's data right
+        
+        //        for event in events {
+        //            if User.current = event.host {
+        //                displayedEvents = event
+        //                //displayedEvents.append(event)
+        //                //where in code does it append to displayed Events??
+        //            }
+        //            else if User.current != host {
+        //                if event.invitees.contains(user.current) {
+        //                    displayedEvents = event.invit
+        //                }
+        //                else {
+        //                    displayedEvents ($0 filter: event)
+        //                }
+        //            }
+        //        }
+        
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventTableViewCell", for: indexPath) as! EventTableViewCell
         let row = indexPath.row
-        let event = self.events[row]
+        let event = self.displayedEvents[row]
         cell.eventNameLabel.text = event.name
         cell.eventDetailsLabel.text = "Host | 14 Invites | Date Chosen"
         //host + number of invites + date (if finalized then date, else if not finalized then "Date pending"
@@ -56,25 +86,25 @@ class EventTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        return displayedEvents.count
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
-
+            
             if identifier == "showEventResults" {
                 print("Table view cell tapped")
-
+                
                 let indexPath = tableView.indexPathForSelectedRow!
-                let event = events[indexPath.row]
+                let event = displayedEvents[indexPath.row]
                 EventViewController.event = event
                 
-//                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
-//                    EventViewController.countDates()
-//                    print(newOrderedDict)
-//                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
-//                }
+                //                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
+                //                    EventViewController.countDates()
+                //                    print(newOrderedDict)
+                //                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
+                //                }
             }
             
             

@@ -43,16 +43,15 @@ struct FriendService {
         let currentUID = User.current.uid
 //        EventViewController.invitees.append(user)
 //        print(EventViewController.invitees)
-        
-        
-        
+
         let ref = Database.database().reference()
         
         let key = EventService.key
         print(key)
+        //
+        let inviteData = ["events/\(currentUID)/\(key)/invitees/\(user.uid)": true, "users/\(user.uid)/invited events/\(key)/invitees/\(user.uid)": true, "users/\(currentUID)/hosting events/\(key)/invitees/\(user.uid)": true]
         
-        let inviteData = ["events/\(currentUID)/\(key)/invitees/\(user.uid)": true]
-
+        
         
         ref.updateChildValues(inviteData) { (error, _) in
             if let error = error {
@@ -60,6 +59,13 @@ struct FriendService {
             }
             success(error == nil)
         }
+        
+        print(event.dictValue)
+
+        
+        let eventRef = Database.database().reference().child("users").child(user.uid).child("invited events").child(key)
+        eventRef.updateChildValues(event.dictValue)
+//
     }
     
     
@@ -70,14 +76,21 @@ struct FriendService {
         let key = EventService.key
         print(key)
         
-        let inviteData = ["events/\(currentUID)/\(key)/invitees/\(user.uid)": NSNull()]
+        let inviteData = ["events/\(currentUID)/\(key)/invitees/\(user.uid)": NSNull(), "users/\(user.uid)/invited events/\(key)/invitees/\(user.uid)": NSNull(), "users/\(currentUID)/hosting events/\(key)/invitees/\(user.uid)": NSNull()]
         ref.updateChildValues(inviteData) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
             }
             success(error == nil)
         }
+        
+        
+        let eventRef = Database.database().reference().child("users").child(user.uid).child("invited events").child(key)
+        eventRef.updateChildValues(event.dictValue)
     }
+    
+    
+
     static func setIsFriending(_ isFriending: Bool, fromCurrentUserTo friender: User, success: @escaping (Bool) -> Void) {
         //friender = user who is doing the friending
         

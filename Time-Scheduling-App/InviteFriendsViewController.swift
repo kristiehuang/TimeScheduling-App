@@ -92,7 +92,9 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
 
         
         //friendservice methods
-        
+        print(InviteFriendsViewController.event?.dates)
+        print(InviteFriendsViewController.event?.invitees)
+
         FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
             defer {
                 inviteButton.isUserInteractionEnabled = true

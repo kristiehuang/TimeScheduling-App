@@ -48,7 +48,7 @@ class EventViewController: UIViewController {
     
     var newOrderedDict = NSMutableDictionary()
     static let dispatchGroup = DispatchGroup()
-
+    
     
     static var event: Event?
     static var invitees: [String] = ["\(User.current)"]
@@ -171,11 +171,11 @@ class EventViewController: UIViewController {
         print(EventViewController.event?.name ?? "Untitled Event")
         var isFound = false
         UserService.events(for: User.current, completion: { (events:[Event]) in
-
-
+            
+            //for each event in events called from user
             for eventz in events {
                 if EventViewController.event?.key == eventz.key {
-
+                    
                     var datesArr = [String]()
                     for date in EventViewController.datesChosen.enumerated() {
                         datesArr.append("\(date)")
@@ -193,42 +193,40 @@ class EventViewController: UIViewController {
                     eventTableViewController.tableView.reloadData()
                     isFound = true
                     print(isFound)
-
+                    
                 }
-
             }
+            
             if isFound == false {
-                print(isFound)
                 print("new event")
-                print(self.eventNameTextField.text ?? "Untitled Event")
                 
                 var datesArr = [String]()
+                
+                //changing type date to type string
                 for date in EventViewController.datesChosen.enumerated() {
                     datesArr.append("\(date)")
                 }
-                print("dates chosen: \(EventViewController.datesChosen)")
-                print("dates array: \(datesArr)")
                 
                 if datesArr.isEmpty {
                     self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
                     return
                 }
+                //add event to database
                 EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "")
                 
-                UserService.events(for: User.current) { (events) in
-                    eventTableViewController.events = events
-                    eventTableViewController.tableView.reloadData()
-                    self.viewWillAppear(true)
-                }
-                eventTableViewController.tableView.reloadData()
                 
                 
+//                UserService.events(for: User.current) { (events) in
+//                    events = eventTableViewController.displayedEvents
+//                    eventTableViewController.tableView.reloadData()
+//                    self.viewWillAppear(true)
+//                }
+//                eventTableViewController.tableView.reloadData()
             }
             EventViewController.dispatchGroup.leave()
             print("dispatch group run")
-
         })
-
+        
     }
     
     
@@ -304,12 +302,13 @@ class EventViewController: UIViewController {
                     
                     let inviteEventViewController = segue.destination as! InviteEventViewController
                     InviteEventViewController.event = EventViewController.event
-                    print(EventViewController.event)
-                    print(InviteEventViewController.event)
+                    
+                    
+                    
                     inviteEventViewController.eventNameLabel.text = EventViewController.event?.name
-
+                    
                 })
-
+                
                 
                 
                 //                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {

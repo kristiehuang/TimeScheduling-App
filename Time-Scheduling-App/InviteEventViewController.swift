@@ -25,23 +25,51 @@ class InviteEventViewController: UIViewController {
     @IBAction func unwindToInvite(_ segue: UIStoryboardSegue) {
     }
     
+    func saveEvent(){
+        //if event already exists, SAVE to existing
+        
+        let eventTableViewController = EventTableViewController()
+
+        UserService.events(for: User.current, completion: { (events:[Event]) in
+            
+            for eventz in events {
+                if EventViewController.event?.key == eventz.key {
+                    let eventRef = Database.database().reference().child("events").child(User.current.uid).child((EventViewController.event?.key!)!)
+                    eventRef.child("invites").setValue(EventViewController.event?.invitees)
+                    eventTableViewController.tableView.reloadData()
+                }
+            }
+        })
+        
+    }
+    
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let inviteFriendsViewController = segue.destination as? InviteFriendsViewController {
+            
             invitees = inviteFriendsViewController.invitees
             InviteFriendsViewController.event = InviteEventViewController.event
             print(InviteFriendsViewController.event!)
             print(InviteEventViewController.event)
+            
+            saveEvent()
         }
         if let addNoteViewController = segue.destination as? AddNoteViewController {
+            
             print(InviteEventViewController.event?.name!)
             AddNoteViewController.event = InviteEventViewController.event
-
-//            addNoteViewController.eventNameLabel.text = InviteEventViewController.event?.name
-//            print(addNoteViewController.eventNameLabel.text!)
             
-    
+            saveEvent()
+            
+            //            addNoteViewController.eventNameLabel.text = InviteEventViewController.event?.name
+            //            print(addNoteViewController.eventNameLabel.text!)
+            
+            
         }
+        
     }
     
     
@@ -52,15 +80,16 @@ class InviteEventViewController: UIViewController {
     @IBAction func saveCloseButton(_ sender: Any) {
         print("transitioning back to home/save")
         //save invites & segue
+        saveEvent()
     }
     
     
-    @IBAction func touchCancelTriggered(_ sender: Any) {
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        eventNameLabel.text = InviteEventViewController.event?.name
+        print(InviteEventViewController.event?.dates)
+        
+        eventNameLabel.text = InviteEventViewController.event?.name //printing nil
         //add contacts output
         
         // remove separators for empty cells

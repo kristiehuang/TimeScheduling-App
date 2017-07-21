@@ -55,6 +55,47 @@ struct UserService {
         })
     }
     
+    //reads database
+    
+    static func readInvitedEvents(for user: User, completion: @escaping ([Event]) -> Void) {
+        let ref = Database.database().reference().child("users").child(User.current.uid)
+        
+        ref.child("invited events").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+                return completion([])
+            }
+            
+            print(snapshot)
+            let invitedEvents: [Event] = snapshot.reversed().flatMap(Event.init)
+            
+            //events returned in array
+            print("amt of events i was invited to: \(invitedEvents.count)")
+            print(invitedEvents)
+            
+            completion(invitedEvents)
+            
+        })
+    }
+    
+    //reads database
+    
+    static func readHostingEvents(for user: User, completion: @escaping ([Event]) -> Void) {
+        
+        let ref = Database.database().reference().child("users").child(User.current.uid)
+
+        ref.child("hosting events").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+                return completion([])
+            }
+            let hostingEvents = snapshot.reversed().flatMap(Event.init)
+            
+            //events returned in array
+            print("amt of events i am hosting: \(hostingEvents.count)")
+            completion(hostingEvents)
+        })
+
+    }
+    
     
     
     static func usersExcludingCurrentUser(completion: @escaping ([User]) -> Void) {
