@@ -16,10 +16,10 @@ import FirebaseDatabase
 //prepare... done clicked, array passed to InviteEventVC
 //array displays on table
 class InviteFriendsViewController: UIViewController {
-    var event: Event?
+    static var event: Event?
 
     var friends = [User]()
-    var invitees: [String] = []
+    var invitees = [String]()
 
     
 
@@ -93,7 +93,7 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         
         //friendservice methods
         
-        FriendService.setIsInviting(!friender.isInvited, event!, fromCurrentUserTo: friender) { (success) in
+        FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
             defer {
                 inviteButton.isUserInteractionEnabled = true
                 self.invitees.append("\(friender)")

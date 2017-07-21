@@ -134,16 +134,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0ay-nH-c8x">
-                                <rect key="frame" x="116.33333333333331" y="26.333333333333329" width="182.33333333333337" height="62.333333333333343"/>
+                                <rect key="frame" x="116.66666666666666" y="26.333333333333329" width="182.33333333333334" height="62.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner @ Jessie's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-gK-YDc">
-                                        <rect key="frame" x="0.0" y="0.0" width="182.33333333333337" height="28.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="182.33333333333331" height="28.666666666666668"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invited as: Lily" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqj-AQ-InK">
-                                        <rect key="frame" x="0.0" y="33.666666666666671" width="182.33333333333337" height="28.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="33.666666666666671" width="182.33333333333331" height="28.666666666666671"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                         <color key="textColor" red="0.63373094797134399" green="0.78512424230575562" blue="0.96810156106948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -373,7 +373,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2F-xO-QHf">
-                                        <rect key="frame" x="133" y="40.666666666666671" width="148" height="33.666666666666671"/>
+                                        <rect key="frame" x="133.33333333333337" y="41" width="147.66666666666663" height="33.666666666666671"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -959,7 +959,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6a-FS-N3Z">
-                                <rect key="frame" x="329" y="30" width="54" height="41"/>
+                                <rect key="frame" x="329" y="30.333333333333329" width="54" height="41"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="24"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
@@ -1032,11 +1032,11 @@
                                     <constraint firstAttribute="height" constant="115" id="8u3-zB-ScF"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9yS-w4-c29">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9yS-w4-c29">
                                 <rect key="frame" x="25" y="31" width="364" height="53"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JfY-iH-GeX">
-                                        <rect key="frame" x="0.0" y="0.0" width="41.666666666666671" height="53"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="53"/>
                                         <state key="normal" image="&lt; button">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1047,13 +1047,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner @ Jessie's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbc-9A-dwm">
-                                        <rect key="frame" x="51.666666666666686" y="0.0" width="253" height="53"/>
+                                        <rect key="frame" x="91" y="0.0" width="182.33333333333331" height="53"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOC-st-2WP">
-                                        <rect key="frame" x="314.66666666666674" y="0.0" width="49.333333333333314" height="53"/>
+                                        <rect key="frame" x="334" y="0.0" width="30" height="53"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1257,11 +1257,11 @@
                                     <constraint firstAttribute="height" constant="115" id="TVC-fq-VPX"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c6d-uj-7VW">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c6d-uj-7VW">
                                 <rect key="frame" x="25" y="31" width="364" height="53"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="344-yq-XSf">
-                                        <rect key="frame" x="0.0" y="0.0" width="41.666666666666671" height="53"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="53"/>
                                         <state key="normal" image="&lt; button">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1272,13 +1272,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner @ Jessie's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFj-rK-XhH">
-                                        <rect key="frame" x="51.666666666666686" y="0.0" width="252.66666666666663" height="53"/>
+                                        <rect key="frame" x="90.666666666666657" y="0.0" width="182.33333333333334" height="53"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYX-Kg-Jf7">
-                                        <rect key="frame" x="314.33333333333326" y="0.0" width="49.666666666666686" height="53"/>
+                                        <rect key="frame" x="333.66666666666674" y="0.0" width="30.333333333333314" height="53"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1392,23 +1392,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6O-a3-4xf">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="191"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="211"/>
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="191" id="Xun-HB-UR3"/>
+                                    <constraint firstAttribute="height" constant="211" id="Xun-HB-UR3"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GG4-XE-7dD">
-                                <rect key="frame" x="25" y="256.33333333333331" width="363" height="38.333333333333371"/>
+                                <rect key="frame" x="25" y="256.66666666666674" width="363" height="38.333333333333314"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best times" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qP-Ak-bgh">
-                                        <rect key="frame" x="141.33333333333337" y="0.0" width="80.666666666666657" height="20.333333333333371"/>
+                                        <rect key="frame" x="141.33333333333337" y="0.0" width="80.666666666666657" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUg-bG-YX6">
-                                        <rect key="frame" x="163.66666666666666" y="20.333333333333371" width="35.666666666666686" height="18"/>
+                                        <rect key="frame" x="163.66666666666666" y="20.333333333333314" width="35.666666666666686" height="18"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

@@ -13,7 +13,7 @@ import FirebaseDatabase
 
 class InviteEventViewController: UIViewController {
     
-    var event: Event?
+    static var event: Event?
     var invitees: [String]?
     
     @IBOutlet weak var eventNameLabel: UILabel!
@@ -29,12 +29,18 @@ class InviteEventViewController: UIViewController {
         
         if let inviteFriendsViewController = segue.destination as? InviteFriendsViewController {
             invitees = inviteFriendsViewController.invitees
-            inviteFriendsViewController.event = event
-            print(inviteFriendsViewController.event)
-            print(event)
+            InviteFriendsViewController.event = InviteEventViewController.event
+            print(InviteFriendsViewController.event!)
+            print(InviteEventViewController.event)
         }
         if let addNoteViewController = segue.destination as? AddNoteViewController {
+            print(InviteEventViewController.event?.name!)
+            AddNoteViewController.event = InviteEventViewController.event
+
+//            addNoteViewController.eventNameLabel.text = InviteEventViewController.event?.name
+//            print(addNoteViewController.eventNameLabel.text!)
             
+    
         }
     }
     
@@ -54,10 +60,8 @@ class InviteEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let event = event {
-            eventNameLabel.text = event.name
-            //add contacts output
-        }
+        eventNameLabel.text = InviteEventViewController.event?.name
+        //add contacts output
         
         // remove separators for empty cells
         inviteesTableView.tableFooterView = UIView()

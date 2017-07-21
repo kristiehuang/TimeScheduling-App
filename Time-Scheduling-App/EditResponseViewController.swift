@@ -30,9 +30,7 @@ class EditResponseViewController: UIViewController {
     let monthColor = UIColor.white //cell date label color in this month
     let selectedMonthColor = UIColor(colorWithHexValue: 0xA3C9F6) //color of selected date label text
     let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
-    
-    //    let event = Event(name: "", creationDate: Date(), host: User.current)
-    
+        
     let dateFormatter = DateFormatter()
     
     var numberOfDates:Int = 0
@@ -199,7 +197,7 @@ class EditResponseViewController: UIViewController {
                         return
                     }
                     
-                    EventService.addEvent(name: thisEvent.name!, invitees: [], creationDate: thisEvent.creationDate, dates: datesArr)
+                    EventService.addEvent(name: thisEvent.name!, invitees: [], creationDate: thisEvent.creationDate, dates: datesArr, note: "")
                     
                     UserService.events(for: User.current) { (events) in
                         //5

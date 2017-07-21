@@ -213,7 +213,7 @@ class EventViewController: UIViewController {
                     self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
                     return
                 }
-                EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr)
+                EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "")
                 
                 UserService.events(for: User.current) { (events) in
                     eventTableViewController.events = events
@@ -303,9 +303,11 @@ class EventViewController: UIViewController {
                     EventViewController.countDates()
                     
                     let inviteEventViewController = segue.destination as! InviteEventViewController
-                    inviteEventViewController.event = EventViewController.event
+                    InviteEventViewController.event = EventViewController.event
                     print(EventViewController.event)
-                    print(inviteEventViewController.event)
+                    print(InviteEventViewController.event)
+                    inviteEventViewController.eventNameLabel.text = EventViewController.event?.name
+
                 })
 
                 

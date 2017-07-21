@@ -8,11 +8,31 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
 
 class AddNoteViewController: UIViewController {
     
+    static var event: Event?
+    
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBAction func finishButtonTapped(_ sender: Any) {
+        
+        if noteTextView.text.isEmpty {
+            noteTextView.text = ""
+        }
+        
+        let ref = Database.database().reference()
+        
+        let key = EventService.key
+        print(key)
+        
+        let noteData = ["events/\(User.current.uid)/\(key)/note": noteTextView.text]
+        
+        ref.updateChildValues(noteData) { (error, _) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+            }
+        }
     }
     
     @IBOutlet weak var noteTextView: UITextView!
@@ -22,9 +42,9 @@ class AddNoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        eventNameLabel.text = EventViewController.event?.name
-         
+        print(AddNoteViewController.event?.name)
+        eventNameLabel.text = AddNoteViewController.event?.name
+
         //dismiss keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false

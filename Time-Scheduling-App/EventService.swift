@@ -16,7 +16,7 @@ struct EventService {
     static var key: String = ""
     
     //just add event to database
-    static func addEvent(name: String, invitees: [String], creationDate: Date, dates: [String]) -> Event {
+    static func addEvent(name: String, invitees: [String], creationDate: Date, dates: [String], note: String) -> Event {
         let currentUser = User.current
         
         
@@ -25,7 +25,7 @@ struct EventService {
         print("current user is \(currentUser.name)")
         
         //save to database
-        let event = Event(name: name, invitees: invitees, creationDate: creationDate, dates: dates)
+        let event = Event(name: name, invitees: invitees, creationDate: creationDate, dates: dates, note: note)
         let dict = event.dictValue
         
         
