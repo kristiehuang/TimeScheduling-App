@@ -52,14 +52,10 @@ class InviteEventViewController: UIViewController {
             
             invitees = inviteFriendsViewController.invitees
             InviteFriendsViewController.event = InviteEventViewController.event
-            print(InviteFriendsViewController.event!)
-            print(InviteEventViewController.event)
             
             saveEvent()
         }
         if let addNoteViewController = segue.destination as? AddNoteViewController {
-            
-            print(InviteEventViewController.event?.name!)
             AddNoteViewController.event = InviteEventViewController.event
             
             saveEvent()
@@ -87,7 +83,7 @@ class InviteEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(InviteEventViewController.event?.dates)
+        print("dates are \(InviteEventViewController.event?.dates ?? [])")
         
         eventNameLabel.text = InviteEventViewController.event?.name //printing nil
         //add contacts output

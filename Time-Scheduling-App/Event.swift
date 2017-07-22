@@ -15,7 +15,7 @@ class Event {
     var name: String?
     var creationDate: Date
     
-//    var host: User
+    var host: String
     var key: String?
     
     var dates: [String]
@@ -24,11 +24,12 @@ class Event {
     
     //turn event objects into dictionary type
     var dictValue: [String: Any] {        
-        return ["name": name ?? "Untitled Event", "invitees": invitees,
+        return ["host": host, "name": name ?? "Untitled Event", "invitees": invitees,
                 "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
     }
     
-    init(name: String, invitees: [String], creationDate: Date, dates: [String], note: String) {
+    init(host: String, name: String, invitees: [String], creationDate: Date, dates: [String], note: String) {
+        self.host = host
         self.name = name
         self.creationDate = Date()
 //        self.host = User.current
@@ -40,10 +41,14 @@ class Event {
     
     
     init?(snapshot: DataSnapshot) {
+        
         guard let dict = snapshot.value as? [String: Any]
             else { return nil }
 
         guard let name = dict["name"] as? String
+            else { return nil }
+        
+        guard let host = dict["host"] as? String
             else { return nil }
 
         guard let createdAgo = dict["created_at"] as? TimeInterval
@@ -59,6 +64,7 @@ class Event {
             else { return nil }
         
         self.key = snapshot.key
+        self.host = host
         self.name = name
         //self.host = host
         self.creationDate = Date(timeIntervalSince1970: createdAgo)

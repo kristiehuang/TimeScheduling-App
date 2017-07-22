@@ -14,9 +14,6 @@ class EventTableViewController: UITableViewController {
     
     @IBOutlet var uiTableView: UITableView!
     
-    
-    
-    
     var displayedEvents = [Event]() {
         
         didSet {
@@ -24,18 +21,10 @@ class EventTableViewController: UITableViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        UserService.events(for: User.current) { (events) in
-            self.displayedEvents = events
-            self.tableView.reloadData()
-        }
-        
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,35 +41,22 @@ class EventTableViewController: UITableViewController {
                 self.displayedEvents.append(invitedEvent)
             }
         }
-        
-        //displayed Events already contains user's data right
-        
-        //        for event in events {
-        //            if User.current = event.host {
-        //                displayedEvents = event
-        //                //displayedEvents.append(event)
-        //                //where in code does it append to displayed Events??
-        //            }
-        //            else if User.current != host {
-        //                if event.invitees.contains(user.current) {
-        //                    displayedEvents = event.invit
-        //                }
-        //                else {
-        //                    displayedEvents ($0 filter: event)
-        //                }
-        //            }
-        //        }
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventTableViewCell", for: indexPath) as! EventTableViewCell
         let row = indexPath.row
-        let event = self.displayedEvents[row]
+        var event = self.displayedEvents[row]
+        
         cell.eventNameLabel.text = event.name
         cell.eventDetailsLabel.text = "Host | 14 Invites | Date Chosen"
         //host + number of invites + date (if finalized then date, else if not finalized then "Date pending"
+        
+        
+        
+        
+        
+        
         return cell
         
     }
@@ -90,24 +66,37 @@ class EventTableViewController: UITableViewController {
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dispatchGroup = DispatchGroup()
+
+        let indexPath = tableView.indexPathForSelectedRow!
+        let event = displayedEvents[indexPath.row]
+        EventViewController.event = event
+        dispatchGroup.enter()
+        
+        UserService.readInvitedEvents(for: User.current) { (invitedEvents) in
             
-            if identifier == "showEventResults" {
-                print("Table view cell tapped")
+            for invitedEvent in invitedEvents {
+                print(invitedEvent)
+                self.displayedEvents.append(invitedEvent)
                 
-                let indexPath = tableView.indexPathForSelectedRow!
-                let event = displayedEvents[indexPath.row]
-                EventViewController.event = event
+                dispatchGroup.leave()
                 
-                //                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
-                //                    EventViewController.countDates()
-                //                    print(newOrderedDict)
-                //                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
-                //                }
+                dispatchGroup.notify(queue: .main, execute: {
+                    print(User.current.uid)
+                    print(event.host)
+                    if User.current.uid == event.host {
+                        print("is host")
+                        self.performSegue(withIdentifier: "editEvent", sender: nil)
+                    }
+                    else {
+                        self.performSegue(withIdentifier: "showEventResults", sender: nil)
+                        print("is not host")
+                    }
+                })
             }
-            
-            
         }
     }
+    
 }

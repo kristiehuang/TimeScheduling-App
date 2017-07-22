@@ -65,7 +65,7 @@ struct UserService {
                 return completion([])
             }
             
-            print(snapshot)
+            print("snapshot : \(snapshot)")
             let invitedEvents: [Event] = snapshot.reversed().flatMap(Event.init)
             
             //events returned in array

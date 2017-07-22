@@ -87,7 +87,6 @@
                                     <outlet property="eventDetailsLabel" destination="GGO-22-LCq" id="Kw3-7t-Lsk"/>
                                     <outlet property="eventNameLabel" destination="XYS-UV-O18" id="YTs-iy-h8P"/>
                                     <outlet property="eventStatusIndicator" destination="5Cn-SQ-Ntx" id="PWC-0q-Qbv"/>
-                                    <segue destination="CP3-VW-hQj" kind="show" identifier="showEventResults" id="bKQ-NJ-GtI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -98,11 +97,13 @@
                     </tableView>
                     <connections>
                         <outlet property="uiTableView" destination="ESh-ly-C0I" id="4Xc-3B-VBi"/>
+                        <segue destination="CP3-VW-hQj" kind="show" identifier="showEventResults" id="QIQ-dP-87R"/>
+                        <segue destination="0iu-06-dBK" kind="show" identifier="editEvent" id="nwZ-Yi-k50"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chp-3H-tH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="328" y="24"/>
+            <point key="canvasLocation" x="354" y="24"/>
         </scene>
         <!--Edit Response View Controller-->
         <scene sceneID="0sz-Kb-jkp">
@@ -134,7 +135,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0ay-nH-c8x">
-                                <rect key="frame" x="116.66666666666666" y="26.333333333333329" width="182.33333333333334" height="62.333333333333343"/>
+                                <rect key="frame" x="116" y="26.333333333333329" width="182.33333333333331" height="62.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner @ Jessie's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-gK-YDc">
                                         <rect key="frame" x="0.0" y="0.0" width="182.33333333333331" height="28.666666666666668"/>
@@ -373,7 +374,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2F-xO-QHf">
-                                        <rect key="frame" x="133.33333333333337" y="41" width="147.66666666666663" height="33.666666666666671"/>
+                                        <rect key="frame" x="133.66666666666669" y="41.666666666666671" width="147.66666666666669" height="32.666666666666671"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -594,7 +595,7 @@
                         <viewControllerLayoutGuide type="bottom" id="O1c-EW-PpT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" id="yJZ-CT-a3x">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="550"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWb-TB-tTf">
@@ -781,7 +782,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uGH-Ri-JfR" userLabel="Buttons Stack View">
-                                <rect key="frame" x="36" y="582" width="342" height="130"/>
+                                <rect key="frame" x="36" y="396" width="342" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hoz-Fr-PMW">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="75"/>
@@ -869,11 +870,11 @@
                         <viewControllerLayoutGuide type="bottom" id="If7-hD-WUZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zdI-tV-Upa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="550"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DHV-lP-n2I">
-                                <rect key="frame" x="0.0" y="100" width="414" height="636"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="450"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="UVu-zE-zlc">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -959,7 +960,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6a-FS-N3Z">
-                                <rect key="frame" x="329" y="30.333333333333329" width="54" height="41"/>
+                                <rect key="frame" x="329" y="29.666666666666671" width="54" height="41"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="24"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
@@ -1019,7 +1020,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hJc-VP-R9W"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wit-ak-RR3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="550"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tm4-kv-OM3">
@@ -1064,7 +1065,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="89q-EI-Bzh" userLabel="Buttons Stack View">
-                                <rect key="frame" x="36" y="582" width="342" height="130"/>
+                                <rect key="frame" x="36" y="396" width="342" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CE-7V-ZAZ">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="75"/>
@@ -1399,7 +1400,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GG4-XE-7dD">
-                                <rect key="frame" x="25" y="256.66666666666674" width="363" height="38.333333333333314"/>
+                                <rect key="frame" x="25" y="255.99999999999997" width="363" height="38.333333333333286"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best times" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qP-Ak-bgh">
                                         <rect key="frame" x="141.33333333333337" y="0.0" width="80.666666666666657" height="20.333333333333314"/>
@@ -1512,4 +1513,7 @@
         <image name="uninvite button" width="144" height="141"/>
         <image name="user+" width="86" height="74"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="nwZ-Yi-k50"/>
+    </inferredMetricsTieBreakers>
 </document>

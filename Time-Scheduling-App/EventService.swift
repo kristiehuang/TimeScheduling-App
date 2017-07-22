@@ -21,14 +21,14 @@ struct EventService {
         print("current user is \(currentUser.name)")
         
         //save to database
-        let event = Event(name: name, invitees: invitees, creationDate: creationDate, dates: dates, note: note)
+        let event = Event(host: User.current.uid, name: name, invitees: invitees, creationDate: creationDate, dates: dates, note: note)
         let dict = event.dictValue
         
         EventViewController.event = event
         
         let eventRef = Database.database().reference().child("events").child(currentUser.uid).childByAutoId()
         key = eventRef.key
-        print(dict)
+        print("dict is \(dict)")
         eventRef.updateChildValues(dict)
         
         

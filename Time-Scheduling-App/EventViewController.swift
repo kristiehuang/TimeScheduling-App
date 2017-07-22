@@ -147,12 +147,22 @@ class EventViewController: UIViewController {
         
     }
     
+    private func currentTopViewController() -> UIViewController {
+        var topVC: UIViewController? = UIApplication.shared.delegate?.window??.rootViewController
+        while ((topVC?.presentedViewController) != nil) {
+            topVC = topVC?.presentedViewController
+        }
+        return topVC!
+    }
+    
     private func showError(bigErrorMsg: String, smallErrorMsg: String){
+        let currentTopVC: UIViewController? = self.currentTopViewController()
+
         let alertController = UIAlertController(title: "\(bigErrorMsg)", message:
             "\(smallErrorMsg)", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
         
-        self.present(alertController, animated: true, completion: nil)
+        currentTopVC?.present(alertController, animated: true, completion: nil)
         
     }
     
@@ -168,7 +178,7 @@ class EventViewController: UIViewController {
         EventViewController.event?.name = self.eventNameTextField.text ?? "Untitled Event"
         
         
-        print(EventViewController.event?.name ?? "Untitled Event")
+        print(" event name is \(EventViewController.event?.name ?? "Untitled Event")")
         var isFound = false
         UserService.events(for: User.current, completion: { (events:[Event]) in
             
@@ -185,6 +195,7 @@ class EventViewController: UIViewController {
                     
                     if datesArr.isEmpty {
                         self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
+                        //unwind to page 1, don't save
                         return
                     }
                     let eventRef = Database.database().reference().child("events").child(User.current.uid).child((EventViewController.event?.key!)!)
@@ -192,9 +203,11 @@ class EventViewController: UIViewController {
                     eventRef.child("dates").setValue(datesArr)
                     eventTableViewController.tableView.reloadData()
                     isFound = true
-                    print(isFound)
+                    print("isfound is \(isFound)")
                     
                 }
+                EventViewController.dispatchGroup.leave()
+                print("dispatch group run")
             }
             
             if isFound == false {
@@ -202,19 +215,22 @@ class EventViewController: UIViewController {
                 
                 var datesArr = [String]()
                 
+                print("dates chosen is \(EventViewController.datesChosen)")
+                
                 //changing type date to type string
                 for date in EventViewController.datesChosen.enumerated() {
                     datesArr.append("\(date)")
+                    
                 }
                 
+                print("dates datesarr is \(datesArr)")
                 if datesArr.isEmpty {
                     self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
+                    //unwind, don't save
                     return
                 }
                 //add event to database
                 EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "")
-                
-                
                 
 //                UserService.events(for: User.current) { (events) in
 //                    events = eventTableViewController.displayedEvents
@@ -222,9 +238,11 @@ class EventViewController: UIViewController {
 //                    self.viewWillAppear(true)
 //                }
 //                eventTableViewController.tableView.reloadData()
+                
+                EventViewController.dispatchGroup.leave()
+                print("dispatch group run")
             }
-            EventViewController.dispatchGroup.leave()
-            print("dispatch group run")
+
         })
         
     }
@@ -237,7 +255,7 @@ class EventViewController: UIViewController {
             counts[date] = (counts[date] ?? 0) + 1
         }
         //sort array by count value, then display only top three
-        print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
+        print("counts are \(counts)")  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
         
         for (key, value) in counts {
             print("\(value) of people prefer the \(key) date")
@@ -300,25 +318,17 @@ class EventViewController: UIViewController {
                 EventViewController.dispatchGroup.notify(queue: .main, execute: {
                     EventViewController.countDates()
                     
+
                     let inviteEventViewController = segue.destination as! InviteEventViewController
                     InviteEventViewController.event = EventViewController.event
-                    
-                    
-                    
                     inviteEventViewController.eventNameLabel.text = EventViewController.event?.name
                     
+                    
                 })
-                
-                
-                
-                //                if let bestDatesEventViewController = segue.destination as? BestDatesEventViewController {
-                //                    print(self.newOrderedDict)
-                //                    bestDatesEventViewController.orderedDict = newOrderedDict as! [Date : Int]
-                //                }
+
             }
                 
             else if identifier == "saveCloseSegue" {
-                newEvent()
                 print("Transitioning back to home/save")
                 
                 //dateschosen is dates form
@@ -328,8 +338,12 @@ class EventViewController: UIViewController {
                 //used mergedCounts instead
                 //create users. add users to indiv events.
                 
-                EventViewController.countDates()
-                
+                EventViewController.dispatchGroup.enter()
+                newEvent()
+                EventViewController.dispatchGroup.notify(queue: .main, execute: {
+                    EventViewController.countDates()
+
+                })
             }
             
         }
