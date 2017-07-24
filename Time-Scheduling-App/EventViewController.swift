@@ -62,6 +62,8 @@ class EventViewController: UIViewController {
         super.viewDidLoad()
         
         setUpCalendarView()
+        
+        
         calendarView.visibleDates { visibleDates in
             self.setupViewsOfCalendar(from: visibleDates)
         }

@@ -21,7 +21,21 @@ class EditResponseViewController: UIViewController {
     @IBOutlet weak var availableDatesLabel: UILabel!
     
     @IBAction func SaveButtonTapped(_ sender: Any) {
-        EditResponseViewController.countDates()
+        print("Transitioning back to home/save")
+        
+        //dateschosen is dates form
+        //datesarr is string form (to put into firebase)
+        
+        //merge all user's Counts dictionaries = mergedCounts
+        //used mergedCounts instead
+        //create users. add users to indiv events.
+        
+        EditResponseViewController.dispatchGroup.enter()
+        mergeDates()
+        EditResponseViewController.dispatchGroup.notify(queue: .main, execute: {
+            EditResponseViewController.countDates()
+            
+        })
     }
     
     
@@ -29,8 +43,10 @@ class EditResponseViewController: UIViewController {
     let outsideMonthColor = UIColor(colorWithHexValue: 0x7FAEE7) //cell date label color in indates/outdates
     let monthColor = UIColor.white //cell date label color in this month
     let selectedMonthColor = UIColor(colorWithHexValue: 0xA3C9F6) //color of selected date label text
-    let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
-        
+//    let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
+    
+    //    let event = Event(name: "", creationDate: Date(), host: User.current)
+    
     let dateFormatter = DateFormatter()
     
     var numberOfDates:Int = 0
@@ -38,48 +54,61 @@ class EditResponseViewController: UIViewController {
     var events: [Event] = []
     
     var newOrderedDict = NSMutableDictionary()
+    static let dispatchGroup = DispatchGroup()
     
     
-    var event: Event?
+    static var event: Event?
+    static var invitees: [String] = ["\(User.current)"]
     
-//    static func getEvent () -> Event {
-//        return event!
-//    }
+    static func getEvent () -> Event {
+        return event!
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpCalendarView()
+        
+        
         calendarView.visibleDates { visibleDates in
             self.setupViewsOfCalendar(from: visibleDates)
         }
-        let currentDate = Date()
-        calendarView.scrollToDate(currentDate)
-        calendarView.allowsMultipleSelection  = true
-        calendarView.isRangeSelectionUsed = true
         
-        if (self.eventNameTextField.text?.isEmpty)! {
-            eventNameTextField.text = "Untitled Event"
-        }
-        eventNameTextField.text = "\(String(describing: event?.name))"
-        availableDatesLabel.text = "\(numberOfDates) dates chosen"
-        invitedAsLabel.text = "Invited as: \(User.current.name)"
+        self.calendarView.allowsMultipleSelection  = true
+        self.calendarView.isRangeSelectionUsed = true
         
+        self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen | Press & hold to select a range"
+        
+        //longpress to select range
+        self.calendarView.allowsMultipleSelection = true
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(self.didStartRangeSelecting(gesture:)))
+        gesture.minimumPressDuration = 0.5
+        self.calendarView.addGestureRecognizer(gesture)
+        self.calendarView.isRangeSelectionUsed = true
         
         //dismiss keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
+        
+        
+        
+        
     }
     
     //    for existing events
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let thisEvent = event {
-            eventNameTextField.text = thisEvent.name
+        
+        let currentDate = Date()
+        calendarView.scrollToDate(currentDate)
+        
+        if let event = EditResponseViewController.event {
+            eventNameTextField.text = event.name
         } else {
-            eventNameTextField.text = ""
+            eventNameTextField.text = "Untitled Event"
         }
     }
     
@@ -91,7 +120,7 @@ class EditResponseViewController: UIViewController {
     
     
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
-        guard let validCell = view as? CalendarCell
+        guard let validCell = view as? InviteCalendarCell
             else { return }
         
         if cellState.isSelected {
@@ -104,7 +133,7 @@ class EditResponseViewController: UIViewController {
     }
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
-        guard let validCell = view as? CalendarCell
+        guard let validCell = view as? InviteCalendarCell
             else { return }
         
         if cellState.isSelected {
@@ -132,58 +161,45 @@ class EditResponseViewController: UIViewController {
         
     }
     
+    private func currentTopViewController() -> UIViewController {
+        var topVC: UIViewController? = UIApplication.shared.delegate?.window??.rootViewController
+        while ((topVC?.presentedViewController) != nil) {
+            topVC = topVC?.presentedViewController
+        }
+        return topVC!
+    }
+    
     private func showError(bigErrorMsg: String, smallErrorMsg: String){
+        let currentTopVC: UIViewController? = self.currentTopViewController()
+        
         let alertController = UIAlertController(title: "\(bigErrorMsg)", message:
             "\(smallErrorMsg)", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
         
-        self.present(alertController, animated: true, completion: nil)
+        currentTopVC?.present(alertController, animated: true, completion: nil)
         
     }
     
-    func newEvent(){
-        //if event already exists, SAVE to existing
+    func mergeDates(){
+        //MERGE DATES to existing
         
-        if let thisEvent = event {
-            let eventTableViewController = EventTableViewController()
+        let eventTableViewController = EventTableViewController()
+        
+        if (self.eventNameTextField.text?.isEmpty)! {
+            eventNameTextField.text = "Untitled Event"
+        }
+        EditResponseViewController.event?.name = self.eventNameTextField.text ?? "Untitled Event"
+        
+        
+        print(" event name is \(EditResponseViewController.event?.name ?? "Untitled Event")")
+        UserService.readInvitedEvents(for: User.current, completion: { (events:[Event]) in
             
-            thisEvent.name = self.eventNameTextField.text ?? ""
-            
-            print(thisEvent.name ?? "")
-            var isFound = false
-            UserService.events(for: User.current, completion: { (events:[Event]) in
+            //for each event in INVITED events called from user
+            for eventz in events {
                 
-                for eventz in events {
-                    if thisEvent.key == eventz.key {
-                        
-                        var datesArr = [String]()
-                        for date in EditResponseViewController.datesChosen.enumerated() {
-                            datesArr.append("\(date)")
-                        }
-                        print("dates chosen: \(EditResponseViewController.datesChosen)")
-                        print("dates array: \(datesArr)")
-                        
-                        if datesArr.isEmpty {
-                            self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
-                            return
-                        }
-                        
-                        
-                        let eventRef = Database.database().reference().child("events").child(User.current.uid).child(thisEvent.key!)
-                        eventRef.child("name").setValue(thisEvent.name)
-                        eventRef.child("dates").setValue(datesArr)
-                        eventTableViewController.tableView.reloadData()
-                        isFound = true
-                        print(isFound)
-                        
-                    }
-                    
-                }
-                
-                if isFound == false {
-                    print(isFound)
-                    print("new event")
-                    print(self.eventNameTextField.text ?? "")
+                print(EditResponseViewController.event?.key)
+                print(eventz.key)
+                if EditResponseViewController.event?.key == eventz.key {
                     
                     var datesArr = [String]()
                     for date in EditResponseViewController.datesChosen.enumerated() {
@@ -191,31 +207,30 @@ class EditResponseViewController: UIViewController {
                     }
                     print("dates chosen: \(EditResponseViewController.datesChosen)")
                     print("dates array: \(datesArr)")
+                    datesArr = eventz.dates + datesArr
+                    //change datesArr to existing dates + datesArr, then update
+                    print("dates array after adding: \(datesArr)")
+
+
                     
                     if datesArr.isEmpty {
                         self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
+                        //unwind to page 1, don't save
                         return
                     }
                     
-                    EventService.addEvent(name: thisEvent.name!, invitees: [], creationDate: thisEvent.creationDate, dates: datesArr, note: "")
-                    
-                    UserService.events(for: User.current) { (events) in
-                        //5
-                        eventTableViewController.displayedEvents = events
-                        eventTableViewController.tableView.reloadData()
-                        self.viewWillAppear(true)
-                    }
-                    
+                    let eventRef = Database.database().reference().child("events").child(eventz.host).child((EditResponseViewController.event?.key!)!)
+                    eventRef.child("dates").setValue(datesArr)
                     eventTableViewController.tableView.reloadData()
+                    print("\(User.current.name) added dates")
+                    
                 }
-                
-            })
+                EditResponseViewController.dispatchGroup.leave()
+                print("dispatch group run")
+            }
             
-            
-            
-            
-            
-        }
+        })
+        
     }
     
     
@@ -226,7 +241,7 @@ class EditResponseViewController: UIViewController {
             counts[date] = (counts[date] ?? 0) + 1
         }
         //sort array by count value, then display only top three
-        print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
+        print("counts are \(counts)")  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
         
         for (key, value) in counts {
             print("\(value) of people prefer the \(key) date")
@@ -243,31 +258,48 @@ class EditResponseViewController: UIViewController {
         
     }
     
+    //longpress gesture func!!
+    var rangeSelectedDates: [Date] = []
+    func didStartRangeSelecting(gesture: UILongPressGestureRecognizer) {
+        let point = gesture.location(in: gesture.view!)
+        rangeSelectedDates = calendarView.selectedDates
+        if let cellState = calendarView.cellStatus(at: point) {
+            let date = cellState.date
+            if !rangeSelectedDates.contains(date) {
+                let dateRange = calendarView.generateDateRange(from: rangeSelectedDates.first ?? date, to: date)
+                for aDate in dateRange {
+                    if !rangeSelectedDates.contains(aDate) {
+                        rangeSelectedDates.append(aDate)
+                    }
+                }
+                calendarView.selectDates(from: rangeSelectedDates.first!, to: date, keepSelectionIfMultiSelectionAllowed: true)
+            } else {
+                let indexOfNewlySelectedDate = rangeSelectedDates.index(of: date)! + 1
+                let lastIndex = rangeSelectedDates.endIndex
+                let calendar = Calendar(identifier: .gregorian)
+                let followingDay = calendar.date(byAdding: .day, value: 1, to: date)!
+                calendarView.selectDates(from: followingDay, to: rangeSelectedDates.last!, keepSelectionIfMultiSelectionAllowed: false)
+                rangeSelectedDates.removeSubrange(indexOfNewlySelectedDate..<lastIndex)
+            }
+        }
+        
+        if gesture.state == .ended {
+            rangeSelectedDates.removeAll()
+        }
+    }
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let identifier = segue.identifier {
             if identifier == "backButtonSegue" {
-                print("Transitioning back to home/back")
+                print("Transitioning back")
             }
-                
-            else if identifier == "saveCloseSegue" {
-                print("Transitioning back to home/save")
-                
-                //dateschosen is dates form
-                //datesarr is string form (to put into firebase)
-                
-                //merge all user's Counts dictionaries = mergedCounts
-                //used mergedCounts instead
-                //create users. add users to indiv events.
-                
-                
-            }
+
             
         }
     }
-    
-
-    
 }
 
 
@@ -305,7 +337,7 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
     
     func handleSelection(cell: JTAppleCell?, cellState: CellState) {
         
-        let calendarCell = cell as! CalendarCell // You created the cell view if you followed the tutorial
+        let calendarCell = cell as! InviteCalendarCell // You created the cell view if you followed the tutorial
         switch cellState.selectedPosition() {
         case .full, .left, .right:
             calendarCell.selectedView.isHidden = false
@@ -328,7 +360,7 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
     
     //display the cell
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
-        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
+        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! InviteCalendarCell
         cell.dateLabel.text = cellState.text
         
         handleCellSelected(view: cell, cellState: cellState)
@@ -362,7 +394,6 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         
         
     }
-    
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         
         handleCellSelected(view: cell, cellState: cellState)
@@ -391,3 +422,4 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         monthYearLabel.text = "   \(dateFormatter.string(from: date))"
     }
 }
+

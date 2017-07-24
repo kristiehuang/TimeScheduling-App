@@ -61,9 +61,7 @@ class BestDatesEventViewController: UIViewController {
         }
         if let identifier = segue.identifier {
             if identifier == "editResponse" {
-                
-                let editResponseViewController = segue.destination as! EditResponseViewController
-                editResponseViewController.event = thisEvent
+                EditResponseViewController.event = thisEvent
                 
             }
         }
@@ -78,7 +76,7 @@ class BestDatesEventViewController: UIViewController {
         return dateFormatter.string(from: date)
     }
     
-    static func countDates() {
+    func countDates() {
         var counts: [Date: Int] = [:]
         var array: [Int] = []
         for date in EditResponseViewController.datesChosen {
