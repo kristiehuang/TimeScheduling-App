@@ -131,15 +131,15 @@ class BestDatesEventViewController: UIViewController {
             if !(keysArray.contains(typeNum)) {
                 //if typeNum section doesn't exist already, create new section & insert date row
                 keysArray.append(typeNum)
+            
                 var datesArr: [Any] = []
-                sortedDict.updateValue(datesArr, forKey: typeNum)
                 print(date)
                 datesArr.append(date)
+                sortedDict.updateValue(datesArr, forKey: typeNum)
+
                 
                 
-                BestDatesEventViewController.sectionNames.append("\(num) people")
-                //                BestDatesEventViewController.sectionNames" value".append("\(key)")
-                
+                BestDatesEventViewController.sectionNames.append("\(num) people")                
             }
             else {
                 //if typeNum section already exists, then just insert date row in section
@@ -163,8 +163,9 @@ class BestDatesEventViewController: UIViewController {
 
 extension BestDatesEventViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         let sectionString = Array(BestDatesEventViewController.sortedDict.keys.sorted().reversed())[section]
-        return BestDatesEventViewController.sortedDict[sectionString]!.count + 1
+        return BestDatesEventViewController.sortedDict[sectionString]!.count
         
     }
     
@@ -179,10 +180,15 @@ extension BestDatesEventViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BestDatesCell")
-        cell?.textLabel?.text = "date"
-//                cell?.textLabel?.text = BestDatesEventViewController.sortedDict[indexPath.section]
-        return cell!
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BestDatesCell", for: indexPath)
+        let sectionString = Array(BestDatesEventViewController.sortedDict.keys)[indexPath.section]
+        print(sectionString)
+        let datesInSect = BestDatesEventViewController.sortedDict[sectionString]
+        
+        cell.textLabel?.text = datesInSect![indexPath.row] as? String
+        
+        return cell
     }
     
 
