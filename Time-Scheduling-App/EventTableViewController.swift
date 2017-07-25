@@ -27,7 +27,6 @@ class EventTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         //my events
         UserService.events(for: User.current) { (events) in
@@ -41,6 +40,8 @@ class EventTableViewController: UITableViewController {
                 self.displayedEvents.append(invitedEvent)
             }
         }
+        
+        super.viewWillAppear(animated)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
