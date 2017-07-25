@@ -11,6 +11,6 @@ import UIKit
 
 class BestDatesCell: UITableViewCell {
     
-    @IBOutlet weak var bestDatesLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
 }
