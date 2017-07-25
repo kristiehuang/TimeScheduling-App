@@ -33,7 +33,7 @@ class EditResponseViewController: UIViewController {
         EditResponseViewController.dispatchGroup.enter()
         mergeDates()
         EditResponseViewController.dispatchGroup.notify(queue: .main, execute: {
-            EditResponseViewController.countDates()
+            BestDatesEventViewController.countDates()
             
         })
     }
@@ -197,8 +197,7 @@ class EditResponseViewController: UIViewController {
             //for each event in INVITED events called from user
             for eventz in events {
                 
-                print(EditResponseViewController.event?.key)
-                print(eventz.key)
+
                 if EditResponseViewController.event?.key == eventz.key {
                     
                     var datesArr = [String]()
@@ -221,6 +220,14 @@ class EditResponseViewController: UIViewController {
                     
                     let eventRef = Database.database().reference().child("events").child(eventz.host).child((EditResponseViewController.event?.key!)!)
                     eventRef.child("dates").setValue(datesArr)
+                    
+                    let hostRef = Database.database().reference().child("users").child(eventz.host).child("hosting events").child((EditResponseViewController.event?.key!)!)
+                    hostRef.child("dates").setValue(datesArr)
+                    
+                    let inviteRef = Database.database().reference().child("users").child(User.current.uid).child("invited events").child((EditResponseViewController.event?.key!)!)
+                    inviteRef.child("dates").setValue(datesArr)
+
+                    
                     eventTableViewController.tableView.reloadData()
                     print("\(User.current.name) added dates")
                     
@@ -234,29 +241,29 @@ class EditResponseViewController: UIViewController {
     }
     
     
-    static func countDates() {
-        var counts: [Date: Int] = [:]
-        var array: [Int] = []
-        for date in datesChosen {
-            counts[date] = (counts[date] ?? 0) + 1
-        }
-        //sort array by count value, then display only top three
-        print("counts are \(counts)")  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
-        
-        for (key, value) in counts {
-            print("\(value) of people prefer the \(key) date")
-            array.append(value)
-            //value is int
-            
-            for var item in array.sorted() {
-                let editResponseViewController = EditResponseViewController()
-                item = value
-                editResponseViewController.newOrderedDict[key] = item
-                print("THIS IS NEW ORDERED DICT \(editResponseViewController.newOrderedDict)")
-            }
-        }
-        
-    }
+//    static func countDates() {
+//        var counts: [Date: Int] = [:]
+//        var array: [Int] = []
+//        for date in datesChosen {
+//            counts[date] = (counts[date] ?? 0) + 1
+//        }
+//        //sort array by count value, then display only top three
+//        print("counts are \(counts)")  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
+//        
+//        for (key, value) in counts {
+//            print("\(value) of people prefer the \(key) date")
+//            array.append(value)
+//            //value is int
+//            
+//            for var item in array.sorted() {
+//                let editResponseViewController = EditResponseViewController()
+//                item = value
+//                editResponseViewController.newOrderedDict[key] = item
+//                print("THIS IS NEW ORDERED DICT \(editResponseViewController.newOrderedDict)")
+//            }
+//        }
+//        
+//    }
     
     //longpress gesture func!!
     var rangeSelectedDates: [Date] = []
