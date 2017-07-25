@@ -468,6 +468,7 @@
                             <constraint firstItem="rQB-yf-ooq" firstAttribute="top" secondItem="xSX-2e-XYw" secondAttribute="bottom" id="yf4-0c-a1T"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="PjN-KI-Xls" id="w6n-KK-aww"/>
                         <outlet property="tableView" destination="rQB-yf-ooq" id="Scd-Jk-DKA"/>
@@ -855,6 +856,7 @@
                             <constraint firstAttribute="trailing" secondItem="uGH-Ri-JfR" secondAttribute="trailing" constant="36" id="zeE-n0-zhD"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="availableDatesLabel" destination="KN1-kX-fF3" id="dfg-la-bH3"/>
                         <outlet property="calendarView" destination="WSU-13-p91" id="oWK-c2-94H"/>
@@ -1502,6 +1504,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="j8i-un-stN" firstAttribute="top" secondItem="tLZ-Sb-RFT" secondAttribute="top" constant="28" id="Ede-ub-SMD"/>
                             <constraint firstItem="bO2-65-nzz" firstAttribute="top" secondItem="AbX-4H-T0s" secondAttribute="bottom" constant="18" id="K5l-xB-bLf"/>
                             <constraint firstItem="V6O-a3-4xf" firstAttribute="top" secondItem="tLZ-Sb-RFT" secondAttribute="top" id="PXW-r1-BCx"/>
                             <constraint firstItem="9CM-h3-cbV" firstAttribute="centerY" secondItem="j8i-un-stN" secondAttribute="centerY" id="Sce-Pf-CLC"/>
@@ -1510,7 +1513,6 @@
                             <constraint firstItem="hKe-K0-Gnm" firstAttribute="top" secondItem="F2t-ZT-46y" secondAttribute="bottom" constant="56" id="aWi-kU-B8F"/>
                             <constraint firstItem="AbX-4H-T0s" firstAttribute="top" secondItem="kOI-xe-2Jc" secondAttribute="bottom" constant="5" id="bVh-A4-vNh"/>
                             <constraint firstItem="hKe-K0-Gnm" firstAttribute="top" secondItem="bO2-65-nzz" secondAttribute="bottom" id="eZH-SE-u5t"/>
-                            <constraint firstItem="j8i-un-stN" firstAttribute="top" secondItem="UEq-Kl-Mr4" secondAttribute="bottom" constant="28" id="gEP-KT-8b2"/>
                             <constraint firstAttribute="trailing" secondItem="V6O-a3-4xf" secondAttribute="trailing" id="jjz-55-SS0"/>
                             <constraint firstItem="bO2-65-nzz" firstAttribute="leading" secondItem="tLZ-Sb-RFT" secondAttribute="leading" id="lRL-iH-B2w"/>
                             <constraint firstAttribute="trailing" secondItem="F2t-ZT-46y" secondAttribute="trailing" constant="26" id="pD9-Wq-mMt"/>
@@ -1523,9 +1525,12 @@
                             <constraint firstItem="j8i-un-stN" firstAttribute="leading" secondItem="tLZ-Sb-RFT" secondAttribute="leading" constant="27" id="ydq-4L-BH0"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="eventNameLabel" destination="9CM-h3-cbV" id="UIX-b9-Pxi"/>
+                        <outlet property="noteLabel" destination="kOI-xe-2Jc" id="tdz-l8-Mn9"/>
+                        <outlet property="respondantsLabel" destination="AbX-4H-T0s" id="tB9-cv-tgV"/>
                         <outlet property="tableView" destination="bO2-65-nzz" id="7xh-s4-SUU"/>
                     </connections>
                 </viewController>

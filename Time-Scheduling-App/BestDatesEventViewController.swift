@@ -13,7 +13,9 @@ class BestDatesEventViewController: UIViewController {
     
     @IBOutlet weak var eventNameLabel: UILabel!
     
-    @IBOutlet weak var invitedAsLabel: UILabel!
+
+    @IBOutlet weak var noteLabel: UILabel!
+    @IBOutlet weak var respondantsLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -48,7 +50,8 @@ class BestDatesEventViewController: UIViewController {
             }
             
             eventNameLabel.text = "\(event.name ?? "Untitled Event")"
-            
+            noteLabel.text = "Host:  \(event.note)"
+            respondantsLabel.text = "number/\(event.invitees.count) respondants"
         }
     }
     
@@ -115,8 +118,6 @@ class BestDatesEventViewController: UIViewController {
             }
             
         }
-        //SORTING INCORRECTLY BUT SECTIONNAME APPENDING IS WORKING
-
         
         print(bestDatesEventViewController.newOrderedDict)
         
@@ -162,8 +163,8 @@ class BestDatesEventViewController: UIViewController {
 
 extension BestDatesEventViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionString = Array(BestDatesEventViewController.sortedDict.keys)[section]
-        return BestDatesEventViewController.sortedDict[sectionString]!.count
+        let sectionString = Array(BestDatesEventViewController.sortedDict.keys.sorted().reversed())[section]
+        return BestDatesEventViewController.sortedDict[sectionString]!.count + 1
         
     }
     
@@ -174,13 +175,13 @@ extension BestDatesEventViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection sectionIndex: Int) -> String? {
-        return BestDatesEventViewController.sectionNames[sectionIndex]
+        return BestDatesEventViewController.sectionNames.reversed()[sectionIndex]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BestDatesCell")
-        cell?.textLabel?.text = "hello"
-        //        cell?.textLabel?.text = data[indexPath.section]
+        cell?.textLabel?.text = "date"
+//                cell?.textLabel?.text = BestDatesEventViewController.sortedDict[indexPath.section]
         return cell!
     }
     
