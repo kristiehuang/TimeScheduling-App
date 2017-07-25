@@ -46,7 +46,7 @@ class BestDatesEventViewController: UIViewController {
                 //            print(dates)
                 displayDates += "\(dateString)"
             }
-
+            
             eventNameLabel.text = "\(event.name ?? "Untitled Event")"
             
         }
@@ -84,6 +84,7 @@ class BestDatesEventViewController: UIViewController {
     
     var newOrderedDict = NSMutableDictionary()
     
+    static var sortedDict: [Int: [Any]] = [:]
     
     static func countDates() {
         
@@ -106,8 +107,6 @@ class BestDatesEventViewController: UIViewController {
             sortedNumber.append(value)
             //offset
             
-            
-            
             for var num in sortedNumber.sorted() {
                 
                 num = value
@@ -117,69 +116,43 @@ class BestDatesEventViewController: UIViewController {
             
         }
         //SORTING INCORRECTLY BUT SECTIONNAME APPENDING IS WORKING
-        var i = 1
-        var maxVal = sortedNumber.sorted()[sortedNumber.count - 1]
-        print(maxVal)
-        
-        //go through counts key one by one
-        /*while i <= maxVal {
-            for (key, num) in bestDatesEventViewController.newOrderedDict {
-                print(key)
-                print(num)
-                
-                while (num as! Int != i){
-                    i += 1
-                }
- 
-                if (num as! Int == i) {
-                    BestDatesEventViewController.sectionNames.append("\(num) people")
-                        //                BestDatesEventViewController.sectionNames" value".append("\(key)")
-                    //append key to new/existing section "value"
-                }
 
-
-            }
-        }*/
         
         print(bestDatesEventViewController.newOrderedDict)
         
         
-        var sortedDict: [Int: [Any]] = [:]
         var keysArray: [Int] = []
-        
+
         for (date, num) in bestDatesEventViewController.newOrderedDict {
             print(num)
             let typeNum = num as! Int
-
+            
             if !(keysArray.contains(typeNum)) {
                 //if typeNum section doesn't exist already, create new section & insert date row
                 keysArray.append(typeNum)
-//                var datesArr = sortedDict[typeNum]
-//                datesArr!.append(typeKey)
+                var datesArr: [Any] = []
+                sortedDict.updateValue(datesArr, forKey: typeNum)
+                print(date)
+                datesArr.append(date)
                 
                 
                 BestDatesEventViewController.sectionNames.append("\(num) people")
                 //                BestDatesEventViewController.sectionNames" value".append("\(key)")
-
+                
             }
             else {
                 //if typeNum section already exists, then just insert date row in section
-                
-                
-//                var datesArr = sortedDict[typeNum]
-//                datesArr!.append(typeKey)
-                
-                //                BestDatesEventViewController.sectionNames" value".append("\(key)")
+                print(date)
+                var newDates = Array(sortedDict[typeNum]!)
+                newDates.append(date)
+                sortedDict.updateValue(newDates, forKey: typeNum)
+
                 
             }
+            //sorted dict
             //1: [july 1, july4, july5]
             //3: [july 5]
-            
 
-
-            
-
-            
         }
         print("THIS IS NEW ORDERED DICT \(bestDatesEventViewController.newOrderedDict)")
         
@@ -189,37 +162,29 @@ class BestDatesEventViewController: UIViewController {
 
 extension BestDatesEventViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        BestDatesEventViewController.countDates()
-        //        return(BestDatesEventViewController.rows.count)
-        return 2
+        let sectionString = Array(BestDatesEventViewController.sortedDict.keys)[section]
+        return BestDatesEventViewController.sortedDict[sectionString]!.count
+        
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
         print(BestDatesEventViewController.sectionNames.count)
-                return(BestDatesEventViewController.sectionNames.count)
+        return(BestDatesEventViewController.sectionNames.count)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection sectionIndex: Int) -> String? {
-        //        BestDatesEventViewController.countDates()
-        
         return BestDatesEventViewController.sectionNames[sectionIndex]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "BestDatesCell")
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "BestDatesCell")
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BestDatesCell")
+        cell?.textLabel?.text = "hello"
         //        cell?.textLabel?.text = data[indexPath.section]
         return cell!
     }
     
-    func configure(cell: BestDatesCell, atIndexPath indexPath: IndexPath) {
-        
-        cell.dateLabel.text = "hello"
-        
-    }
+
 }
 
 extension BestDatesEventViewController: UITableViewDelegate {
