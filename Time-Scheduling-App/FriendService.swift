@@ -39,16 +39,15 @@ struct FriendService {
     
     
     private static func inviteUser(_ user: User, _ event: Event, forCurrentUserWithSuccess success: @escaping (Bool) -> Void) {
-
+        
         let currentUID = User.current.uid
-//        EventViewController.invitees.append(user)
-//        print(EventViewController.invitees)
-
+        //        EventViewController.invitees.append(user)
+        //        print(EventViewController.invitees)
+        
         let ref = Database.database().reference()
         
-        let key = EventService.key
-        print(key)
-        //
+        let key = event.key
+
         let inviteData = ["events/\(currentUID)/\(key)/invitees/\(user.uid)": true, "users/\(user.uid)/invited events/\(key)/invitees/\(user.uid)": true, "users/\(currentUID)/hosting events/\(key)/invitees/\(user.uid)": true]
         
         
@@ -63,10 +62,9 @@ struct FriendService {
         
         print(event.dictValue)
 
-        
-        let eventRef = Database.database().reference().child("users").child(user.uid).child("invited events").child(key)
+        let eventRef = Database.database().reference().child("users").child(user.uid).child("invited events").child(event.key!)
         eventRef.updateChildValues(event.dictValue)
-//
+        //
     }
     
     
@@ -74,10 +72,10 @@ struct FriendService {
         let currentUID = User.current.uid
         let ref = Database.database().reference()
         
-        let key = EventService.key
+        let key = event.key
         print(key)
         
-        let inviteData = ["events/\(currentUID)/\(key)/invitees/\(user.uid)": NSNull(), "users/\(user.uid)/invited events/\(key)/invitees/\(user.uid)": NSNull(), "users/\(currentUID)/hosting events/\(key)/invitees/\(user.uid)": NSNull()]
+        let inviteData = ["events/\(currentUID)/\(key)/invitees/\(user.uid)": NSNull(), "users/\(user.uid)/invited events/\(key)/invitees/\(user.uid)": NSNull(), "users/\(currentUID)/hosting events/\(event.key)/invitees/\(user.uid)": NSNull()]
         ref.updateChildValues(inviteData) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
@@ -86,12 +84,12 @@ struct FriendService {
         }
         
         
-        let eventRef = Database.database().reference().child("users").child(user.uid).child("invited events").child(key)
+        let eventRef = Database.database().reference().child("users").child(user.uid).child("invited events").child(event.key!)
         eventRef.updateChildValues(event.dictValue)
     }
     
     
-
+    
     static func setIsFriending(_ isFriending: Bool, fromCurrentUserTo friender: User, success: @escaping (Bool) -> Void) {
         //friender = user who is doing the friending
         
@@ -111,7 +109,7 @@ struct FriendService {
             uninviteUser(friender, event, forCurrentUserWithSuccess: success)
         }
     }
-
+    
     
     static func isUserFriended(_ user: User, byCurrentUserWithCompletion completion: @escaping (Bool) -> Void) {
         let currentUID = User.current.uid
@@ -131,7 +129,7 @@ struct FriendService {
         let currentUID = User.current.uid
         //does current user follow user?
         let ref = Database.database().reference().child("events").child(currentUID).child("invitees")
-
+        
         ref.queryEqual(toValue: nil, childKey: user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             if let _ = snapshot.value as? [String : Bool] {
                 completion(true)

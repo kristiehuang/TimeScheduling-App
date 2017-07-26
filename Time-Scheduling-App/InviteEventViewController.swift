@@ -35,7 +35,8 @@ class InviteEventViewController: UIViewController {
             for eventz in events {
                 if EventViewController.event?.key == eventz.key {
                     let eventRef = Database.database().reference().child("events").child(User.current.uid).child((EventViewController.event?.key!)!)
-                    eventRef.child("invites").setValue(EventViewController.event?.invitees)
+                    
+                    eventRef.child("invitees").setValue(EventViewController.event?.invitees)
                     eventTableViewController.tableView.reloadData()
                 }
             }
@@ -109,4 +110,16 @@ class InviteEventViewController: UIViewController {
     
     
     
+}
+
+extension InviteEventViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InviteesCell") as! InviteesCell
+        
+        return cell
+    }
 }

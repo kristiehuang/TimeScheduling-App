@@ -23,7 +23,7 @@ class AddNoteViewController: UIViewController {
         
         let ref = Database.database().reference()
         
-        let key = EventService.key
+        let key = AddNoteViewController.event?.key
         print(key)
         
         let noteData = ["events/\(User.current.uid)/\(key)/note": noteTextView.text]

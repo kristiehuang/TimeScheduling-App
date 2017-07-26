@@ -44,8 +44,6 @@ class BestDatesEventViewController: UIViewController {
             var displayDates = ""
             for (date, _) in orderedDict {
                 let dateString = getDateString(date: date)
-                //            dates.append(dateString)
-                //            print(dates)
                 displayDates += "\(dateString)"
             }
             
@@ -102,7 +100,7 @@ class BestDatesEventViewController: UIViewController {
             
         }
         //sort array by count value, then display only top three
-        print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
+        //print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
         let bestDatesEventViewController = BestDatesEventViewController()
         
         for (key, value) in counts {
@@ -119,13 +117,12 @@ class BestDatesEventViewController: UIViewController {
             
         }
         
-        print(bestDatesEventViewController.newOrderedDict)
+        //print(bestDatesEventViewController.newOrderedDict)
         
         
         var keysArray: [Int] = []
 
         for (date, num) in bestDatesEventViewController.newOrderedDict {
-            print(num)
             let typeNum = num as! Int
             
             if !(keysArray.contains(typeNum)) {
@@ -133,17 +130,13 @@ class BestDatesEventViewController: UIViewController {
                 keysArray.append(typeNum)
             
                 var datesArr: [Any] = []
-                print(date)
                 datesArr.append(date)
                 sortedDict.updateValue(datesArr, forKey: typeNum)
 
-                
-                
-                BestDatesEventViewController.sectionNames.append("\(num) people")                
+                BestDatesEventViewController.sectionNames.append("\(num) people")
             }
             else {
                 //if typeNum section already exists, then just insert date row in section
-                print(date)
                 var newDates = Array(sortedDict[typeNum]!)
                 newDates.append(date)
                 sortedDict.updateValue(newDates, forKey: typeNum)
@@ -165,13 +158,13 @@ extension BestDatesEventViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let sectionString = Array(BestDatesEventViewController.sortedDict.keys.sorted().reversed())[section]
+        print(BestDatesEventViewController.sortedDict.valueKeySorted)
         return BestDatesEventViewController.sortedDict[sectionString]!.count
         
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(BestDatesEventViewController.sectionNames.count)
         return(BestDatesEventViewController.sectionNames.count)
     }
     
@@ -182,11 +175,20 @@ extension BestDatesEventViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "BestDatesCell", for: indexPath)
-        let sectionString = Array(BestDatesEventViewController.sortedDict.keys)[indexPath.section]
-        print(sectionString)
-        let datesInSect = BestDatesEventViewController.sortedDict[sectionString]
+        let sectionString = BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].0
+        print(BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].0)
+        let datesInSect = BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].1
         
-        cell.textLabel?.text = datesInSect![indexPath.row] as? String
+        if indexPath.section < BestDatesEventViewController.sortedDict.keys.count && indexPath.row < (datesInSect.count) {
+            cell.textLabel?.text = datesInSect[indexPath.row] as? String
+            
+
+        } else {
+            print("index out of range")
+        }
+        
+        print(datesInSect)
+        print(indexPath.row)
         
         return cell
     }

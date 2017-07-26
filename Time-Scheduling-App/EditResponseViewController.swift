@@ -197,7 +197,6 @@ class EditResponseViewController: UIViewController {
             //for each event in INVITED events called from user
             for eventz in events {
                 
-
                 if EditResponseViewController.event?.key == eventz.key {
                     
                     var datesArr = [String]()
@@ -240,30 +239,6 @@ class EditResponseViewController: UIViewController {
         
     }
     
-    
-//    static func countDates() {
-//        var counts: [Date: Int] = [:]
-//        var array: [Int] = []
-//        for date in datesChosen {
-//            counts[date] = (counts[date] ?? 0) + 1
-//        }
-//        //sort array by count value, then display only top three
-//        print("counts are \(counts)")  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
-//        
-//        for (key, value) in counts {
-//            print("\(value) of people prefer the \(key) date")
-//            array.append(value)
-//            //value is int
-//            
-//            for var item in array.sorted() {
-//                let editResponseViewController = EditResponseViewController()
-//                item = value
-//                editResponseViewController.newOrderedDict[key] = item
-//                print("THIS IS NEW ORDERED DICT \(editResponseViewController.newOrderedDict)")
-//            }
-//        }
-//        
-//    }
     
     //longpress gesture func!!
     var rangeSelectedDates: [Date] = []

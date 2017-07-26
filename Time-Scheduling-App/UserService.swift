@@ -70,7 +70,6 @@ struct UserService {
             
             //events returned in array
             print("amt of events i was invited to: \(invitedEvents.count)")
-            print(invitedEvents)
             
             completion(invitedEvents)
             

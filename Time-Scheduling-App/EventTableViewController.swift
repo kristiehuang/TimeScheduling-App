@@ -79,21 +79,19 @@ class EventTableViewController: UITableViewController {
         UserService.readInvitedEvents(for: User.current) { (invitedEvents) in
             
             for invitedEvent in invitedEvents {
-                print(invitedEvent)
-                self.displayedEvents.append(invitedEvent)
+//                print(invitedEvent)
+//                self.displayedEvents.append(invitedEvent)
                 
                 dispatchGroup.leave()
                 
                 dispatchGroup.notify(queue: .main, execute: {
-                    print(User.current.uid)
-                    print(event.host)
                     if User.current.uid == event.host {
-                        print("is host")
+//                        print("is host")
                         self.performSegue(withIdentifier: "editEvent", sender: nil)
                     }
                     else {
                         self.performSegue(withIdentifier: "showEventResults", sender: nil)
-                        print("is not host")
+//                        print("is not host")
                     }
                 })
             }
