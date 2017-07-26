@@ -19,7 +19,7 @@ class Event {
     var key: String?
     
     var dates: [String]
-    var invitees: [String]
+    var invitees: [String: Bool]
     var note: String
     
     //turn event objects into dictionary type
@@ -28,7 +28,7 @@ class Event {
                 "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
     }
     
-    init(host: String, name: String, invitees: [String], creationDate: Date, dates: [String], note: String) {
+    init(host: String, name: String, invitees: [String: Bool], creationDate: Date, dates: [String], note: String) {
         self.host = host
         self.name = name
         self.creationDate = Date()
@@ -57,7 +57,7 @@ class Event {
         guard let dates = dict["dates"] as? [String]
             else { return nil }
         
-        guard let invitees = dict["invitees"] as? [String]
+        guard let invitees = dict["invitees"] as? [String: Bool]
             else { return nil }
         
         guard let note = dict["note"] as? String

@@ -51,7 +51,7 @@ class EventViewController: UIViewController {
     
     
     static var event: Event?
-    static var invitees: [String] = ["\(User.current)"]
+    static var invitees: [String: Bool] = [User.current.uid : true]
     
     static func getEvent () -> Event {
         return event!
@@ -190,7 +190,8 @@ class EventViewController: UIViewController {
                     
                     var datesArr = [String]()
                     for date in EventViewController.datesChosen.enumerated() {
-                        datesArr.append("\(date)")
+                        let justDate = date.1
+                        datesArr.append("\(justDate)")
                     }
                     print("dates chosen: \(EventViewController.datesChosen)")
                     print("dates array: \(datesArr)")
@@ -206,10 +207,9 @@ class EventViewController: UIViewController {
                     eventTableViewController.tableView.reloadData()
                     isFound = true
                     print("isfound is \(isFound)")
-                    
+                    EventViewController.dispatchGroup.leave()
+
                 }
-                EventViewController.dispatchGroup.leave()
-                print("dispatch group run")
             }
             
             if isFound == false {

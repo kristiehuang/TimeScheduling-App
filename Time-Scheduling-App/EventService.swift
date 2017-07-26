@@ -16,7 +16,7 @@ struct EventService {
     static var key: String = ""
     
     //just add event to database
-    static func addEvent(name: String, invitees: [String], creationDate: Date, dates: [String], note: String) -> Event {
+    static func addEvent(name: String, invitees: [String: Bool], creationDate: Date, dates: [String], note: String) -> Event {
         let currentUser = User.current
         print("current user is \(currentUser.name)")
         
@@ -27,12 +27,13 @@ struct EventService {
         EventViewController.event = event
         
         let eventRef = Database.database().reference().child("events").child(currentUser.uid).childByAutoId()
-        key = eventRef.key
+        event.key = eventRef.key
+
         print("dict is \(dict)")
         eventRef.updateChildValues(dict)
         
         
-        let ref = Database.database().reference().child("users").child(currentUser.uid).child("hosting events").child(key)
+        let ref = Database.database().reference().child("users").child(currentUser.uid).child("hosting events").child(eventRef.key)
         ref.updateChildValues(dict)
         
         //        let hostData = ["users/\(currentUser.uid)/hosting events/\(key)": true]

@@ -58,7 +58,6 @@ class EditResponseViewController: UIViewController {
     
     
     static var event: Event?
-    static var invitees: [String] = ["\(User.current)"]
     
     static func getEvent () -> Event {
         return event!
@@ -201,7 +200,8 @@ class EditResponseViewController: UIViewController {
                     
                     var datesArr = [String]()
                     for date in EditResponseViewController.datesChosen.enumerated() {
-                        datesArr.append("\(date)")
+                        let justDate = date.1
+                        datesArr.append("\(justDate)")
                     }
                     print("dates chosen: \(EditResponseViewController.datesChosen)")
                     print("dates array: \(datesArr)")

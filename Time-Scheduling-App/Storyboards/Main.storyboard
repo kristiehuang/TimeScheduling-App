@@ -135,7 +135,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0ay-nH-c8x">
-                                <rect key="frame" x="116.66666666666666" y="26.333333333333329" width="182.33333333333334" height="62.333333333333343"/>
+                                <rect key="frame" x="116" y="26.333333333333329" width="182.33333333333331" height="62.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner @ Jessie's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-gK-YDc">
                                         <rect key="frame" x="0.0" y="0.0" width="182.33333333333331" height="28.666666666666668"/>
@@ -376,7 +376,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2F-xO-QHf">
-                                        <rect key="frame" x="133.33333333333337" y="41.666666666666671" width="147.66666666666663" height="32.666666666666671"/>
+                                        <rect key="frame" x="133.66666666666669" y="41.666666666666671" width="147.66666666666669" height="32.666666666666671"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -598,7 +598,7 @@
                         <viewControllerLayoutGuide type="bottom" id="O1c-EW-PpT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" id="yJZ-CT-a3x">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="550"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWb-TB-tTf">
@@ -789,7 +789,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uGH-Ri-JfR" userLabel="Buttons Stack View">
-                                <rect key="frame" x="36" y="396" width="342" height="130"/>
+                                <rect key="frame" x="36" y="582" width="342" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hoz-Fr-PMW">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="75"/>
@@ -968,7 +968,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6a-FS-N3Z">
-                                <rect key="frame" x="329" y="30.333333333333329" width="54" height="41"/>
+                                <rect key="frame" x="329" y="29.666666666666671" width="54" height="41"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="24"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
@@ -1553,6 +1553,6 @@
         <image name="user+" width="86" height="74"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nwZ-Yi-k50"/>
+        <segue reference="JpJ-Bc-8o5"/>
     </inferredMetricsTieBreakers>
 </document>

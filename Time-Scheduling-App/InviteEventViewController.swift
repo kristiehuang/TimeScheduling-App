@@ -36,7 +36,7 @@ class InviteEventViewController: UIViewController {
                 if EventViewController.event?.key == eventz.key {
                     let eventRef = Database.database().reference().child("events").child(User.current.uid).child((EventViewController.event?.key!)!)
                     
-                    eventRef.child("invitees").setValue(EventViewController.event?.invitees)
+                    eventRef.child("invitees").updateChildValues((EventViewController.event?.invitees)!)
                     eventTableViewController.tableView.reloadData()
                 }
             }

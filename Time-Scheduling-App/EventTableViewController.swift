@@ -69,33 +69,20 @@ class EventTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dispatchGroup = DispatchGroup()
-
+        
         let indexPath = tableView.indexPathForSelectedRow!
         let event = displayedEvents[indexPath.row]
         EventViewController.event = event
-        dispatchGroup.enter()
         
-        UserService.readInvitedEvents(for: User.current) { (invitedEvents) in
-            
-            for invitedEvent in invitedEvents {
-//                print(invitedEvent)
-//                self.displayedEvents.append(invitedEvent)
-                
-                dispatchGroup.leave()
-                
-                dispatchGroup.notify(queue: .main, execute: {
-                    if User.current.uid == event.host {
-//                        print("is host")
-                        self.performSegue(withIdentifier: "editEvent", sender: nil)
-                    }
-                    else {
-                        self.performSegue(withIdentifier: "showEventResults", sender: nil)
-//                        print("is not host")
-                    }
-                })
-            }
+        
+        
+        if User.current.uid == event.host {
+            //                        print("is host")
+            self.performSegue(withIdentifier: "editEvent", sender: nil)
+        }
+        else {
+            self.performSegue(withIdentifier: "showEventResults", sender: nil)
+            //                        print("is not host")
         }
     }
-    
 }

@@ -24,9 +24,10 @@ class AddNoteViewController: UIViewController {
         let ref = Database.database().reference()
         
         let key = AddNoteViewController.event?.key
-        print(key)
+        print(key!)
         
-        let noteData = ["events/\(User.current.uid)/\(key)/note": noteTextView.text]
+        let noteData = ["events/\(User.current.uid)/\(key!)/note": noteTextView.text, "users/\(User.current.uid)/hosting events/\(key!)/note": noteTextView.text]
+        //not updated to invited user > invited events> notes
         
         ref.updateChildValues(noteData) { (error, _) in
             if let error = error {
@@ -42,7 +43,7 @@ class AddNoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(AddNoteViewController.event?.name)
+        print(AddNoteViewController.event?.name!)
         eventNameLabel.text = AddNoteViewController.event?.name
 
         //dismiss keyboard

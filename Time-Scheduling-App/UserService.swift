@@ -39,12 +39,15 @@ struct UserService {
     //reads database
     
     static func events(for user: User, completion: @escaping ([Event]) -> Void) {
-        let ref = Database.database().reference().child("events").child(user.uid)
+        let ref = Database.database().reference().child("events").child(User.current.uid)
+//        let ref = Database.database().reference().child("users").child(User.current.uid).child("hosting events")
+
         
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
                 return completion([])
             }
+            print(snapshot)
             let events = snapshot.reversed().flatMap(Event.init)
             
             //events returned in array
