@@ -68,6 +68,37 @@ class EventViewController: UIViewController {
             self.setupViewsOfCalendar(from: visibleDates)
         }
         
+        let currentDate = Date()
+        calendarView.scrollToDate(currentDate)
+        
+        //        let dispatchGroup = DispatchGroup()
+        //        var existingDates = [Date]()
+        //        dispatchGroup.enter()
+        ////        UserService.events(for: User.current, completion: { (events:[Event]) in
+        ////            //for each event in events called from user
+        ////            for eventz in events {
+        ////                if EventViewController.event?.key == eventz.key {
+        ////                    for (myDate) in eventz.dates {
+        ////
+        ////                        let dateFormatter = DateFormatter()
+        ////                        dateFormatter.dateFormat = myDate //Your date format
+        //////                        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00") //Current time zone
+        ////                        let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
+        ////
+        ////                        existingDates.append(dateDate!)
+        ////                    }
+        ////
+        ////                }
+        ////            }
+        //            dispatchGroup.leave()
+        ////        })
+        //        dispatchGroup.notify(queue: .main) {
+        ////            self.calendarView.selectDates(existingDates)
+        //            self.calendarView.selectDates([currentDate])
+        //
+        //        }
+        
+        
         calendarView.allowsMultipleSelection  = true
         calendarView.isRangeSelectionUsed = true
         
@@ -90,11 +121,9 @@ class EventViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let currentDate = Date()
-        calendarView.scrollToDate(currentDate)
-        
         if let event = EventViewController.event {
             eventNameTextField.text = event.name
+            //show selected event.dates
         } else {
             eventNameTextField.text = "Untitled Event"
         }
@@ -107,9 +136,14 @@ class EventViewController: UIViewController {
     }
     
     
+    
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? CalendarCell
             else { return }
+        
+//        if cellState.dateBelongsTo != .thisMonth {
+//            validCell.isUserInteractionEnabled = false
+//        }
         
         if cellState.isSelected {
             //selected view = circle behind text
@@ -159,7 +193,7 @@ class EventViewController: UIViewController {
     
     private func showError(bigErrorMsg: String, smallErrorMsg: String){
         let currentTopVC: UIViewController? = self.currentTopViewController()
-
+        
         let alertController = UIAlertController(title: "\(bigErrorMsg)", message:
             "\(smallErrorMsg)", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
@@ -188,6 +222,8 @@ class EventViewController: UIViewController {
             for eventz in events {
                 if EventViewController.event?.key == eventz.key {
                     
+                    
+                    
                     var datesArr = [String]()
                     for date in EventViewController.datesChosen.enumerated() {
                         let justDate = date.1
@@ -203,12 +239,13 @@ class EventViewController: UIViewController {
                     }
                     let eventRef = Database.database().reference().child("events").child(User.current.uid).child((EventViewController.event?.key!)!)
                     eventRef.child("name").setValue(EventViewController.event?.name ?? "Untitled Event")
+                    
                     eventRef.child("dates").setValue(datesArr)
                     eventTableViewController.tableView.reloadData()
                     isFound = true
                     print("isfound is \(isFound)")
                     EventViewController.dispatchGroup.leave()
-
+                    
                 }
             }
             
@@ -221,9 +258,10 @@ class EventViewController: UIViewController {
                 
                 //changing type date to type string
                 for date in EventViewController.datesChosen.enumerated() {
-                    datesArr.append("\(date)")
-                    
+                    let justDate = date.1
+                    datesArr.append("\(justDate)")
                 }
+                
                 
                 print("dates datesarr is \(datesArr)")
                 if datesArr.isEmpty {
@@ -232,19 +270,19 @@ class EventViewController: UIViewController {
                     return
                 }
                 //add event to database
-                EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "")
+                EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "")
                 
-//                UserService.events(for: User.current) { (events) in
-//                    events = eventTableViewController.displayedEvents
-//                    eventTableViewController.tableView.reloadData()
-//                    self.viewWillAppear(true)
-//                }
-//                eventTableViewController.tableView.reloadData()
+                //                UserService.events(for: User.current) { (events) in
+                //                    events = eventTableViewController.displayedEvents
+                //                    eventTableViewController.tableView.reloadData()
+                //                    self.viewWillAppear(true)
+                //                }
+                //                eventTableViewController.tableView.reloadData()
                 
                 EventViewController.dispatchGroup.leave()
                 print("dispatch group run")
             }
-
+            
         })
         
     }
@@ -274,14 +312,20 @@ class EventViewController: UIViewController {
         
     }
     
+    
+    
     //longpress gesture func!!
-    var rangeSelectedDates: [Date] = []
     func didStartRangeSelecting(gesture: UILongPressGestureRecognizer) {
+        var rangeSelectedDates: [Date] = []
+        
         let point = gesture.location(in: gesture.view!)
         rangeSelectedDates = calendarView.selectedDates
+        
+        
         if let cellState = calendarView.cellStatus(at: point) {
             let date = cellState.date
             if !rangeSelectedDates.contains(date) {
+                print(rangeSelectedDates.first)
                 let dateRange = calendarView.generateDateRange(from: rangeSelectedDates.first ?? date, to: date)
                 for aDate in dateRange {
                     if !rangeSelectedDates.contains(aDate) {
@@ -320,14 +364,14 @@ class EventViewController: UIViewController {
                 EventViewController.dispatchGroup.notify(queue: .main, execute: {
                     EventViewController.countDates()
                     
-
+                    
                     let inviteEventViewController = segue.destination as! InviteEventViewController
                     InviteEventViewController.event = EventViewController.event
                     inviteEventViewController.eventNameLabel.text = EventViewController.event?.name
                     
                     
                 })
-
+                
             }
                 
             else if identifier == "saveCloseSegue" {
@@ -344,7 +388,7 @@ class EventViewController: UIViewController {
                 newEvent()
                 EventViewController.dispatchGroup.notify(queue: .main, execute: {
                     EventViewController.countDates()
-
+                    
                 })
             }
             
@@ -387,24 +431,26 @@ extension EventViewController: JTAppleCalendarViewDelegate {
     
     func handleSelection(cell: JTAppleCell?, cellState: CellState) {
         
-        let calendarCell = cell as! CalendarCell // You created the cell view if you followed the tutorial
-        switch cellState.selectedPosition() {
-        case .full, .left, .right:
-            calendarCell.selectedView.isHidden = false
-            calendarCell.selectedView.backgroundColor = UIColor.white // Or you can put what ever you like for your rounded corners, and your stand-alone selected cell
-            calendarCell.isSelected = true
-        case .middle:
-            calendarCell.selectedView.isHidden = false
-            calendarCell.selectedView.backgroundColor = UIColor.white // Or what ever you want for your dates that land in the middle
-            calendarCell.isSelected = true
-            
-        default:
-            calendarCell.selectedView.isHidden = true
-            calendarCell.selectedView.backgroundColor = nil // Have no selection when a cell is not selected
-            calendarCell.isSelected = false
-        }
-        
+
+            let calendarCell = cell as! CalendarCell // You created the cell view if you followed the tutorial
+            switch cellState.selectedPosition() {
+            case .full, .left, .right:
+                calendarCell.selectedView.isHidden = false
+                calendarCell.selectedView.backgroundColor = UIColor.white // Or you can put what ever you like for your rounded corners, and your stand-alone selected cell
+                calendarCell.isSelected = true
+            case .middle:
+                calendarCell.selectedView.isHidden = false
+                calendarCell.selectedView.backgroundColor = UIColor.white // Or what ever you want for your dates that land in the middle
+                calendarCell.isSelected = true
+                
+            default:
+                calendarCell.selectedView.isHidden = true
+                calendarCell.selectedView.backgroundColor = nil // Have no selection when a cell is not selected
+                calendarCell.isSelected = false
+            }
+
     }
+    
     
     
     
@@ -418,11 +464,21 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         handleSelection(cell: cell, cellState: cellState)
         
         
+        
         return cell
     }
-    
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         
+        //read exisitng dates
+        //for date in existing dates
+        
+        //let validCell = cell of date
+        //cellState.isSelected = true
+        //validCell.selectedView.isHidden = false
+        //if date in eventz.date, set cellState.isSelected = true
+//        if cellState.dateBelongsTo != .thisMonth {
+//            cell?.isUserInteractionEnabled = false
+//        }
         
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
@@ -436,14 +492,15 @@ extension EventViewController: JTAppleCalendarViewDelegate {
             availableDatesLabel.text = "\(numberOfDates) dates chosen"
         }
         
-        let dateSelected = date
-        EventViewController.datesChosen.append(dateSelected)
+        
+        
+        EventViewController.datesChosen.append(date)
         print("dates chosen array are \(EventViewController.datesChosen.enumerated())")
         
         
         
-        
     }
+    
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         
         handleCellSelected(view: cell, cellState: cellState)

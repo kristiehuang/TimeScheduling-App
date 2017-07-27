@@ -184,7 +184,7 @@ extension BestDatesEventViewController: UITableViewDataSource {
         var newArray: [Int] = []
         var size = (array.count - 1)
         while size >= 0 {
-            for num in array {
+            for _ in array {
                 newArray.append(array[size])
                 size -= 1
             }

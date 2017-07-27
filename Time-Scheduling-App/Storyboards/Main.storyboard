@@ -1193,6 +1193,7 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
                                                     <state key="normal" image="uninvite button"/>
+                                                    <state key="selected" image="friendinvite button"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <real key="value" value="15.5"/>
@@ -1218,7 +1219,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Zxm-ID-UmB" id="0Kg-7N-lCu"/>
-                                    <outlet property="delegate" destination="Zxm-ID-UmB" id="ojg-h1-fT7"/>
+                                    <outlet property="delegate" destination="Zxm-ID-UmB" id="gmf-0f-fCy"/>
                                 </connections>
                             </tableView>
                         </subviews>

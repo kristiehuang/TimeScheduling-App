@@ -33,12 +33,8 @@ class InviteFriendsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        
-        
-        UserService.usersExcludingCurrentUser { [unowned self] (users) in
+
+        UserService.allUsers { [unowned self] (users) in
             self.friends = users
             
             DispatchQueue.main.async {
@@ -46,7 +42,7 @@ class InviteFriendsViewController: UIViewController {
             }
         }
         
-
+        super.viewWillAppear(animated)
     }
     
 
@@ -87,8 +83,7 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         inviteButton.isUserInteractionEnabled = false
         let friender = friends[indexPath.row]
         
-        //display friends only
-        //if setIsFriending = true, display
+        self.invitees = []
 
         
         //friendservice methods

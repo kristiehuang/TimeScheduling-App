@@ -230,8 +230,8 @@
 				9EE391321F14439E00C41503 /* CalendarCell.swift */,
 				9EA986E71F2672B0007A24B5 /* InviteCalendarCell.swift */,
 				9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */,
-				9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */,
 				9E519EB01F20134B00E19E75 /* InviteesCell.swift */,
+				9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */,
 				9EA986E91F269966007A24B5 /* BestDatesCell.swift */,
 			);
 			name = Views;

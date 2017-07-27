@@ -58,6 +58,7 @@ struct UserService {
         })
     }
     
+    
     //reads database
     
     static func readInvitedEvents(for user: User, completion: @escaping ([Event]) -> Void) {
@@ -112,6 +113,32 @@ struct UserService {
                 snapshot
                     .flatMap(User.init)
                     .filter { $0.uid != currentUser.uid }
+            
+            let dispatchGroup = DispatchGroup()
+            users.forEach { (user) in
+                dispatchGroup.enter()
+                FriendService.isUserFriended(user) { (isFriended) in
+                    user.isFriended = isFriended
+                    dispatchGroup.leave()
+                }
+            }
+            
+            dispatchGroup.notify(queue: .main, execute: {
+                completion(users)
+            })
+        })
+    }
+    
+    static func allUsers(completion: @escaping ([User]) -> Void) {
+        let ref = Database.database().reference().child("users")
+        
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
+                else { return completion([]) }
+            
+            let users =
+                snapshot
+                    .flatMap(User.init)
             
             let dispatchGroup = DispatchGroup()
             users.forEach { (user) in
