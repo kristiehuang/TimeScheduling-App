@@ -40,7 +40,6 @@ class BestDatesEventViewController: UIViewController {
             
             BestDatesEventViewController.thisEvent = event
             BestDatesEventViewController.countDates()
-            // var dates: [String] = []
             var displayDates = ""
             for (date, _) in orderedDict {
                 let dateString = getDateString(date: date)
@@ -58,11 +57,12 @@ class BestDatesEventViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let eventViewController = segue.destination as? EventViewController {
-            let newOrderedDict = eventViewController.newOrderedDict
-            print(newOrderedDict)
-            orderedDict = newOrderedDict as! [Date : Int]
-        }
+//        if let eventViewController = segue.destination as? EventViewController {
+//            let newOrderedDict = eventViewController.newOrderedDict
+//            print(newOrderedDict)
+//            print(orderedDict)
+//            orderedDict = newOrderedDict as! [Date : Int]
+//        }
         if let identifier = segue.identifier {
             if identifier == "editResponse" {
                 EditResponseViewController.event = BestDatesEventViewController.thisEvent
@@ -83,7 +83,6 @@ class BestDatesEventViewController: UIViewController {
     static var sectionNames: [String] = []
     static var rows: [String] = []
     
-    var newOrderedDict = NSMutableDictionary()
     
     static var sortedDict: [Int: [Any]] = [:]
     
@@ -91,11 +90,9 @@ class BestDatesEventViewController: UIViewController {
         
         var counts: [String: Int] = [:]
         var sortedNumber: [Int] = []
-        
-        print(BestDatesEventViewController.thisEvent?.dates)
-        
+        let newOrderedDict = NSMutableDictionary()
+
         for date in (BestDatesEventViewController.thisEvent?.dates)! {
-            
             counts[date] = (counts[date] ?? 0) + 1
             counts.updateValue(counts[date]!, forKey: date)
             //int + 1 for every date
@@ -103,7 +100,6 @@ class BestDatesEventViewController: UIViewController {
         }
         //sort array by count value, then display only top three
         //print(counts)  // "[BAR: 1, FOOBAR: 1, FOO: 2]"
-        let bestDatesEventViewController = BestDatesEventViewController()
         
         for (key, value) in counts {
             print("\(value) of people prefer the \(key) date")
@@ -114,8 +110,7 @@ class BestDatesEventViewController: UIViewController {
                 
                 num = value
                 
-                //                bestDatesEventViewController.newOrderedDict.setValue(num, forKey: key)
-                bestDatesEventViewController.newOrderedDict[key] = num
+                newOrderedDict.setValue(num, forKey: key)
                 
             }
             
@@ -125,9 +120,10 @@ class BestDatesEventViewController: UIViewController {
         
         
         var keysArray: [Int] = []
+        sortedDict = [:]
         BestDatesEventViewController.sectionNames = []
 
-        for (date, num) in bestDatesEventViewController.newOrderedDict {
+        for (date, num) in newOrderedDict {
             let typeNum = num as! Int
             
             if !(keysArray.contains(typeNum)) {
@@ -153,7 +149,7 @@ class BestDatesEventViewController: UIViewController {
             //3: [july 5]
             
         }
-        print("THIS IS NEW ORDERED DICT \(bestDatesEventViewController.newOrderedDict)")
+        print("THIS IS NEW ORDERED DICT \(newOrderedDict)")
         
     }
     

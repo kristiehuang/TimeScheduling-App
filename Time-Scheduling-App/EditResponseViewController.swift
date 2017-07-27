@@ -22,13 +22,7 @@ class EditResponseViewController: UIViewController {
     
     @IBAction func SaveButtonTapped(_ sender: Any) {
         print("Transitioning back to home/save")
-        
-        //dateschosen is dates form
-        //datesarr is string form (to put into firebase)
-        
-        //merge all user's Counts dictionaries = mergedCounts
-        //used mergedCounts instead
-        //create users. add users to indiv events.
+
         
         EditResponseViewController.dispatchGroup.enter()
         mergeDates()
@@ -231,10 +225,10 @@ class EditResponseViewController: UIViewController {
                     print("\(User.current.name) added dates")
                     
                 }
-                EditResponseViewController.dispatchGroup.leave()
-                print("dispatch group run")
+
             }
-            
+            EditResponseViewController.dispatchGroup.leave()
+            print("dispatch group run")
         })
         
     }
