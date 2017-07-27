@@ -57,12 +57,12 @@ class BestDatesEventViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let eventViewController = segue.destination as? EventViewController {
-//            let newOrderedDict = eventViewController.newOrderedDict
-//            print(newOrderedDict)
-//            print(orderedDict)
-//            orderedDict = newOrderedDict as! [Date : Int]
-//        }
+        //        if let eventViewController = segue.destination as? EventViewController {
+        //            let newOrderedDict = eventViewController.newOrderedDict
+        //            print(newOrderedDict)
+        //            print(orderedDict)
+        //            orderedDict = newOrderedDict as! [Date : Int]
+        //        }
         if let identifier = segue.identifier {
             if identifier == "editResponse" {
                 EditResponseViewController.event = BestDatesEventViewController.thisEvent
@@ -91,7 +91,7 @@ class BestDatesEventViewController: UIViewController {
         var counts: [String: Int] = [:]
         var sortedNumber: [Int] = []
         let newOrderedDict = NSMutableDictionary()
-
+        
         for date in (BestDatesEventViewController.thisEvent?.dates)! {
             counts[date] = (counts[date] ?? 0) + 1
             counts.updateValue(counts[date]!, forKey: date)
@@ -122,7 +122,7 @@ class BestDatesEventViewController: UIViewController {
         var keysArray: [Int] = []
         sortedDict = [:]
         BestDatesEventViewController.sectionNames = []
-
+        
         for (date, num) in newOrderedDict {
             let typeNum = num as! Int
             
@@ -160,14 +160,14 @@ extension BestDatesEventViewController: UITableViewDataSource {
         var sectionString: Int = 1
         if section < BestDatesEventViewController.sortedDict.keys.count {
             sectionString = Array(BestDatesEventViewController.sortedDict.keys.sorted().reversed())[section]
-
+            
         }
         else {
             print("failed")
         }
         
         return BestDatesEventViewController.sortedDict[sectionString]!.count
-
+        
         //        let dates = BestDatesEventViewController.sortedDict.valueKeySorted[section].1
         //
         //        return dates.count
@@ -180,8 +180,23 @@ extension BestDatesEventViewController: UITableViewDataSource {
         return(BestDatesEventViewController.sectionNames.count)
     }
     
+    func reverseDictionary(array: [Int]) -> [Int] {
+        var newArray: [Int] = []
+        var size = (array.count - 1)
+        while size >= 0 {
+            for num in array {
+                newArray.append(array[size])
+                size -= 1
+            }
+        }
+        return newArray
+    }
+    
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection sectionIndex: Int) -> String? {
-        return BestDatesEventViewController.sectionNames.reversed()[sectionIndex]
+        
+        let reverseSectionNames = reverseDictionary(array: BestDatesEventViewController.sortedDict.keys.sorted())
+        return ("\(reverseSectionNames[sectionIndex]) people")
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -1141,7 +1141,6 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="send"/>
                                                 <connections>
                                                     <action selector="addInviteActionTriggered:" destination="Zxm-ID-UmB" eventType="primaryActionTriggered" id="oje-MJ-NV9"/>
-                                                    <action selector="touchCancelTriggered:" destination="Zxm-ID-UmB" eventType="touchCancel" id="jeH-fw-rfM"/>
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFC-P2-PNx">
