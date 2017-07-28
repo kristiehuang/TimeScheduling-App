@@ -34,7 +34,7 @@ class InviteFriendsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
 
-        UserService.allUsers { [unowned self] (users) in
+        UserService.usersExcludingCurrentUser { [unowned self] (users) in
             self.friends = users
             
             DispatchQueue.main.async {

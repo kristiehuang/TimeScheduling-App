@@ -17,6 +17,8 @@ class InviteEventViewController: UIViewController {
     var invitees = [String]()
     var inviteeEmails = [String]()
     var inviteesUser = [User]()
+    let dispatchGroup = DispatchGroup()
+
     
     @IBOutlet weak var eventNameLabel: UILabel!
     
@@ -102,7 +104,6 @@ class InviteEventViewController: UIViewController {
 
     }
     
-    let dispatchGroup = DispatchGroup()
 
     override func viewWillAppear(_ animated: Bool) {
         dispatchGroup.enter()
@@ -148,10 +149,19 @@ class InviteEventViewController: UIViewController {
                             }
                             print(snapshot[0].value as! String)
                             
+                            
 //
-                            name = snapshot[3].value as! String
                             email = snapshot[0].value as! String
                             
+                            if snapshot.count == 4 {
+                                name = snapshot[3].value as! String
+                            }
+                            else if snapshot.count == 3 {
+                                name = snapshot[2].value as! String
+                            }
+                            else if snapshot.count == 2 {
+                                name = snapshot[1].value as! String
+                            }
                             
                             self.invitees.append(name)
                             self.inviteeEmails.append(email)
@@ -184,7 +194,9 @@ extension InviteEventViewController: UITableViewDataSource {
 
         cell.inviteeNameLabel.text = "\(invitees[indexPath.row])"
         cell.inviteeEmailLabel.text = "\(inviteeEmails[indexPath.row])"
-
+        
+        let invitee = inviteesUser[indexPath.row]
+        cell.inviteeButton.isSelected = invitee.isInvited
         
         return cell
     }
@@ -194,7 +206,10 @@ extension InviteEventViewController: InviteEventCellDelegate {
         guard let indexPath = inviteesTableView.indexPath(for: cell) else { return }
         
         inviteeButton.isUserInteractionEnabled = false
-        let friender = inviteesUser[indexPath.row]
+        if inviteesUser.count > indexPath.row {
+            let friender = inviteesUser[indexPath.row]
+            
+            cell.inviteeButton.isSelected = friender.isInvited
         
         //display friends only
         //if setIsFriending = true, display
@@ -215,7 +230,7 @@ extension InviteEventViewController: InviteEventCellDelegate {
             friender.isInvited = !friender.isInvited
             self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
         }
-        
+       }
     }
 }
 

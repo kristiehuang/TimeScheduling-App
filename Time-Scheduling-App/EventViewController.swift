@@ -51,7 +51,7 @@ class EventViewController: UIViewController {
     
     
     static var event: Event?
-    static var invitees: [String: Bool] = [User.current.uid : true]
+    static var invitees: [String: Bool] = [:]
     
     static func getEvent () -> Event {
         return event!
