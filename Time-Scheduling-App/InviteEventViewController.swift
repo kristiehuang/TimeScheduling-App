@@ -18,7 +18,7 @@ class InviteEventViewController: UIViewController {
     var inviteeEmails = [String]()
     var inviteesUser = [User]()
     let dispatchGroup = DispatchGroup()
-
+    
     
     @IBOutlet weak var eventNameLabel: UILabel!
     
@@ -34,7 +34,7 @@ class InviteEventViewController: UIViewController {
         //if event already exists, SAVE to existing
         
         let eventTableViewController = EventTableViewController()
-
+        
         UserService.events(for: User.current, completion: { (events:[Event]) in
             
             for eventz in events {
@@ -101,16 +101,16 @@ class InviteEventViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
         
         super.viewDidLoad()
-
+        
     }
     
-
+    
     override func viewWillAppear(_ animated: Bool) {
         dispatchGroup.enter()
         invitees = []
         getInvites()
         
-        dispatchGroup.notify(queue: .main) { 
+        dispatchGroup.notify(queue: .main) {
             self.inviteesTableView.reloadData()
             super.viewWillAppear(true)
         }
@@ -123,8 +123,8 @@ class InviteEventViewController: UIViewController {
                 self.inviteesTableView.reloadData()
             }
         }
-
-
+        
+         
     }
     
     func getInvites() {
@@ -137,10 +137,10 @@ class InviteEventViewController: UIViewController {
             
             for eventz in events {
                 if EventViewController.event?.key == eventz.key {
-
-
+                    
+                    
                     for invitee in eventz.invitees {
-
+                        
                         let ref = Database.database().reference().child("users").child(invitee.key)
                         
                         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -150,7 +150,7 @@ class InviteEventViewController: UIViewController {
                             print(snapshot[0].value as! String)
                             
                             
-//
+                            //
                             email = snapshot[0].value as! String
                             
                             if snapshot.count == 4 {
@@ -167,14 +167,14 @@ class InviteEventViewController: UIViewController {
                             self.inviteeEmails.append(email)
                             
                         })
-
-
+                        
+                        
                     }
                 }
             }
             self.dispatchGroup.leave()
         })
-
+        
     }
     
     
@@ -191,7 +191,7 @@ extension InviteEventViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InviteesCell") as! InviteesCell
         
         cell.delegate = self
-
+        
         cell.inviteeNameLabel.text = "\(invitees[indexPath.row])"
         cell.inviteeEmailLabel.text = "\(inviteeEmails[indexPath.row])"
         
@@ -207,30 +207,32 @@ extension InviteEventViewController: InviteEventCellDelegate {
         
         inviteeButton.isUserInteractionEnabled = false
         if inviteesUser.count > indexPath.row {
+            self.invitees = []
             let friender = inviteesUser[indexPath.row]
             
             cell.inviteeButton.isSelected = friender.isInvited
-        
-        //display friends only
-        //if setIsFriending = true, display
-        
-        self.invitees = []
-
-        //friendservice methods
-        
-        FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
-            defer {
-                inviteeButton.isUserInteractionEnabled = true
-                self.invitees.append("\(friender)")
-                print("invitees!!: \(self.invitees.enumerated())")
+            
+            
+            
+            //display friends only
+            //if setIsFriending = true, display
+            
+            
+            //friendservice methods
+            
+            FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
+                defer {
+                    inviteeButton.isUserInteractionEnabled = true
+                    self.invitees.append("\(friender)")
+                    print("invitees!!: \(self.invitees.enumerated())")
+                }
+                
+                guard success else { return }
+                
+                friender.isInvited = !friender.isInvited
+                self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
             }
-            
-            guard success else { return }
-            
-            friender.isInvited = !friender.isInvited
-            self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
         }
-       }
     }
 }
 

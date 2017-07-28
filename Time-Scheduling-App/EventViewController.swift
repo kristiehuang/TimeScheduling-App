@@ -480,13 +480,22 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                     
                     cell.selectedView.isHidden = false
                     cell.selectedView.backgroundColor = UIColor.white
+                    cell.dateLabel.textColor = self.selectedMonthColor
+                }
+                else {
+                    self.handleCellSelected(view: cell, cellState: cellState)
+                    self.handleCellTextColor(view: cell, cellState: cellState)
+                    self.handleSelection(cell: cell, cellState: cellState)
                 }
                 
             }
+            if self.existingDates.isEmpty {
+                self.handleCellSelected(view: cell, cellState: cellState)
+                self.handleCellTextColor(view: cell, cellState: cellState)
+                self.handleSelection(cell: cell, cellState: cellState)
+            }
             
-            self.handleCellSelected(view: cell, cellState: cellState)
-            self.handleCellTextColor(view: cell, cellState: cellState)
-            self.handleSelection(cell: cell, cellState: cellState)
+  
             
             
         }
