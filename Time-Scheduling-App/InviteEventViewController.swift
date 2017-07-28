@@ -106,6 +106,7 @@ class InviteEventViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         dispatchGroup.enter()
+        invitees = []
         getInvites()
         
         dispatchGroup.notify(queue: .main) { 
