@@ -66,10 +66,6 @@ class InviteEventViewController: UIViewController {
             
             saveEvent()
             
-            //            addNoteViewController.eventNameLabel.text = InviteEventViewController.event?.name
-            //            print(addNoteViewController.eventNameLabel.text!)
-            
-            
         }
         
     }
@@ -104,27 +100,28 @@ class InviteEventViewController: UIViewController {
         
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         dispatchGroup.enter()
         invitees = []
+        inviteeEmails = []
+        
         getInvites()
         
-        dispatchGroup.notify(queue: .main) {
-            self.inviteesTableView.reloadData()
-            super.viewWillAppear(true)
-        }
-        
-        
-        UserService.usersExcludingCurrentUser { [unowned self] (users) in
-            self.inviteesUser = users
+        dispatchGroup.notify(queue: .main, execute: {
             
-            DispatchQueue.main.async {
-                self.inviteesTableView.reloadData()
-            }
-        }
+            //
+            //            UserService.usersExcludingCurrentUser { [unowned self] (users) in
+            //                self.inviteesUser = users
+            //
+            //                DispatchQueue.main.async {
+            //                    self.inviteesTableView.reloadData()
+            //                }
+            //            }
+            print("dispatch group run yay")
+            self.inviteesTableView.reloadData()
+            super.viewDidAppear(true)
+        })
         
-         
     }
     
     func getInvites() {
@@ -136,10 +133,14 @@ class InviteEventViewController: UIViewController {
         UserService.events(for: User.current, completion: { (events:[Event]) in
             
             for eventz in events {
-                if EventViewController.event?.key == eventz.key {
-                    
+                print(eventz.key)
+                print(InviteEventViewController.event?.key)
+                if InviteEventViewController.event?.key == eventz.key {
+                    let anotherDispatchGroup = DispatchGroup()
                     
                     for invitee in eventz.invitees {
+                        
+                        anotherDispatchGroup.enter()
                         
                         let ref = Database.database().reference().child("users").child(invitee.key)
                         
@@ -162,17 +163,27 @@ class InviteEventViewController: UIViewController {
                             else if snapshot.count == 2 {
                                 name = snapshot[1].value as! String
                             }
-                            
+                        
+
                             self.invitees.append(name)
                             self.inviteeEmails.append(email)
-                            
+
+                            anotherDispatchGroup.leave()
                         })
                         
                         
                     }
+                    anotherDispatchGroup.notify(queue: .main, execute: {
+                        print("invitee")
+                        self.inviteesTableView.reloadData()
+
+                        self.dispatchGroup.leave()
+                    })
+
+                    
+                    
                 }
             }
-            self.dispatchGroup.leave()
         })
         
     }
@@ -192,14 +203,30 @@ extension InviteEventViewController: UITableViewDataSource {
         
         cell.delegate = self
         
-        cell.inviteeNameLabel.text = "\(invitees[indexPath.row])"
-        cell.inviteeEmailLabel.text = "\(inviteeEmails[indexPath.row])"
-        
-        let invitee = inviteesUser[indexPath.row]
-        cell.inviteeButton.isSelected = invitee.isInvited
+        configure(cell: cell, atIndexPath: indexPath)
+
+
+//        
+//        let invitee = inviteesUser[indexPath.row]
+//        cell.inviteeButton.isSelected = invitee.isInvited
         
         return cell
     }
+    
+    func configure(cell: InviteesCell, atIndexPath indexPath: IndexPath) {
+        
+        
+//        
+        cell.inviteeNameLabel.text = "\(invitees[indexPath.row])"
+        cell.inviteeEmailLabel.text = "\(inviteeEmails[indexPath.row])"
+        
+//        let invitee = inviteesUser[indexPath.row]
+//
+//        cell.inviteeButton.isSelected = invitee.isInvited
+        
+    }
+    
+    
 }
 extension InviteEventViewController: InviteEventCellDelegate {
     func didTapInviteeButton(_ inviteeButton: UIButton, on cell: InviteesCell) {
@@ -209,11 +236,17 @@ extension InviteEventViewController: InviteEventCellDelegate {
         if inviteesUser.count > indexPath.row {
             self.invitees = []
             let friender = inviteesUser[indexPath.row]
+            self.inviteesUser = []
+
+//            cell.inviteeButton.isSelected = friender.isInvited
             
-            cell.inviteeButton.isSelected = friender.isInvited
-            
-            
-            
+//            if !cell.inviteeButton.isSelected {
+//                friender.isInvited = false
+//                inviteesUser.remove(at: indexPath.row)
+//                inviteesTableView.reloadData()
+//                
+//            }
+//            
             //display friends only
             //if setIsFriending = true, display
             
@@ -223,8 +256,9 @@ extension InviteEventViewController: InviteEventCellDelegate {
             FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
                 defer {
                     inviteeButton.isUserInteractionEnabled = true
-                    self.invitees.append("\(friender)")
-                    print("invitees!!: \(self.invitees.enumerated())")
+                    self.inviteesUser.append(friender)
+                    print("invitees!!: \(self.inviteesUser.enumerated())")
+
                 }
                 
                 guard success else { return }

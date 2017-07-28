@@ -71,7 +71,10 @@ extension InviteFriendsViewController: UITableViewDataSource {
         let friend = friends[indexPath.row]
         cell.friendNameLabel.text = friend.name
         cell.friendEmailLabel.text = friend.email
+        
         cell.inviteButton.isSelected = friend.isInvited
+        
+
         
     }
 }
@@ -100,6 +103,8 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
             guard success else { return }
             
             friender.isInvited = !friender.isInvited
+            
+            
             self.tableView.reloadRows(at: [indexPath], with: .none)
         }
         

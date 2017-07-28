@@ -43,7 +43,7 @@ class EventViewController: UIViewController {
     let dateFormatter = DateFormatter()
     
     var numberOfDates:Int = 0
-    static var datesChosen: [Date] = []
+    var datesChosen: [Date] = []
     var events: [Event] = []
     
     var newOrderedDict = NSMutableDictionary()
@@ -78,6 +78,8 @@ class EventViewController: UIViewController {
             //for each event in events called from user
             for eventz in events {
                 if EventViewController.event?.key == eventz.key {
+                    
+                    self.existingDates = []
                     for (myDate) in eventz.dates {
                         
                         let dateFormatter = DateFormatter()
@@ -128,6 +130,7 @@ class EventViewController: UIViewController {
     //    for existing events
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         
         if let event = EventViewController.event {
             eventNameTextField.text = event.name
@@ -233,11 +236,12 @@ class EventViewController: UIViewController {
                     
                     
                     var datesArr = [String]()
-                    for date in EventViewController.datesChosen.enumerated() {
+                    
+                    for date in self.datesChosen.enumerated() {
                         let justDate = date.1
                         datesArr.append("\(justDate)")
                     }
-                    print("dates chosen: \(EventViewController.datesChosen)")
+                    print("dates chosen: \(self.datesChosen)")
                     print("dates array: \(datesArr)")
                     
                     if datesArr.isEmpty {
@@ -249,6 +253,9 @@ class EventViewController: UIViewController {
                     eventRef.child("name").setValue(EventViewController.event?.name ?? "Untitled Event")
                     
                     eventRef.child("dates").setValue(datesArr)
+                    self.datesChosen = []
+                    datesArr = []
+                    
                     eventTableViewController.tableView.reloadData()
                     isFound = true
                     print("isfound is \(isFound)")
@@ -262,10 +269,10 @@ class EventViewController: UIViewController {
                 
                 var datesArr = [String]()
                 
-                print("dates chosen is \(EventViewController.datesChosen)")
+                print("dates chosen is \(self.datesChosen)")
                 
                 //changing type date to type string
-                for date in EventViewController.datesChosen.enumerated() {
+                for date in self.datesChosen.enumerated() {
                     let justDate = date.1
                     datesArr.append("\(justDate)")
                 }
@@ -279,6 +286,8 @@ class EventViewController: UIViewController {
                 }
                 //add event to database
                 EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "")
+                
+                datesArr = []
                 
                 //                UserService.events(for: User.current) { (events) in
                 //                    events = eventTableViewController.displayedEvents
@@ -296,10 +305,10 @@ class EventViewController: UIViewController {
     }
     
     
-    static func countDates() {
+    func countDates() {
         var counts: [Date: Int] = [:]
         var array: [Int] = []
-        for date in datesChosen {
+        for date in self.datesChosen {
             counts[date] = (counts[date] ?? 0) + 1
         }
         //sort array by count value, then display only top three
@@ -370,7 +379,7 @@ class EventViewController: UIViewController {
                 EventViewController.dispatchGroup.enter()
                 newEvent()
                 EventViewController.dispatchGroup.notify(queue: .main, execute: {
-                    EventViewController.countDates()
+                    self.countDates()
                     
                     
                     let inviteEventViewController = segue.destination as! InviteEventViewController
@@ -395,7 +404,7 @@ class EventViewController: UIViewController {
                 EventViewController.dispatchGroup.enter()
                 newEvent()
                 EventViewController.dispatchGroup.notify(queue: .main, execute: {
-                    EventViewController.countDates()
+                    self.countDates()
                     
                 })
             }
@@ -481,6 +490,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                     cell.selectedView.isHidden = false
                     cell.selectedView.backgroundColor = UIColor.white
                     cell.dateLabel.textColor = self.selectedMonthColor
+                    self.datesChosen.append(myDate)
                 }
                 else {
                     self.handleCellSelected(view: cell, cellState: cellState)
@@ -533,8 +543,8 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
         
         
-        EventViewController.datesChosen.append(date)
-        print("dates chosen array are \(EventViewController.datesChosen.enumerated())")
+        self.datesChosen.append(date)
+        print("dates chosen array are \(self.datesChosen.enumerated())")
         
         
         
@@ -555,9 +565,9 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         }
         
         let dateDeselected = date
-        EventViewController.datesChosen = EventViewController.datesChosen.filter { $0 != dateDeselected }
+        self.datesChosen = self.datesChosen.filter { $0 != dateDeselected }
         
-        print("dates chosen array are \(EventViewController.datesChosen.enumerated())")
+        print("dates chosen array are \(self.datesChosen.enumerated())")
         
     }
     
