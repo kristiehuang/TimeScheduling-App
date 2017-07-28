@@ -706,6 +706,7 @@ extension JTAppleCalendarView {
         }
         return returnPaths
     }
+
     
     func cellStateFromIndexPath(_ indexPath: IndexPath, withDateInfo info: (date: Date, owner: DateOwner)? = nil, cell: JTAppleCell? = nil) -> CellState {
         let validDateInfo: (date: Date, owner: DateOwner)
@@ -820,6 +821,7 @@ extension JTAppleCalendarView {
         // handle the reloading of view, else we will reload the data
         if shouldTriggerSelecteionDelegate {
             self.collectionView(self, didSelectItemAt: indexPath)
+
         } else {
             // Although we do not want the delegate triggered,
             // we still want counterpart cells to be selected

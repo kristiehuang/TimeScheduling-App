@@ -1443,7 +1443,7 @@
                                 <rect key="frame" x="0.0" y="203" width="414" height="533"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BestDatesCell" rowHeight="59" id="BAh-40-8gt" customClass="BestDatesCell" customModule="Time_Scheduling_App" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bestDatesCell" rowHeight="59" id="BAh-40-8gt" customClass="BestDatesCell" customModule="Time_Scheduling_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55" width="414" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BAh-40-8gt" id="PXa-I1-wtt">
@@ -1540,7 +1540,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQi-7U-fNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JkN-Ms-UV3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1233" y="24"/>
+            <point key="canvasLocation" x="1231.8840579710145" y="23.64130434782609"/>
         </scene>
     </scenes>
     <resources>

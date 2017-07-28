@@ -201,11 +201,11 @@ extension BestDatesEventViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BestDatesCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bestDatesCell", for: indexPath) as! BestDatesCell
         let datesInSect = BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].1
         
         if indexPath.section < BestDatesEventViewController.sortedDict.keys.count && indexPath.row < (datesInSect.count) {
-            cell.textLabel?.text = datesInSect[indexPath.row] as? String
+            cell.dateLabel.text = datesInSect[indexPath.row] as? String
             
         } else {
             print("index out of range")

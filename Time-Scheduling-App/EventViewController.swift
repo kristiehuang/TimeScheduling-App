@@ -56,6 +56,8 @@ class EventViewController: UIViewController {
     static func getEvent () -> Event {
         return event!
     }
+    var existingDates = [Date]()
+    let dispatchGroup = DispatchGroup()
     
     
     override func viewDidLoad() {
@@ -71,32 +73,29 @@ class EventViewController: UIViewController {
         let currentDate = Date()
         calendarView.scrollToDate(currentDate)
         
-        //        let dispatchGroup = DispatchGroup()
-        //        var existingDates = [Date]()
-        //        dispatchGroup.enter()
-        ////        UserService.events(for: User.current, completion: { (events:[Event]) in
-        ////            //for each event in events called from user
-        ////            for eventz in events {
-        ////                if EventViewController.event?.key == eventz.key {
-        ////                    for (myDate) in eventz.dates {
-        ////
-        ////                        let dateFormatter = DateFormatter()
-        ////                        dateFormatter.dateFormat = myDate //Your date format
-        //////                        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00") //Current time zone
-        ////                        let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
-        ////
-        ////                        existingDates.append(dateDate!)
-        ////                    }
-        ////
-        ////                }
-        ////            }
-        //            dispatchGroup.leave()
-        ////        })
-        //        dispatchGroup.notify(queue: .main) {
-        ////            self.calendarView.selectDates(existingDates)
-        //            self.calendarView.selectDates([currentDate])
-        //
-        //        }
+        dispatchGroup.enter()
+        UserService.events(for: User.current, completion: { (events:[Event]) in
+            //for each event in events called from user
+            for eventz in events {
+                if EventViewController.event?.key == eventz.key {
+                    for (myDate) in eventz.dates {
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd h:mm:ss Z" //Your date format
+                        dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
+                        let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
+                        
+                        print("my date \(myDate)")
+                        print("date date \(dateDate)")
+                        
+                        self.existingDates.append(dateDate!)
+                    }
+                    
+                }
+            }
+            self.dispatchGroup.leave()
+        })
+        
         
         
         calendarView.allowsMultipleSelection  = true
@@ -115,6 +114,15 @@ class EventViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
+        
+        dispatchGroup.notify(queue: .main) {
+            
+            
+            //             self.calendarView.selectDates(existingDates)
+            
+            //            self.calendarView.selectDates([currentDate])
+        }
+        
     }
     
     //    for existing events
@@ -141,9 +149,9 @@ class EventViewController: UIViewController {
         guard let validCell = view as? CalendarCell
             else { return }
         
-//        if cellState.dateBelongsTo != .thisMonth {
-//            validCell.isUserInteractionEnabled = false
-//        }
+        //        if cellState.dateBelongsTo != .thisMonth {
+        //            validCell.isUserInteractionEnabled = false
+        //        }
         
         if cellState.isSelected {
             //selected view = circle behind text
@@ -431,7 +439,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
     
     func handleSelection(cell: JTAppleCell?, cellState: CellState) {
         
-
+        if let cell = cell {
             let calendarCell = cell as! CalendarCell // You created the cell view if you followed the tutorial
             switch cellState.selectedPosition() {
             case .full, .left, .right:
@@ -448,7 +456,11 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                 calendarCell.selectedView.backgroundColor = nil // Have no selection when a cell is not selected
                 calendarCell.isSelected = false
             }
-
+        }
+        else {
+            return
+        }
+        
     }
     
     
@@ -459,13 +471,28 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
         cell.dateLabel.text = cellState.text
         
-        handleCellSelected(view: cell, cellState: cellState)
-        handleCellTextColor(view: cell, cellState: cellState)
-        handleSelection(cell: cell, cellState: cellState)
-        
-        
-        
+        dispatchGroup.notify(queue: .main) {
+            for myDate in self.existingDates {
+                if myDate == date {
+                    print("array of existing dates \(self.existingDates)")
+                    cell.isSelected = true
+                    
+                    
+                    cell.selectedView.isHidden = false
+                    cell.selectedView.backgroundColor = UIColor.white
+                }
+                
+            }
+            
+            self.handleCellSelected(view: cell, cellState: cellState)
+            self.handleCellTextColor(view: cell, cellState: cellState)
+            self.handleSelection(cell: cell, cellState: cellState)
+            
+            
+        }
         return cell
+        
+        
     }
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         
@@ -476,9 +503,12 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         //cellState.isSelected = true
         //validCell.selectedView.isHidden = false
         //if date in eventz.date, set cellState.isSelected = true
-//        if cellState.dateBelongsTo != .thisMonth {
-//            cell?.isUserInteractionEnabled = false
-//        }
+        
+        
+        
+        //        if cellState.dateBelongsTo != .thisMonth {
+        //            cell?.isUserInteractionEnabled = false
+        //        }
         
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
