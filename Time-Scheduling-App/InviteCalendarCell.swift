@@ -14,6 +14,7 @@ class InviteCalendarCell: JTAppleCell {
 
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var selectedView: UIView!
+    @IBOutlet weak var inviteSelectedView: UIView!
     
     /*
      // Only override draw() if you perform custom drawing.

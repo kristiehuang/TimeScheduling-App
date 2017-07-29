@@ -49,7 +49,13 @@ class EventTableViewController: UITableViewController {
         let event = self.displayedEvents[row]
         
         cell.eventNameLabel.text = event.name
-        cell.eventDetailsLabel.text = "Host | 14 Invites | Date Chosen"
+        
+        if User.current.uid == event.host {
+            cell.eventDetailsLabel.text = "\(User.current.name) | \(event.invitees.count) invitees | Hosting"
+        }
+        else {
+            cell.eventDetailsLabel.text = "Invited | \(event.invitees.count) invitees"
+        }
         //host + number of invites + date (if finalized then date, else if not finalized then "Date pending"
         
         

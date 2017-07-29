@@ -36,7 +36,12 @@ class EditResponseViewController: UIViewController {
     
     let outsideMonthColor = UIColor(colorWithHexValue: 0x7FAEE7) //cell date label color in indates/outdates
     let monthColor = UIColor.white //cell date label color in this month
-    let selectedMonthColor = UIColor(colorWithHexValue: 0xA3C9F6) //color of selected date label text
+    let selectedMonthColor = UIColor.white //color of selected date label text
+    
+    let inviteSelectedViewColor = UIColor(colorWithHexValue: 0xFFC55A) //color of invite selected view, orange
+    let selectedViewColor = UIColor(colorWithHexValue: 0xBCD8F7) //color of invite selected view, light white
+
+
 //    let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
     
     //    let event = Event(name: "", creationDate: Date(), host: User.current)
@@ -44,7 +49,7 @@ class EditResponseViewController: UIViewController {
     let dateFormatter = DateFormatter()
     
     var numberOfDates:Int = 0
-    static var datesChosen: [Date] = []
+    var datesChosen: [String] = []
     var events: [Event] = []
     
     var newOrderedDict = NSMutableDictionary()
@@ -57,28 +62,69 @@ class EditResponseViewController: UIViewController {
         return event!
     }
     
+    let dispatchGroup = DispatchGroup()
+    var existingDates = [String]()
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpCalendarView()
-        
-        
+
         calendarView.visibleDates { visibleDates in
             self.setupViewsOfCalendar(from: visibleDates)
         }
         
-        self.calendarView.allowsMultipleSelection  = true
-        self.calendarView.isRangeSelectionUsed = true
+        
+        dispatchGroup.enter()
+        
+        UserService.readInvitedEvents(for: User.current, completion: { (events:[Event]) in
+            //for each event in events called from user
+            for eventz in events {
+                if EditResponseViewController.event?.key == eventz.key {
+                    
+                    //for NOW, all dates in database. not just host's
+                    self.existingDates = []
+                    for (myDate) in eventz.dates {
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd h:mm:ss Z" //Your date format
+                        dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
+                        let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
+                        
+                        print("my date \(myDate)")
+//                        print("date date \(dateDate)")
+//                        
+//                        let dateFormatterGet = DateFormatter()
+//                        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+//                        
+//                        let dateFormatter1 = DateFormatter()
+//                        dateFormatter1.dateFormat = "EEEE, MMMM d, yyyy"
+//                        
+//                        let formatDate: Date? = dateFormatterGet.date(from: "\(String(describing: dateDate))")
+//                        print(dateFormatter1.string(from: formatDate!))
+//                        
+                        
+                        self.existingDates.append(myDate)
+                    }
+                    
+                }
+            }
+            self.dispatchGroup.leave()
+        })
+        
+        calendarView.allowsMultipleSelection  = true
+        calendarView.isRangeSelectionUsed = true
         
         self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen | Press & hold to select a range"
         
         //longpress to select range
-        self.calendarView.allowsMultipleSelection = true
+        calendarView.allowsMultipleSelection = true
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(self.didStartRangeSelecting(gesture:)))
         gesture.minimumPressDuration = 0.5
-        self.calendarView.addGestureRecognizer(gesture)
-        self.calendarView.isRangeSelectionUsed = true
+        calendarView.addGestureRecognizer(gesture)
+        calendarView.isRangeSelectionUsed = true
         
         //dismiss keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
@@ -118,10 +164,13 @@ class EditResponseViewController: UIViewController {
         
         if cellState.isSelected {
             //selected view = circle behind text
-            validCell.selectedView.isHidden = false //is not hidden
+            validCell.inviteSelectedView.isHidden = false //is not hidden
+//            validCell.selectedView.isHidden = false //is not hidden
+
+            
         }
         else {
-            validCell.selectedView.isHidden = true //is hidden
+            validCell.inviteSelectedView.isHidden = true //is hidden
         }
     }
     
@@ -129,21 +178,38 @@ class EditResponseViewController: UIViewController {
         guard let validCell = view as? InviteCalendarCell
             else { return }
         
-        if cellState.isSelected {
-            //selected view = circle behind text
-            validCell.dateLabel.textColor = selectedMonthColor
-        }
-        else {
+//        if cellState.isSelected {
+//            //selected view = circle behind text
+//            validCell.dateLabel.textColor = selectedMonthColor
+//        }
+//        else {
+//            if cellState.dateBelongsTo == .thisMonth {
+//                validCell.dateLabel.textColor = monthColor
+//                //cell date label color in this month
+//            }
+//            else {
+//                validCell.dateLabel.textColor = outsideMonthColor
+//                //cell date label color in indates/outdates
+//            }
+//        }
+
             if cellState.dateBelongsTo == .thisMonth {
-                validCell.dateLabel.textColor = monthColor
-                //cell date label color in this month
+                if cellState.isSelected {
+                    validCell.dateLabel.textColor = selectedMonthColor
+                }
+                else {
+                    validCell.dateLabel.textColor = monthColor
+                }
             }
             else {
+                validCell.isUserInteractionEnabled = false
                 validCell.dateLabel.textColor = outsideMonthColor
                 //cell date label color in indates/outdates
             }
-        }
+        
     }
+    
+    
     
     
     func setupViewsOfCalendar(from visibleDates: DateSegmentInfo) {
@@ -193,11 +259,12 @@ class EditResponseViewController: UIViewController {
                 if EditResponseViewController.event?.key == eventz.key {
                     
                     var datesArr = [String]()
-                    for date in EditResponseViewController.datesChosen.enumerated() {
+                    for date in self.datesChosen.enumerated() {
                         let justDate = date.1
-                        datesArr.append("\(justDate)")
+                        
+                        datesArr.append(justDate)
                     }
-                    print("dates chosen: \(EditResponseViewController.datesChosen)")
+                    print("dates chosen: \(self.datesChosen)")
                     print("dates array: \(datesArr)")
                     datesArr = eventz.dates + datesArr
                     //change datesArr to existing dates + datesArr, then update
@@ -220,6 +287,8 @@ class EditResponseViewController: UIViewController {
                     let inviteRef = Database.database().reference().child("users").child(User.current.uid).child("invited events").child((EditResponseViewController.event?.key!)!)
                     inviteRef.child("dates").setValue(datesArr)
 
+                    datesArr = []
+                    self.datesChosen = []
                     
                     eventTableViewController.tableView.reloadData()
                     print("\(User.current.name) added dates")
@@ -235,8 +304,10 @@ class EditResponseViewController: UIViewController {
     
     
     //longpress gesture func!!
-    var rangeSelectedDates: [Date] = []
     func didStartRangeSelecting(gesture: UILongPressGestureRecognizer) {
+        
+        var rangeSelectedDates: [Date] = []
+
         let point = gesture.location(in: gesture.view!)
         rangeSelectedDates = calendarView.selectedDates
         if let cellState = calendarView.cellStatus(at: point) {
@@ -313,37 +384,76 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
     
     func handleSelection(cell: JTAppleCell?, cellState: CellState) {
         
+        
         let calendarCell = cell as! InviteCalendarCell // You created the cell view if you followed the tutorial
+        calendarCell.selectedView.isUserInteractionEnabled = false
+
         switch cellState.selectedPosition() {
         case .full, .left, .right:
-            calendarCell.selectedView.isHidden = false
-            calendarCell.selectedView.backgroundColor = UIColor.white // Or you can put what ever you like for your rounded corners, and your stand-alone selected cell
+            calendarCell.inviteSelectedView.isHidden = false
+            calendarCell.inviteSelectedView.backgroundColor = self.inviteSelectedViewColor // Or you can put what ever you like for your rounded corners, and your stand-alone selected cell
             calendarCell.isSelected = true
         case .middle:
-            calendarCell.selectedView.isHidden = false
-            calendarCell.selectedView.backgroundColor = UIColor.white // Or what ever you want for your dates that land in the middle
+            calendarCell.inviteSelectedView.isHidden = false
+            calendarCell.inviteSelectedView.backgroundColor = self.inviteSelectedViewColor // Or what ever you want for your dates that land in the middle
             calendarCell.isSelected = true
             
         default:
-            calendarCell.selectedView.isHidden = true
-            calendarCell.selectedView.backgroundColor = nil // Have no selection when a cell is not selected
+            calendarCell.inviteSelectedView.isHidden = true
+            calendarCell.inviteSelectedView.backgroundColor = nil // Have no selection when a cell is not selected
             calendarCell.isSelected = false
         }
         
     }
     
-    
+
+
     
     //display the cell
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! InviteCalendarCell
         cell.dateLabel.text = cellState.text
         
-        handleCellSelected(view: cell, cellState: cellState)
-        handleCellTextColor(view: cell, cellState: cellState)
-        handleSelection(cell: cell, cellState: cellState)
         
+        dispatchGroup.notify(queue: .main) {
+            for myDate in self.existingDates {
+                if myDate == "\(date)" {
+                    print("array of existing dates \(self.existingDates)")
+                    cell.isSelected = true
+                    
+                    
+                    cell.selectedView.isHidden = false
+                    cell.selectedView.isUserInteractionEnabled = false
+                    cell.selectedView.backgroundColor = self.selectedViewColor
+                    cell.dateLabel.textColor = self.selectedMonthColor
+                    
+                    
+                    let dateFormatterGet = DateFormatter()
+                    dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+                    
+                    let formatDate: Date? = dateFormatterGet.date(from: "\(myDate)")
+                    print(dateFormatter.string(from: formatDate!))
+                    
+                    
+                    self.datesChosen.append(dateFormatter.string(from: formatDate!))
+                }
+                else {
+                    self.handleCellSelected(view: cell, cellState: cellState)
+                    self.handleCellTextColor(view: cell, cellState: cellState)
+                    self.handleSelection(cell: cell, cellState: cellState)
+                }
+                
+            }
+            if self.existingDates.isEmpty {
+                self.handleCellSelected(view: cell, cellState: cellState)
+                self.handleCellTextColor(view: cell, cellState: cellState)
+                self.handleSelection(cell: cell, cellState: cellState)
+            }
         
+        }
         return cell
     }
     
@@ -363,8 +473,20 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         }
         
         let dateSelected = date
-        EditResponseViewController.datesChosen.append(dateSelected)
-        print("dates chosen array are \(EditResponseViewController.datesChosen.enumerated())")
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        
+        let formatDate: Date? = dateFormatterGet.date(from: "\(dateSelected)")
+        print(dateFormatter.string(from: formatDate!))
+        
+        
+        self.datesChosen.append(dateFormatter.string(from: formatDate!))
+        
+        print("dates chosen array are \(self.datesChosen.enumerated())")
         
         
         
@@ -385,9 +507,22 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         }
         
         let dateDeselected = date
-        EditResponseViewController.datesChosen = EditResponseViewController.datesChosen.filter { $0 != dateDeselected }
         
-        print("dates chosen array are \(EditResponseViewController.datesChosen.enumerated())")
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        
+        let formatDate: Date? = dateFormatterGet.date(from: "\(dateDeselected)")
+        print(dateFormatter.string(from: formatDate!))
+        
+        
+        self.datesChosen.append(dateFormatter.string(from: formatDate!))
+        
+        datesChosen = datesChosen.filter { $0 != dateFormatter.string(from: formatDate!) }
+        
+        print("dates chosen array are \(datesChosen.enumerated())")
         
     }
     
@@ -398,4 +533,3 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         monthYearLabel.text = "   \(dateFormatter.string(from: date))"
     }
 }
-

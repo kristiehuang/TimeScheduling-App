@@ -43,11 +43,14 @@ class EventViewController: UIViewController {
     let dateFormatter = DateFormatter()
     
     var numberOfDates:Int = 0
-    var datesChosen: [Date] = []
+//    var datesChosen: [Date] = []
+    var datesChosen: [String] = []
+
     var events: [Event] = []
     
+    let firstDispatchGroup = DispatchGroup()
+    
     var newOrderedDict = NSMutableDictionary()
-    static let dispatchGroup = DispatchGroup()
     
     
     static var event: Event?
@@ -56,12 +59,14 @@ class EventViewController: UIViewController {
     static func getEvent () -> Event {
         return event!
     }
-    var existingDates = [Date]()
+    var existingDates = [String]()
     let dispatchGroup = DispatchGroup()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.existingDates = []
+
         
         setUpCalendarView()
         
@@ -79,18 +84,10 @@ class EventViewController: UIViewController {
             for eventz in events {
                 if EventViewController.event?.key == eventz.key {
                     
-                    self.existingDates = []
                     for (myDate) in eventz.dates {
-                        
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd h:mm:ss Z" //Your date format
-                        dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
-                        let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
-                        
-                        print("my date \(myDate)")
-                        print("date date \(dateDate)")
-                        
-                        self.existingDates.append(dateDate!)
+
+                        self.existingDates.append(myDate)
+
                     }
                     
                 }
@@ -173,7 +170,7 @@ class EventViewController: UIViewController {
             //selected view = circle behind text
             validCell.dateLabel.textColor = selectedMonthColor
         }
-        else {
+        else { //if cell is deselected
             if cellState.dateBelongsTo == .thisMonth {
                 validCell.dateLabel.textColor = monthColor
                 //cell date label color in this month
@@ -259,7 +256,7 @@ class EventViewController: UIViewController {
                     eventTableViewController.tableView.reloadData()
                     isFound = true
                     print("isfound is \(isFound)")
-                    EventViewController.dispatchGroup.leave()
+                    self.firstDispatchGroup.leave()
                     
                 }
             }
@@ -288,6 +285,7 @@ class EventViewController: UIViewController {
                 EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "")
                 
                 datesArr = []
+                self.datesChosen = []
                 
                 //                UserService.events(for: User.current) { (events) in
                 //                    events = eventTableViewController.displayedEvents
@@ -296,7 +294,7 @@ class EventViewController: UIViewController {
                 //                }
                 //                eventTableViewController.tableView.reloadData()
                 
-                EventViewController.dispatchGroup.leave()
+                self.firstDispatchGroup.leave()
                 print("dispatch group run")
             }
             
@@ -306,7 +304,7 @@ class EventViewController: UIViewController {
     
     
     func countDates() {
-        var counts: [Date: Int] = [:]
+        var counts: [String: Int] = [:]
         var array: [Int] = []
         for date in self.datesChosen {
             counts[date] = (counts[date] ?? 0) + 1
@@ -342,7 +340,6 @@ class EventViewController: UIViewController {
         if let cellState = calendarView.cellStatus(at: point) {
             let date = cellState.date
             if !rangeSelectedDates.contains(date) {
-                print(rangeSelectedDates.first)
                 let dateRange = calendarView.generateDateRange(from: rangeSelectedDates.first ?? date, to: date)
                 for aDate in dateRange {
                     if !rangeSelectedDates.contains(aDate) {
@@ -376,9 +373,9 @@ class EventViewController: UIViewController {
             else if identifier == "nextSegue" {
                 print("Transitioning to next & save")
                 
-                EventViewController.dispatchGroup.enter()
+                firstDispatchGroup.enter()
                 newEvent()
-                EventViewController.dispatchGroup.notify(queue: .main, execute: {
+                firstDispatchGroup.notify(queue: .main, execute: {
                     self.countDates()
                     
                     
@@ -401,9 +398,9 @@ class EventViewController: UIViewController {
                 //used mergedCounts instead
                 //create users. add users to indiv events.
                 
-                EventViewController.dispatchGroup.enter()
+                firstDispatchGroup.enter()
                 newEvent()
-                EventViewController.dispatchGroup.notify(queue: .main, execute: {
+                firstDispatchGroup.notify(queue: .main, execute: {
                     self.countDates()
                     
                 })
@@ -482,7 +479,18 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
         dispatchGroup.notify(queue: .main) {
             for myDate in self.existingDates {
-                if myDate == date {
+                
+                
+                let dateFormatter3 = DateFormatter()
+                dateFormatter3.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+                
+                let dateFormatter4 = DateFormatter()
+                dateFormatter4.dateFormat = "EEEE, MMMM d, yyyy"
+                
+                let dateee: Date? = dateFormatter3.date(from: "\(date)")
+                
+                
+                if myDate == dateFormatter4.string(from: dateee!) {
                     print("array of existing dates \(self.existingDates)")
                     cell.isSelected = true
                     
@@ -490,7 +498,12 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                     cell.selectedView.isHidden = false
                     cell.selectedView.backgroundColor = UIColor.white
                     cell.dateLabel.textColor = self.selectedMonthColor
+//
+                    
                     self.datesChosen.append(myDate)
+                    
+                    break
+                    
                 }
                 else {
                     self.handleCellSelected(view: cell, cellState: cellState)
@@ -541,9 +554,17 @@ extension EventViewController: JTAppleCalendarViewDelegate {
             availableDatesLabel.text = "\(numberOfDates) dates chosen"
         }
         
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        
+        let formatDate: Date? = dateFormatterGet.date(from: "\(date)")
+        print(dateFormatter.string(from: formatDate!))
         
         
-        self.datesChosen.append(date)
+        self.datesChosen.append(dateFormatter.string(from: formatDate!))
         print("dates chosen array are \(self.datesChosen.enumerated())")
         
         
@@ -564,8 +585,18 @@ extension EventViewController: JTAppleCalendarViewDelegate {
             availableDatesLabel.text = "\(numberOfDates) dates chosen"
         }
         
-        let dateDeselected = date
-        self.datesChosen = self.datesChosen.filter { $0 != dateDeselected }
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        
+        let formatDate: Date? = dateFormatterGet.date(from: "\(date)")
+        print(dateFormatter.string(from: formatDate!))
+        
+        
+        self.datesChosen = self.datesChosen.filter { $0 != dateFormatter.string(from: formatDate!) }
         
         print("dates chosen array are \(self.datesChosen.enumerated())")
         

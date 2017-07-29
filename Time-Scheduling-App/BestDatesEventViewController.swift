@@ -131,6 +131,13 @@ class BestDatesEventViewController: UIViewController {
                 keysArray.append(typeNum)
                 
                 var datesArr: [Any] = []
+//                
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+//                dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
+//                let formatDate = dateFormatter.string(from: date)
+                
+                
                 datesArr.append(date)
                 sortedDict.updateValue(datesArr, forKey: typeNum)
                 
@@ -139,6 +146,13 @@ class BestDatesEventViewController: UIViewController {
             else {
                 //if typeNum section already exists, then just insert date row in section
                 var newDates = Array(sortedDict[typeNum]!)
+                
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+//                dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
+//                let formatDate = dateFormatter.date(from: "\(date)")
+                
+                
                 newDates.append(date)
                 sortedDict.updateValue(newDates, forKey: typeNum)
                 
