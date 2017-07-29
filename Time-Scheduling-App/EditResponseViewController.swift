@@ -93,18 +93,6 @@ class EditResponseViewController: UIViewController {
                         dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
                         let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
                         
-                        print("my date \(myDate)")
-//                        print("date date \(dateDate)")
-//                        
-//                        let dateFormatterGet = DateFormatter()
-//                        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
-//                        
-//                        let dateFormatter1 = DateFormatter()
-//                        dateFormatter1.dateFormat = "EEEE, MMMM d, yyyy"
-//                        
-//                        let formatDate: Date? = dateFormatterGet.date(from: "\(String(describing: dateDate))")
-//                        print(dateFormatter1.string(from: formatDate!))
-//                        
                         
                         self.existingDates.append(myDate)
                     }
@@ -202,7 +190,7 @@ class EditResponseViewController: UIViewController {
                 }
             }
             else {
-                validCell.isUserInteractionEnabled = false
+//                validCell.isUserInteractionEnabled = false
                 validCell.dateLabel.textColor = outsideMonthColor
                 //cell date label color in indates/outdates
             }
@@ -386,12 +374,16 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         
         
         let calendarCell = cell as! InviteCalendarCell // You created the cell view if you followed the tutorial
-        calendarCell.selectedView.isUserInteractionEnabled = false
+//        calendarCell.selectedView.isUserInteractionEnabled = false
 
         switch cellState.selectedPosition() {
         case .full, .left, .right:
             calendarCell.inviteSelectedView.isHidden = false
-            calendarCell.inviteSelectedView.backgroundColor = self.inviteSelectedViewColor // Or you can put what ever you like for your rounded corners, and your stand-alone selected cell
+            calendarCell.inviteSelectedView.backgroundColor = self.inviteSelectedViewColor
+//            calendarCell.inviteSelectedView.backgroundColor = UIColor.white
+
+//            calendarCell.isHidden = false
+//            calendarCell.backgroundColor = self.inviteSelectedViewColor
             calendarCell.isSelected = true
         case .middle:
             calendarCell.inviteSelectedView.isHidden = false
@@ -423,7 +415,7 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
                     
                     
                     cell.selectedView.isHidden = false
-                    cell.selectedView.isUserInteractionEnabled = false
+//                    cell.selectedView.isUserInteractionEnabled = false
                     cell.selectedView.backgroundColor = self.selectedViewColor
                     cell.dateLabel.textColor = self.selectedMonthColor
                     

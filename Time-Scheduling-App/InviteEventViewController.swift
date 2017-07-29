@@ -14,9 +14,13 @@ import FirebaseDatabase
 class InviteEventViewController: UIViewController {
     
     static var event: Event?
-    var invitees = [String]()
-    var inviteeEmails = [String]()
-    var inviteesUser = [User]()
+    var invitees = [String]() //invitee names array
+    var inviteeEmails = [String]() //emails of invitee array
+    
+    var inviteesUser = [User]() //actual User array
+    var myInvitees = [User]() //actual invitees array in type User
+
+    
     let dispatchGroup = DispatchGroup()
     
     
@@ -56,7 +60,7 @@ class InviteEventViewController: UIViewController {
         
         if let inviteFriendsViewController = segue.destination as? InviteFriendsViewController {
             
-            invitees = inviteFriendsViewController.invitees
+            inviteesUser = inviteFriendsViewController.invitees
             InviteFriendsViewController.event = InviteEventViewController.event
             
             saveEvent()
@@ -222,7 +226,7 @@ extension InviteEventViewController: UITableViewDataSource {
         
 //        let invitee = inviteesUser[indexPath.row]
 //
-//        cell.inviteeButton.isSelected = invitee.isInvited
+//        cell.inviteeButton.isSelected = friender.isInvited
         
     }
     
@@ -232,11 +236,12 @@ extension InviteEventViewController: InviteEventCellDelegate {
     func didTapInviteeButton(_ inviteeButton: UIButton, on cell: InviteesCell) {
         guard let indexPath = inviteesTableView.indexPath(for: cell) else { return }
         
-        inviteeButton.isUserInteractionEnabled = false
-        if inviteesUser.count > indexPath.row {
-            self.invitees = []
-            let friender = inviteesUser[indexPath.row]
-            self.inviteesUser = []
+        inviteeButton.isUserInteractionEnabled = true
+        if self.inviteesUser.count > indexPath.row {
+            
+            let friender = self.inviteesUser[indexPath.row]
+            
+//            self.inviteesUser = []
 
 //            cell.inviteeButton.isSelected = friender.isInvited
             
@@ -256,7 +261,7 @@ extension InviteEventViewController: InviteEventCellDelegate {
             FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
                 defer {
                     inviteeButton.isUserInteractionEnabled = true
-                    self.inviteesUser.append(friender)
+                    self.myInvitees.append(friender)
                     print("invitees!!: \(self.inviteesUser.enumerated())")
 
                 }
@@ -264,6 +269,9 @@ extension InviteEventViewController: InviteEventCellDelegate {
                 guard success else { return }
                 
                 friender.isInvited = !friender.isInvited
+                
+                cell.inviteeButton.isSelected = friender.isInvited
+
                 self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
             }
         }

@@ -19,7 +19,7 @@ class InviteFriendsViewController: UIViewController {
     static var event: Event?
 
     var friends = [User]()
-    var invitees = [String]()
+    var invitees = [User]()
 
     
 
@@ -43,6 +43,12 @@ class InviteFriendsViewController: UIViewController {
         }
         
         super.viewWillAppear(animated)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let inviteEventViewController = segue.destination as! InviteEventViewController
+        inviteEventViewController.inviteesUser = self.invitees
+        
     }
     
 
@@ -96,7 +102,7 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
             defer {
                 inviteButton.isUserInteractionEnabled = true
-                self.invitees.append("\(friender)")
+                self.invitees.append(friender)
                 print("invitees!!: \(self.invitees.enumerated())")
             }
             
