@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -32,25 +33,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WH7-rB-jZu">
-                                <rect key="frame" x="50" y="184" width="275" height="299.5"/>
+                                <rect key="frame" x="50" y="188.5" width="275" height="290.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Friends icon" translatesAutoresizingMaskIntoConstraints="NO" id="rZJ-t0-OcK">
                                         <rect key="frame" x="89.5" y="0.0" width="96" height="72"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A I R T I M E" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLT-Pw-HUG">
-                                        <rect key="frame" x="51" y="92" width="173" height="36"/>
-                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="30"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AIRTIME" translatesAutoresizingMaskIntoConstraints="NO" id="OAr-aM-ymB">
+                                        <rect key="frame" x="50" y="92" width="175" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="OAr-aM-ymB" secondAttribute="height" multiplier="554.82:84.69" id="qVc-DH-j6z"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coordinate times between friends &amp; family to meet. Event scheduling as lightweight, quick, and free as air." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgz-P4-e2T">
-                                        <rect key="frame" x="0.0" y="148" width="275" height="81.5"/>
+                                        <rect key="frame" x="0.0" y="139" width="275" height="81.5"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bs4-1Z-DTa">
-                                        <rect key="frame" x="0.0" y="249.5" width="275" height="50"/>
+                                        <rect key="frame" x="0.0" y="240.5" width="275" height="50"/>
                                         <color key="backgroundColor" red="0.29411764705882354" green="0.62352941176470589" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="quw-Nh-10I"/>
@@ -66,6 +67,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="OAr-aM-ymB" secondAttribute="trailing" constant="50" id="Xhs-hd-F3n"/>
                                     <constraint firstItem="bs4-1Z-DTa" firstAttribute="width" secondItem="WH7-rB-jZu" secondAttribute="width" id="ysH-Bf-Dqi"/>
                                 </constraints>
                             </stackView>
@@ -184,6 +186,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AIRTIME" width="16" height="16"/>
         <image name="Background" width="1125" height="2001"/>
         <image name="Friends icon" width="96" height="72"/>
     </resources>

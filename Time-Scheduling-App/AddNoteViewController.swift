@@ -15,6 +15,10 @@ class AddNoteViewController: UIViewController {
     static var event: Event?
     
     @IBOutlet weak var eventNameLabel: UILabel!
+    
+    @IBAction func unwindToAddNote(_ segue: UIStoryboardSegue) {
+    }
+    
     @IBAction func finishButtonTapped(_ sender: Any) {
         
         if noteTextView.text.isEmpty {
@@ -45,6 +49,7 @@ class AddNoteViewController: UIViewController {
         super.viewDidLoad()
         print(AddNoteViewController.event?.name!)
         eventNameLabel.text = AddNoteViewController.event?.name
+        noteTextView.text = AddNoteViewController.event?.note
 
         //dismiss keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))

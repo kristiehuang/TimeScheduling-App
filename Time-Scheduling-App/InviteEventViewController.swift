@@ -15,11 +15,15 @@ class InviteEventViewController: UIViewController {
     
     static var event: Event?
     var invitees = [String]() //invitee names array
-    var inviteeEmails = [String]() //emails of invitee array
+    static var inviteeEmails = [String]() //emails of invitee array
     
     var inviteesUser = [User]() //actual User array
     var myInvitees = [User]() //actual invitees array in type User
+    @IBOutlet weak var emailTextField: UITextField!
 
+    @IBAction func returnButtonTapped(_ sender: Any) {
+        print(emailTextField.text)
+    }
     
     let dispatchGroup = DispatchGroup()
     
@@ -76,6 +80,7 @@ class InviteEventViewController: UIViewController {
     
     
     @IBAction func sendInvitesButtonTapped(_ sender: Any) {
+        print("hello")
     }
     
     @IBAction func saveCloseButton(_ sender: Any) {
@@ -107,7 +112,7 @@ class InviteEventViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         dispatchGroup.enter()
         invitees = []
-        inviteeEmails = []
+        InviteEventViewController.inviteeEmails = []
         
         getInvites()
         
@@ -170,7 +175,7 @@ class InviteEventViewController: UIViewController {
                         
 
                             self.invitees.append(name)
-                            self.inviteeEmails.append(email)
+                            InviteEventViewController.inviteeEmails.append(email)
 
                             anotherDispatchGroup.leave()
                         })
@@ -222,7 +227,7 @@ extension InviteEventViewController: UITableViewDataSource {
         
 //        
         cell.inviteeNameLabel.text = "\(invitees[indexPath.row])"
-        cell.inviteeEmailLabel.text = "\(inviteeEmails[indexPath.row])"
+        cell.inviteeEmailLabel.text = "\(InviteEventViewController.inviteeEmails[indexPath.row])"
         
 //        let invitee = inviteesUser[indexPath.row]
 //

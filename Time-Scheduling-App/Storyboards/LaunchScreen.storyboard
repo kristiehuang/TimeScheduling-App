@@ -21,27 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsn-jI-fNs">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.31192976236343384" green="0.6307607889175415" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-512" translatesAutoresizingMaskIntoConstraints="NO" id="mOp-Q9-1mA">
-                                <rect key="frame" x="100" y="246" width="175" height="175"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="mOp-Q9-1mA">
+                                <rect key="frame" x="100" y="220" width="175" height="227"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="mOp-Q9-1mA" secondAttribute="height" multiplier="1:1" id="XRS-ZZ-ovm"/>
+                                    <constraint firstAttribute="width" secondItem="mOp-Q9-1mA" secondAttribute="height" multiplier="280:363" id="6zR-Uk-H16"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mOp-Q9-1mA" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Hh3-es-0fT"/>
-                            <constraint firstAttribute="trailing" secondItem="jsn-jI-fNs" secondAttribute="trailing" id="OOD-iP-aDJ"/>
-                            <constraint firstItem="mOp-Q9-1mA" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="100" id="SEr-Y5-Jsh"/>
-                            <constraint firstItem="jsn-jI-fNs" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Yea-pG-tYp"/>
+                            <constraint firstItem="mOp-Q9-1mA" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="7jX-fJ-IJH"/>
                             <constraint firstItem="mOp-Q9-1mA" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ju7-ZA-fVn"/>
-                            <constraint firstItem="jsn-jI-fNs" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="jx9-oW-0H4"/>
-                            <constraint firstAttribute="trailing" secondItem="mOp-Q9-1mA" secondAttribute="trailing" constant="100" id="kHe-nT-xl7"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="jsn-jI-fNs" secondAttribute="bottom" id="uEV-gr-GWn"/>
+                            <constraint firstItem="mOp-Q9-1mA" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="100" id="mMr-NW-nqs"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -51,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-512" width="16" height="16"/>
+        <image name="logo" width="560" height="726"/>
     </resources>
 </document>

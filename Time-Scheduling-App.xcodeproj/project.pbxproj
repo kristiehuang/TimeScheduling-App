@@ -30,6 +30,7 @@
 		9E519EAD1F1FE14300E19E75 /* FindFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */; };
 		9E519EAF1F20103700E19E75 /* InviteFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */; };
 		9E519EB11F20134B00E19E75 /* InviteesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EB01F20134B00E19E75 /* InviteesCell.swift */; };
+		9E6526071F2D4F09007CB06D /* SendEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6526061F2D4F09007CB06D /* SendEmailViewController.swift */; };
 		9E758A051F1181A800D2745C /* SFDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */; };
 		9E758A061F1181A800D2745C /* SFDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */; };
 		9E758A071F1181A800D2745C /* SFDisplay-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7589FF1F1181A800D2745C /* SFDisplay-Regular.otf */; };
@@ -76,6 +77,7 @@
 		9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsCell.swift; sourceTree = "<group>"; };
 		9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsCell.swift; sourceTree = "<group>"; };
 		9E519EB01F20134B00E19E75 /* InviteesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteesCell.swift; sourceTree = "<group>"; };
+		9E6526061F2D4F09007CB06D /* SendEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendEmailViewController.swift; sourceTree = "<group>"; };
 		9E7589FD1F1181A800D2745C /* SFDisplay-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Light.otf"; path = "Fonts/SFDisplay-Light.otf"; sourceTree = "<group>"; };
 		9E7589FE1F1181A800D2745C /* SFDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Medium.otf"; path = "Fonts/SFDisplay-Medium.otf"; sourceTree = "<group>"; };
 		9E7589FF1F1181A800D2745C /* SFDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFDisplay-Regular.otf"; path = "Fonts/SFDisplay-Regular.otf"; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				9EE3912F1F142DE400C41503 /* EventViewController.swift */,
 				9E519EB41F20184000E19E75 /* Invite Friends */,
 				9E0653FA1F1E6E520031E4F5 /* AddNoteViewController.swift */,
+				9E6526061F2D4F09007CB06D /* SendEmailViewController.swift */,
 				9E519EB51F20185100E19E75 /* Invited to Event */,
 			);
 			name = "View Controllers";
@@ -433,6 +436,7 @@
 				9EB893831F1FD2CB000F3904 /* InviteFriendsViewController.swift in Sources */,
 				9E1A59B31F0E00DF00792D24 /* ViewController.swift in Sources */,
 				9E519EAF1F20103700E19E75 /* InviteFriendsCell.swift in Sources */,
+				9E6526071F2D4F09007CB06D /* SendEmailViewController.swift in Sources */,
 				9EB893851F1FD301000F3904 /* FriendService.swift in Sources */,
 				9E0C0B941F1570F80026307C /* EventService.swift in Sources */,
 				9E0E041D1F1D78DB0038705D /* InviteEventViewController.swift in Sources */,
