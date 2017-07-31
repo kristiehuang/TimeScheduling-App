@@ -104,7 +104,13 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
             defer {
                 inviteButton.isUserInteractionEnabled = true
-                self.invitees.append(friender)
+                if friender.isInvited == true { //false, inviting
+                    self.invitees.append(friender)
+                }
+                else {
+                    self.invitees = self.invitees.filter { $0 != friender }
+                }
+
                 print("invitees!!: \(self.invitees.enumerated())")
             }
             

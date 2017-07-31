@@ -228,13 +228,13 @@
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4p4-uk-fR7">
                                             <size key="itemSize" width="95" height="89"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="headerReferenceSize" width="50" height="50"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CalendarCell" id="hES-qC-fPi" customClass="InviteCalendarCell" customModule="Time_Scheduling_App" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="95" height="89"/>
+                                                <rect key="frame" x="50" y="0.0" width="95" height="89"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="95" height="89"/>
@@ -244,7 +244,8 @@
                                                             <rect key="frame" x="30" y="26" width="36" height="36"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="FKb-fw-mTC" secondAttribute="height" multiplier="1:1" id="BSd-kF-qQK"/>
+                                                                <constraint firstAttribute="width" constant="36" id="8TC-fW-eQO"/>
+                                                                <constraint firstAttribute="height" constant="36" id="Pke-Jj-erU"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -253,10 +254,11 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMc-KE-93R">
-                                                            <rect key="frame" x="22" y="18" width="52" height="52"/>
+                                                            <rect key="frame" x="30" y="26" width="36" height="36"/>
                                                             <color key="backgroundColor" red="1" green="0.77254901960784317" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="BMc-KE-93R" secondAttribute="height" multiplier="1:1" id="wm5-1k-jfO"/>
+                                                                <constraint firstAttribute="height" constant="36" id="Kc6-Kt-51Q"/>
+                                                                <constraint firstAttribute="width" constant="36" id="Xvl-7r-eXh"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -273,13 +275,11 @@
                                                     </subviews>
                                                 </view>
                                                 <constraints>
-                                                    <constraint firstItem="FKb-fw-mTC" firstAttribute="leading" secondItem="hES-qC-fPi" secondAttribute="leadingMargin" constant="22" id="3Vk-91-9i1"/>
                                                     <constraint firstItem="7of-tR-Bjb" firstAttribute="centerY" secondItem="hES-qC-fPi" secondAttribute="centerY" id="5fG-ba-Lrh"/>
+                                                    <constraint firstItem="BMc-KE-93R" firstAttribute="centerY" secondItem="hES-qC-fPi" secondAttribute="centerY" id="6AA-qy-15i"/>
                                                     <constraint firstItem="7of-tR-Bjb" firstAttribute="centerX" secondItem="hES-qC-fPi" secondAttribute="centerX" id="78T-iH-kbu"/>
                                                     <constraint firstItem="FKb-fw-mTC" firstAttribute="centerY" secondItem="hES-qC-fPi" secondAttribute="centerY" id="FrC-sI-Moo"/>
-                                                    <constraint firstItem="BMc-KE-93R" firstAttribute="centerY" secondItem="hES-qC-fPi" secondAttribute="centerY" id="Np6-aT-IMm"/>
-                                                    <constraint firstItem="BMc-KE-93R" firstAttribute="centerX" secondItem="hES-qC-fPi" secondAttribute="centerX" id="QwC-9C-BLV"/>
-                                                    <constraint firstItem="BMc-KE-93R" firstAttribute="leading" secondItem="hES-qC-fPi" secondAttribute="leading" constant="22" id="YIl-XZ-dKz"/>
+                                                    <constraint firstItem="BMc-KE-93R" firstAttribute="centerX" secondItem="hES-qC-fPi" secondAttribute="centerX" id="c8c-fp-cQl"/>
                                                     <constraint firstItem="FKb-fw-mTC" firstAttribute="centerX" secondItem="hES-qC-fPi" secondAttribute="centerX" id="cK0-Sp-50f"/>
                                                 </constraints>
                                                 <connections>
@@ -289,6 +289,10 @@
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
+                                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hnb-xY-jLf">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="239"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </collectionReusableView>
                                         <connections>
                                             <outlet property="ibCalendarDataSource" destination="J9a-NJ-v58" id="v2i-sH-lWI"/>
                                             <outlet property="ibCalendarDelegate" destination="J9a-NJ-v58" id="aED-3E-aEk"/>
@@ -1318,8 +1322,8 @@
                                                         <constraint firstAttribute="width" constant="31" id="afM-v3-lIY"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="20"/>
-                                                    <state key="normal" image="uninvite button"/>
-                                                    <state key="selected" image="friendinvite button"/>
+                                                    <state key="normal" image="friendinvite button"/>
+                                                    <state key="selected" image="uninvite button"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <real key="value" value="15.5"/>

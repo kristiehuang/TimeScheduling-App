@@ -46,7 +46,6 @@ struct FriendService {
         
         let key = event.key!
 
-        
         print(event.dictValue)
 
         let eventRef = Database.database().reference().child("users").child(user.uid).child("invited events").child(key)
@@ -69,7 +68,7 @@ struct FriendService {
     private static func uninviteUser(_ user: User, _ event: Event, forCurrentUserWithSuccess success: @escaping (Bool) -> Void) {
         let currentUID = User.current.uid
         let ref = Database.database().reference()
-        
+
 //        let key = Database.database().reference().child("events").child(currentUID).childByAutoId().key
         let key = event.key!
 

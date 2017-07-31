@@ -13,12 +13,12 @@ import FirebaseDatabase
 
 class InviteEventViewController: UIViewController {
     
-
+    
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBAction func returnButtonTapped(_ sender: Any) {
     }
-
+    
     
     @IBOutlet weak var eventNameLabel: UILabel!
     
@@ -31,13 +31,13 @@ class InviteEventViewController: UIViewController {
     
     let dispatchGroup = DispatchGroup()
     static var event: Event?
-    var inviteeNames = [String]() //invitee names array
-    static var inviteeEmails = [String]() //emails of invitee array
+//    var inviteeNames = [String]() //invitee names array
+//    static var inviteeEmails = [String]() //emails of invitee array
     
     var invitees = [User]() //
-    var inviteesUser = [User]() //actual User array
+//    var inviteesUser = [User]() //actual User array
     var myInvitees = [User]() //actual invitees array in type User
-
+    
     
     
     @IBAction func sendInvitesButtonTapped(_ sender: Any) {
@@ -72,22 +72,24 @@ class InviteEventViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        dispatchGroup.enter()
-        inviteeNames = []
-        InviteEventViewController.inviteeEmails = []
-        inviteesUser = []
+//        inviteeNames = []
+//        InviteEventViewController.inviteeEmails = []
+//        inviteesUser = []
+        myInvitees = []
         
-        getInvites()
         
-        for invitee in (invitees) {
-            
+        //        getInvites()
+
+        for invitee in invitees { //from inviteFriends
+            dispatchGroup.enter()
+
             let ref = Database.database().reference().child("users").child(invitee.uid)
             
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 let user = User(snapshot: snapshot)
-                self.inviteesUser.append(user!)
+                self.myInvitees.append(user!)
+                self.dispatchGroup.leave()
             })
-            
             //go into database, append user based on key
         }
         
@@ -132,7 +134,7 @@ class InviteEventViewController: UIViewController {
         
         if let inviteFriendsViewController = segue.destination as? InviteFriendsViewController {
             
-            inviteesUser = inviteFriendsViewController.invitees
+            myInvitees = inviteFriendsViewController.invitees
             InviteFriendsViewController.event = InviteEventViewController.event
             
             saveEvent()
@@ -147,78 +149,13 @@ class InviteEventViewController: UIViewController {
     }
     
     
-    func getInvites() {
-        
-        var name = ""
-        var email: String = ""
-        
-        
-        UserService.events(for: User.current, completion: { (events:[Event]) in
-            
-            for eventz in events {
-                print(eventz.key)
-                print(InviteEventViewController.event?.key)
-                if InviteEventViewController.event?.key == eventz.key {
-                    let anotherDispatchGroup = DispatchGroup()
-                    
-                    for invitee in eventz.invitees {
-                        
-                        anotherDispatchGroup.enter()
-                        
-                        let ref = Database.database().reference().child("users").child(invitee.key)
-                        
-                        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
-                                return
-                            }
-                            print(snapshot[0].value as! String)
-                            
-                            
-                            //
-                            email = snapshot[0].value as! String
-                            
-                            if snapshot.count == 4 {
-                                name = snapshot[3].value as! String
-                            }
-                            else if snapshot.count == 3 {
-                                name = snapshot[2].value as! String
-                            }
-                            else if snapshot.count == 2 {
-                                name = snapshot[1].value as! String
-                            }
-                            
-                            
-                            self.inviteeNames.append(name)
-                            InviteEventViewController.inviteeEmails.append(email)
-                            
-                            anotherDispatchGroup.leave()
-                        })
-                        
-                        
-                    }
-                    anotherDispatchGroup.notify(queue: .main, execute: {
-                        print("invitee")
-                        self.inviteesTableView.reloadData()
-                        
-                        self.dispatchGroup.leave()
-                    })
-                    
-                    
-                    
-                }
-            }
-        })
-        
-    }
-    
-    
 }
 
 extension InviteEventViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.inviteeNames.count
+        return self.myInvitees.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -240,8 +177,14 @@ extension InviteEventViewController: UITableViewDataSource {
         
         
         //
-        cell.inviteeNameLabel.text = "\(inviteeNames[indexPath.row])"
-        cell.inviteeEmailLabel.text = "\(InviteEventViewController.inviteeEmails[indexPath.row])"
+        //        cell.inviteeNameLabel.text = "\(inviteeNames[indexPath.row])"
+        //        cell.inviteeEmailLabel.text = "\(InviteEventViewController.inviteeEmails[indexPath.row])"
+        if self.myInvitees.count > indexPath.row {
+            
+            cell.inviteeNameLabel.text = myInvitees[indexPath.row].name
+            cell.inviteeEmailLabel.text = myInvitees[indexPath.row].email
+            cell.inviteeButton.isSelected = myInvitees[indexPath.row].isInvited
+        }
         
         //        let invitee = inviteesUser[indexPath.row]
         //
@@ -256,27 +199,29 @@ extension InviteEventViewController: InviteEventCellDelegate {
         guard let indexPath = inviteesTableView.indexPath(for: cell) else { return }
         
         inviteeButton.isUserInteractionEnabled = true
-        if self.inviteesUser.count > indexPath.row {
+        if self.myInvitees.count > indexPath.row {
             
-            let friender = self.inviteesUser[indexPath.row]
-            
+            let friender = self.myInvitees[indexPath.row]
+
             
             //friendservice methods
             let dispatchReloadTable = DispatchGroup()
             dispatchReloadTable.enter()
             FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
                 defer {
+                    
                     inviteeButton.isUserInteractionEnabled = true
                     
-                    if !friender.isInvited == true { //false, inviting
+                    if !friender.isInvited == false { //false, inviting
+                        cell.inviteeButton.isSelected = false
                         self.myInvitees.append(friender)
                         print("has been invited")
                         dispatchReloadTable.leave()
                     }
-                    if !friender.isInvited == false { //true, uninviting
+                    else if !friender.isInvited == true { //true, uninviting
+                        cell.inviteeButton.isSelected = true
                         self.myInvitees = self.myInvitees.filter { $0 != friender }
                         print("has been UNinvited")
-
                         dispatchReloadTable.leave()
                     }
                     
@@ -284,14 +229,12 @@ extension InviteEventViewController: InviteEventCellDelegate {
                 
                 guard success else { return }
                 
-                dispatchReloadTable.notify(queue: .main, execute: { 
+                dispatchReloadTable.notify(queue: .main, execute: {
                     friender.isInvited = !friender.isInvited
-                    
-                    cell.inviteeButton.isSelected = friender.isInvited
-                    
-                    self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
+                    self.inviteesTableView.reloadData()
+//                    self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
                 })
-  
+                
             }
         }
     }

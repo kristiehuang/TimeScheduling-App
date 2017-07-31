@@ -35,11 +35,14 @@ class EditResponseViewController: UIViewController {
     
     
     let outsideMonthColor = UIColor(colorWithHexValue: 0x7FAEE7) //cell date label color in indates/outdates
+    
     let monthColor = UIColor.white //cell date label color in this month
     let selectedMonthColor = UIColor.white //color of selected date label text
+
     
     let inviteSelectedViewColor = UIColor(colorWithHexValue: 0xFFC55A) //color of invite selected view, orange
     let selectedViewColor = UIColor(colorWithHexValue: 0xBCD8F7) //color of invite selected view, light white
+//    let selectedViewColor = UIColor.white //color of invite selected view, light white
 
 
 //    let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
@@ -87,13 +90,6 @@ class EditResponseViewController: UIViewController {
                     //for NOW, all dates in database. not just host's
                     self.existingDates = []
                     for (myDate) in eventz.dates {
-//                        
-//                        let dateFormatter = DateFormatter()
-//                        dateFormatter.dateFormat = "yyyy-MM-dd h:mm:ss Z" //Your date format
-//                        dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
-//                        let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
-                        
-                        
                         self.existingDates.append(myDate)
                     }
                     
@@ -152,13 +148,14 @@ class EditResponseViewController: UIViewController {
         
         if cellState.isSelected {
             //selected view = circle behind text
-            validCell.inviteSelectedView.isHidden = false //is not hidden
-//            validCell.selectedView.isHidden = false //is not hidden
-
+//            validCell.inviteSelectedView.isHidden = false //is not hidden
+            validCell.selectedView.isHidden = false
+            validCell.selectedView.backgroundColor = inviteSelectedViewColor
             
         }
         else {
-            validCell.inviteSelectedView.isHidden = true //is hidden
+            validCell.selectedView.isHidden = true //is hidden
+            
         }
     }
     
@@ -378,21 +375,29 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
 
         switch cellState.selectedPosition() {
         case .full, .left, .right:
-            calendarCell.inviteSelectedView.isHidden = false
-            calendarCell.inviteSelectedView.backgroundColor = self.inviteSelectedViewColor
+//            calendarCell.inviteSelectedView.isHidden = false
+            
+            calendarCell.selectedView.isHidden = false
+            calendarCell.selectedView.backgroundColor = inviteSelectedViewColor
+
+//            calendarCell.inviteSelectedView.backgroundColor = self.inviteSelectedViewColor
 //            calendarCell.inviteSelectedView.backgroundColor = UIColor.white
 
 //            calendarCell.isHidden = false
 //            calendarCell.backgroundColor = self.inviteSelectedViewColor
             calendarCell.isSelected = true
         case .middle:
-            calendarCell.inviteSelectedView.isHidden = false
-            calendarCell.inviteSelectedView.backgroundColor = self.inviteSelectedViewColor // Or what ever you want for your dates that land in the middle
+            calendarCell.selectedView.isHidden = false
+            calendarCell.selectedView.backgroundColor = inviteSelectedViewColor // Or what ever you want for your dates that land in the middle
             calendarCell.isSelected = true
             
         default:
             calendarCell.inviteSelectedView.isHidden = true
             calendarCell.inviteSelectedView.backgroundColor = nil // Have no selection when a cell is not selected
+            
+            calendarCell.selectedView.isHidden = true
+            calendarCell.selectedView.backgroundColor = nil
+            
             calendarCell.isSelected = false
         }
         
@@ -406,10 +411,21 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! InviteCalendarCell
         cell.dateLabel.text = cellState.text
         
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        
+        let formatDate: Date? = dateFormatterGet.date(from: "\(date)")
+        let newDate = dateFormatter.string(from: formatDate!)
+        
+        
+        
         
         dispatchGroup.notify(queue: .main) {
             for myDate in self.existingDates {
-                if myDate == "\(date)" {
+                if myDate == newDate {
                     print("array of existing dates \(self.existingDates)")
                     cell.isSelected = true
                     
@@ -419,18 +435,7 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
                     cell.selectedView.backgroundColor = self.selectedViewColor
                     cell.dateLabel.textColor = self.selectedMonthColor
                     
-                    
-                    let dateFormatterGet = DateFormatter()
-                    dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
-                    
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
-                    
-                    let formatDate: Date? = dateFormatterGet.date(from: "\(myDate)")
-                    print(dateFormatter.string(from: formatDate!))
-                    
-                    
-                    self.datesChosen.append(dateFormatter.string(from: formatDate!))
+                    self.datesChosen.append(myDate)
                 }
                 else {
                     self.handleCellSelected(view: cell, cellState: cellState)
