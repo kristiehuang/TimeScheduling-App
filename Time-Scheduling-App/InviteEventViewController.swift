@@ -13,20 +13,12 @@ import FirebaseDatabase
 
 class InviteEventViewController: UIViewController {
     
-    static var event: Event?
-    var inviteeNames = [String]() //invitee names array
-    static var inviteeEmails = [String]() //emails of invitee array
-    
-    var inviteesUser = [User]() //actual User array
-    var myInvitees = [User]() //actual invitees array in type User
+
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBAction func returnButtonTapped(_ sender: Any) {
-        print(emailTextField.text)
     }
-    
-    let dispatchGroup = DispatchGroup()
-    
+
     
     @IBOutlet weak var eventNameLabel: UILabel!
     
@@ -36,6 +28,82 @@ class InviteEventViewController: UIViewController {
     
     @IBAction func unwindToInvite(_ segue: UIStoryboardSegue) {
     }
+    
+    let dispatchGroup = DispatchGroup()
+    static var event: Event?
+    var inviteeNames = [String]() //invitee names array
+    static var inviteeEmails = [String]() //emails of invitee array
+    
+    var invitees = [User]() //
+    var inviteesUser = [User]() //actual User array
+    var myInvitees = [User]() //actual invitees array in type User
+
+    
+    
+    @IBAction func sendInvitesButtonTapped(_ sender: Any) {
+        print("hello")
+    }
+    
+    @IBAction func saveCloseButton(_ sender: Any) {
+        print("transitioning back to home/save")
+        //save invites & segue
+        saveEvent()
+    }
+    
+    
+    
+    override func viewDidLoad() {
+        print("dates are \(InviteEventViewController.event?.dates ?? [])")
+        
+        eventNameLabel.text = InviteEventViewController.event?.name //printing nil
+        //add contacts output
+        
+        // remove separators for empty cells
+        inviteesTableView.tableFooterView = UIView()
+        inviteesTableView.rowHeight = 71
+        
+        //dismiss keyboard
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+        
+        super.viewDidLoad()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        dispatchGroup.enter()
+        inviteeNames = []
+        InviteEventViewController.inviteeEmails = []
+        inviteesUser = []
+        
+        getInvites()
+        
+        for invitee in (invitees) {
+            
+            let ref = Database.database().reference().child("users").child(invitee.uid)
+            
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                let user = User(snapshot: snapshot)
+                self.inviteesUser.append(user!)
+            })
+            
+            //go into database, append user based on key
+        }
+        
+        
+        
+        
+        dispatchGroup.notify(queue: .main, execute: {
+            
+            print("dispatch group run yay")
+            self.inviteesTableView.reloadData()
+            super.viewDidAppear(true)
+        })
+        
+    }
+    
+    
     
     func saveEvent(){
         
@@ -78,69 +146,6 @@ class InviteEventViewController: UIViewController {
         
     }
     
-    
-    @IBAction func sendInvitesButtonTapped(_ sender: Any) {
-        print("hello")
-    }
-    
-    @IBAction func saveCloseButton(_ sender: Any) {
-        print("transitioning back to home/save")
-        //save invites & segue
-        saveEvent()
-    }
-    
-    
-    override func viewDidLoad() {
-        print("dates are \(InviteEventViewController.event?.dates ?? [])")
-        
-        eventNameLabel.text = InviteEventViewController.event?.name //printing nil
-        //add contacts output
-        
-        // remove separators for empty cells
-        inviteesTableView.tableFooterView = UIView()
-        inviteesTableView.rowHeight = 71
-        
-        //dismiss keyboard
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
-        tap.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tap)
-        
-        super.viewDidLoad()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        dispatchGroup.enter()
-        inviteeNames = []
-        InviteEventViewController.inviteeEmails = []
-        inviteesUser = []
-        
-        getInvites()
-        
-        for invitee in (InviteEventViewController.event?.invitees)! {
-            
-            
-            let ref = Database.database().reference().child("users").child(invitee.key)
-            
-            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                let user = User(snapshot: snapshot)
-                self.inviteesUser.append(user!)
-            })
-            
-            //go into database, append user based on key
-        }
-        
-        
-        
-        
-        dispatchGroup.notify(queue: .main, execute: {
-            
-            print("dispatch group run yay")
-            self.inviteesTableView.reloadData()
-            super.viewDidAppear(true)
-        })
-        
-    }
     
     func getInvites() {
         
@@ -257,22 +262,36 @@ extension InviteEventViewController: InviteEventCellDelegate {
             
             
             //friendservice methods
-            
+            let dispatchReloadTable = DispatchGroup()
+            dispatchReloadTable.enter()
             FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
                 defer {
                     inviteeButton.isUserInteractionEnabled = true
-                    self.myInvitees.append(friender)
-                    print("invitees!!: \(self.inviteesUser.enumerated())")
+                    
+                    if !friender.isInvited == true { //false, inviting
+                        self.myInvitees.append(friender)
+                        print("has been invited")
+                        dispatchReloadTable.leave()
+                    }
+                    if !friender.isInvited == false { //true, uninviting
+                        self.myInvitees = self.myInvitees.filter { $0 != friender }
+                        print("has been UNinvited")
+
+                        dispatchReloadTable.leave()
+                    }
                     
                 }
                 
                 guard success else { return }
                 
-                friender.isInvited = !friender.isInvited
-                
-                cell.inviteeButton.isSelected = friender.isInvited
-                
-                self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
+                dispatchReloadTable.notify(queue: .main, execute: { 
+                    friender.isInvited = !friender.isInvited
+                    
+                    cell.inviteeButton.isSelected = friender.isInvited
+                    
+                    self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
+                })
+  
             }
         }
     }

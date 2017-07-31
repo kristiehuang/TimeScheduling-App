@@ -36,6 +36,7 @@ class InviteFriendsViewController: UIViewController {
 
         UserService.usersExcludingCurrentUser { [unowned self] (users) in
             self.friends = users
+            self.invitees = []
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -47,7 +48,7 @@ class InviteFriendsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let inviteEventViewController = segue.destination as! InviteEventViewController
-        inviteEventViewController.inviteesUser = self.invitees
+        inviteEventViewController.invitees = self.invitees
         
     }
     
@@ -92,7 +93,7 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         inviteButton.isUserInteractionEnabled = false
         let friender = friends[indexPath.row]
         
-        self.invitees = []
+//        self.invitees = []
 
         //if empty, give invitees default value. if new invitees, reset & append
         
