@@ -87,11 +87,11 @@ class EditResponseViewController: UIViewController {
                     //for NOW, all dates in database. not just host's
                     self.existingDates = []
                     for (myDate) in eventz.dates {
-                        
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd h:mm:ss Z" //Your date format
-                        dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
-                        let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
+//                        
+//                        let dateFormatter = DateFormatter()
+//                        dateFormatter.dateFormat = "yyyy-MM-dd h:mm:ss Z" //Your date format
+//                        dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
+//                        let dateDate = dateFormatter.date(from: myDate) //according to date format your date string
                         
                         
                         self.existingDates.append(myDate)

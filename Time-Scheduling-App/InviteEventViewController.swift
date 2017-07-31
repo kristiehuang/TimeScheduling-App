@@ -14,13 +14,13 @@ import FirebaseDatabase
 class InviteEventViewController: UIViewController {
     
     static var event: Event?
-    var invitees = [String]() //invitee names array
+    var inviteeNames = [String]() //invitee names array
     static var inviteeEmails = [String]() //emails of invitee array
     
     var inviteesUser = [User]() //actual User array
     var myInvitees = [User]() //actual invitees array in type User
     @IBOutlet weak var emailTextField: UITextField!
-
+    
     @IBAction func returnButtonTapped(_ sender: Any) {
         print(emailTextField.text)
     }
@@ -111,21 +111,30 @@ class InviteEventViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         dispatchGroup.enter()
-        invitees = []
+        inviteeNames = []
         InviteEventViewController.inviteeEmails = []
+        inviteesUser = []
         
         getInvites()
         
+        for invitee in (InviteEventViewController.event?.invitees)! {
+            
+            
+            let ref = Database.database().reference().child("users").child(invitee.key)
+            
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                let user = User(snapshot: snapshot)
+                self.inviteesUser.append(user!)
+            })
+            
+            //go into database, append user based on key
+        }
+        
+        
+        
+        
         dispatchGroup.notify(queue: .main, execute: {
             
-            //
-            //            UserService.usersExcludingCurrentUser { [unowned self] (users) in
-            //                self.inviteesUser = users
-            //
-            //                DispatchQueue.main.async {
-            //                    self.inviteesTableView.reloadData()
-            //                }
-            //            }
             print("dispatch group run yay")
             self.inviteesTableView.reloadData()
             super.viewDidAppear(true)
@@ -172,11 +181,11 @@ class InviteEventViewController: UIViewController {
                             else if snapshot.count == 2 {
                                 name = snapshot[1].value as! String
                             }
-                        
-
-                            self.invitees.append(name)
+                            
+                            
+                            self.inviteeNames.append(name)
                             InviteEventViewController.inviteeEmails.append(email)
-
+                            
                             anotherDispatchGroup.leave()
                         })
                         
@@ -185,10 +194,10 @@ class InviteEventViewController: UIViewController {
                     anotherDispatchGroup.notify(queue: .main, execute: {
                         print("invitee")
                         self.inviteesTableView.reloadData()
-
+                        
                         self.dispatchGroup.leave()
                     })
-
+                    
                     
                     
                 }
@@ -204,7 +213,7 @@ extension InviteEventViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.invitees.count
+        return self.inviteeNames.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -213,11 +222,11 @@ extension InviteEventViewController: UITableViewDataSource {
         cell.delegate = self
         
         configure(cell: cell, atIndexPath: indexPath)
-
-
-//        
-//        let invitee = inviteesUser[indexPath.row]
-//        cell.inviteeButton.isSelected = invitee.isInvited
+        
+        
+        //
+        //        let invitee = inviteesUser[indexPath.row]
+        //        cell.inviteeButton.isSelected = invitee.isInvited
         
         return cell
     }
@@ -225,13 +234,13 @@ extension InviteEventViewController: UITableViewDataSource {
     func configure(cell: InviteesCell, atIndexPath indexPath: IndexPath) {
         
         
-//        
-        cell.inviteeNameLabel.text = "\(invitees[indexPath.row])"
+        //
+        cell.inviteeNameLabel.text = "\(inviteeNames[indexPath.row])"
         cell.inviteeEmailLabel.text = "\(InviteEventViewController.inviteeEmails[indexPath.row])"
         
-//        let invitee = inviteesUser[indexPath.row]
-//
-//        cell.inviteeButton.isSelected = friender.isInvited
+        //        let invitee = inviteesUser[indexPath.row]
+        //
+        //        cell.inviteeButton.isSelected = friender.isInvited
         
     }
     
@@ -246,20 +255,6 @@ extension InviteEventViewController: InviteEventCellDelegate {
             
             let friender = self.inviteesUser[indexPath.row]
             
-//            self.inviteesUser = []
-
-//            cell.inviteeButton.isSelected = friender.isInvited
-            
-//            if !cell.inviteeButton.isSelected {
-//                friender.isInvited = false
-//                inviteesUser.remove(at: indexPath.row)
-//                inviteesTableView.reloadData()
-//                
-//            }
-//            
-            //display friends only
-            //if setIsFriending = true, display
-            
             
             //friendservice methods
             
@@ -268,7 +263,7 @@ extension InviteEventViewController: InviteEventCellDelegate {
                     inviteeButton.isUserInteractionEnabled = true
                     self.myInvitees.append(friender)
                     print("invitees!!: \(self.inviteesUser.enumerated())")
-
+                    
                 }
                 
                 guard success else { return }
@@ -276,7 +271,7 @@ extension InviteEventViewController: InviteEventCellDelegate {
                 friender.isInvited = !friender.isInvited
                 
                 cell.inviteeButton.isSelected = friender.isInvited
-
+                
                 self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
             }
         }

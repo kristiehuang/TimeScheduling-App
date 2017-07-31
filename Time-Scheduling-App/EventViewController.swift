@@ -66,35 +66,37 @@ class EventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.existingDates = []
-
-        
-        setUpCalendarView()
-        
-        
-        calendarView.visibleDates { visibleDates in
-            self.setupViewsOfCalendar(from: visibleDates)
-        }
-        
-        let currentDate = Date()
-        calendarView.scrollToDate(currentDate)
-        
-        dispatchGroup.enter()
-        UserService.events(for: User.current, completion: { (events:[Event]) in
-            //for each event in events called from user
-            for eventz in events {
-                if EventViewController.event?.key == eventz.key {
-                    
-                    for (myDate) in eventz.dates {
-
-                        self.existingDates.append(myDate)
-
-                    }
-                    
-                }
-            }
-            self.dispatchGroup.leave()
-        })
-        
+//
+//        
+//        setUpCalendarView()
+//        
+//        
+//        calendarView.visibleDates { visibleDates in
+//            self.setupViewsOfCalendar(from: visibleDates)
+//        }
+//        
+//        let currentDate = Date()
+//        calendarView.scrollToDate(currentDate)
+//        
+//        dispatchGroup.enter()
+//        UserService.events(for: User.current, completion: { (events:[Event]) in
+//            //for each event in events called from user
+//            for eventz in events {
+//                if EventViewController.event?.key == eventz.key {
+//                    
+//                    for (myDate) in eventz.dates {
+//
+////                        self.existingDates.append(myDate)
+//        self.datesChosen.append(myDate)
+//        numberOfDates += 1
+//
+//                    }
+//
+//                }
+//            }
+//            self.dispatchGroup.leave()
+//        })
+//        
         
         
         calendarView.allowsMultipleSelection  = true
@@ -114,32 +116,82 @@ class EventViewController: UIViewController {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
-        dispatchGroup.notify(queue: .main) {
-            
-            
-            //             self.calendarView.selectDates(existingDates)
-            
-            //            self.calendarView.selectDates([currentDate])
-        }
-        
     }
     
     //    for existing events
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
+        self.existingDates = []
+
+        dispatchGroup.enter()
         if let event = EventViewController.event {
             eventNameTextField.text = event.name
+            
+            for (myDate) in event.dates {
+                
+                self.existingDates.append(myDate)
+                self.datesChosen.append(myDate)
+                self.numberOfDates += 1
+                
+            }
+            
+            self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen | Press & hold to select a range"
+            
+            dispatchGroup.leave()
             //show selected event.dates
         } else {
             eventNameTextField.text = "Untitled Event"
+            dispatchGroup.leave()
         }
+        
+        
+        
+        
+        setUpCalendarView()
+        
+        
+        calendarView.visibleDates { visibleDates in
+            self.setupViewsOfCalendar(from: visibleDates)
+        }
+        
+        let currentDate = Date()
+        calendarView.scrollToDate(currentDate)
+        
+//        dispatchGroup.enter()
+//        UserService.events(for: User.current, completion: { (events:[Event]) in
+//            //for each event in events called from user
+//            for eventz in events {
+//                if EventViewController.event?.key == eventz.key {
+//                    
+//                    for (myDate) in eventz.dates {
+//                        
+//                        self.existingDates.append(myDate)
+//                        self.datesChosen.append(myDate)
+//                        self.numberOfDates += 1
+//                        
+//                    }
+//                    
+//                    self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen | Press & hold to select a range"
+//                }
+//            }
+//            self.dispatchGroup.leave()
+//        })
+        
+        
+        
+        calendarView.allowsMultipleSelection  = true
+        calendarView.isRangeSelectionUsed = true
+
+
+        
+        
     }
     
     func setUpCalendarView() {
         calendarView.minimumLineSpacing = 0
         calendarView.minimumInteritemSpacing = 0
+        
+    
         
     }
     
@@ -477,6 +529,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! CalendarCell
         cell.dateLabel.text = cellState.text
         
+        
         dispatchGroup.notify(queue: .main) {
             for myDate in self.existingDates {
                 
@@ -498,6 +551,8 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                     cell.selectedView.isHidden = false
                     cell.selectedView.backgroundColor = UIColor.white
                     cell.dateLabel.textColor = self.selectedMonthColor
+                    
+                    self.numberOfDates += 1
 //
                     
                     self.datesChosen.append(myDate)
@@ -565,7 +620,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
         
         self.datesChosen.append(dateFormatter.string(from: formatDate!))
-        print("dates chosen array are \(self.datesChosen.enumerated())")
+//        print("dates chosen array are \(self.datesChosen.enumerated())")
         
         
         

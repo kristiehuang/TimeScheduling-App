@@ -80,14 +80,80 @@ class EventTableViewController: UITableViewController {
         EventViewController.event = event
         
         
+        //                        print("is host")
+        self.performSegue(withIdentifier: "showEventResults", sender: nil)
+        //        }
+        //        else {
+        //            self.performSegue(withIdentifier: "showEventResults", sender: nil)
+        //            //                        print("is not host")
+        //        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if User.current.uid == displayedEvents[indexPath.row].host {
+            if editingStyle == .delete {
+                let alertController = UIAlertController(title: "Are you sure?", message: "This will delete the event permanently & uninvite all invitees.", preferredStyle: .alert)
+
+                let delete = UIAlertAction(title: "Delete", style: .default) { _ in
+                    let event = self.displayedEvents[indexPath.row]
+                    
+                    for invitee in event.invitees {
+                        let inviteeRef = Database.database(
+                            ).reference().child("users").child(invitee.key).child("invited events").child(event.key!)
+                        inviteeRef.removeValue()
+                        print("\(invitee.key) uninvited")
+                    }
+                    
+                    let eventRef = Database.database().reference().child("events").child(User.current.uid).child(event.key!)
+                    eventRef.removeValue()
+                    
+                    
+                    let hostRef = Database.database().reference().child("users").child(User.current.uid).child("hosting events").child(event.key!)
+                    hostRef.removeValue()
+                    
+                    self.displayedEvents.remove(at: indexPath.row)
+                    
+                }
+                alertController.addAction(delete)
+                
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancel)
+                
+                present(alertController, animated: true)
+                
+            }
+        }
+        else { //if user is invitee
+            if editingStyle == .delete {
+                let alertController = UIAlertController(title: "Are you sure?", message: "You will no longer be able to access this event.", preferredStyle: .alert)
+                
+                let delete = UIAlertAction(title: "Delete", style: .default) { _ in
+                                        //remove user from event invitees, remove user entries to dates
+                    
+                    self.displayedEvents.remove(at: indexPath.row)
+                    
+                    
+                    
+
+                }
+                alertController.addAction(delete)
+                
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancel)
+                
+                present(alertController, animated: true)
+                
+            }
+        }
         
-        if User.current.uid == event.host {
-            //                        print("is host")
-            self.performSegue(withIdentifier: "editEvent", sender: nil)
-        }
-        else {
-            self.performSegue(withIdentifier: "showEventResults", sender: nil)
-            //                        print("is not host")
-        }
+        //
+        //        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        //
+        //        let delete = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        //        alertController.addAction(delete)
+        //
+        //
+        //
+        //        present(alertController, animated: true)
     }
 }

@@ -94,6 +94,7 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         
         self.invitees = []
 
+        //if empty, give invitees default value. if new invitees, reset & append
         
         //friendservice methods
         print(InviteFriendsViewController.event?.dates)

@@ -12,7 +12,8 @@ import UIKit
 class BestDatesEventViewController: UIViewController {
     
     @IBOutlet weak var eventNameLabel: UILabel!
-    
+    var orderedDict: [Date: Int] = [:]
+    static var thisEvent : Event?
     
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var respondantsLabel: UILabel!
@@ -25,12 +26,20 @@ class BestDatesEventViewController: UIViewController {
     @IBAction func backButton1(_ sender: Any) {
     }
     
-    @IBAction func saveButtonTapped(_ sender: Any) {
+    @IBAction func editButtonTapped(_ sender: Any) {
+        if User.current.uid == BestDatesEventViewController.thisEvent?.host {
+            //                        print("is host")
+            self.performSegue(withIdentifier: "editEvent", sender: nil)
+
+        }
+        else {
+            self.performSegue(withIdentifier: "editResponse", sender: nil)
+            //                        print("is not host")
+        }
     }
+
     
-    
-    var orderedDict: [Date: Int] = [:]
-    static var thisEvent : Event?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

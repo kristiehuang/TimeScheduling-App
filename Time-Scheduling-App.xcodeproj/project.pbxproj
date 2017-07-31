@@ -49,6 +49,7 @@
 		9EB893871F1FD7EA000F3904 /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB893861F1FD7EA000F3904 /* FindFriendsViewController.swift */; };
 		9EE391301F142DE400C41503 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE3912F1F142DE400C41503 /* EventViewController.swift */; };
 		9EE391331F14439E00C41503 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE391321F14439E00C41503 /* CalendarCell.swift */; };
+		9EFDADAE1F2F925A009D6940 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFDADAD1F2F925A009D6940 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,7 @@
 		9EE3912F1F142DE400C41503 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		9EE391321F14439E00C41503 /* CalendarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		9EF449861F09A8C8002EA988 /* Time-Scheduling-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time-Scheduling-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EFDADAD1F2F925A009D6940 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				9E1A59B21F0E00DF00792D24 /* ViewController.swift */,
 				9E0C0B991F1588850026307C /* EventTableViewController.swift */,
 				9EB893861F1FD7EA000F3904 /* FindFriendsViewController.swift */,
+				9EFDADAD1F2F925A009D6940 /* ProfileViewController.swift */,
 			);
 			name = "Home View";
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				9EB893831F1FD2CB000F3904 /* InviteFriendsViewController.swift in Sources */,
 				9E1A59B31F0E00DF00792D24 /* ViewController.swift in Sources */,
 				9E519EAF1F20103700E19E75 /* InviteFriendsCell.swift in Sources */,
+				9EFDADAE1F2F925A009D6940 /* ProfileViewController.swift in Sources */,
 				9E6526071F2D4F09007CB06D /* SendEmailViewController.swift in Sources */,
 				9EB893851F1FD301000F3904 /* FriendService.swift in Sources */,
 				9E0C0B941F1570F80026307C /* EventService.swift in Sources */,
