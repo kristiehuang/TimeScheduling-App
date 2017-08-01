@@ -150,7 +150,6 @@
 				9EE3912F1F142DE400C41503 /* EventViewController.swift */,
 				9E519EB41F20184000E19E75 /* Invite Friends */,
 				9E0653FA1F1E6E520031E4F5 /* AddNoteViewController.swift */,
-				9E6526061F2D4F09007CB06D /* SendEmailViewController.swift */,
 				9E519EB51F20185100E19E75 /* Invited to Event */,
 			);
 			name = "View Controllers";
@@ -189,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */,
+				9E6526061F2D4F09007CB06D /* SendEmailViewController.swift */,
 				9E0653FC1F1EA3590031E4F5 /* EditResponseViewController.swift */,
 				9E20BC121F29053F0016AA20 /* Extension.swift */,
 			);

@@ -66,7 +66,7 @@ class BestDatesEventViewController: UIViewController {
             
             eventNameLabel.text = "\(event.name ?? "Untitled Event")"
             noteLabel.text = "Host:  \(event.note)"
-            respondantsLabel.text = "number/\(event.invitees.count) respondants"
+            respondantsLabel.text = "number/\(event.invitees.count + event.emailInvitees.count) respondants"
         }
     }
     

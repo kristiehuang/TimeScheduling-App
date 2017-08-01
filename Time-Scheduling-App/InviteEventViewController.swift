@@ -112,24 +112,7 @@ class InviteEventViewController: UIViewController {
 		self.view.addGestureRecognizer(tap)
 		
 		self.emailTextField.delegate = self
-		
-		//remove temporary values
-		
-		//        InviteEventViewController.myInvitees.removeAll()
-		//        InviteEventViewController.emailInvitees.removeAll()
-		//
-		//        let ref = Database.database().reference()
-		//        let key = InviteEventViewController.event?.key!
-		//
-		//        let inviteRef = ref.child("events").child(User.current.uid).child(key!).child("invitees")
-		//        inviteRef.setValue(nil)
-		//
-		//
-		//        let eventRef = ref.child("events").child(User.current.uid).child(key!).child("email invitees")
-		//        eventRef.setValue(nil)
-		//
-		//        let hostRef = ref.child("users").child(User.current.uid).child("hosting events").child("email invitees")
-		//        hostRef.setValue(nil)
+
 		
 		super.viewDidLoad()
 		
@@ -144,16 +127,6 @@ class InviteEventViewController: UIViewController {
 			dispatchGroup.enter()
 			self.inviteesTableView.reloadData()
 
-//			let ref = Database.database().reference().child("users").child(invitee.uid)
-//			
-//			
-//			ref.observeSingleEvent(of: .value, with: { (snapshot) in
-//				let user = User(snapshot: snapshot)
-//				
-//				//append users in database
-//				InviteEventViewController.myInvitees.append(user!)
-//				self.inviteesTableView.reloadData()
-//
 				self.dispatchGroup.leave()
 //			})
 			//go into database, append user based on key

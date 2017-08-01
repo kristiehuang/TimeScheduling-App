@@ -22,6 +22,7 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
         sendEmail()
     }
     
+    
     func sendEmail() {
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
@@ -41,18 +42,18 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
             })
         }
         
-//        
+
 //        for invitee in InviteEventViewController.myInvitees {
 //            inviteeEmails.append(invitee.email)
 //        }
-        for email in InviteEventViewController.emailInvitees {
+        for email in (BestDatesEventViewController.thisEvent?.emailInvitees)! {
             inviteeEmails.append(email)
         }
 
         
         composeVC.setBccRecipients(inviteeEmails)
         composeVC.setSubject("Invite to \(String(describing: BestDatesEventViewController.thisEvent?.name))")
-        composeVC.setMessageBody("Hi! <br> I'm planning an event for us to get together sometime for \(BestDatesEventViewController.thisEvent?.name!). I'd love to know when everyone is available. \(BestDatesEventViewController.thisEvent?.note) <br> Download AirTime on the iOS App Store to input your best dates to attend.", isHTML: true)
+        composeVC.setMessageBody("Hi! <p>I'm planning an event for us to get together sometime for \(BestDatesEventViewController.thisEvent?.name!). I'd love to know when everyone is available.</p> <br> <p>\(BestDatesEventViewController.thisEvent?.note)</p> <br> Download AirTime on the iOS App Store to input your best dates to attend.", isHTML: true)
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
     }
@@ -64,6 +65,10 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
         }
         if result == .sent {
             performSegue(withIdentifier: "unwindToHome", sender: nil)
+            let notification = UIAlertController(title: "Email sent", message: "", preferredStyle: .alert)
+            present(notification, animated: true)
+
+
         }
         // Check the result or perform other tasks.
         // Dismiss the mail compzose view controller.

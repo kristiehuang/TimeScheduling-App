@@ -392,7 +392,7 @@ class EventViewController: UIViewController {
         }
         
         if gesture.state == .ended {
-            rangeSelectedDates.removeAll()
+            rangeSelectedDates = []
         }
     }
     
