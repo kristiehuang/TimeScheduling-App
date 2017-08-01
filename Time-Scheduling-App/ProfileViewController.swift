@@ -18,6 +18,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     
     @IBOutlet weak var userEmailLabel: UILabel!
+    @IBAction func developerBioButton(_ sender: Any) {
+    }
+    @IBAction func unwindToProfile(_ segue: UIStoryboardSegue) {
+    }
     
     @IBAction func logOutButtonTapped(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

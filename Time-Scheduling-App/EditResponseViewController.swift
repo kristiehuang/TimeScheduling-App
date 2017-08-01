@@ -24,9 +24,9 @@ class EditResponseViewController: UIViewController {
         print("Transitioning back to home/save")
 
         
-        EditResponseViewController.dispatchGroup.enter()
+        dispatchGroup1.enter()
         mergeDates()
-        EditResponseViewController.dispatchGroup.notify(queue: .main, execute: {
+        dispatchGroup1.notify(queue: .main, execute: {
             BestDatesEventViewController.countDates()
             
         })
@@ -56,7 +56,7 @@ class EditResponseViewController: UIViewController {
     var events: [Event] = []
     
     var newOrderedDict = NSMutableDictionary()
-    static let dispatchGroup = DispatchGroup()
+    let dispatchGroup1 = DispatchGroup()
     
     
     static var event: Event?
@@ -88,11 +88,10 @@ class EditResponseViewController: UIViewController {
                 if EditResponseViewController.event?.key == eventz.key {
                     
                     //for NOW, all dates in database. not just host's
-                    self.existingDates = []
+//                    self.existingDates = []
                     for (myDate) in eventz.dates {
                         self.existingDates.append(myDate)
                     }
-                    
                 }
             }
             self.dispatchGroup.leave()
@@ -102,6 +101,7 @@ class EditResponseViewController: UIViewController {
         calendarView.isRangeSelectionUsed = true
         
         self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen | Press & hold to select a range"
+        self.invitedAsLabel.text = "Invited as: \(User.current.name)"
         
         //longpress to select range
         calendarView.allowsMultipleSelection = true
@@ -271,17 +271,16 @@ class EditResponseViewController: UIViewController {
                     
                     let inviteRef = Database.database().reference().child("users").child(User.current.uid).child("invited events").child((EditResponseViewController.event?.key!)!)
                     inviteRef.child("dates").setValue(datesArr)
-
-                    datesArr = []
-                    self.datesChosen = []
                     
                     eventTableViewController.tableView.reloadData()
                     print("\(User.current.name) added dates")
                     
+                    datesArr = []
+                    self.datesChosen = []
                 }
 
             }
-            EditResponseViewController.dispatchGroup.leave()
+            self.dispatchGroup1.leave()
             print("dispatch group run")
         })
         
@@ -342,10 +341,6 @@ extension EditResponseViewController: JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         
-        
-        //        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        
-        //        dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
         dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
         
         dateFormatter.timeZone = Calendar.current.timeZone
@@ -371,7 +366,6 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         
         
         let calendarCell = cell as! InviteCalendarCell // You created the cell view if you followed the tutorial
-//        calendarCell.selectedView.isUserInteractionEnabled = false
 
         switch cellState.selectedPosition() {
         case .full, .left, .right:
@@ -421,8 +415,6 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         let newDate = dateFormatter.string(from: formatDate!)
         
         
-        
-        
         dispatchGroup.notify(queue: .main) {
             for myDate in self.existingDates {
                 if myDate == newDate {
@@ -436,6 +428,8 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
                     cell.dateLabel.textColor = self.selectedMonthColor
                     
                     self.datesChosen.append(myDate)
+                    
+                    break
                 }
                 else {
                     self.handleCellSelected(view: cell, cellState: cellState)
@@ -513,9 +507,6 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         
         let formatDate: Date? = dateFormatterGet.date(from: "\(dateDeselected)")
         print(dateFormatter.string(from: formatDate!))
-        
-        
-        self.datesChosen.append(dateFormatter.string(from: formatDate!))
         
         datesChosen = datesChosen.filter { $0 != dateFormatter.string(from: formatDate!) }
         

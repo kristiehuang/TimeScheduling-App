@@ -39,12 +39,21 @@ class BestDatesEventViewController: UIViewController {
     }
 
     
+    @IBOutlet weak var sendInvitesButton: UIButton!
 
+    @IBAction func sendInvitesButtonTapped(_ sender: Any) {
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        if User.current.uid == BestDatesEventViewController.thisEvent?.host {
+            sendInvitesButton.isHidden = false //not hidden
+        }
+        else {
+            sendInvitesButton.isHidden = true
+        }
+
         if let event = EventViewController.event {
             
             BestDatesEventViewController.thisEvent = event
