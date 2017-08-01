@@ -54,7 +54,7 @@ struct FriendService {
         
         let inviteData = ["events/\(currentUID)/\(key)/invitees/\(user.uid)": true, "users/\(user.uid)/invited events/\(key)/invitees/\(user.uid)": true, "users/\(currentUID)/hosting events/\(key)/invitees/\(user.uid)": true]
         
-        
+        print(inviteData)
         ref.updateChildValues(inviteData) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)

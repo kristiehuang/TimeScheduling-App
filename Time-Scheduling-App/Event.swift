@@ -20,21 +20,22 @@ class Event {
     
     var dates: [String]
     var invitees: [String: Bool]
+    var emailInvitees: [String]
     var note: String
     
     //turn event objects into dictionary type
     var dictValue: [String: Any] {        
-        return ["host": host, "name": name ?? "Untitled Event", "invitees": invitees,
-                "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
+        return ["host": host, "name": name ?? "Untitled Event", "invitees": invitees, "email invitees": emailInvitees, "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
     }
     
-    init(host: String, name: String, invitees: [String: Bool], creationDate: Date, dates: [String], note: String) {
+    init(host: String, name: String, invitees: [String: Bool], emailInvitees: [String], creationDate: Date, dates: [String], note: String) {
         self.host = host
         self.name = name
         self.creationDate = Date()
 //        self.host = User.current
         self.dates = dates
         self.invitees = invitees
+        self.emailInvitees = emailInvitees
         self.note = note
         
     }
@@ -63,6 +64,9 @@ class Event {
         guard let note = dict["note"] as? String
             else { return nil }
         
+        guard let emailInvitees = dict["email invitees"] as? [String]
+            else { return nil }
+        
         self.key = snapshot.key
         self.host = host
         self.name = name
@@ -74,6 +78,7 @@ class Event {
         self.dates = dates
         self.invitees = invitees
         self.note = note
+        self.emailInvitees = emailInvitees
     }
 
 

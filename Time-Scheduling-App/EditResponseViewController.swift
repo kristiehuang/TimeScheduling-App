@@ -42,12 +42,7 @@ class EditResponseViewController: UIViewController {
     
     let inviteSelectedViewColor = UIColor(colorWithHexValue: 0xFFC55A) //color of invite selected view, orange
     let selectedViewColor = UIColor(colorWithHexValue: 0xBCD8F7) //color of invite selected view, light white
-//    let selectedViewColor = UIColor.white //color of invite selected view, light white
 
-
-//    let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
-    
-    //    let event = Event(name: "", creationDate: Date(), host: User.current)
     
     let dateFormatter = DateFormatter()
     

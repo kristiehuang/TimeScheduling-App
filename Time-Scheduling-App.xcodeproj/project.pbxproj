@@ -65,7 +65,7 @@
 		9E0C0B991F1588850026307C /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 		9E0C0B9D1F15F5A20026307C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E0E041A1F1D33C90038705D /* BestDatesEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestDatesEventViewController.swift; sourceTree = "<group>"; };
-		9E0E041C1F1D78DB0038705D /* InviteEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteEventViewController.swift; sourceTree = "<group>"; };
+		9E0E041C1F1D78DB0038705D /* InviteEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteEventViewController.swift; sourceTree = "<group>"; usesTabs = 1; };
 		9E1A599C1F0E006100792D24 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E1A599E1F0E006900792D24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E1A59A61F0E00A500792D24 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };

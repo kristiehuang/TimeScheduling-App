@@ -24,6 +24,16 @@ class EventViewController: UIViewController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
+        
+        firstDispatchGroup.enter()
+        newEvent()
+        firstDispatchGroup.notify(queue: .main, execute: {
+            self.countDates()
+            
+            InviteEventViewController.event = EventViewController.event
+            
+            self.performSegue(withIdentifier: "nextSegue", sender: nil)
+        })
     }
     
     @IBAction func saveCloseButtonTapped(_ sender: Any) {
@@ -38,7 +48,6 @@ class EventViewController: UIViewController {
     let selectedMonthColor = UIColor(colorWithHexValue: 0xA3C9F6) //color of selected date label text
     let currentDateSelectedViewColor = UIColor(colorWithHexValue: 0x7FAEE7)
     
-    //    let event = Event(name: "", creationDate: Date(), host: User.current)
     
     let dateFormatter = DateFormatter()
     
@@ -55,6 +64,7 @@ class EventViewController: UIViewController {
     
     static var event: Event?
     static var invitees: [String: Bool] = [:]
+    static var emailinvitees: [String] = []
     
     static func getEvent () -> Event {
         return event!
@@ -66,36 +76,6 @@ class EventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.existingDates = []
-//
-//        
-//        setUpCalendarView()
-//        
-//        
-//        calendarView.visibleDates { visibleDates in
-//            self.setupViewsOfCalendar(from: visibleDates)
-//        }
-//        
-//        let currentDate = Date()
-//        calendarView.scrollToDate(currentDate)
-//        
-//        dispatchGroup.enter()
-//        UserService.events(for: User.current, completion: { (events:[Event]) in
-//            //for each event in events called from user
-//            for eventz in events {
-//                if EventViewController.event?.key == eventz.key {
-//                    
-//                    for (myDate) in eventz.dates {
-//
-////                        self.existingDates.append(myDate)
-//        self.datesChosen.append(myDate)
-//        numberOfDates += 1
-//
-//                    }
-//
-//                }
-//            }
-//            self.dispatchGroup.leave()
-//        })
 //        
         
         
@@ -334,8 +314,10 @@ class EventViewController: UIViewController {
                     return
                 }
                 //add event to database
-                EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "")
-                
+                EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "", emailInvitees: EventViewController.emailinvitees)
+                    
+                    
+                    
                 datesArr = []
                 self.datesChosen = []
                 
@@ -421,23 +403,6 @@ class EventViewController: UIViewController {
         if let identifier = segue.identifier {
             if identifier == "backButtonSegue" {
                 print("Transitioning back to home/back")
-            }
-            else if identifier == "nextSegue" {
-                print("Transitioning to next & save")
-                
-                firstDispatchGroup.enter()
-                newEvent()
-                firstDispatchGroup.notify(queue: .main, execute: {
-                    self.countDates()
-                    
-                    
-                    let inviteEventViewController = segue.destination as! InviteEventViewController
-                    InviteEventViewController.event = EventViewController.event
-                    inviteEventViewController.eventNameLabel.text = EventViewController.event?.name
-                    
-                    
-                })
-                
             }
                 
             else if identifier == "saveCloseSegue" {

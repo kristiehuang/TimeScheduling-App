@@ -42,7 +42,7 @@ class ViewController: UIViewController {
             }
             else if identifier == "showNewEvent" {
                 print("+ button tapped")
-                let newEvent = Event(host: User.current.uid, name: "", invitees: [User.current.uid : true], creationDate: Date(), dates: [], note: "")
+                let newEvent = Event(host: User.current.uid, name: "", invitees: [User.current.uid : true], emailInvitees: ["blah"], creationDate: Date(), dates: [], note: "")
                 EventViewController.event = newEvent
                 
                 

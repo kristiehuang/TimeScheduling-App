@@ -78,6 +78,7 @@ class EventTableViewController: UITableViewController {
         let indexPath = tableView.indexPathForSelectedRow!
         let event = displayedEvents[indexPath.row]
         EventViewController.event = event
+        BestDatesEventViewController.thisEvent = event
         
         
         //                        print("is host")
@@ -98,8 +99,7 @@ class EventTableViewController: UITableViewController {
                     let event = self.displayedEvents[indexPath.row]
                     
                     for invitee in event.invitees {
-                        let inviteeRef = Database.database(
-                            ).reference().child("users").child(invitee.key).child("invited events").child(event.key!)
+                        let inviteeRef = Database.database().reference().child("users").child(invitee.key).child("invited events").child(event.key!)
                         inviteeRef.removeValue()
                         print("\(invitee.key) uninvited")
                     }

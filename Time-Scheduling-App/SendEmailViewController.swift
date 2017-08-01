@@ -9,6 +9,7 @@
 import Foundation
 import MessageUI
 import UIKit
+import FirebaseDatabase
 
 class SendEmailViewController: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewDidLoad() {
@@ -27,12 +28,31 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
         // Configure the fields of the interface.
         
         var inviteeEmails = [String]()
-        for invitee in InviteEventViewController.myInvitees {
-            inviteeEmails.append(invitee.email)
+        
+        for invitee in (BestDatesEventViewController.thisEvent?.invitees)! {
+            let ref = Database.database().reference().child("users").child(invitee.key)
+            
+            ref.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
+                if let user = User(snapshot: snapshot) {
+                    inviteeEmails.append(user.email)
+                }
+
+
+            })
         }
+        
+//        
+//        for invitee in InviteEventViewController.myInvitees {
+//            inviteeEmails.append(invitee.email)
+//        }
+        for email in InviteEventViewController.emailInvitees {
+            inviteeEmails.append(email)
+        }
+
+        
         composeVC.setBccRecipients(inviteeEmails)
-        composeVC.setSubject("Invite to \(String(describing: InviteEventViewController.event?.name))")
-        composeVC.setMessageBody("Hi! I'm planning an event for us to get together sometime for \(String(describing: InviteEventViewController.event?.name)). I'd love to know when everyone is available. \(String(describing: InviteEventViewController.event?.note)) Download AirTime on the iOS App Store to input your best dates to attend.", isHTML: false)
+        composeVC.setSubject("Invite to \(String(describing: BestDatesEventViewController.thisEvent?.name))")
+        composeVC.setMessageBody("Hi! <br> I'm planning an event for us to get together sometime for \(BestDatesEventViewController.thisEvent?.name!). I'd love to know when everyone is available. \(BestDatesEventViewController.thisEvent?.note) <br> Download AirTime on the iOS App Store to input your best dates to attend.", isHTML: true)
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
     }

@@ -47,8 +47,10 @@ class InviteFriendsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let inviteEventViewController = segue.destination as! InviteEventViewController
-        inviteEventViewController.invitees = self.invitees
+//        let inviteEventViewController = segue.destination as! InviteEventViewController
+//        inviteEventViewController.invitees = self.invitees
+        InviteEventViewController.myInvitees = self.invitees
+
         
     }
     

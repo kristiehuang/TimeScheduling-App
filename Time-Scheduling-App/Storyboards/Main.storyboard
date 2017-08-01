@@ -43,7 +43,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DQ8-H4-nFn" id="gUy-n4-Lew">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Cn-SQ-Ntx">
@@ -134,7 +134,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0ay-nH-c8x">
-                                <rect key="frame" x="116.66666666666666" y="26.333333333333329" width="182.33333333333334" height="62.333333333333343"/>
+                                <rect key="frame" x="116" y="26.333333333333329" width="182.33333333333331" height="62.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner @ Jessie's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-gK-YDc">
                                         <rect key="frame" x="0.0" y="0.0" width="182.33333333333331" height="28.666666666666668"/>
@@ -401,7 +401,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Options" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yel-3f-omS">
-                                <rect key="frame" x="159.66666666666666" y="51.000000000000007" width="95.666666666666686" height="33.666666666666679"/>
+                                <rect key="frame" x="160" y="51.333333333333343" width="95.666666666666657" height="33.666666666666657"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -470,13 +470,13 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-Tr-DN9">
-                                <rect key="frame" x="76.333333333333314" y="145" width="262" height="60"/>
+                                <rect key="frame" x="76.666666666666686" y="145" width="262" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6tH-Zn-bMz">
                                         <rect key="frame" x="0.0" y="0.0" width="152" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Lily Li" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRq-I2-3ts">
-                                                <rect key="frame" x="0.0" y="0.0" width="68.000000000000014" height="26"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="67.999999999999986" height="26"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -563,7 +563,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2F-xO-QHf">
-                                        <rect key="frame" x="133.66666666666669" y="41.666666666666671" width="147.66666666666669" height="33.000000000000014"/>
+                                        <rect key="frame" x="134" y="41.666666666666671" width="147.66666666666669" height="33.000000000000014"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -591,7 +591,7 @@
                                         <rect key="frame" x="0.0" y="72" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JCu-SO-Xak" id="oXZ-5k-yeZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TCN-Wg-eep">
@@ -1005,7 +1005,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="nextButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="hxR-1L-nIV"/>
-                                            <segue destination="Zxm-ID-UmB" kind="show" identifier="nextSegue" id="GB1-Ib-QH3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQP-rh-1Wb">
@@ -1058,6 +1057,7 @@
                         <outlet property="calendarView" destination="WSU-13-p91" id="oWK-c2-94H"/>
                         <outlet property="eventNameTextField" destination="pjd-0b-C2c" id="X3S-Qj-hL1"/>
                         <outlet property="monthYearLabel" destination="JEa-yP-irL" id="BAN-YV-6NG"/>
+                        <segue destination="Zxm-ID-UmB" kind="show" identifier="nextSegue" id="G8X-5Y-0vz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m6W-Pv-QWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1093,7 +1093,7 @@
                                         <rect key="frame" x="0.0" y="72" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rav-4O-BKr" id="4Gg-gG-vgz">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2q-S3-vZ3">
@@ -1322,7 +1322,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invites will be delivered immediately to users with the app; emails can be sent later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="E3k-9t-Ehr">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invites will be delivered immediately to users with the app; emails can be sent later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="E3k-9t-Ehr">
                                         <rect key="frame" x="0.0" y="34" width="335.33333333333331" height="38.333333333333343"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
                                         <color key="textColor" red="0.71764705882352942" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1375,7 +1375,7 @@
                                         <rect key="frame" x="0.0" y="28" width="342" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GXQ-jb-kas" id="fqf-cd-dmN">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="66.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="66.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="OMo-IM-U06">
@@ -1697,7 +1697,7 @@
                                         <rect key="frame" x="0.0" y="55" width="414" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BAh-40-8gt" id="PXa-I1-wtt">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-HX-CY1">
@@ -1853,7 +1853,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AirTime, Version 1.0, © 2017" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iah-Mz-CeV">
-                                <rect key="frame" x="95" y="696.33333333333337" width="224.66666666666669" height="20.333333333333258"/>
+                                <rect key="frame" x="95.333333333333343" y="696.33333333333337" width="224.66666666666666" height="20.333333333333258"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
