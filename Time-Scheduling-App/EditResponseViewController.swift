@@ -217,7 +217,7 @@ class EditResponseViewController: UIViewController {
         let currentTopVC: UIViewController? = self.currentTopViewController()
         
         let alertController = UIAlertController(title: "\(bigErrorMsg)", message:
-            "\(smallErrorMsg)", preferredStyle: UIAlertControllerStyle.alert)
+            "\(smallErrorMsg)", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
         
         currentTopVC?.present(alertController, animated: true, completion: nil)

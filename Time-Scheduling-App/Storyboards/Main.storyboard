@@ -1288,7 +1288,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="sendInvitesButtonTapped:" destination="Zxm-ID-UmB" eventType="touchUpInside" id="m10-az-2P1"/>
-                                            <segue destination="dpb-71-YEo" kind="showDetail" action="showViewController:sender:" id="19B-1s-si4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xC-EQ-J1I">
@@ -1461,6 +1460,7 @@
                         <outlet property="emailTextField" destination="w43-mJ-Vwv" id="Lgx-tB-1Wq"/>
                         <outlet property="eventNameLabel" destination="qbc-9A-dwm" id="uOv-iA-orx"/>
                         <outlet property="inviteesTableView" destination="u4z-pr-FIM" id="y9A-Io-WUl"/>
+                        <segue destination="dpb-71-YEo" kind="show" identifier="toAddNote" id="nWU-FA-1eT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Dj-FZ-Pyj" userLabel="First Responder" sceneMemberID="firstResponder"/>

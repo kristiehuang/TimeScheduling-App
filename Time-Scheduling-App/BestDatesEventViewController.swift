@@ -90,6 +90,8 @@ class BestDatesEventViewController: UIViewController {
         
     }
     
+    
+    
     func getDateString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium

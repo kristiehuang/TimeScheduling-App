@@ -30,18 +30,33 @@ class InviteEventViewController: UIViewController {
     }
     
     let dispatchGroup = DispatchGroup()
+    
     static var event: Event?
-//    var inviteeNames = [String]() //invitee names array
-//    static var inviteeEmails = [String]() //emails of invitee array
+    //    var inviteeNames = [String]() //invitee names array
+    //    static var inviteeEmails = [String]() //emails of invitee array
     
     var invitees = [User]() //
-//    var inviteesUser = [User]() //actual User array
+    //    var inviteesUser = [User]() //actual User array
     static var myInvitees = [User]() //actual invitees array in type User
-    
-    
     
     @IBAction func sendInvitesButtonTapped(_ sender: Any) {
         print("hello")
+        let alertController = UIAlertController(title: "Are you sure?", message: "Invites will be sent to \(InviteEventViewController.myInvitees.count) user(s).", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancel)
+        
+        let next = UIAlertAction(
+        title: "Send", style: .default) { (action) in
+            
+            AddNoteViewController.event = InviteEventViewController.event
+            
+            self.saveEvent()
+            self.performSegue(withIdentifier: "toAddNote", sender: nil)
+        }
+        
+        
+        alertController.addAction(next)
+        present(alertController, animated: true)
     }
     
     @IBAction func saveCloseButton(_ sender: Any) {
@@ -50,6 +65,12 @@ class InviteEventViewController: UIViewController {
         saveEvent()
     }
     
+    
+    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //        textField.text =
+    //            self.view.endEditing(true);
+    //        return false;
+    //    }
     
     
     override func viewDidLoad() {
@@ -67,22 +88,24 @@ class InviteEventViewController: UIViewController {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
+        self.emailTextField.delegate = self
+        
         super.viewDidLoad()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        inviteeNames = []
-//        InviteEventViewController.inviteeEmails = []
-//        inviteesUser = []
+        //        inviteeNames = []
+        //        InviteEventViewController.inviteeEmails = []
+        //        inviteesUser = []
         InviteEventViewController.myInvitees = []
         
         
         //        getInvites()
-
+        
         for invitee in invitees { //from inviteFriends
             dispatchGroup.enter()
-
+            
             let ref = Database.database().reference().child("users").child(invitee.uid)
             
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -138,12 +161,6 @@ class InviteEventViewController: UIViewController {
             InviteFriendsViewController.event = InviteEventViewController.event
             
             saveEvent()
-        }
-        if let addNoteViewController = segue.destination as? AddNoteViewController {
-            AddNoteViewController.event = InviteEventViewController.event
-            
-            saveEvent()
-            
         }
         
     }
@@ -202,7 +219,7 @@ extension InviteEventViewController: InviteEventCellDelegate {
         if InviteEventViewController.myInvitees.count > indexPath.row {
             
             let friender = InviteEventViewController.myInvitees[indexPath.row]
-
+            
             
             //friendservice methods
             let dispatchReloadTable = DispatchGroup()
@@ -232,11 +249,20 @@ extension InviteEventViewController: InviteEventCellDelegate {
                 dispatchReloadTable.notify(queue: .main, execute: {
                     friender.isInvited = !friender.isInvited
                     self.inviteesTableView.reloadData()
-//                    self.inviteesTableView.reloadRows(at: [indexPath], with: .none)
                 })
                 
             }
         }
+    }
+}
+
+extension InviteEventViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //        textField.text =
+        
+        self.view.endEditing(true)
+        return false
     }
 }
 
