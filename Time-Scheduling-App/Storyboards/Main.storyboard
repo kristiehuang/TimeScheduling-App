@@ -43,7 +43,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DQ8-H4-nFn" id="gUy-n4-Lew">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Cn-SQ-Ntx">
@@ -134,16 +134,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0ay-nH-c8x">
-                                <rect key="frame" x="116.33333333333331" y="26.333333333333329" width="182.33333333333337" height="62.333333333333343"/>
+                                <rect key="frame" x="116.66666666666666" y="26.333333333333329" width="182.33333333333334" height="62.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner @ Jessie's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdk-gK-YDc">
-                                        <rect key="frame" x="0.0" y="0.0" width="182.33333333333337" height="28.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="182.33333333333331" height="28.666666666666668"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invited as: Lily" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqj-AQ-InK">
-                                        <rect key="frame" x="0.0" y="33.666666666666671" width="182.33333333333337" height="28.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="33.666666666666671" width="182.33333333333331" height="28.666666666666671"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                         <color key="textColor" red="0.63373094797134399" green="0.78512424230575562" blue="0.96810156106948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -401,7 +401,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Options" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yel-3f-omS">
-                                <rect key="frame" x="159.33333333333337" y="50.666666666666671" width="95.666666666666657" height="33.666666666666671"/>
+                                <rect key="frame" x="159.66666666666666" y="51.000000000000007" width="95.666666666666686" height="33.666666666666679"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -470,13 +470,13 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-Tr-DN9">
-                                <rect key="frame" x="76" y="145" width="262" height="60"/>
+                                <rect key="frame" x="76.333333333333314" y="145" width="262" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6tH-Zn-bMz">
                                         <rect key="frame" x="0.0" y="0.0" width="152" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Lily Li" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRq-I2-3ts">
-                                                <rect key="frame" x="0.0" y="0.0" width="68" height="26"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="68.000000000000014" height="26"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -563,7 +563,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2F-xO-QHf">
-                                        <rect key="frame" x="133.33333333333337" y="41.666666666666671" width="147.66666666666663" height="33.000000000000014"/>
+                                        <rect key="frame" x="133.66666666666669" y="41.666666666666671" width="147.66666666666669" height="33.000000000000014"/>
                                         <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -591,7 +591,7 @@
                                         <rect key="frame" x="0.0" y="72" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JCu-SO-Xak" id="oXZ-5k-yeZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TCN-Wg-eep">
@@ -1093,7 +1093,7 @@
                                         <rect key="frame" x="0.0" y="72" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rav-4O-BKr" id="4Gg-gG-vgz">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="91.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2q-S3-vZ3">
@@ -1315,7 +1315,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fas-OA-Mmd">
-                                <rect key="frame" x="36" y="135" width="342" height="87"/>
+                                <rect key="frame" x="36" y="135" width="342" height="127.33333333333331"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invites" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAa-NW-7gV">
                                         <rect key="frame" x="0.0" y="0.0" width="56.666666666666671" height="24"/>
@@ -1323,23 +1323,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nV7-dZ-0ot">
-                                        <rect key="frame" x="0.0" y="34" width="342" height="53"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invites will be delivered immediately to users with the app; emails can be sent later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="E3k-9t-Ehr">
+                                        <rect key="frame" x="0.0" y="34" width="335.33333333333331" height="38.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="16"/>
+                                        <color key="textColor" red="0.71764705882352942" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="nV7-dZ-0ot">
+                                        <rect key="frame" x="0.0" y="82.333333333333343" width="342" height="44.999999999999972"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="w43-mJ-Vwv">
-                                                <rect key="frame" x="0.0" y="0.0" width="286" height="53"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="53" id="fzc-s6-OED"/>
-                                                </constraints>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="send"/>
-                                                <connections>
-                                                    <action selector="returnButtonTapped:" destination="Zxm-ID-UmB" eventType="primaryActionTriggered" id="2oJ-Sw-UnR"/>
-                                                </connections>
-                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFC-P2-PNx">
-                                                <rect key="frame" x="296" y="4" width="46" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="46" height="44.999999999999972"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="oFC-P2-PNx" secondAttribute="height" multiplier="46:45" id="CBp-WB-iTB"/>
                                                     <constraint firstAttribute="height" constant="45" id="TW5-1F-cKo"/>
@@ -1349,6 +1343,24 @@
                                                     <segue destination="pHR-du-C9V" kind="show" id="bSl-rO-RVc"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pa-Ld-gSE">
+                                                <rect key="frame" x="45.999999999999993" y="0.0" width="43.333333333333321" height="44.999999999999972"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="18"/>
+                                                <color key="textColor" red="0.71764705882352942" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="w43-mJ-Vwv">
+                                                <rect key="frame" x="89.333333333333343" y="0.0" width="252.66666666666666" height="44.999999999999972"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="53" id="fzc-s6-OED"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="go"/>
+                                                <connections>
+                                                    <action selector="returnButtonTapped:" destination="Zxm-ID-UmB" eventType="primaryActionTriggered" id="2oJ-Sw-UnR"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -1357,14 +1369,14 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u4z-pr-FIM">
-                                <rect key="frame" x="36" y="232" width="342" height="330"/>
+                                <rect key="frame" x="36" y="272.33333333333326" width="342" height="289.66666666666674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InviteesCell" rowHeight="67" id="GXQ-jb-kas" customClass="InviteesCell" customModule="Time_Scheduling_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="342" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GXQ-jb-kas" id="fqf-cd-dmN">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="66.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="66.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="OMo-IM-U06">
@@ -1613,7 +1625,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tab-eU-sKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2074" y="742"/>
+            <point key="canvasLocation" x="2074" y="778"/>
         </scene>
         <!--Best Dates Event View Controller-->
         <scene sceneID="zlH-jd-8oE">
@@ -1635,7 +1647,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SfT-to-2lb">
-                                <rect key="frame" x="316.66666666666669" y="40" width="60" height="60"/>
+                                <rect key="frame" x="316.66666666666669" y="118.33333333333334" width="60" height="60.000000000000028"/>
                                 <color key="backgroundColor" red="0.29531574249999998" green="0.62302786109999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="AvU-sT-4gG"/>
@@ -1685,7 +1697,7 @@
                                         <rect key="frame" x="0.0" y="55" width="414" height="59"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BAh-40-8gt" id="PXa-I1-wtt">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-HX-CY1">
@@ -1747,10 +1759,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="j8i-un-stN" firstAttribute="top" secondItem="tLZ-Sb-RFT" secondAttribute="top" constant="28" id="Ede-ub-SMD"/>
-                            <constraint firstItem="SfT-to-2lb" firstAttribute="centerY" secondItem="9CM-h3-cbV" secondAttribute="centerY" id="JAk-pj-hQh"/>
                             <constraint firstItem="bO2-65-nzz" firstAttribute="top" secondItem="AbX-4H-T0s" secondAttribute="bottom" constant="18" id="K5l-xB-bLf"/>
                             <constraint firstItem="V6O-a3-4xf" firstAttribute="top" secondItem="tLZ-Sb-RFT" secondAttribute="top" id="PXW-r1-BCx"/>
                             <constraint firstItem="9CM-h3-cbV" firstAttribute="centerY" secondItem="j8i-un-stN" secondAttribute="centerY" id="Sce-Pf-CLC"/>
+                            <constraint firstItem="SfT-to-2lb" firstAttribute="centerY" secondItem="kOI-xe-2Jc" secondAttribute="centerY" id="Tck-Pp-oP7"/>
                             <constraint firstItem="kOI-xe-2Jc" firstAttribute="top" secondItem="j8i-un-stN" secondAttribute="bottom" constant="26" id="Tdt-Wa-DM8"/>
                             <constraint firstItem="kOI-xe-2Jc" firstAttribute="leading" secondItem="tLZ-Sb-RFT" secondAttribute="leading" constant="55" id="UFV-Ut-a3s"/>
                             <constraint firstItem="SfT-to-2lb" firstAttribute="leading" secondItem="9CM-h3-cbV" secondAttribute="trailing" constant="10" id="ZfX-SV-Uzc"/>
@@ -1841,7 +1853,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AirTime, Version 1.0, © 2017" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iah-Mz-CeV">
-                                <rect key="frame" x="94.666666666666686" y="696.33333333333337" width="224.66666666666663" height="20.333333333333258"/>
+                                <rect key="frame" x="95" y="696.33333333333337" width="224.66666666666669" height="20.333333333333258"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

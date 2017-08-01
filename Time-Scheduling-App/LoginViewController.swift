@@ -42,7 +42,19 @@ class LoginViewController: UIViewController {
 extension LoginViewController: FUIAuthDelegate {
     func authUI(_ authUI: FUIAuth, didSignInWith user: FIRUser?, error: Error?) {
         if let error = error {
-            assertionFailure("Error signing in: \(error.localizedDescription)")
+            if error.localizedDescription.contains("Network error") {
+                let alertController = UIAlertController(title: "No network", message: "Make sure you're connected to wifi or data.", preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "Try again", style: .cancel, handler: nil)
+                alertController.addAction(cancel)
+                present(alertController, animated: true)
+            }
+            else {
+                assertionFailure("Error signing in: \(error.localizedDescription)")
+                let alertController = UIAlertController(title: "Something went wrong", message: "", preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "Try again", style: .cancel, handler: nil)
+                alertController.addAction(cancel)
+                present(alertController, animated: true)
+            }
             return
         }
         
