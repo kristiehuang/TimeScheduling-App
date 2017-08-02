@@ -187,11 +187,18 @@ class InviteEventViewController: UIViewController {
 					//0: user.uid
 					eventRef.child("invitees").setValue(stringUIDs)
 					
-					
-					
-					let hostRef = Database.database().reference().child("users").child(User.current.uid).child("hosting events").child("email invitees")
-					hostRef.setValue(InviteEventViewController.emailInvitees)
-					
+//					
+//					
+//					let hostRef = Database.database().reference().child("users").child(User.current.uid).child("hosting events").child("email invitees")
+//					hostRef.setValue(InviteEventViewController.emailInvitees)
+//					
+//					for person in self.invitees {
+//						
+//						let inviteRef = Database.database().reference().child("users").child(person.key).child("invited events").child("email invitees")
+//						inviteRef.setValue(InviteEventViewController.emailInvitees)
+//
+//					}
+
 					
 					eventTableViewController.tableView.reloadData()
 				}
@@ -363,8 +370,15 @@ extension InviteEventViewController: UITextFieldDelegate {
 				let eventRef = ref.child("events").child(User.current.uid).child(key!).child("email invitees")
 				eventRef.setValue(InviteEventViewController.emailInvitees)
 				
-				let hostRef = ref.child("users").child(User.current.uid).child("hosting events").child("email invitees")
+				let hostRef = ref.child("users").child(User.current.uid).child("hosting events").child(key!).child("email invitees")
 				hostRef.setValue(InviteEventViewController.emailInvitees)
+				
+				for person in InviteEventViewController.myInvitees {
+					
+					let inviteRef = ref.child("users").child(person.uid).child("invited events").child(key!).child("email invitees")
+					inviteRef.setValue(InviteEventViewController.emailInvitees)
+					
+				}
 				
 				inviteesTableView.reloadData()
 			}

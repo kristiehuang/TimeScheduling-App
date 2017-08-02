@@ -50,10 +50,13 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
             inviteeEmails.append(email)
         }
 
+        let eventName = (BestDatesEventViewController.thisEvent?.name)!
+        let eventNote = (BestDatesEventViewController.thisEvent?.note)!
         
-        composeVC.setBccRecipients(inviteeEmails)
-        composeVC.setSubject("Invite to \(String(describing: BestDatesEventViewController.thisEvent?.name))")
-        composeVC.setMessageBody("Hi! <p>I'm planning an event for us to get together sometime for \(BestDatesEventViewController.thisEvent?.name!). I'd love to know when everyone is available.</p> <br> <p>\(BestDatesEventViewController.thisEvent?.note)</p> <br> Download AirTime on the iOS App Store to input your best dates to attend.", isHTML: true)
+        
+        composeVC.setToRecipients(inviteeEmails)
+        composeVC.setSubject("Invite to \(eventName)")
+        composeVC.setMessageBody("Hi! <p>I'm planning an event for us to get together sometime for \(eventName). I'd love to know when everyone is available.</p> <br> <p>\(eventNote)</p> <br> Download AirTime on the iOS App Store to input your best dates to attend.", isHTML: true)
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
     }

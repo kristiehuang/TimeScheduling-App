@@ -38,6 +38,7 @@ class EventTableViewController: UITableViewController {
             for invitedEvent in invitedEvents {
                 self.displayedEvents.append(invitedEvent)
             }
+            self.tableView.reloadData()
         }
         
         super.viewWillAppear(animated)
