@@ -19,23 +19,22 @@ class Event {
     var key: String?
     
     var dates: [String]
-    var invitees: [String: Bool]
-    var emailInvitees: [String]
+    var invitees: [String: Any]?
+    var emailInvitees: [String]?
     var note: String
     
     //turn event objects into dictionary type
     var dictValue: [String: Any] {        
-        return ["host": host, "name": name ?? "Untitled Event", "invitees": invitees, "email invitees": emailInvitees, "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
+        return ["host": host, "name": name ?? "Untitled Event", "invitees": invitees, "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
     }
     
-    init(host: String, name: String, invitees: [String: Bool], emailInvitees: [String], creationDate: Date, dates: [String], note: String) {
+    init(host: String, name: String, invitees: [String: Any], emailInvitees: [String]? = nil, creationDate: Date, dates: [String], note: String) {
         self.host = host
         self.name = name
         self.creationDate = Date()
-//        self.host = User.current
         self.dates = dates
         self.invitees = invitees
-        self.emailInvitees = emailInvitees
+        self.emailInvitees = nil
         self.note = note
         
     }
@@ -58,14 +57,14 @@ class Event {
         guard let dates = dict["dates"] as? [String]
             else { return nil }
         
-        guard let invitees = dict["invitees"] as? [String: Bool]
+        guard let invitees = dict["invitees"] as? [String: Any]
             else { return nil }
         
         guard let note = dict["note"] as? String
             else { return nil }
         
-        guard let emailInvitees = dict["email invitees"] as? [String]
-            else { return nil }
+//        guard let emailInvitees = dict["email invitees"] as? [String]
+//            else { return nil }
         
         self.key = snapshot.key
         self.host = host
@@ -78,7 +77,7 @@ class Event {
         self.dates = dates
         self.invitees = invitees
         self.note = note
-        self.emailInvitees = emailInvitees
+//        self.emailInvitees = emailInvitees
     }
 
 

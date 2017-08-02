@@ -37,44 +37,64 @@ class InviteEventViewController: UIViewController {
 	//    static var inviteeEmails = [String]() //emails of invitee array
 	
 	var invitees = [String: Bool]() //
-	//    var inviteesUser = [User]() //actual User array
 	static var myInvitees = [User]() //actual invitees array in type User
 	static var emailInvitees = [String]() //just emails
 	
 	@IBAction func sendInvitesButtonTapped(_ sender: Any) {
 		
-		if InviteEventViewController.myInvitees.count == 0 {
+		if InviteEventViewController.myInvitees.count == 0 && InviteEventViewController.emailInvitees.count == 0 {
+
+			
 			let alertController = UIAlertController(title: "You didn't invite anyone!", message: "Please invite at least one person", preferredStyle: .alert)
 			let cancel = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
 			alertController.addAction(cancel)
 			
 			present(alertController, animated: true)
 		}
-		if InviteEventViewController.emailInvitees.count == 0 {
-			let alertController = UIAlertController(title: "You didn't invite anyone!", message: "Please invite at least one person through email", preferredStyle: .alert)
-			let cancel = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
-			alertController.addAction(cancel)
+		if InviteEventViewController.myInvitees.count == 0 {
 			
-			present(alertController, animated: true)
-		}
-		else {
-			let alertController = UIAlertController(title: "Are you sure?", message: "Invitations will be sent to \(InviteEventViewController.myInvitees.count) of \(InviteEventViewController.myInvitees.count + InviteEventViewController.emailInvitees.count) user(s).", preferredStyle: .alert)
-			let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-			alertController.addAction(cancel)
+			let ref = Database.database().reference()
 			
-			let next = UIAlertAction(
-			title: "Send", style: .default) { (action) in
-				
-				AddNoteViewController.event = InviteEventViewController.event
-				
-				self.saveEvent()
-				self.performSegue(withIdentifier: "toAddNote", sender: nil)
+			let key = InviteEventViewController.event?.key!
+			let inviteData = ["events/\(User.current.uid)/\(key!)/invitees/\(User.current.uid)": false, "users/\(User.current.uid)/hosting events/\(key!)/invitees/\(User.current.uid)": false]
+			
+			ref.updateChildValues(inviteData) { (error, _) in
+				if let error = error {
+					assertionFailure(error.localizedDescription)
+				}
 			}
 			
 			
-			alertController.addAction(next)
-			present(alertController, animated: true)
+			
 		}
+		
+//		if InviteEventViewController.emailInvitees.count == 0 {
+//			InviteEventViewController.emailInvitees = ["tempvalue@gmail.com"]
+		
+//			let alertController = UIAlertController(title: "You didn't invite anyone!", message: "Please invite at least one person through email", preferredStyle: .alert)
+//			let cancel = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+//			alertController.addAction(cancel)
+//			
+//			present(alertController, animated: true)
+//		}
+		//				else {
+		let alertController = UIAlertController(title: "Are you sure?", message: "Invitations will be sent to \(InviteEventViewController.myInvitees.count) of \(InviteEventViewController.myInvitees.count + InviteEventViewController.emailInvitees.count) user(s).", preferredStyle: .alert)
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		alertController.addAction(cancel)
+		
+		let next = UIAlertAction(
+		title: "Send", style: .default) { (action) in
+			
+			AddNoteViewController.event = InviteEventViewController.event
+			
+			self.saveEvent()
+			self.performSegue(withIdentifier: "toAddNote", sender: nil)
+		}
+		
+		
+		alertController.addAction(next)
+		present(alertController, animated: true)
+		//				}
 	}
 	
 	@IBAction func saveCloseButton(_ sender: Any) {
@@ -84,18 +104,8 @@ class InviteEventViewController: UIViewController {
 	}
 	
 	
-	//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-	//        textField.text =
-	//            self.view.endEditing(true);
-	//        return false;
-	//    }
-	
-	
 	override func viewDidLoad() {
 		print("dates are \(InviteEventViewController.event?.dates ?? [])")
-		
-		InviteEventViewController.myInvitees = []
-		InviteEventViewController.emailInvitees = []
 		
 		
 		eventNameLabel.text = InviteEventViewController.event?.name //printing nil
@@ -112,6 +122,9 @@ class InviteEventViewController: UIViewController {
 		self.view.addGestureRecognizer(tap)
 		
 		self.emailTextField.delegate = self
+		
+		InviteEventViewController.myInvitees = []
+		InviteEventViewController.emailInvitees = []
 
 		
 		super.viewDidLoad()
@@ -119,24 +132,40 @@ class InviteEventViewController: UIViewController {
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
-		
+
 
 		
 		//also for invitee in InviteEventViewController.event?.invitees
-		for invitee in InviteEventViewController.myInvitees {
+		for invitee in InviteEventViewController.event?.invitees ?? [:] {
 			dispatchGroup.enter()
-			self.inviteesTableView.reloadData()
-
-				self.dispatchGroup.leave()
-//			})
+			
+			
+			let ref = Database.database().reference().child("users").child(invitee.key)
+			
+			ref.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
+				if let user = User(snapshot: snapshot) {
+					InviteEventViewController.myInvitees.append(user)
+					
+					self.inviteesTableView.reloadData()
+					
+					self.dispatchGroup.leave()
+				}
+			})
+			
+			
+			//			})
 			//go into database, append user based on key
 		}
-		for email in (InviteEventViewController.event?.emailInvitees)! { //from inviteFriends
+		
+		
+		
+		
+		for email in (InviteEventViewController.event?.emailInvitees ?? []) { //from inviteFriends
 			dispatchGroup.enter()
 			
 			InviteEventViewController.emailInvitees.append(email)
 			self.inviteesTableView.reloadData()
-
+			
 			self.dispatchGroup.leave()
 			//go into database, append user based on key
 		}
@@ -187,18 +216,11 @@ class InviteEventViewController: UIViewController {
 					//0: user.uid
 					eventRef.child("invitees").setValue(stringUIDs)
 					
-//					
-//					
-//					let hostRef = Database.database().reference().child("users").child(User.current.uid).child("hosting events").child("email invitees")
-//					hostRef.setValue(InviteEventViewController.emailInvitees)
-//					
-//					for person in self.invitees {
-//						
-//						let inviteRef = Database.database().reference().child("users").child(person.key).child("invited events").child("email invitees")
-//						inviteRef.setValue(InviteEventViewController.emailInvitees)
-//
-//					}
+					eventRef.child("invitees").child("email invitees").setValue(InviteEventViewController.emailInvitees)
 
+					
+					
+					
 					
 					eventTableViewController.tableView.reloadData()
 				}
@@ -367,15 +389,15 @@ extension InviteEventViewController: UITextFieldDelegate {
 				
 				InviteEventViewController.emailInvitees.append(correctEmail!)
 				
-				let eventRef = ref.child("events").child(User.current.uid).child(key!).child("email invitees")
+				let eventRef = ref.child("events").child(User.current.uid).child(key!).child("invitees").child("email invitees")
 				eventRef.setValue(InviteEventViewController.emailInvitees)
 				
-				let hostRef = ref.child("users").child(User.current.uid).child("hosting events").child(key!).child("email invitees")
+				let hostRef = ref.child("users").child(User.current.uid).child("hosting events").child(key!).child("invitees").child("email invitees")
 				hostRef.setValue(InviteEventViewController.emailInvitees)
 				
 				for person in InviteEventViewController.myInvitees {
 					
-					let inviteRef = ref.child("users").child(person.uid).child("invited events").child(key!).child("email invitees")
+					let inviteRef = ref.child("users").child(person.uid).child("invited events").child(key!).child("invitees").child("email invitees")
 					inviteRef.setValue(InviteEventViewController.emailInvitees)
 					
 				}

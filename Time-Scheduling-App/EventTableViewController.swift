@@ -52,10 +52,10 @@ class EventTableViewController: UITableViewController {
         cell.eventNameLabel.text = event.name
         
         if User.current.uid == event.host {
-            cell.eventDetailsLabel.text = "\(User.current.name) | \(event.invitees.count + event.emailInvitees.count) invitees | Hosting"
+            cell.eventDetailsLabel.text = "\(User.current.name) | \((event.invitees?.count ?? 0) + (event.emailInvitees?.count ?? 0)) invitees | Hosting"
         }
         else {
-            cell.eventDetailsLabel.text = "Invited | \(event.invitees.count + event.emailInvitees.count) invitees"
+            cell.eventDetailsLabel.text = "Invited | \((event.invitees?.count ?? 0) + (event.emailInvitees?.count ?? 0))  invitees"
         }
         //host + number of invites + date (if finalized then date, else if not finalized then "Date pending"
         
@@ -99,7 +99,7 @@ class EventTableViewController: UITableViewController {
                 let delete = UIAlertAction(title: "Delete", style: .default) { _ in
                     let event = self.displayedEvents[indexPath.row]
                     
-                    for invitee in event.invitees {
+                    for invitee in event.invitees! {
                         let inviteeRef = Database.database().reference().child("users").child(invitee.key).child("invited events").child(event.key!)
                         inviteeRef.removeValue()
                         print("\(invitee.key) uninvited")

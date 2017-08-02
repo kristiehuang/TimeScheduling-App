@@ -317,7 +317,7 @@ class EventViewController: UIViewController {
                     return
                 }
                 //add event to database
-                EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "", emailInvitees: EventViewController.emailinvitees)
+                EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "", emailInvitees: (EventViewController.emailinvitees))
                     
                     
                     

@@ -21,7 +21,7 @@ struct EventService {
         print("current user is \(currentUser.name)")
         
         //save to database
-        let event = Event(host: User.current.uid, name: name, invitees: invitees, emailInvitees: emailInvitees, creationDate: creationDate, dates: dates, note: note)
+        let event = Event(host: User.current.uid, name: name, invitees: invitees, creationDate: creationDate, dates: dates, note: note)
         let dict = event.dictValue
         
         EventViewController.event = event
@@ -35,12 +35,9 @@ struct EventService {
         let ref = Database.database().reference().child("users").child(currentUser.uid).child("hosting events").child(eventRef.key)
         ref.updateChildValues(dict)
         
-        //        let hostData = ["users/\(currentUser.uid)/hosting events/\(key)": true]
-        //        Database.database().reference().updateChildValues(hostData) { (error, _) in
-        //            if let error = error {
-        //                assertionFailure(error.localizedDescription)
-        //            }
-        //        }
+
+        eventRef.child("invitees").child("email invitees").setValue(emailInvitees)
+
         
         return event
         

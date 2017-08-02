@@ -43,10 +43,7 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
         }
         
 
-//        for invitee in InviteEventViewController.myInvitees {
-//            inviteeEmails.append(invitee.email)
-//        }
-        for email in (BestDatesEventViewController.thisEvent?.emailInvitees)! {
+        for email in (InviteEventViewController.emailInvitees) {
             inviteeEmails.append(email)
         }
 
