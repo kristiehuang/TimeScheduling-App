@@ -459,7 +459,6 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
                     cell.selectedView.backgroundColor = self.selectedViewColor
                     cell.dateLabel.textColor = self.selectedMonthColor
                     
-                    //                        self.datesChosen.append(newDate)
                 }
                 else {
                     self.handleCellSelected(view: cell, cellState: cellState)

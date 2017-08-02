@@ -521,10 +521,8 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                     cell.selectedView.backgroundColor = UIColor.white
                     cell.dateLabel.textColor = self.selectedMonthColor
                     
-                    self.numberOfDates += 1
 //
                     
-                    self.datesChosen.append(myDate)
                     //kljhgj
                     
                     break
