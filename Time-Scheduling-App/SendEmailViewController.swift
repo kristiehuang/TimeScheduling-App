@@ -37,16 +37,17 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
                 if let user = User(snapshot: snapshot) {
                     inviteeEmails.append(user.email)
                 }
-
-
+                
+                
             })
         }
+        let emailinvite = BestDatesEventViewController.thisEvent?.invitees?["email invitees"]
+        let emailzz = emailinvite as! [String]
         
-
-        for email in (InviteEventViewController.emailInvitees) {
+        for email in emailzz {
             inviteeEmails.append(email)
         }
-
+        
         let eventName = (BestDatesEventViewController.thisEvent?.name)!
         let eventNote = (BestDatesEventViewController.thisEvent?.note)!
         
@@ -67,8 +68,8 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
             performSegue(withIdentifier: "unwindToHome", sender: nil)
             let notification = UIAlertController(title: "Email sent", message: "", preferredStyle: .alert)
             present(notification, animated: true)
-
-
+            
+            
         }
         // Check the result or perform other tasks.
         // Dismiss the mail compzose view controller.
