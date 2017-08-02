@@ -22,6 +22,9 @@ class EventViewController: UIViewController {
     
     @IBAction func backButtonTapped(_ sender: Any) {
     }
+    @IBAction func todayButtonTapped(_ sender: Any) {
+        calendarView.scrollToDate(Date())
+    }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         
@@ -496,6 +499,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
         
         dispatchGroup.notify(queue: .main) {
+            
             for myDate in self.existingDates {
                 
                 
@@ -521,6 +525,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
 //
                     
                     self.datesChosen.append(myDate)
+                    //kljhgj
                     
                     break
                     

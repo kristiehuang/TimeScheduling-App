@@ -20,6 +20,9 @@ class EditResponseViewController: UIViewController {
     @IBOutlet weak var invitedAsLabel: UILabel!
     @IBOutlet weak var availableDatesLabel: UILabel!
     
+    @IBAction func todayButtonTapped(_ sender: Any) {
+        calendarView.scrollToDate(Date())
+    }
     @IBAction func SaveButtonTapped(_ sender: Any) {
         print("Transitioning back to home/save")
         
@@ -48,6 +51,9 @@ class EditResponseViewController: UIViewController {
     var numberOfDates:Int = 0
     var datesChosen: [String] = []
     var events: [Event] = []
+    
+    var newNewDates = [String]()
+    
     
     var newOrderedDict = NSMutableDictionary()
     let dispatchGroup1 = DispatchGroup()
@@ -237,7 +243,7 @@ class EditResponseViewController: UIViewController {
                 if EditResponseViewController.event?.key == eventz.key {
                     
                     var datesArr = [String]()
-                    for date in self.datesChosen.enumerated() {
+                    for date in self.newNewDates.enumerated() {
                         let justDate = date.1
                         
                         datesArr.append(justDate)
@@ -408,16 +414,12 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
     
     
     
-    
     //display the cell
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         
-        print(date)
+        //print(date)
         
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CalendarCell", for: indexPath) as! InviteCalendarCell
-        
-        print(date)
-        
         
         cell.dateLabel.text = cellState.text
         
@@ -430,28 +432,44 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         let formatDate: Date? = dateFormatterGet.date(from: "\(date)")
         let newDate = dateFormatter.string(from: formatDate!)
         
-        
-                dispatchGroup.notify(queue: .main) {
-                    if self.existingDates.contains(newDate) {
-        
-                        print("array of existing dates \(self.existingDates)")
-        
-                        cell.isUserInteractionEnabled = true
-                        cell.selectedView.isHidden = false
-                        cell.selectedView.backgroundColor = self.selectedViewColor
-                        cell.dateLabel.textColor = self.selectedMonthColor
-        
-                        self.datesChosen.append(newDate)
-                    }
-                    else {
-                        self.handleCellSelected(view: cell, cellState: cellState)
-                        self.handleCellTextColor(view: cell, cellState: cellState)
-                        self.handleSelection(cell: cell, cellState: cellState)
-                        cell.isUserInteractionEnabled = false
-                    }
-        
+        dispatchGroup.notify(queue: .main, execute: {
+            
+            if self.datesChosen.contains(newDate) {
+                if self.newNewDates.contains(newDate) {
+                    cell.isUserInteractionEnabled = true
+                    cell.selectedView.isHidden = false
+                    cell.selectedView.backgroundColor = self.inviteSelectedViewColor
+                    cell.dateLabel.textColor = UIColor.white
                 }
-
+                    
+                else {
+                    cell.isUserInteractionEnabled = true
+                    cell.selectedView.isHidden = false
+                    cell.selectedView.backgroundColor = self.selectedViewColor
+                    cell.dateLabel.textColor = self.selectedMonthColor
+                }
+                
+            }
+                
+            else {
+                if self.existingDates.contains(newDate) {
+                    
+                    cell.isUserInteractionEnabled = true
+                    cell.selectedView.isHidden = false
+                    cell.selectedView.backgroundColor = self.selectedViewColor
+                    cell.dateLabel.textColor = self.selectedMonthColor
+                    
+                    //                        self.datesChosen.append(newDate)
+                }
+                else {
+                    self.handleCellSelected(view: cell, cellState: cellState)
+                    self.handleCellTextColor(view: cell, cellState: cellState)
+                    self.handleSelection(cell: cell, cellState: cellState)
+                    cell.isUserInteractionEnabled = false
+                }
+            }
+        })
+        
         
         
         return cell
@@ -468,8 +486,12 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         let formatDate: Date? = dateFormatterGet.date(from: "\(date)")
         let newDate = dateFormatter.string(from: formatDate!)
         
+        print("this is the new date: \(newDate)")
+        
         if self.existingDates.contains(newDate) {
+            print("this is the new date: \(newDate)")
             let validCell = cell as? InviteCalendarCell
+            
             
             validCell?.selectedView.isHidden = false
             validCell?.selectedView.backgroundColor = inviteSelectedViewColor
@@ -484,41 +506,40 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
             }
             
             self.datesChosen.append(newDate)
+            self.newNewDates.append(newDate)
             
         }
-        else {
-            //            handleCellSelected(view: cell, cellState: cellState)
-            //            handleCellTextColor(view: cell, cellState: cellState)
-            //
-            //            handleSelection(cell: cell, cellState: cellState)
-            //            numberOfDates += 1
-            //
-            //            if numberOfDates == 1 {
-            //                availableDatesLabel.text = "\(numberOfDates) date chosen | Select dates within those selected by the host."
-            //            } else {
-            //                availableDatesLabel.text = "\(numberOfDates) dates chosen | Select dates within those selected by the host."
-            //            }
-            //
-            //            let dateSelected = date
-            //
-            //            let dateFormatterGet = DateFormatter()
-            //            dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
-            //
-            //            let dateFormatter = DateFormatter()
-            //            dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
-            //
-            //            let formatDate: Date? = dateFormatterGet.date(from: "\(dateSelected)")
-            //            print(dateFormatter.string(from: formatDate!))
-            //
-            //
-            //            self.datesChosen.append(dateFormatter.string(from: formatDate!))
-            //
-            //            print("dates chosen array are \(self.datesChosen.enumerated())")
-            
-        }
-        
-        
+        //        else {
+        //                        handleCellSelected(view: cell, cellState: cellState)
+        //                        handleCellTextColor(view: cell, cellState: cellState)
+        //
+        //                        handleSelection(cell: cell, cellState: cellState)
+        //                        numberOfDates += 1
+        //
+        //                        if numberOfDates == 1 {
+        //                            availableDatesLabel.text = "\(numberOfDates) date chosen | Select dates within those selected by the host."
+        //                        } else {
+        //                            availableDatesLabel.text = "\(numberOfDates) dates chosen | Select dates within those selected by the host."
+        //                        }
+        //
+        //                        let dateSelected = date
+        //
+        //                        let dateFormatterGet = DateFormatter()
+        //                        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
+        //
+        //                        let dateFormatter = DateFormatter()
+        //                        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
+        //
+        //                        let formatDate: Date? = dateFormatterGet.date(from: "\(dateSelected)")
+        //                        print(dateFormatter.string(from: formatDate!))
+        //
+        //
+        //                        self.datesChosen.append(dateFormatter.string(from: formatDate!))
+        //
+        //                        print("dates chosen array are \(self.datesChosen.enumerated())")
+        //        }
     }
+    
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         
         let dateFormatterGet = DateFormatter()
@@ -531,6 +552,8 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         let newDate = dateFormatter.string(from: formatDate!)
         
         if self.existingDates.contains(newDate) {
+            print("this is the deslected date : \(newDate)")
+            
             let validCell = cell as? InviteCalendarCell
             
             validCell?.selectedView.isHidden = false
@@ -546,7 +569,9 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
             }
             
             
-            datesChosen = datesChosen.filter { $0 != newDate }
+            //            datesChosen = datesChosen.filter { $0 != newDate }
+            newNewDates = newNewDates.filter { $0 != newDate }
+            
             
         }
         else {
@@ -571,12 +596,12 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
             //
             //            let dateFormatter = DateFormatter()
             //            dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
-            //            
+            //
             //            let formatDate: Date? = dateFormatterGet.date(from: "\(dateDeselected)")
             //            print(dateFormatter.string(from: formatDate!))
-            //            
+            //
             //            datesChosen = datesChosen.filter { $0 != dateFormatter.string(from: formatDate!) }
-            //            
+            //
             //            print("dates chosen array are \(datesChosen.enumerated())")
         }
     }
@@ -588,3 +613,4 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
         monthYearLabel.text = "   \(dateFormatter.string(from: date))"
     }
 }
+
