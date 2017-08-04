@@ -18,7 +18,7 @@ class BestDatesEventViewController: UIViewController {
     var finalInvite = false
 
     
-    var bestDate: String = ""
+    static var bestDate: String = ""
     
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var respondantsLabel: UILabel!
@@ -47,7 +47,7 @@ class BestDatesEventViewController: UIViewController {
     @IBOutlet weak var sendInvitesButton: UIButton!
     
     @IBAction func sendInvitesButtonTapped(_ sender: Any) {
-        SendEmailViewController.bestDate = bestDate
+        SendEmailViewController.bestDate = (BestDatesEventViewController.bestDate)
         SendEmailViewController.finalInvite = finalInvite
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -85,32 +85,28 @@ class BestDatesEventViewController: UIViewController {
             
             BestDatesEventViewController.thisEvent = event
             BestDatesEventViewController.countDates()
-            getBestDate()
-            //            var displayDates = ""
-            //            for (date, _) in orderedDict {
-            //                let dateString = getDateString(date: date)
-            //                displayDates += "\(dateString)"
-            //            }
             
             eventNameLabel.text = "\(event.name ?? "Untitled Event")"
             noteLabel.text = "Host:  \(event.note)"
             respondantsLabel.text = "\((event.invitees?.count ?? 0) + (event.emailInvitees?.count ?? 0)) invitees"
-            
             
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //        tableView.reloadData()
+        
+        
+        if BestDatesEventViewController.bestDate == "" {
+            getBestDate()
+        }
+        else {
+            
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        if let eventViewController = segue.destination as? EventViewController {
-        //            let newOrderedDict = eventViewController.newOrderedDict
-        //            print(newOrderedDict)
-        //            print(orderedDict)
-        //            orderedDict = newOrderedDict as! [Date : Int]
-        //        }
+
         if let identifier = segue.identifier {
             if identifier == "editResponse" {
                 EditResponseViewController.event = BestDatesEventViewController.thisEvent
@@ -217,7 +213,7 @@ class BestDatesEventViewController: UIViewController {
     
     func getBestDate() {
             let firstKey = BestDatesEventViewController.sortedDict.keys.first
-            bestDate = BestDatesEventViewController.sortedDict[firstKey!]?.first as! String
+            BestDatesEventViewController.bestDate = (BestDatesEventViewController.sortedDict[firstKey!]?.first as? String)!
     }
     
 }
@@ -282,7 +278,7 @@ extension BestDatesEventViewController: UITableViewDataSource {
             cell.star.isHidden = true
             cell.dateLabel.text = datesInSect[indexPath.row] as? String
             
-            if bestDate == datesInSect[indexPath.row] as? String {
+            if BestDatesEventViewController.bestDate == datesInSect[indexPath.row] as? String {
 //                select = true
                 cell.star.isHidden = false
                 cell.dateLabel.text = datesInSect[indexPath.row] as? String
@@ -307,8 +303,7 @@ extension BestDatesEventViewController: UITableViewDataSource {
             let datesInSect = BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].1
             
             if indexPath.section < BestDatesEventViewController.sortedDict.keys.count && indexPath.row < (datesInSect.count) {
-                
-                bestDate = (datesInSect[indexPath.row] as? String)!
+                BestDatesEventViewController.bestDate = (datesInSect[indexPath.row] as? String)!
                 tableView.reloadData()
                 
             } else {

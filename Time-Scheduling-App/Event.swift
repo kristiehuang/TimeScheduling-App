@@ -23,6 +23,7 @@ class Event {
     var emailInvitees: [String]?
     var note: String
     
+    
     //turn event objects into dictionary type
     var dictValue: [String: Any] {        
         return ["host": host, "name": name ?? "Untitled Event", "invitees": invitees, "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
