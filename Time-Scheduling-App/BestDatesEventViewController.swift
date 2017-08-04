@@ -216,7 +216,9 @@ class BestDatesEventViewController: UIViewController {
     }
     
     func getBestDate() {
-        bestDate = BestDatesEventViewController.sortedDict[1]?.first as! String
+        for key in BestDatesEventViewController.sortedDict.keys {
+            bestDate = BestDatesEventViewController.sortedDict[key]?.first as! String
+        }
     }
     
 }

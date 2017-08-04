@@ -55,9 +55,9 @@ class EventViewController: UIViewController {
     let dateFormatter = DateFormatter()
     
     var numberOfDates:Int = 0
-//    var datesChosen: [Date] = []
+    //    var datesChosen: [Date] = []
     var datesChosen: [String] = []
-
+    
     var events: [Event] = []
     
     let firstDispatchGroup = DispatchGroup()
@@ -79,7 +79,9 @@ class EventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.existingDates = []
-//        
+        datesChosen = []
+        numberOfDates = 0
+        //
         
         
         calendarView.allowsMultipleSelection  = true
@@ -104,8 +106,11 @@ class EventViewController: UIViewController {
     //    for existing events
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.existingDates = []
-
+        
+        existingDates = []
+        datesChosen = []
+        numberOfDates = 0
+        
         dispatchGroup.enter()
         if let event = EventViewController.event {
             eventNameTextField.text = event.name
@@ -114,9 +119,27 @@ class EventViewController: UIViewController {
                 
                 self.existingDates.append(myDate)
                 self.datesChosen.append(myDate)
-                self.numberOfDates += 1
+                //                self.numberOfDates += 1
+                
                 
             }
+            
+            var counts: [String: Int] = [:]
+            
+            for date1 in existingDates {
+                counts[date1] = (counts[date1] ?? 0) + 1
+                for (day, count) in counts {
+                    if count > 2 { //repetitive
+                        let index = existingDates.index(of: day)
+                        existingDates.remove(at: index!)
+                    }
+                    
+                }
+            }
+
+            numberOfDates = existingDates.count
+            existingDates = datesChosen
+            
             
             self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen | Press & hold to select a range"
             
@@ -126,8 +149,6 @@ class EventViewController: UIViewController {
             eventNameTextField.text = "Untitled Event"
             dispatchGroup.leave()
         }
-        
-        
         
         
         setUpCalendarView()
@@ -140,32 +161,11 @@ class EventViewController: UIViewController {
         let currentDate = Date()
         calendarView.scrollToDate(currentDate)
         
-//        dispatchGroup.enter()
-//        UserService.events(for: User.current, completion: { (events:[Event]) in
-//            //for each event in events called from user
-//            for eventz in events {
-//                if EventViewController.event?.key == eventz.key {
-//                    
-//                    for (myDate) in eventz.dates {
-//                        
-//                        self.existingDates.append(myDate)
-//                        self.datesChosen.append(myDate)
-//                        self.numberOfDates += 1
-//                        
-//                    }
-//                    
-//                    self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen | Press & hold to select a range"
-//                }
-//            }
-//            self.dispatchGroup.leave()
-//        })
-        
-        
         
         calendarView.allowsMultipleSelection  = true
         calendarView.isRangeSelectionUsed = true
-
-
+        
+        
         
         
     }
@@ -174,7 +174,7 @@ class EventViewController: UIViewController {
         calendarView.minimumLineSpacing = 0
         calendarView.minimumInteritemSpacing = 0
         
-    
+        
         
     }
     
@@ -318,9 +318,9 @@ class EventViewController: UIViewController {
                 }
                 //add event to database
                 EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "", emailInvitees: (EventViewController.emailinvitees))
-                    
-                    
-                    
+                
+                
+                
                 datesArr = []
                 self.datesChosen = []
                 
@@ -521,7 +521,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                     cell.selectedView.backgroundColor = UIColor.white
                     cell.dateLabel.textColor = self.selectedMonthColor
                     
-//
+                    //
                     
                     //kljhgj
                     
@@ -541,7 +541,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                 self.handleSelection(cell: cell, cellState: cellState)
             }
             
-  
+            
             
             
         }
@@ -588,7 +588,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
         
         self.datesChosen.append(dateFormatter.string(from: formatDate!))
-//        print("dates chosen array are \(self.datesChosen.enumerated())")
+        //        print("dates chosen array are \(self.datesChosen.enumerated())")
         
         
         

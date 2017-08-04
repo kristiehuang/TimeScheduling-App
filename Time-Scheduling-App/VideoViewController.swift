@@ -26,7 +26,7 @@ class VideoViewController: UIViewController {
         
         //        let videoView = UIView(frame: CGRect(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.width, self.view.bounds.height))
         
-        let path = Bundle.main.path(forResource: "tutorial", ofType: "mp4")
+        let path = Bundle.main.path(forResource: "tutorial2", ofType: "mp4")
         let pathURL = URL(fileURLWithPath: path!)
         let player = AVPlayer(url: pathURL)
         
