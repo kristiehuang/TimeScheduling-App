@@ -216,9 +216,8 @@ class BestDatesEventViewController: UIViewController {
     }
     
     func getBestDate() {
-        for key in BestDatesEventViewController.sortedDict.keys {
-            bestDate = BestDatesEventViewController.sortedDict[key]?.first as! String
-        }
+            let firstKey = BestDatesEventViewController.sortedDict.keys.first
+            bestDate = BestDatesEventViewController.sortedDict[firstKey!]?.first as! String
     }
     
 }
@@ -279,31 +278,23 @@ extension BestDatesEventViewController: UITableViewDataSource {
         let datesInSect = BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].1
         
         if indexPath.section < BestDatesEventViewController.sortedDict.keys.count && indexPath.row < (datesInSect.count) {
+            
+            cell.star.isHidden = true
             cell.dateLabel.text = datesInSect[indexPath.row] as? String
             
-            
             if bestDate == datesInSect[indexPath.row] as? String {
-                select = true
-                cell.star.isHidden = false
-                cell.dateLabel.text = datesInSect[indexPath.row] as? String
-            }
-            
-            if select == true {
+//                select = true
                 cell.star.isHidden = false
                 cell.dateLabel.text = datesInSect[indexPath.row] as? String
                 print("best date selected")
-                
+                //save to database
+
             }
-            else {
-                cell.star.isHidden = true
-                cell.dateLabel.text = datesInSect[indexPath.row] as? String
-            }
+
             
         } else {
             print("index out of range")
         }
-        
-        select = false
         
         
         return cell
@@ -311,19 +302,14 @@ extension BestDatesEventViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "bestDatesCell", for: indexPath) as! BestDatesCell
-        
-        //        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         
         if User.current.uid == BestDatesEventViewController.thisEvent?.host {
             let datesInSect = BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].1
             
             if indexPath.section < BestDatesEventViewController.sortedDict.keys.count && indexPath.row < (datesInSect.count) {
                 
-                cell.star.isHidden = false
-                cell.dateLabel.text = datesInSect[indexPath.row] as? String
                 bestDate = (datesInSect[indexPath.row] as? String)!
-                select = false
+                tableView.reloadData()
                 
             } else {
                 print("index out of range")
