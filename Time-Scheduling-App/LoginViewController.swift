@@ -17,6 +17,7 @@ typealias FIRUser = FirebaseAuth.User
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
+    static var newUser = false
     
     @IBAction func loginButtonTapped(_ sender: Any) {
         print("login button tapped")
@@ -28,12 +29,13 @@ class LoginViewController: UIViewController {
         let authViewController = authUI.authViewController()
         present(authViewController, animated: true)
         //redesign auth page https://github.com/firebase/FirebaseUI-Android/issues/229
-        
+                
     }
     //google login doesnt work yet
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LoginViewController.newUser = true
     }
     
 }
@@ -86,26 +88,19 @@ extension LoginViewController: FUIAuthDelegate {
                 if let initialViewController = storyboard.instantiateInitialViewController() {
                     self.view.window?.rootViewController = initialViewController
                     self.view.window?.makeKeyAndVisible()
-                    
-                    let tutorialAlert = UIAlertController(title: "Have you used this app before?", message: "", preferredStyle: .alert)
-                    let yes = UIAlertAction(title: "Yes", style: .cancel, handler: nil)
-                    tutorialAlert.addAction(yes)
-                    
-                    let no = UIAlertAction(title: "No", style: .default, handler: { (UIAlertAction) in
-                        self.performSegue(withIdentifier: "toTutorial", sender: nil)
-                    })
-                    
-                    tutorialAlert.addAction(no)
-                    self.present(tutorialAlert, animated: true)
+//                    
                 }
                 
             }
             else {
                 print("new user")
                 self.performSegue(withIdentifier: "toDisplayName", sender: self)
+                
             }
         })
         
+
+
         print("handle user signup / login")
     }
 }

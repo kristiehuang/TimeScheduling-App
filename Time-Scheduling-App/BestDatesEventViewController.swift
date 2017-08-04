@@ -14,6 +14,11 @@ class BestDatesEventViewController: UIViewController {
     @IBOutlet weak var eventNameLabel: UILabel!
     var orderedDict: [Date: Int] = [:]
     static var thisEvent : Event?
+    var select = false
+    var finalInvite = false
+
+    
+    var bestDate: String = ""
     
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var respondantsLabel: UILabel!
@@ -30,18 +35,40 @@ class BestDatesEventViewController: UIViewController {
         if User.current.uid == BestDatesEventViewController.thisEvent?.host {
             //                        print("is host")
             self.performSegue(withIdentifier: "editEvent", sender: nil)
-
+            
         }
         else {
             self.performSegue(withIdentifier: "editResponse", sender: nil)
             //                        print("is not host")
         }
     }
-
+    
     
     @IBOutlet weak var sendInvitesButton: UIButton!
-
+    
     @IBAction func sendInvitesButtonTapped(_ sender: Any) {
+        SendEmailViewController.bestDate = bestDate
+        SendEmailViewController.finalInvite = finalInvite
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let invite = UIAlertAction(title: "Ask for input", style: .default) { (_) in
+            self.finalInvite = false
+            self.performSegue(withIdentifier: "toEmail", sender: nil)
+        }
+        alertController.addAction(invite)
+        
+        let final = UIAlertAction(title: "Send final invitation", style: .default) { (_) in
+            self.finalInvite = true
+            self.performSegue(withIdentifier: "toEmail", sender: nil)
+            
+        }
+        alertController.addAction(final)
+        
+
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancel)
+        
+        present(alertController, animated: true)
     }
     
     override func viewDidLoad() {
@@ -53,20 +80,23 @@ class BestDatesEventViewController: UIViewController {
         else {
             sendInvitesButton.isHidden = true
         }
-
+        
         if let event = EventViewController.event {
             
             BestDatesEventViewController.thisEvent = event
             BestDatesEventViewController.countDates()
-            var displayDates = ""
-            for (date, _) in orderedDict {
-                let dateString = getDateString(date: date)
-                displayDates += "\(dateString)"
-            }
+            getBestDate()
+            //            var displayDates = ""
+            //            for (date, _) in orderedDict {
+            //                let dateString = getDateString(date: date)
+            //                displayDates += "\(dateString)"
+            //            }
             
             eventNameLabel.text = "\(event.name ?? "Untitled Event")"
             noteLabel.text = "Host:  \(event.note)"
             respondantsLabel.text = "\((event.invitees?.count ?? 0) + (event.emailInvitees?.count ?? 0)) invitees"
+            
+            
         }
     }
     
@@ -133,7 +163,6 @@ class BestDatesEventViewController: UIViewController {
                 newOrderedDict.setValue(num, forKey: key)
                 
             }
-            
         }
         
         //print(bestDatesEventViewController.newOrderedDict)
@@ -151,11 +180,11 @@ class BestDatesEventViewController: UIViewController {
                 keysArray.append(typeNum)
                 
                 var datesArr: [Any] = []
-//                
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-//                dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
-//                let formatDate = dateFormatter.string(from: date)
+                //
+                //                let dateFormatter = DateFormatter()
+                //                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+                //                dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
+                //                let formatDate = dateFormatter.string(from: date)
                 
                 
                 datesArr.append(date)
@@ -167,10 +196,10 @@ class BestDatesEventViewController: UIViewController {
                 //if typeNum section already exists, then just insert date row in section
                 var newDates = Array(sortedDict[typeNum]!)
                 
-//                let dateFormatter = DateFormatter()
-//                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-//                dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
-//                let formatDate = dateFormatter.date(from: "\(date)")
+                //                let dateFormatter = DateFormatter()
+                //                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+                //                dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
+                //                let formatDate = dateFormatter.date(from: "\(date)")
                 
                 
                 newDates.append(date)
@@ -183,8 +212,11 @@ class BestDatesEventViewController: UIViewController {
             //3: [july 5]
             
         }
-        print("THIS IS NEW ORDERED DICT \(newOrderedDict)")
         
+    }
+    
+    func getBestDate() {
+        bestDate = BestDatesEventViewController.sortedDict[1]?.first as! String
     }
     
 }
@@ -233,23 +265,72 @@ extension BestDatesEventViewController: UITableViewDataSource {
         return ("\(reverseSectionNames[sectionIndex]) people")
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "bestDatesCell", for: indexPath) as! BestDatesCell
+        cell.star.isHidden = true
+        
+        
+        
         let datesInSect = BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].1
         
         if indexPath.section < BestDatesEventViewController.sortedDict.keys.count && indexPath.row < (datesInSect.count) {
             cell.dateLabel.text = datesInSect[indexPath.row] as? String
             
+            
+            if bestDate == datesInSect[indexPath.row] as? String {
+                select = true
+                cell.star.isHidden = false
+                cell.dateLabel.text = datesInSect[indexPath.row] as? String
+            }
+            
+            if select == true {
+                cell.star.isHidden = false
+                cell.dateLabel.text = datesInSect[indexPath.row] as? String
+                print("best date selected")
+                
+            }
+            else {
+                cell.star.isHidden = true
+                cell.dateLabel.text = datesInSect[indexPath.row] as? String
+            }
+            
         } else {
             print("index out of range")
         }
         
-        print(datesInSect)
-        print(indexPath.row)
+        select = false
+        
         
         return cell
     }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bestDatesCell", for: indexPath) as! BestDatesCell
+        
+        //        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
+        if User.current.uid == BestDatesEventViewController.thisEvent?.host {
+            let datesInSect = BestDatesEventViewController.sortedDict.valueKeySorted[indexPath.section].1
+            
+            if indexPath.section < BestDatesEventViewController.sortedDict.keys.count && indexPath.row < (datesInSect.count) {
+                
+                cell.star.isHidden = false
+                cell.dateLabel.text = datesInSect[indexPath.row] as? String
+                bestDate = (datesInSect[indexPath.row] as? String)!
+                select = false
+                
+            } else {
+                print("index out of range")
+            }
+            
+            
+        }
+    }
+    
     
     
 }

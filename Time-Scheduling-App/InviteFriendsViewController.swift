@@ -17,44 +17,58 @@ import FirebaseDatabase
 //array displays on table
 class InviteFriendsViewController: UIViewController {
     static var event: Event?
-
+    
     var friends = [User]()
     var invitees = [User]()
-
     
-
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
     
     override func viewDidLoad() {
+        
+        invitees = []
         super.viewDidLoad()
         
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
         UserService.usersExcludingCurrentUser { [unowned self] (users) in
             self.friends = users
-            self.invitees = []
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
         
+        for invitee in (InviteEventViewController.myInvitees) {
+            let ref = Database.database().reference().child("users").child(invitee.uid)
+            
+            ref.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
+                if let user = User(snapshot: snapshot) {
+                    self.invitees.append(user)
+                }
+                
+                
+            })
+        }
+        //read invitees
+        
         super.viewWillAppear(animated)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let inviteEventViewController = segue.destination as! InviteEventViewController
-//        inviteEventViewController.invitees = self.invitees
-        InviteEventViewController.myInvitees = self.invitees
-
+        //        let inviteEventViewController = segue.destination as! InviteEventViewController
+        //        inviteEventViewController.invitees = self.invitees
+        InviteEventViewController.myInvitees = self.invitees //set IE invitees to invited invitees
+        
         
     }
     
-
+    
 }
 
 
@@ -81,9 +95,15 @@ extension InviteFriendsViewController: UITableViewDataSource {
         cell.friendNameLabel.text = friend.name
         cell.friendEmailLabel.text = friend.email
         
-        cell.inviteButton.isSelected = friend.isInvited
+        print(friend.isInvited)
         
-
+        for invitee in invitees {
+            if invitee.name == friend.name {
+                friend.isInvited = true
+            }
+        }
+        
+        cell.inviteButton.isSelected = friend.isInvited
         
     }
 }
@@ -95,14 +115,14 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         inviteButton.isUserInteractionEnabled = false
         let friender = friends[indexPath.row]
         
-//        self.invitees = []
-
+        //        self.invitees = []
+        
         //if empty, give invitees default value. if new invitees, reset & append
         
         //friendservice methods
         print(InviteFriendsViewController.event?.dates)
         print(InviteFriendsViewController.event?.invitees)
-
+        
         FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
             defer {
                 inviteButton.isUserInteractionEnabled = true
@@ -112,7 +132,7 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
                 else {
                     self.invitees = self.invitees.filter { $0 != friender }
                 }
-
+                
                 print("invitees!!: \(self.invitees.enumerated())")
             }
             
@@ -120,20 +140,9 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
             
             friender.isInvited = !friender.isInvited
             
-            
             self.tableView.reloadRows(at: [indexPath], with: .none)
         }
         
-        
-//        if cell.inviteButton.isUserInteractionEnabled {
-//            friender.isInvited = true
-//            invites.append(friender)
-//        }
-//        else {
-//            friender.isInvited = false
-//            invites = invites.filter { $0 != friender }
-//        }
-//        print("they were invited: \(invites.enumerated())")
         
     }
 }

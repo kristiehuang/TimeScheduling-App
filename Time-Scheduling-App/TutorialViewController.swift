@@ -8,8 +8,18 @@
 
 import Foundation
 import UIKit
+import MediaPlayer
+import AVKit
+import AVFoundation
 
 class TutorialViewController: UIViewController {
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
+
+
 }

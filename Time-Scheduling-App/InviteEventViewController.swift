@@ -78,7 +78,7 @@ class InviteEventViewController: UIViewController {
 //			present(alertController, animated: true)
 //		}
 		//				else {
-		let alertController = UIAlertController(title: "Are you sure?", message: "Invitations will be sent to \(InviteEventViewController.myInvitees.count) of \(InviteEventViewController.myInvitees.count + InviteEventViewController.emailInvitees.count) user(s).", preferredStyle: .alert)
+		let alertController = UIAlertController(title: "Are you sure?", message: "Invitations will be sent to \(InviteEventViewController.myInvitees.count) of \(InviteEventViewController.myInvitees.count + InviteEventViewController.emailInvitees.count) user(s). Users invited via email can be emailed later.", preferredStyle: .alert)
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		alertController.addAction(cancel)
 		
@@ -196,15 +196,6 @@ class InviteEventViewController: UIViewController {
 				if EventViewController.event?.key == eventz.key {
 					
 					
-					//
-					//                    if (InviteEventViewController.myInvitees.isEmpty) {
-					//                        //set temporary value
-					//                        InviteEventViewController.myInvitees.append(User.current)
-					//                    }
-					//                    if InviteEventViewController.emailInvitees.isEmpty {
-					//                        InviteEventViewController.emailInvitees.append("temp empty")
-					//                    }
-					
 					let eventRef = Database.database().reference().child("events").child(User.current.uid).child((EventViewController.event?.key!)!)
 					
 					var stringUIDs = [String: Bool]()
@@ -236,7 +227,7 @@ class InviteEventViewController: UIViewController {
 		
 		if let inviteFriendsViewController = segue.destination as? InviteFriendsViewController {
 			
-			InviteEventViewController.myInvitees = inviteFriendsViewController.invitees
+			inviteFriendsViewController.invitees = InviteEventViewController.myInvitees
 			InviteFriendsViewController.event = InviteEventViewController.event
 			
 			saveEvent()
@@ -268,20 +259,13 @@ extension InviteEventViewController: UITableViewDataSource {
 		
 		configure(cell: cell, atIndexPath: indexPath)
 		
-		
-		//
-		//        let invitee = inviteesUser[indexPath.row]
-		//        cell.inviteeButton.isSelected = invitee.isInvited
+	
 		
 		return cell
 	}
 	
 	func configure(cell: InviteesCell, atIndexPath indexPath: IndexPath) {
 		
-		
-		//
-		//        cell.inviteeNameLabel.text = "\(inviteeNames[indexPath.row])"
-		//        cell.inviteeEmailLabel.text = "\(InviteEventViewController.inviteeEmails[indexPath.row])"
 		
 		var inviteeCount = InviteEventViewController.myInvitees.count + InviteEventViewController.emailInvitees.count
 		

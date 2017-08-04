@@ -15,6 +15,8 @@ class DisplayNameViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
+    var newUser = true
+    
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         guard let FIRUser = Auth.auth().currentUser, let name = nameTextField.text, let email = Auth.auth().currentUser?.email, !name.isEmpty else { return }
         
@@ -29,18 +31,9 @@ class DisplayNameViewController: UIViewController {
             let initialViewController = UIStoryboard.initialViewController(for: .main)
             self.view.window?.rootViewController = initialViewController
             self.view.window?.makeKeyAndVisible()
-            
-            let tutorialAlert = UIAlertController(title: "Have you used this app before?", message: "", preferredStyle: .alert)
-            let yes = UIAlertAction(title: "Yes", style: .cancel, handler: nil)
-            tutorialAlert.addAction(yes)
-            
-            let no = UIAlertAction(title: "No", style: .default, handler: { (UIAlertAction) in
-                self.performSegue(withIdentifier: "toTutorial", sender: nil)
-            })
-            
-            tutorialAlert.addAction(no)
-            self.present(tutorialAlert, animated: true)
+
         }
+        
     }
 }
 

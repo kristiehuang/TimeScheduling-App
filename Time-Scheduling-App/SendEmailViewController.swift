@@ -12,6 +12,10 @@ import UIKit
 import FirebaseDatabase
 
 class SendEmailViewController: UIViewController, MFMailComposeViewControllerDelegate {
+    
+    static var bestDate: String = ""
+    static var finalInvite = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,12 +55,20 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
         let eventName = (BestDatesEventViewController.thisEvent?.name)!
         let eventNote = (BestDatesEventViewController.thisEvent?.note)!
         
-        
+        if SendEmailViewController.finalInvite == true {
+            composeVC.setToRecipients(inviteeEmails)
+            composeVC.setSubject("Invite to \(eventName)")
+            composeVC.setMessageBody("Hi! <p>You're invited to \(eventName). Everyone is most available on \(SendEmailViewController.bestDate), so let's meet then.</p><p>\(eventNote)</p> <p>P.S. I used AirTime, available on the iOS App Store to gather everyone's most convenient dates. I hope I'll see you there!</p>", isHTML: true)
+            // Present the view controller modally.
+            self.present(composeVC, animated: true, completion: nil)
+        }
+        else {
         composeVC.setToRecipients(inviteeEmails)
-        composeVC.setSubject("Invite to \(eventName)")
-        composeVC.setMessageBody("Hi! <p>I'm planning an event for us to get together sometime for \(eventName). I'd love to know when everyone is available.</p> <br> <p>\(eventNote)</p> <br> Download AirTime on the iOS App Store to input your best dates to attend.", isHTML: true)
+        composeVC.setSubject("What time are you available to \(eventName)")
+        composeVC.setMessageBody("Hi! <p>I'm planning an event for us to get together sometime for \(eventName). I'd love to know when everyone is available.</p> <br> <p>\(eventNote)</p> <p>Download AirTime on the iOS App Store to input your best dates to attend. Create an account with this email to view your invite.</p>", isHTML: true)
         // Present the view controller modally.
         self.present(composeVC, animated: true, completion: nil)
+        }
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController,

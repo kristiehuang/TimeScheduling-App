@@ -13,4 +13,7 @@ class BestDatesCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var star: UIImageView!
+    
+
 }
