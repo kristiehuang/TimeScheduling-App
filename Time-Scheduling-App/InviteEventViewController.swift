@@ -247,7 +247,7 @@ extension InviteEventViewController: UITableViewDataSource {
 		
 		var inviteeCount = InviteEventViewController.myInvitees.count
 		
-		for email in InviteEventViewController.emailInvitees {
+		for _ in InviteEventViewController.emailInvitees {
 			inviteeCount += 1
 		}
 		
@@ -269,7 +269,7 @@ extension InviteEventViewController: UITableViewDataSource {
 	func configure(cell: InviteesCell, atIndexPath indexPath: IndexPath) {
 		
 		
-		var inviteeCount = InviteEventViewController.myInvitees.count + InviteEventViewController.emailInvitees.count
+		let inviteeCount = InviteEventViewController.myInvitees.count + InviteEventViewController.emailInvitees.count
 		
 		if inviteeCount > indexPath.row {
 			

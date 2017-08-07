@@ -171,6 +171,20 @@ class EventTableViewController: UITableViewController {
                 let delete = UIAlertAction(title: "Delete", style: .default) { _ in
                                         //remove user from event invitees, remove user entries to dates
                     
+                    
+                    let event = self.sortedDisplayedEvents[indexPath.row]
+
+                    for invitee in (event.invitees!) {
+                        let inviteeRef = Database.database().reference().child("users").child(invitee.key).child("invited events").child((event.key!))
+                        inviteeRef.removeValue()
+                        print("\(invitee.key) uninvited")
+                        
+                        
+                        let eventRef = Database.database().reference().child("events").child(event.host).child(event.key!).child("invitees").child(invitee.key)
+                        eventRef.removeValue()
+                        
+                    }
+                    
                     self.sortedDisplayedEvents.remove(at: indexPath.row)
                     
                     

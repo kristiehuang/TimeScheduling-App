@@ -39,7 +39,7 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
             let ref = Database.database().reference().child("users").child(invitee.key)
             
             dispatchGroup.enter()
-            ref.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let user = User(snapshot: snapshot) {
                     inviteeEmails.append(user.email)
                     dispatchGroup.leave()

@@ -20,8 +20,65 @@ class EventViewController: UIViewController {
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var availableDatesLabel: UILabel!
     
+    var eventss = [Event]()
+    var eventsString = [String]()
+    
+    var performSegue = false
+    
+    
     @IBAction func backButtonTapped(_ sender: Any) {
+        
+        print("Transitioning back to home/back")
+        let sureAlert = UIAlertController(title: "Are you sure?", message: "Unsaved information will be lost. The Save&Close button will save your event if you wish to edit later.", preferredStyle: .alert)
+        let yes = UIAlertAction(title: "Yes", style: .default) { (_) in
+            //delete event if it exists
+            
+            for event in self.eventss {
+                self.eventsString.append("\(event.creationDate)")
+            }
+            if self.eventsString.contains("\(EventViewController.event?.creationDate ?? Date())") {
+                for invitee in (EventViewController.event?.invitees!)! {
+                    let inviteeRef = Database.database().reference().child("users").child(invitee.key).child("invited events").child((EventViewController.event?.key!)!)
+                    inviteeRef.removeValue()
+                    print("\(invitee.key) uninvited")
+                }
+                
+                let eventRef = Database.database().reference().child("events").child(User.current.uid).child((EventViewController.event?.key!)!)
+                eventRef.removeValue()
+                
+                
+                let hostRef = Database.database().reference().child("users").child(User.current.uid).child("hosting events").child((EventViewController.event?.key!)!)
+                hostRef.removeValue()
+                
+
+            }
+            self.performSegue = true
+            self.performSegue(withIdentifier: "backButtonSegue", sender: nil)
+        }
+        let no = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        sureAlert.addAction(no)
+        sureAlert.addAction(yes)
+        
+        if !(self.datesChosen.isEmpty) || !(eventNameTextField.text?.isEmpty)! {
+            present(sureAlert, animated: true)
+        }
+        else {
+            self.performSegue = true
+            self.performSegue(withIdentifier: "backButtonSegue", sender: nil)
+        }
+        
+        
     }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "backButtonSegue" {
+            return performSegue
+        }
+        else {
+            return true
+        }
+    }
+    
     @IBAction func todayButtonTapped(_ sender: Any) {
         calendarView.scrollToDate(Date())
     }
@@ -72,7 +129,6 @@ class EventViewController: UIViewController {
     //    var datesChosen: [Date] = []
     var datesChosen: [String] = []
     
-    var events: [Event] = []
     
     let firstDispatchGroup = DispatchGroup()
     
@@ -150,7 +206,7 @@ class EventViewController: UIViewController {
                     
                 }
             }
-
+            
             numberOfDates = existingDates.count
             existingDates = datesChosen
             
@@ -274,7 +330,6 @@ class EventViewController: UIViewController {
         print(" event name is \(EventViewController.event?.name ?? "Untitled Event")")
         var isFound = false
         UserService.events(for: User.current, completion: { (events:[Event]) in
-            
             //for each event in events called from user
             for eventz in events {
                 if EventViewController.event?.key == eventz.key {
@@ -341,13 +396,11 @@ class EventViewController: UIViewController {
                 datesArr = []
                 self.datesChosen = []
                 
-                //                UserService.events(for: User.current) { (events) in
-                //                    events = eventTableViewController.displayedEvents
-                //                    eventTableViewController.tableView.reloadData()
-                //                    self.viewWillAppear(true)
-                //                }
-//                eventTableViewController.tableView.reloadData()
+                UserService.events(for: User.current) { (events) in
+                    self.eventss = events
+                }
                 
+
                 self.firstDispatchGroup.leave()
                 print("dispatch group run")
             }
@@ -413,23 +466,6 @@ class EventViewController: UIViewController {
         
         if gesture.state == .ended {
             rangeSelectedDates = []
-        }
-    }
-    
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let identifier = segue.identifier {
-            if identifier == "backButtonSegue" {
-                print("Transitioning back to home/back")
-            }
-                
-            else if identifier == "saveCloseSegue" {
-                print("Transitioning back to home/save")
-
-            }
-            
         }
     }
 }

@@ -1,26 +1,26 @@
   //
-//  BestDatesEventViewController.swift
-//  Time-Scheduling-App
-//
-//  Created by Kristie Huang on 7/17/17.
-//  Copyright © 2017 Kristie Huang. All rights reserved.
-//
-
-import Foundation
-import UIKit
-import FirebaseDatabase
-import EventKit
-
-class BestDatesEventViewController: UIViewController {
+  //  BestDatesEventViewController.swift
+  //  Time-Scheduling-App
+  //
+  //  Created by Kristie Huang on 7/17/17.
+  //  Copyright © 2017 Kristie Huang. All rights reserved.
+  //
+  
+  import Foundation
+  import UIKit
+  import FirebaseDatabase
+  import EventKit
+  
+  class BestDatesEventViewController: UIViewController {
     
     @IBOutlet weak var eventNameLabel: UILabel!
     var orderedDict: [Date: Int] = [:]
     static var thisEvent : Event?
     var select = false
     var finalInvite = false
-
     
-//    static var bestDate: String = ""
+    
+    //    static var bestDate: String = ""
     
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var respondantsLabel: UILabel!
@@ -70,7 +70,7 @@ class BestDatesEventViewController: UIViewController {
         }
         alertController.addAction(calendar)
         
-
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancel)
         
@@ -104,15 +104,39 @@ class BestDatesEventViewController: UIViewController {
         
         let firstKey = BestDatesEventViewController.sortedDict.keys.first
         
-        if BestDatesEventViewController.thisEvent?.bestDate == "" {
-            getBestDate()
+        if User.current.uid == BestDatesEventViewController.thisEvent?.host {
+            if BestDatesEventViewController.thisEvent?.bestDate == "" { //no best date
+                
+                BestDatesEventViewController.thisEvent?.bestDate = (BestDatesEventViewController.sortedDict[firstKey!]?.first as? String)!
+                
+                let eventKey = BestDatesEventViewController.thisEvent?.key
+                let ref = Database.database().reference().child("events").child(User.current.uid).child(eventKey!).child("best date")
+                ref.setValue(BestDatesEventViewController.thisEvent?.bestDate)
+                
+                
+                let hostRef = Database.database().reference().child("users").child(User.current.uid).child("hosting events").child(eventKey!).child("best date")
+                hostRef.setValue(BestDatesEventViewController.thisEvent?.bestDate)
+                
+            }
+            else {
+                
+            }
         }
-        else if BestDatesEventViewController.thisEvent?.bestDate != (BestDatesEventViewController.sortedDict[firstKey!]?.first as? String)! {
+            //        else if BestDatesEventViewController.thisEvent?.bestDate != (BestDatesEventViewController.sortedDict[firstKey!]?.first as? String)! {
+            //        }
+        else { //user is not host
+            //observe from database, set best date
+            let ref = Database.database().reference().child("events").child((BestDatesEventViewController.thisEvent?.host)!).child((BestDatesEventViewController.thisEvent?.key)!).child("best date")
+            
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                BestDatesEventViewController.thisEvent?.bestDate = snapshot.value as? String
+                self.tableView.reloadData()
+            })
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if let identifier = segue.identifier {
             if identifier == "editResponse" {
                 EditResponseViewController.event = BestDatesEventViewController.thisEvent
@@ -142,15 +166,15 @@ class BestDatesEventViewController: UIViewController {
                 let event:EKEvent = EKEvent(eventStore: eventStore)
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .medium
-                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
-
+                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+                
                 let bestDateDate = dateFormatter.date(from: (BestDatesEventViewController.thisEvent?.bestDate)!)
                 
                 event.title = (BestDatesEventViewController.thisEvent?.name)!
+                event.isAllDay = true
                 event.startDate = bestDateDate!
                 event.endDate = bestDateDate!
-                event.notes = BestDatesEventViewController.thisEvent?.note
+                event.notes = "Note from host: \(BestDatesEventViewController.thisEvent?.note ?? "N/A"). Saved via AirTime."
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 do {
                     try eventStore.save(event, span: .thisEvent)
@@ -158,10 +182,18 @@ class BestDatesEventViewController: UIViewController {
                     print("failed to save event with error : \(error)")
                 }
                 print("Saved Event")
+                let successAlert = UIAlertController(title: "Saved event to calendar", message: "Event on \((BestDatesEventViewController.thisEvent?.bestDate!)!)", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "Cool", style: .cancel, handler: nil)
+                successAlert.addAction(ok)
+                self.present(successAlert, animated: true)
             }
             else{
                 
-                print("failed to save event with error : \(error) or access not granted")
+                print("failed to save event with error : \(String(describing: error)) or access not granted")
+                let errorAlert = UIAlertController(title: "Something went wrong", message: "Try again?", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                errorAlert.addAction(ok)
+                self.present(errorAlert, animated: true)
             }
         }
     }
@@ -224,11 +256,6 @@ class BestDatesEventViewController: UIViewController {
                 keysArray.append(typeNum)
                 
                 var datesArr: [Any] = []
-                //
-                //                let dateFormatter = DateFormatter()
-                //                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-                //                dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
-                //                let formatDate = dateFormatter.string(from: date)
                 
                 
                 datesArr.append(date)
@@ -239,11 +266,6 @@ class BestDatesEventViewController: UIViewController {
             else {
                 //if typeNum section already exists, then just insert date row in section
                 var newDates = Array(sortedDict[typeNum]!)
-                
-                //                let dateFormatter = DateFormatter()
-                //                dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-                //                dateFormatter.timeZone = Calendar.current.timeZone //Current time zone
-                //                let formatDate = dateFormatter.date(from: "\(date)")
                 
                 
                 newDates.append(date)
@@ -259,23 +281,9 @@ class BestDatesEventViewController: UIViewController {
         
     }
     
-    func getBestDate() {
-        let firstKey = BestDatesEventViewController.sortedDict.keys.first
-        BestDatesEventViewController.thisEvent?.bestDate = (BestDatesEventViewController.sortedDict[firstKey!]?.first as? String)!
-        
-        let eventKey = BestDatesEventViewController.thisEvent?.key
-        let ref = Database.database().reference().child("events").child(User.current.uid).child(eventKey!).child("best date")
-        ref.setValue(BestDatesEventViewController.thisEvent?.bestDate)
-        
-        
-        let hostRef = Database.database().reference().child("users").child(User.current.uid).child("hosting events").child(eventKey!).child("best date")
-        hostRef.setValue(BestDatesEventViewController.thisEvent?.bestDate)
-
-    }
-    
-}
-
-extension BestDatesEventViewController: UITableViewDataSource {
+  }
+  
+  extension BestDatesEventViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var sectionString: Int = 1
         if section < BestDatesEventViewController.sortedDict.keys.count {
@@ -336,19 +344,26 @@ extension BestDatesEventViewController: UITableViewDataSource {
             cell.dateLabel.text = datesInSect[indexPath.row] as? String
             
             if BestDatesEventViewController.thisEvent?.bestDate == datesInSect[indexPath.row] as? String {
-//                select = true
+                //                select = true
                 cell.star.isHidden = false
                 cell.dateLabel.text = datesInSect[indexPath.row] as? String
                 
-                
-                print("best date selected & saved to database")
-                //save to database
-
             }
-
+            
             
         } else {
             print("index out of range")
+        }
+        
+        if User.current.uid != BestDatesEventViewController.thisEvent?.host {
+            cell.isUserInteractionEnabled = false
+            
+            if BestDatesEventViewController.thisEvent?.bestDate == datesInSect[indexPath.row] as? String {
+                //                select = true
+                cell.star.isHidden = false
+                cell.dateLabel.text = datesInSect[indexPath.row] as? String
+                
+            }
         }
         
         
@@ -380,12 +395,13 @@ extension BestDatesEventViewController: UITableViewDataSource {
             
             
         }
+        
     }
     
     
     
-}
-
-extension BestDatesEventViewController: UITableViewDelegate {
+  }
+  
+  extension BestDatesEventViewController: UITableViewDelegate {
     
-}
+  }
