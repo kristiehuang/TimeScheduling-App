@@ -119,10 +119,6 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         
         //if empty, give invitees default value. if new invitees, reset & append
         
-        //friendservice methods
-        print(InviteFriendsViewController.event?.dates)
-        print(InviteFriendsViewController.event?.invitees)
-        
         FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
             defer {
                 inviteButton.isUserInteractionEnabled = true

@@ -36,17 +36,21 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
         
         let dispatchGroup = DispatchGroup()
         for invitee in (BestDatesEventViewController.thisEvent?.invitees)! {
-            let ref = Database.database().reference().child("users").child(invitee.key)
-            
+            if invitee.key != "email invitees" {
+                let ref = Database.database().reference().child("users").child(invitee.key)
+                
+                dispatchGroup.enter()
+                ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let user = User(snapshot: snapshot) {
+                        inviteeEmails.append(user.email)
+                        dispatchGroup.leave()
+                    }
+                })
+            }
+        }
+        if (BestDatesEventViewController.thisEvent?.invitees)!.isEmpty {
             dispatchGroup.enter()
-            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                if let user = User(snapshot: snapshot) {
-                    inviteeEmails.append(user.email)
-                    dispatchGroup.leave()
-                }
-                
-                
-            })
+            dispatchGroup.leave()
         }
         let emailinvite = BestDatesEventViewController.thisEvent?.invitees?["email invitees"] ?? [""]
         print(emailinvite)
@@ -64,7 +68,7 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
         let eventName = (BestDatesEventViewController.thisEvent?.name)!
         let eventNote = (BestDatesEventViewController.thisEvent?.note)!
         
-        dispatchGroup.notify(queue: .main, execute: {
+        dispatchGroup.notify(queue: .main) {
             
             if SendEmailViewController.finalInvite == true {
                 composeVC.setToRecipients(inviteeEmails)
@@ -80,7 +84,7 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
                 // Present the view controller modally.
                 self.present(composeVC, animated: true, completion: nil)
             }
-        })
+        }
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController,

@@ -15,9 +15,19 @@ class EventTableViewController: UITableViewController {
     @IBOutlet var uiTableView: UITableView!
     
     var displayedEvents = [Event]()
+    let refreshCont = UIRefreshControl()
+    
+    let dispatchGroup = DispatchGroup()
+    
+
     
     override func viewDidLoad() {
-        tableView.reloadData()
+    
+        reloadTimeline()
+
+        refreshCont.addTarget(self, action: #selector(reloadTimeline), for: .valueChanged)
+        tableView.addSubview(refreshCont)
+        
         super.viewDidLoad()
     }
     
@@ -28,17 +38,15 @@ class EventTableViewController: UITableViewController {
             tableView.reloadData()
         }
     }
-
-    let dispatchGroup = DispatchGroup()
-    override func viewDidAppear(_ animated: Bool) {
-        
+    
+    func reloadTimeline() {
         creationDates = []
         sortedDisplayedEvents = []
         
         dispatchGroup.enter()
         dispatchGroup.enter()
-
-
+        
+        
         UserService.events(for: User.current) { (events) in
             self.displayedEvents = events
             self.dispatchGroup.leave()
@@ -51,15 +59,23 @@ class EventTableViewController: UITableViewController {
             }
             self.dispatchGroup.leave()
         }
-        dispatchGroup.notify(queue: .main) { 
+        dispatchGroup.notify(queue: .main) {
             self.reorderTable()
-
+            
+            if self.refreshCont.isRefreshing {
+                self.refreshCont.endRefreshing()
+            }
+            
         }
-
-        super.viewDidAppear(animated)
-
-
     }
+    
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadTimeline()
+        super.viewWillAppear(true)
+    }
+
     
     func reorderTable() {
         

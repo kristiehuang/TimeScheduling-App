@@ -19,7 +19,8 @@
     var select = false
     var finalInvite = false
     
-    
+    let refreshCont = UIRefreshControl()
+
     //    static var bestDate: String = ""
     
     @IBOutlet weak var noteLabel: UILabel!

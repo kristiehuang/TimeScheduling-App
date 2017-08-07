@@ -595,14 +595,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rQB-yf-ooq">
                                 <rect key="frame" x="0.0" y="115" width="414" height="621"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="ieW-xy-USZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FindFriendsCell" rowHeight="92" id="JCu-SO-Xak" customClass="FindFriendsCell" customModule="Time_Scheduling_App" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="414" height="92"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JCu-SO-Xak" id="oXZ-5k-yeZ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
@@ -671,20 +666,11 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
-                        <outlet property="searchDisplayController" destination="PjN-KI-Xls" id="w6n-KK-aww"/>
                         <outlet property="tableView" destination="rQB-yf-ooq" id="Scd-Jk-DKA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ulw-xU-ZB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="8Pa-eU-y6R" userLabel="Exit" sceneMemberID="exit"/>
-                <searchDisplayController id="PjN-KI-Xls">
-                    <connections>
-                        <outlet property="delegate" destination="RCS-W2-neG" id="giH-Je-Iql"/>
-                        <outlet property="searchContentsController" destination="RCS-W2-neG" id="ZRr-2s-3fT"/>
-                        <outlet property="searchResultsDataSource" destination="RCS-W2-neG" id="xCI-Ij-32U"/>
-                        <outlet property="searchResultsDelegate" destination="RCS-W2-neG" id="vLc-pi-g19"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-462.31884057971018" y="-1090.7608695652175"/>
         </scene>
@@ -1398,34 +1384,17 @@
                             <constraint firstItem="KyX-mP-y5K" firstAttribute="top" secondItem="zdI-tV-Upa" secondAttribute="top" constant="28" id="W5w-RJ-c8A"/>
                             <constraint firstItem="dHz-ab-FWd" firstAttribute="centerY" secondItem="Clu-CU-bxc" secondAttribute="centerY" id="ebq-m7-m7p"/>
                             <constraint firstItem="Clu-CU-bxc" firstAttribute="top" secondItem="zdI-tV-Upa" secondAttribute="top" id="jte-OD-I64"/>
+                            <constraint firstItem="If7-hD-WUZ" firstAttribute="top" secondItem="DHV-lP-n2I" secondAttribute="bottom" id="l0N-VZ-k2k"/>
                             <constraint firstItem="Clu-CU-bxc" firstAttribute="leading" secondItem="zdI-tV-Upa" secondAttribute="leading" id="mUi-dv-6qv"/>
                             <constraint firstItem="KyX-mP-y5K" firstAttribute="leading" secondItem="zdI-tV-Upa" secondAttribute="leading" constant="48" id="pew-yV-E26"/>
-                            <constraint firstItem="If7-hD-WUZ" firstAttribute="top" secondItem="DHV-lP-n2I" secondAttribute="bottom" id="teq-xU-dwY"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchDisplayController" destination="2yx-iu-nwc" id="8GD-Q4-vlj"/>
                         <outlet property="tableView" destination="DHV-lP-n2I" id="wDQ-lR-cqY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Oj-dk-p20" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="9hr-9f-znd" userLabel="Exit" sceneMemberID="exit"/>
-                <searchDisplayController id="fcE-UD-OZY">
-                    <connections>
-                        <outlet property="delegate" destination="pHR-du-C9V" id="BdS-wi-37V"/>
-                        <outlet property="searchContentsController" destination="pHR-du-C9V" id="Ssv-iN-TOD"/>
-                        <outlet property="searchResultsDataSource" destination="pHR-du-C9V" id="bD9-Uz-yu6"/>
-                        <outlet property="searchResultsDelegate" destination="pHR-du-C9V" id="xMV-8l-YX2"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="2yx-iu-nwc">
-                    <connections>
-                        <outlet property="delegate" destination="pHR-du-C9V" id="bWU-DE-6nm"/>
-                        <outlet property="searchContentsController" destination="pHR-du-C9V" id="x5u-O7-Own"/>
-                        <outlet property="searchResultsDataSource" destination="pHR-du-C9V" id="1d6-LS-7ru"/>
-                        <outlet property="searchResultsDelegate" destination="pHR-du-C9V" id="w0F-TG-ylc"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1579.7101449275362" y="-1417.663043478261"/>
         </scene>
@@ -1921,7 +1890,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friday, October 31, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-HX-CY1">
-                                                    <rect key="frame" x="104.33333333333331" y="18.666666666666664" width="206.33333333333337" height="20.999999999999993"/>
+                                                    <rect key="frame" x="104.66666666666666" y="18.666666666666664" width="206.33333333333334" height="20.999999999999993"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
