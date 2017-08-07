@@ -451,6 +451,10 @@ class EventViewController: UIViewController {
                 for aDate in dateRange {
                     if !rangeSelectedDates.contains(aDate) {
                         rangeSelectedDates.append(aDate)
+                        
+                        handleCellSelected(view: gesture.view as? JTAppleCell, cellState: cellState)
+                        handleCellTextColor(view: gesture.view as? JTAppleCell, cellState: cellState)
+                        handleSelection(cell: gesture.view as? JTAppleCell, cellState: cellState)
                     }
                 }
                 calendarView.selectDates(from: rangeSelectedDates.first!, to: date, keepSelectionIfMultiSelectionAllowed: true)
@@ -461,6 +465,10 @@ class EventViewController: UIViewController {
                 let followingDay = calendar.date(byAdding: .day, value: 1, to: date)!
                 calendarView.selectDates(from: followingDay, to: rangeSelectedDates.last!, keepSelectionIfMultiSelectionAllowed: false)
                 rangeSelectedDates.removeSubrange(indexOfNewlySelectedDate..<lastIndex)
+                
+                handleCellSelected(view: gesture.view as? JTAppleCell, cellState: cellState)
+                handleCellTextColor(view: gesture.view as? JTAppleCell, cellState: cellState)
+                handleSelection(cell: gesture.view as? JTAppleCell, cellState: cellState)
             }
         }
         
@@ -593,17 +601,7 @@ extension EventViewController: JTAppleCalendarViewDelegate {
         
         //read exisitng dates
         //for date in existing dates
-        
-        //let validCell = cell of date
-        //cellState.isSelected = true
-        //validCell.selectedView.isHidden = false
-        //if date in eventz.date, set cellState.isSelected = true
-        
-        
-        
-        //        if cellState.dateBelongsTo != .thisMonth {
-        //            cell?.isUserInteractionEnabled = false
-        //        }
+
         
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)

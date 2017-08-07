@@ -88,7 +88,7 @@ class EventTableViewController: UITableViewController {
         cell.eventNameLabel.text = event.name
         
         if User.current.uid == event.host {
-            cell.eventDetailsLabel.text = "Hosting | \((event.invitees?.count ?? 0) + (event.emailInvitees?.count ?? 0)) invitees | Hosting"
+            cell.eventDetailsLabel.text = "Hosting | \((event.invitees?.count ?? 0) + (event.emailInvitees?.count ?? 0)) invitees"
             cell.hostInviteIndicator.text = "H"
 
         }

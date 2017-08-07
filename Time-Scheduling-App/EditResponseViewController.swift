@@ -100,7 +100,7 @@ class EditResponseViewController: UIViewController {
         calendarView.allowsMultipleSelection  = true
         calendarView.isRangeSelectionUsed = true
         
-        self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen | Select dates within those selected by the host."
+        self.availableDatesLabel.text = "\(self.numberOfDates) dates chosen"
         self.invitedAsLabel.text = "Invited as: \(User.current.name)"
         
         //longpress to select range
@@ -499,44 +499,15 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
             numberOfDates += 1
             
             if numberOfDates == 1 {
-                availableDatesLabel.text = "\(numberOfDates) date chosen | Select dates within those selected by the host."
+                availableDatesLabel.text = "\(numberOfDates) date chosen"
             } else {
-                availableDatesLabel.text = "\(numberOfDates) dates chosen | Select dates within those selected by the host."
+                availableDatesLabel.text = "\(numberOfDates) dates chosen"
             }
             
             self.datesChosen.append(newDate)
             self.newNewDates.append(newDate)
             
         }
-        //        else {
-        //                        handleCellSelected(view: cell, cellState: cellState)
-        //                        handleCellTextColor(view: cell, cellState: cellState)
-        //
-        //                        handleSelection(cell: cell, cellState: cellState)
-        //                        numberOfDates += 1
-        //
-        //                        if numberOfDates == 1 {
-        //                            availableDatesLabel.text = "\(numberOfDates) date chosen | Select dates within those selected by the host."
-        //                        } else {
-        //                            availableDatesLabel.text = "\(numberOfDates) dates chosen | Select dates within those selected by the host."
-        //                        }
-        //
-        //                        let dateSelected = date
-        //
-        //                        let dateFormatterGet = DateFormatter()
-        //                        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
-        //
-        //                        let dateFormatter = DateFormatter()
-        //                        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
-        //
-        //                        let formatDate: Date? = dateFormatterGet.date(from: "\(dateSelected)")
-        //                        print(dateFormatter.string(from: formatDate!))
-        //
-        //
-        //                        self.datesChosen.append(dateFormatter.string(from: formatDate!))
-        //
-        //                        print("dates chosen array are \(self.datesChosen.enumerated())")
-        //        }
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -562,9 +533,9 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
             numberOfDates -= 1
             
             if numberOfDates == 1 {
-                availableDatesLabel.text = "\(numberOfDates) date chosen | Select dates within those selected by the host."
+                availableDatesLabel.text = "\(numberOfDates) date chosen"
             } else {
-                availableDatesLabel.text = "\(numberOfDates) dates chosen | Select dates within those selected by the host."
+                availableDatesLabel.text = "\(numberOfDates) dates chosen"
             }
             
             

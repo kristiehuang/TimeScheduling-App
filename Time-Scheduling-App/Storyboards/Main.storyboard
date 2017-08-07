@@ -144,8 +144,53 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COC-Ce-fM7">
+                                <rect key="frame" x="28" y="532" width="358" height="79"/>
+                                <color key="backgroundColor" red="0.29411764709999999" green="0.62352941179999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="79" id="8lQ-7S-c8a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="25"/>
+                                <color key="tintColor" red="0.29514700170000002" green="0.62262469529999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="SaveButtonTapped:" destination="J9a-NJ-v58" eventType="touchUpInside" id="nKh-Lh-8it"/>
+                                    <action selector="nextButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="shp-Bg-pq7"/>
+                                    <segue destination="JnZ-j6-mpK" kind="unwind" unwindAction="unwindToHome:" id="Alw-63-r6O"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MOP-Js-Liy">
+                                <rect key="frame" x="28" y="123" width="358" height="48"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select dates within those selected by the host." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Pt1-wI-RXG">
+                                        <rect key="frame" x="0.0" y="0.0" width="358" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="I9m-nn-WQM"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
+                                        <color key="textColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 dates chosen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Cd1-Le-2WT">
+                                        <rect key="frame" x="0.0" y="24" width="358" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="FMv-bw-Afx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="18"/>
+                                        <color key="textColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Uje-xa-hBX" userLabel="Calendar Stack View">
-                                <rect key="frame" x="28" y="159" width="358" height="338"/>
+                                <rect key="frame" x="28" y="179" width="358" height="338"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oFG-Jw-drm">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="55"/>
@@ -320,60 +365,29 @@
                                     <constraint firstItem="rVC-if-3gM" firstAttribute="width" secondItem="Uje-xa-hBX" secondAttribute="width" id="T7X-OK-Lkg"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COC-Ce-fM7">
-                                <rect key="frame" x="28" y="532" width="358" height="79"/>
-                                <color key="backgroundColor" red="0.29411764709999999" green="0.62352941179999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="8lQ-7S-c8a"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="25"/>
-                                <color key="tintColor" red="0.29514700170000002" green="0.62262469529999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="9"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="SaveButtonTapped:" destination="J9a-NJ-v58" eventType="touchUpInside" id="nKh-Lh-8it"/>
-                                    <action selector="nextButtonTapped:" destination="0iu-06-dBK" eventType="touchUpInside" id="shp-Bg-pq7"/>
-                                    <segue destination="JnZ-j6-mpK" kind="unwind" unwindAction="unwindToHome:" id="Alw-63-r6O"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 dates " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Pt1-wI-RXG">
-                                <rect key="frame" x="28" y="125" width="358" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="I9m-nn-WQM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="20"/>
-                                <color key="textColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cWU-EN-qMe" firstAttribute="leading" secondItem="JDb-bG-8Ii" secondAttribute="leading" id="4Px-bE-we9"/>
                             <constraint firstItem="qlZ-LN-gIS" firstAttribute="centerY" secondItem="cWU-EN-qMe" secondAttribute="centerY" id="CU2-9F-1Ag"/>
-                            <constraint firstItem="Pt1-wI-RXG" firstAttribute="width" secondItem="Uje-xa-hBX" secondAttribute="width" id="EdW-pN-jy7"/>
+                            <constraint firstItem="MOP-Js-Liy" firstAttribute="centerX" secondItem="JDb-bG-8Ii" secondAttribute="centerX" id="Dtj-RI-vtC"/>
                             <constraint firstAttribute="trailing" secondItem="cWU-EN-qMe" secondAttribute="trailing" id="Mu6-2H-2aS"/>
-                            <constraint firstItem="Pt1-wI-RXG" firstAttribute="top" secondItem="cWU-EN-qMe" secondAttribute="bottom" constant="10" id="Nxa-QD-zdo"/>
+                            <constraint firstItem="Uje-xa-hBX" firstAttribute="top" secondItem="MOP-Js-Liy" secondAttribute="bottom" constant="8" id="Nxt-01-XiA"/>
                             <constraint firstItem="0ay-nH-c8x" firstAttribute="centerY" secondItem="cWU-EN-qMe" secondAttribute="centerY" id="VhO-0o-6nP"/>
                             <constraint firstItem="qlZ-LN-gIS" firstAttribute="leading" secondItem="JDb-bG-8Ii" secondAttribute="leading" constant="27" id="Yeh-Ji-89G"/>
                             <constraint firstItem="0ay-nH-c8x" firstAttribute="centerX" secondItem="JDb-bG-8Ii" secondAttribute="centerX" id="aRy-is-Hws"/>
-                            <constraint firstItem="Pt1-wI-RXG" firstAttribute="centerX" secondItem="JDb-bG-8Ii" secondAttribute="centerX" id="bpb-0d-Gdi"/>
-                            <constraint firstItem="Uje-xa-hBX" firstAttribute="top" secondItem="Pt1-wI-RXG" secondAttribute="bottom" constant="10" id="chz-mk-9I1"/>
+                            <constraint firstItem="MOP-Js-Liy" firstAttribute="width" secondItem="Uje-xa-hBX" secondAttribute="width" id="cPg-6v-MKg"/>
                             <constraint firstItem="COC-Ce-fM7" firstAttribute="width" secondItem="Uje-xa-hBX" secondAttribute="width" id="efZ-Sv-NBh"/>
+                            <constraint firstItem="COC-Ce-fM7" firstAttribute="top" secondItem="Uje-xa-hBX" secondAttribute="bottom" constant="15" id="hZq-3I-CUV"/>
                             <constraint firstAttribute="trailing" secondItem="Uje-xa-hBX" secondAttribute="trailing" constant="28" id="isA-Ww-9bA"/>
                             <constraint firstItem="COC-Ce-fM7" firstAttribute="centerX" secondItem="JDb-bG-8Ii" secondAttribute="centerX" id="kJn-sz-6yo"/>
                             <constraint firstItem="Uje-xa-hBX" firstAttribute="leading" secondItem="JDb-bG-8Ii" secondAttribute="leading" constant="28" id="lzw-ke-TQd"/>
+                            <constraint firstItem="MOP-Js-Liy" firstAttribute="top" secondItem="cWU-EN-qMe" secondAttribute="bottom" constant="8" id="mPk-d7-rrW"/>
                             <constraint firstItem="cWU-EN-qMe" firstAttribute="top" secondItem="JDb-bG-8Ii" secondAttribute="top" id="xSt-hJ-Uq6"/>
-                            <constraint firstItem="COC-Ce-fM7" firstAttribute="top" secondItem="Uje-xa-hBX" secondAttribute="bottom" constant="35" id="zO5-hX-zW2"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="availableDatesLabel" destination="Pt1-wI-RXG" id="2QS-s0-1BC"/>
+                        <outlet property="availableDatesLabel" destination="Cd1-Le-2WT" id="DYe-tL-3uO"/>
                         <outlet property="calendarView" destination="n7j-TE-waJ" id="FbD-J5-hsp"/>
                         <outlet property="eventNameTextField" destination="Fdk-gK-YDc" id="0Jr-jC-E05"/>
                         <outlet property="invitedAsLabel" destination="qqj-AQ-InK" id="S4p-Jp-sle"/>
