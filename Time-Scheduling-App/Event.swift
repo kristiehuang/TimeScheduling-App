@@ -23,13 +23,14 @@ class Event {
     var emailInvitees: [String]?
     var note: String
     
+    var bestDate: String?
     
     //turn event objects into dictionary type
     var dictValue: [String: Any] {        
-        return ["host": host, "name": name ?? "Untitled Event", "invitees": invitees, "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
+        return ["best date": bestDate ?? "", "host": host, "name": name ?? "Untitled Event", "invitees": invitees ?? [User.current.uid: false], "created_at": creationDate.timeIntervalSince1970, "dates": dates, "note": note]
     }
     
-    init(host: String, name: String, invitees: [String: Any], emailInvitees: [String]? = nil, creationDate: Date, dates: [String], note: String) {
+    init(host: String, name: String, invitees: [String: Any], emailInvitees: [String]? = nil, creationDate: Date, dates: [String], note: String, bestDate: String? = nil) {
         self.host = host
         self.name = name
         self.creationDate = Date()
@@ -37,6 +38,7 @@ class Event {
         self.invitees = invitees
         self.emailInvitees = nil
         self.note = note
+        self.bestDate = bestDate
         
     }
     
@@ -64,8 +66,8 @@ class Event {
         guard let note = dict["note"] as? String
             else { return nil }
         
-//        guard let emailInvitees = dict["email invitees"] as? [String]
-//            else { return nil }
+        guard let bestDate = dict["best date"] as? String
+            else { return nil }
         
         self.key = snapshot.key
         self.host = host
@@ -78,7 +80,7 @@ class Event {
         self.dates = dates
         self.invitees = invitees
         self.note = note
-//        self.emailInvitees = emailInvitees
+        self.bestDate = bestDate
     }
 
 

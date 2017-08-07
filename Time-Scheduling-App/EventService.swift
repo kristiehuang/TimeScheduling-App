@@ -16,12 +16,12 @@ struct EventService {
     static var key: String = ""
     
     //just add event to database
-    static func addEvent(name: String, invitees: [String: Bool], creationDate: Date, dates: [String], note: String, emailInvitees: [String]) -> Event {
+    static func addEvent(name: String, invitees: [String: Bool], creationDate: Date, dates: [String], note: String, emailInvitees: [String], bestDate: String? = nil) -> Event {
         let currentUser = User.current
         print("current user is \(currentUser.name)")
         
         //save to database
-        let event = Event(host: User.current.uid, name: name, invitees: invitees, creationDate: creationDate, dates: dates, note: note)
+        let event = Event(host: User.current.uid, name: name, invitees: invitees, creationDate: creationDate, dates: dates, note: note, bestDate: bestDate)
         let dict = event.dictValue
         
         EventViewController.event = event

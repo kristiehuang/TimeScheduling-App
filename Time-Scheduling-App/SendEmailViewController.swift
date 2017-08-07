@@ -13,7 +13,7 @@ import FirebaseDatabase
 
 class SendEmailViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    static var bestDate: String = ""
+    var bestDate: String = ""
     static var finalInvite = false
     
     override func viewDidLoad() {
@@ -34,41 +34,53 @@ class SendEmailViewController: UIViewController, MFMailComposeViewControllerDele
         
         var inviteeEmails = [String]()
         
+        let dispatchGroup = DispatchGroup()
         for invitee in (BestDatesEventViewController.thisEvent?.invitees)! {
             let ref = Database.database().reference().child("users").child(invitee.key)
             
+            dispatchGroup.enter()
             ref.observeSingleEvent(of: .value, with: { [unowned self] (snapshot) in
                 if let user = User(snapshot: snapshot) {
                     inviteeEmails.append(user.email)
+                    dispatchGroup.leave()
                 }
                 
                 
             })
         }
-        let emailinvite = BestDatesEventViewController.thisEvent?.invitees?["email invitees"]
+        let emailinvite = BestDatesEventViewController.thisEvent?.invitees?["email invitees"] ?? [""]
+        print(emailinvite)
         let emailzz = emailinvite as! [String]
         
-        for email in emailzz {
-            inviteeEmails.append(email)
+        if emailzz == [""] {
+            print("no email invitees invited")
+        }
+        else {
+            for email in emailzz {
+                inviteeEmails.append(email)
+            }
         }
         
         let eventName = (BestDatesEventViewController.thisEvent?.name)!
         let eventNote = (BestDatesEventViewController.thisEvent?.note)!
         
-        if SendEmailViewController.finalInvite == true {
-            composeVC.setToRecipients(inviteeEmails)
-            composeVC.setSubject("Invite to \(eventName)")
-            composeVC.setMessageBody("Hi! <p>You're invited to \(eventName). Everyone is most available on \(SendEmailViewController.bestDate), so let's meet then.</p><p>\(eventNote)</p> <p>P.S. I used AirTime, available on the iOS App Store to gather everyone's most convenient dates. I hope I'll see you there!</p>", isHTML: true)
-            // Present the view controller modally.
-            self.present(composeVC, animated: true, completion: nil)
-        }
-        else {
-        composeVC.setToRecipients(inviteeEmails)
-        composeVC.setSubject("What time are you available to \(eventName)")
-        composeVC.setMessageBody("Hi! <p>I'm planning an event for us to get together sometime for \(eventName). I'd love to know when everyone is available.</p> <br> <p>\(eventNote)</p> <p>Download AirTime on the iOS App Store to input your best dates to attend. Create an account with this email to view your invite.</p>", isHTML: true)
-        // Present the view controller modally.
-        self.present(composeVC, animated: true, completion: nil)
-        }
+        dispatchGroup.notify(queue: .main, execute: {
+            
+            if SendEmailViewController.finalInvite == true {
+                composeVC.setToRecipients(inviteeEmails)
+                composeVC.setSubject("Invite to \(eventName)")
+                composeVC.setMessageBody("Hi! <p>You're invited to \(eventName). The best date for everyone \(self.bestDate), so let's meet then.</p><p>\(eventNote)</p> <p>P.S. I used AirTime, available on the iOS App Store to gather everyone's most convenient dates. I hope I'll see you there!</p>", isHTML: true)
+                // Present the view controller modally.
+                self.present(composeVC, animated: true, completion: nil)
+            }
+            else {
+                composeVC.setToRecipients(inviteeEmails)
+                composeVC.setSubject("What time are you available to \(eventName)")
+                composeVC.setMessageBody("Hi! <p>I'm planning an event for us to get together sometime for \(eventName). I'd love to know when everyone is available.</p> <br> <p>\(eventNote)</p> <p>Download AirTime on the iOS App Store to input your best dates to attend. Create an account with this email to view your invite.</p>", isHTML: true)
+                // Present the view controller modally.
+                self.present(composeVC, animated: true, completion: nil)
+            }
+        })
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController,

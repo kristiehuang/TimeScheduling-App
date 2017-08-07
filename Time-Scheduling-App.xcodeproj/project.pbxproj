@@ -28,7 +28,6 @@
 		9E1A59C41F0E028C00792D24 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1A59C31F0E028C00792D24 /* LoginViewController.swift */; };
 		9E20BC131F29053F0016AA20 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E20BC121F29053F0016AA20 /* Extension.swift */; };
 		9E3B7E7E1F32579D00D57D55 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3B7E7D1F32579D00D57D55 /* TutorialViewController.swift */; };
-		9E3B7E831F33CBEE00D57D55 /* tutorial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9E3B7E821F33CBED00D57D55 /* tutorial.mp4 */; };
 		9E3D251E1F34333500DBF2B5 /* tutorial2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9E3D251D1F34333500DBF2B5 /* tutorial2.mp4 */; };
 		9E519EAD1F1FE14300E19E75 /* FindFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */; };
 		9E519EAF1F20103700E19E75 /* InviteFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */; };
@@ -82,7 +81,6 @@
 		9E3B7E7D1F32579D00D57D55 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		9E3B7E801F33CBBB00D57D55 /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		9E3B7E811F33CBBB00D57D55 /* tutorial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tutorial.mp4; sourceTree = "<group>"; };
-		9E3B7E821F33CBED00D57D55 /* tutorial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tutorial.mp4; sourceTree = "<group>"; };
 		9E3D251D1F34333500DBF2B5 /* tutorial2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tutorial2.mp4; sourceTree = "<group>"; };
 		9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsCell.swift; sourceTree = "<group>"; };
 		9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsCell.swift; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 			children = (
 				9E1A599C1F0E006100792D24 /* AppDelegate.swift */,
 				9E1A599E1F0E006900792D24 /* Assets.xcassets */,
-				9E3B7E821F33CBED00D57D55 /* tutorial.mp4 */,
 				9E3D251D1F34333500DBF2B5 /* tutorial2.mp4 */,
 				9E758A0D1F1181B000D2745C /* Fonts */,
 				9E1A59AA1F0E00AB00792D24 /* Storyboards */,
@@ -386,7 +383,6 @@
 				9E758A0A1F1181A800D2745C /* SFText-Medium.otf in Resources */,
 				9E758A061F1181A800D2745C /* SFDisplay-Medium.otf in Resources */,
 				9E1A59A91F0E00A500792D24 /* Main.storyboard in Resources */,
-				9E3B7E831F33CBEE00D57D55 /* tutorial.mp4 in Resources */,
 				9E758A051F1181A800D2745C /* SFDisplay-Light.otf in Resources */,
 				9E1A59C11F0E020E00792D24 /* GoogleService-Info.plist in Resources */,
 				9E758A0C1F1181A800D2745C /* SFText-Semibold.otf in Resources */,

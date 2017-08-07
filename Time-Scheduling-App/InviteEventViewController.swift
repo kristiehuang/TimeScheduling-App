@@ -132,6 +132,8 @@ class InviteEventViewController: UIViewController {
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
+		
+		InviteEventViewController.event?.invitees?.removeValue(forKey: User.current.uid)
 
 
 		

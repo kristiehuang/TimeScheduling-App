@@ -8,9 +8,6 @@
 
 import Foundation
 import UIKit
-import MediaPlayer
-import AVKit
-import AVFoundation
 
 class TutorialViewController: UIViewController {
     
@@ -21,5 +18,8 @@ class TutorialViewController: UIViewController {
     }
     
 
+    @IBAction func backButtonTapped(_ sender: Any) {
+        print("back button tapped")
+    }
 
 }

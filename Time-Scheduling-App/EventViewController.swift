@@ -40,6 +40,20 @@ class EventViewController: UIViewController {
     }
     
     @IBAction func saveCloseButtonTapped(_ sender: Any) {
+        
+        //dateschosen is dates form
+        //datesarr is string form (to put into firebase)
+        
+        //merge all user's Counts dictionaries = mergedCounts
+        //used mergedCounts instead
+        //create users. add users to indiv events.
+        
+        firstDispatchGroup.enter()
+        newEvent()
+        firstDispatchGroup.notify(queue: .main, execute: {
+            self.countDates()
+            
+        })
     }
     
     @IBAction func unwindToPage1(_ segue: UIStoryboardSegue) {
@@ -265,8 +279,6 @@ class EventViewController: UIViewController {
             for eventz in events {
                 if EventViewController.event?.key == eventz.key {
                     
-                    
-                    
                     var datesArr = [String]()
                     
                     for date in self.datesChosen.enumerated() {
@@ -316,6 +328,11 @@ class EventViewController: UIViewController {
                     //unwind, don't save
                     return
                 }
+                
+                if EventViewController.invitees.isEmpty {
+                    EventViewController.invitees.updateValue(false, forKey: User.current.uid)
+                }
+                
                 //add event to database
                 EventViewController.event = EventService.addEvent(name: EventViewController.event!.name!, invitees: EventViewController.invitees, creationDate: (EventViewController.event?.creationDate)!, dates: datesArr, note: "", emailInvitees: (EventViewController.emailinvitees))
                 
@@ -329,7 +346,7 @@ class EventViewController: UIViewController {
                 //                    eventTableViewController.tableView.reloadData()
                 //                    self.viewWillAppear(true)
                 //                }
-                //                eventTableViewController.tableView.reloadData()
+//                eventTableViewController.tableView.reloadData()
                 
                 self.firstDispatchGroup.leave()
                 print("dispatch group run")
@@ -410,20 +427,7 @@ class EventViewController: UIViewController {
                 
             else if identifier == "saveCloseSegue" {
                 print("Transitioning back to home/save")
-                
-                //dateschosen is dates form
-                //datesarr is string form (to put into firebase)
-                
-                //merge all user's Counts dictionaries = mergedCounts
-                //used mergedCounts instead
-                //create users. add users to indiv events.
-                
-                firstDispatchGroup.enter()
-                newEvent()
-                firstDispatchGroup.notify(queue: .main, execute: {
-                    self.countDates()
-                    
-                })
+
             }
             
         }

@@ -13,7 +13,7 @@ class EventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDetailsLabel: UILabel!
-    @IBOutlet weak var eventStatusIndicator: UIView!
     
+    @IBOutlet weak var hostInviteIndicator: UILabel!
     
 }

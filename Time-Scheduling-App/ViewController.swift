@@ -53,6 +53,7 @@ class ViewController: UIViewController {
         
         if newUser == true {
             present(tutorialAlert, animated: true)
+            newUser = false
         }
     }
     
