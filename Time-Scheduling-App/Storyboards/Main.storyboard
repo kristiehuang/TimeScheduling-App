@@ -1725,7 +1725,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ofr-6E-hk4">
-                                <rect key="frame" x="42" y="135" width="330" height="223"/>
+                                <rect key="frame" x="42" y="134.99999999999997" width="330" height="253.33333333333329"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Sl6-au-ywA">
                                         <rect key="frame" x="0.0" y="0.0" width="169.66666666666666" height="24"/>
@@ -1761,6 +1761,17 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GJV-6Y-6Xm">
+                                        <rect key="frame" x="0.0" y="233" width="107.66666666666666" height="20.333333333333314"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 char max" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRh-8S-WUr">
+                                                <rect key="frame" x="0.0" y="0.0" width="107.66666666666666" height="20.333333333333314"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                                                <color key="textColor" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="bdJ-Jm-SbV" firstAttribute="width" secondItem="Ofr-6E-hk4" secondAttribute="width" id="MAa-6h-xRN"/>
@@ -1855,7 +1866,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner @ Jessie's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CM-h3-cbV">
-                                <rect key="frame" x="107.66666666666669" y="32" width="199" height="31"/>
+                                <rect key="frame" x="107.66666666666669" y="41" width="199" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="199" id="QJE-d5-xKa"/>
                                     <constraint firstAttribute="height" constant="31" id="jA0-Ab-1tP"/>
@@ -1865,7 +1876,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8i-un-stN">
-                                <rect key="frame" x="27" y="28" width="51" height="39"/>
+                                <rect key="frame" x="27" y="28" width="51" height="55.333333333333329"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="51" id="WhM-sE-RPW"/>
                                 </constraints>
@@ -1948,8 +1959,8 @@
                                 <color key="textColor" red="0.63373094797134399" green="0.78512424230575562" blue="0.96810156106948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host: blahblah blah lbadlfasjfaljfdas;ldjfalj fasl;fjsal;jfalf ja" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOI-xe-2Jc">
-                                <rect key="frame" x="55" y="93" width="304" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host: hi blahblhalhak jaklj blah bhal hl ha event this kaj kj test kaj k kbla lahblhalhak jaklj blah bhal hl ha event th" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kOI-xe-2Jc">
+                                <rect key="frame" x="55" y="91.333333333333314" width="304" height="64.666666666666686"/>
                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1957,12 +1968,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kOI-xe-2Jc" firstAttribute="top" secondItem="j8i-un-stN" secondAttribute="bottom" priority="800" constant="8" id="2D4-d0-kMX"/>
                             <constraint firstItem="j8i-un-stN" firstAttribute="top" secondItem="tLZ-Sb-RFT" secondAttribute="top" constant="28" id="Ede-ub-SMD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SfT-to-2lb" secondAttribute="trailing" constant="20" id="FTf-M9-n0r"/>
                             <constraint firstItem="bO2-65-nzz" firstAttribute="top" secondItem="AbX-4H-T0s" secondAttribute="bottom" constant="18" id="K5l-xB-bLf"/>
                             <constraint firstItem="V6O-a3-4xf" firstAttribute="top" secondItem="tLZ-Sb-RFT" secondAttribute="top" id="PXW-r1-BCx"/>
                             <constraint firstItem="9CM-h3-cbV" firstAttribute="centerY" secondItem="j8i-un-stN" secondAttribute="centerY" id="Sce-Pf-CLC"/>
-                            <constraint firstItem="kOI-xe-2Jc" firstAttribute="top" secondItem="j8i-un-stN" secondAttribute="bottom" constant="26" id="Tdt-Wa-DM8"/>
                             <constraint firstItem="kOI-xe-2Jc" firstAttribute="leading" secondItem="tLZ-Sb-RFT" secondAttribute="leading" constant="55" id="UFV-Ut-a3s"/>
                             <constraint firstItem="hKe-K0-Gnm" firstAttribute="top" secondItem="F2t-ZT-46y" secondAttribute="bottom" constant="56" id="aWi-kU-B8F"/>
                             <constraint firstItem="SfT-to-2lb" firstAttribute="centerY" secondItem="AbX-4H-T0s" secondAttribute="centerY" id="cMa-zR-idY"/>
@@ -1977,6 +1988,7 @@
                             <constraint firstItem="bO2-65-nzz" firstAttribute="top" secondItem="V6O-a3-4xf" secondAttribute="bottom" id="v1Y-7m-2ja"/>
                             <constraint firstItem="9CM-h3-cbV" firstAttribute="centerX" secondItem="tLZ-Sb-RFT" secondAttribute="centerX" id="xSb-3t-GRj"/>
                             <constraint firstItem="j8i-un-stN" firstAttribute="leading" secondItem="tLZ-Sb-RFT" secondAttribute="leading" constant="27" id="ydq-4L-BH0"/>
+                            <constraint firstItem="AbX-4H-T0s" firstAttribute="top" secondItem="kOI-xe-2Jc" secondAttribute="bottom" priority="800" constant="8" id="z63-hd-VvR"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
@@ -1995,7 +2007,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQi-7U-fNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JkN-Ms-UV3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1229.5999999999999" y="22.938530734632685"/>
+            <point key="canvasLocation" x="1228.985507246377" y="22.826086956521742"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="zcT-gN-d46">

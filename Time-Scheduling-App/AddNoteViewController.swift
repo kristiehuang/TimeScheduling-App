@@ -47,6 +47,8 @@ class AddNoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        noteTextView.delegate = self as UITextViewDelegate
         print(AddNoteViewController.event?.name!)
         eventNameLabel.text = AddNoteViewController.event?.name
         noteTextView.text = AddNoteViewController.event?.note
@@ -55,5 +57,14 @@ class AddNoteViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
+    }
+    
+    
+}
+extension AddNoteViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let maxChar: Int = 100
+        return (textView.text.utf16.count) + text.utf16.count - range.length <= maxChar
+
     }
 }
