@@ -1908,7 +1908,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friday, October 31, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-HX-CY1">
-                                                    <rect key="frame" x="104.66666666666666" y="18.666666666666664" width="206.33333333333334" height="20.999999999999993"/>
+                                                    <rect key="frame" x="104.33333333333331" y="18.666666666666664" width="206.33333333333337" height="20.999999999999993"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

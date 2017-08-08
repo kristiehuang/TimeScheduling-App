@@ -63,6 +63,25 @@ extension FindFriendsViewController: UITableViewDataSource {
         
     }
 }
+extension FindFriendsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FindFriendsCell") as! FindFriendsCell
+
+        cell.addButton.isUserInteractionEnabled = false
+        let friender = users[indexPath.row]
+        
+        FriendService.setIsFriending(!friender.isFriended, fromCurrentUserTo: friender) { (success) in
+            defer {
+                cell.addButton.isUserInteractionEnabled = true
+            }
+            
+            guard success else { return }
+            
+            friender.isFriended = !friender.isFriended
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+}
 
 extension FindFriendsViewController: FindFriendsCellDelegate {
     func didTapAddButton(_ addButton: UIButton, on cell: FindFriendsCell) {
