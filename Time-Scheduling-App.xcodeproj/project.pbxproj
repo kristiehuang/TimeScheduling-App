@@ -41,6 +41,7 @@
 		9E758A0A1F1181A800D2745C /* SFText-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E758A021F1181A800D2745C /* SFText-Medium.otf */; };
 		9E758A0B1F1181A800D2745C /* SFText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E758A031F1181A800D2745C /* SFText-Regular.otf */; };
 		9E758A0C1F1181A800D2745C /* SFText-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E758A041F1181A800D2745C /* SFText-Semibold.otf */; };
+		9E8E58071F397EBB00455228 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E58061F397EBB00455228 /* ContactsViewController.swift */; };
 		9EA986E81F2672B0007A24B5 /* InviteCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA986E71F2672B0007A24B5 /* InviteCalendarCell.swift */; };
 		9EA986EA1F269966007A24B5 /* BestDatesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA986E91F269966007A24B5 /* BestDatesCell.swift */; };
 		9EB5118D1F13E45B0097659A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB5118C1F13E45B0097659A /* User.swift */; };
@@ -94,6 +95,7 @@
 		9E758A021F1181A800D2745C /* SFText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Medium.otf"; path = "Fonts/SFText-Medium.otf"; sourceTree = "<group>"; };
 		9E758A031F1181A800D2745C /* SFText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Regular.otf"; path = "Fonts/SFText-Regular.otf"; sourceTree = "<group>"; };
 		9E758A041F1181A800D2745C /* SFText-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFText-Semibold.otf"; path = "Fonts/SFText-Semibold.otf"; sourceTree = "<group>"; };
+		9E8E58061F397EBB00455228 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		9EA986E71F2672B0007A24B5 /* InviteCalendarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteCalendarCell.swift; sourceTree = "<group>"; };
 		9EA986E91F269966007A24B5 /* BestDatesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestDatesCell.swift; sourceTree = "<group>"; };
 		9EB5118C1F13E45B0097659A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				9E1A59B21F0E00DF00792D24 /* ViewController.swift */,
 				9E0C0B991F1588850026307C /* EventTableViewController.swift */,
 				9EB893861F1FD7EA000F3904 /* FindFriendsViewController.swift */,
+				9E8E58061F397EBB00455228 /* ContactsViewController.swift */,
 				9EFDADAD1F2F925A009D6940 /* ProfileViewController.swift */,
 				9E3B7E7D1F32579D00D57D55 /* TutorialViewController.swift */,
 				9EBEAC781F33D3C800B7BEF9 /* VideoViewController.swift */,
@@ -474,6 +477,7 @@
 				9E0653FD1F1EA35A0031E4F5 /* EditResponseViewController.swift in Sources */,
 				9E1A599D1F0E006100792D24 /* AppDelegate.swift in Sources */,
 				9E519EB11F20134B00E19E75 /* InviteesCell.swift in Sources */,
+				9E8E58071F397EBB00455228 /* ContactsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

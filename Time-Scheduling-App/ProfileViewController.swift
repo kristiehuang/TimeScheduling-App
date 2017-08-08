@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var userNameLabel: UILabel!
     
+    @IBOutlet weak var userUsernameLabel: UILabel!
     @IBOutlet weak var userEmailLabel: UILabel!
     @IBAction func developerBioButton(_ sender: Any) {
     }
@@ -47,6 +48,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         userNameLabel.text = User.current.name
+        userUsernameLabel.text = User.current.username
         userEmailLabel.text = User.current.email
         
         authHandle = Auth.auth().addStateDidChangeListener() { [unowned self] (auth, user) in

@@ -16,8 +16,8 @@ struct UserService {
 
     
     
-    static func createDatabase(_ firUser: FIRUser, name: String, email: String, completion: @escaping (User?) -> Void) {
-        let userAttrs = ["name": name, "email": email]
+    static func createDatabase(_ firUser: FIRUser, username: String, email: String, name: String, completion: @escaping (User?) -> Void) {
+        let userAttrs = ["username": username, "email": email, "name": name]
         
         
         

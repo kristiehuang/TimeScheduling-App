@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 class FindFriendsViewController: UIViewController {
 
     var users = [User]()
@@ -56,8 +57,8 @@ extension FindFriendsViewController: UITableViewDataSource {
     func configure(cell: FindFriendsCell, atIndexPath indexPath: IndexPath) {
         let friend = users[indexPath.row]
         
-        cell.friendNameLabel.text = friend.name
-        cell.friendEmailLabel.text = friend.email
+        cell.friendNameLabel.text = friend.username
+        cell.friendEmailLabel.text = friend.name //just display username
         cell.addButton.isSelected = friend.isFriended
         
     }

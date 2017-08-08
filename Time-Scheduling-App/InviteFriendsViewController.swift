@@ -92,13 +92,13 @@ extension InviteFriendsViewController: UITableViewDataSource {
     func configure(cell: InviteFriendsCell, atIndexPath indexPath: IndexPath) {
         
         let friend = friends[indexPath.row]
-        cell.friendNameLabel.text = friend.name
-        cell.friendEmailLabel.text = friend.email
+        cell.friendNameLabel.text = friend.username
+        cell.friendEmailLabel.text = friend.name
         
         print(friend.isInvited)
         
         for invitee in invitees {
-            if invitee.name == friend.name {
+            if invitee.username == friend.username {
                 friend.isInvited = true
             }
         }

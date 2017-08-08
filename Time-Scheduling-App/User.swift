@@ -13,39 +13,43 @@ import FirebaseDatabase.FIRDataSnapshot
 class User: NSObject {
     
     let uid: String
-    let name: String
+    var name: String = (Auth.auth().currentUser?.displayName)!
     var email: String = (Auth.auth().currentUser?.email)!
+    let username: String
     
     var isFriended = false
     var isInvited = false
     
     
     
-    init(uid: String, name: String, email: String) {
+    init(uid: String, name: String, email: String, username: String) {
         self.uid = uid
         self.name = name
         self.email = email
+        self.username = username
         super.init()
         
     }
     
     init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String, let email = dict["email"] as? String
+        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String, let email = dict["email"] as? String, let username = dict["username"] as? String
             else { return nil }
         self.uid = snapshot.key
         self.name = name
         self.email = email
+        self.username = username
         super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
         guard let uid = aDecoder.decodeObject(forKey: "uid") as? String,
-            let name = aDecoder.decodeObject(forKey: "name") as? String, let email = aDecoder.decodeObject(forKey: "email") as? String
+            let name = aDecoder.decodeObject(forKey: "name") as? String, let email = aDecoder.decodeObject(forKey: "email") as? String, let username = aDecoder.decodeObject(forKey: "username") as? String
             else { return nil }
         
         self.uid = uid
         self.name = name
         self.email = email
+        self.username = username
         
         super.init()
     }
@@ -81,5 +85,7 @@ extension User: NSCoding {
         aCoder.encode(uid, forKey: "uid")
         aCoder.encode(name, forKey: "name")
         aCoder.encode(email, forKey: "email")
+        aCoder.encode(username, forKey: "username")
+
     }
 }
