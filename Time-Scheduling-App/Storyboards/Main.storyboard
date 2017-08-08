@@ -35,7 +35,7 @@
             <objects>
                 <tableViewController autoresizesArchivedViewToFullSize="NO" id="Ry8-7Q-GeY" customClass="EventTableViewController" customModule="Time_Scheduling_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="28" sectionFooterHeight="28" id="ESh-ly-C0I">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="627"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -623,16 +623,16 @@
                                                     </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TCN-Wg-eep">
-                                                    <rect key="frame" x="13" y="16" width="160" height="60.333333333333329"/>
+                                                    <rect key="frame" x="13" y="16" width="114" height="60.333333333333329"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lily Li" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI1-9p-6M6">
-                                                            <rect key="frame" x="0.0" y="0.0" width="160" height="28.666666666666664"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lily25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI1-9p-6M6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="114" height="28.666666666666664"/>
                                                             <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="24"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lilyli.25@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qe-M4-6gt">
-                                                            <rect key="frame" x="0.0" y="38.666666666666671" width="160" height="21.666666666666664"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stephanie Liu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qe-M4-6gt">
+                                                            <rect key="frame" x="0.0" y="38.666666666666671" width="114" height="21.666666666666664"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -894,10 +894,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fek-Fw-FWo">
-                                <rect key="frame" x="16" y="43" width="382" height="44"/>
+                                <rect key="frame" x="16" y="43" width="382" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-Id-aEJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <rect key="frame" x="0.0" y="2" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="d9b-Id-aEJ" secondAttribute="height" multiplier="1:1" id="HQ1-4H-sPS"/>
                                             <constraint firstAttribute="height" constant="44" id="x3j-ow-4ZS"/>
@@ -912,14 +912,14 @@
                                             <segue destination="av5-Dx-Ban" kind="show" id="abr-7l-Y0o"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A I R T I M E" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="XVy-as-nDK">
-                                        <rect key="frame" x="64" y="4" width="258" height="36"/>
-                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="airtime" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="XVy-as-nDK">
+                                        <rect key="frame" x="64" y="0.0" width="258" height="48"/>
+                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cu9-8d-q2W">
-                                        <rect key="frame" x="342" y="5" width="40" height="34"/>
+                                        <rect key="frame" x="342" y="7" width="40" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="cu9-8d-q2W" secondAttribute="height" multiplier="43:37" id="NSE-Wc-MdE"/>
                                             <constraint firstAttribute="width" constant="40" id="Tlo-Sa-u7i"/>
@@ -932,7 +932,7 @@
                                 </subviews>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YxS-qF-Wmo">
-                                <rect key="frame" x="0.0" y="109" width="414" height="627"/>
+                                <rect key="frame" x="0.0" y="113" width="414" height="623"/>
                                 <connections>
                                     <segue destination="Ry8-7Q-GeY" kind="embed" identifier="showTableSegue" id="j2c-Di-8P3"/>
                                 </connections>
@@ -1908,7 +1908,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friday, October 31, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-HX-CY1">
-                                                    <rect key="frame" x="104.33333333333331" y="18.666666666666664" width="206.33333333333337" height="20.999999999999993"/>
+                                                    <rect key="frame" x="104" y="18.666666666666664" width="206.33333333333331" height="20.999999999999993"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2131,7 +2131,7 @@
         <image name="uninvite button" width="144" height="141"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uBn-75-8Kc"/>
-        <segue reference="hcK-O4-tBH"/>
+        <segue reference="JpJ-Bc-8o5"/>
+        <segue reference="nim-iF-2HQ"/>
     </inferredMetricsTieBreakers>
 </document>
