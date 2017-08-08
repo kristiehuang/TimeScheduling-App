@@ -89,6 +89,8 @@ extension InviteFriendsViewController: UITableViewDataSource {
         return cell
     }
     
+    
+    
     func configure(cell: InviteFriendsCell, atIndexPath indexPath: IndexPath) {
         
         let friend = friends[indexPath.row]
@@ -97,14 +99,56 @@ extension InviteFriendsViewController: UITableViewDataSource {
         
         print(friend.isInvited)
         
+        var uids = [String]()
         for invitee in invitees {
-            if invitee.username == friend.username {
-                friend.isInvited = true
-            }
+            uids.append(invitee.uid)
+        }
+        if uids.contains(friend.uid) {
+            friend.isInvited = true
         }
         
         cell.inviteButton.isSelected = friend.isInvited
         
+    }
+    
+    
+}
+extension InviteFriendsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InviteFriendsCell") as! InviteFriendsCell
+        
+        cell.inviteButton.isUserInteractionEnabled = false
+        let friender = friends[indexPath.row]
+//
+//        //        self.invitees = []
+//        
+//        //if empty, give invitees default value. if new invitees, reset & append
+//        
+        FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
+            defer {
+                friender.isInvited = !friender.isInvited
+                
+                cell.inviteButton.isUserInteractionEnabled = true
+                if friender.isInvited == true { //false, inviting
+                    self.invitees.append(friender)
+                }
+                else {
+                    self.invitees = self.invitees.filter { $0 != friender }
+                }
+                
+                print("invitees!!: \(self.invitees.enumerated())")
+                
+                self.tableView.reloadRows(at: [indexPath], with: .none)
+                
+                
+            }
+//            
+            guard success else { return }
+//
+//            friender.isInvited = !friender.isInvited
+//            
+//            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
     }
 }
 
@@ -121,8 +165,10 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
         
         FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
             defer {
+                friender.isInvited = !friender.isInvited
+
                 inviteButton.isUserInteractionEnabled = true
-                if friender.isInvited == true { //false, inviting
+                if friender.isInvited == true { //true, inviting
                     self.invitees.append(friender)
                 }
                 else {
@@ -130,13 +176,17 @@ extension InviteFriendsViewController: InviteFriendsCellDelegate {
                 }
                 
                 print("invitees!!: \(self.invitees.enumerated())")
+                
+                self.tableView.reloadRows(at: [indexPath], with: .none)
+
+
             }
             
             guard success else { return }
             
-            friender.isInvited = !friender.isInvited
+//            friender.isInvited = !friender.isInvited
             
-            self.tableView.reloadRows(at: [indexPath], with: .none)
+//            self.tableView.reloadRows(at: [indexPath], with: .none)
         }
         
         

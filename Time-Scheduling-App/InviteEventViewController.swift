@@ -276,9 +276,12 @@ extension InviteEventViewController: UITableViewDataSource {
 			if InviteEventViewController.myInvitees.count > indexPath.row {
 				print(InviteEventViewController.myInvitees[indexPath.row].name)
 				
-				cell.inviteeNameLabel.text = InviteEventViewController.myInvitees[indexPath.row].name
-				cell.inviteeEmailLabel.text = InviteEventViewController.myInvitees[indexPath.row].email
-				cell.inviteeButton.isSelected = InviteEventViewController.myInvitees[indexPath.row].isInvited
+				cell.inviteeNameLabel.text = InviteEventViewController.myInvitees[indexPath.row].username
+
+				cell.inviteeEmailLabel.text = InviteEventViewController.myInvitees[indexPath.row].name
+				
+				
+				cell.inviteeButton.isSelected = InviteEventViewController.myInvitees[indexPath.row].isInvited  //deselected = - button
 			}
 			else {
 				cell.inviteeNameLabel.text = InviteEventViewController.emailInvitees[indexPath.row - InviteEventViewController.myInvitees.count]
@@ -295,6 +298,73 @@ extension InviteEventViewController: UITableViewDataSource {
 	
 	
 }
+
+extension InviteEventViewController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "InviteesCell") as! InviteesCell
+
+		cell.inviteeButton.isUserInteractionEnabled = true
+		var inviteeCount = InviteEventViewController.myInvitees.count
+		
+		for email in InviteEventViewController.emailInvitees {
+			inviteeCount += 1
+		}
+		
+		if inviteeCount > indexPath.row {
+			if InviteEventViewController.myInvitees.count > indexPath.row {
+				let friender = InviteEventViewController.myInvitees[indexPath.row]
+				
+				
+				//friendservice methods
+				//				let dispatchReloadTable = DispatchGroup()
+				//				dispatchReloadTable.enter()
+				FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
+					defer {
+						
+						cell.inviteeButton.isUserInteractionEnabled = true
+						friender.isInvited = !friender.isInvited
+						
+						if friender.isInvited == true { //false, inviting
+							cell.inviteeButton.isSelected = false
+							InviteEventViewController.myInvitees.append(friender)
+							print("has been invited")
+							//							dispatchReloadTable.leave()
+						}
+						else if friender.isInvited == false { //true, uninviting
+							cell.inviteeButton.isSelected = true
+							InviteEventViewController.myInvitees = InviteEventViewController.myInvitees.filter { $0 != friender }
+							print("has been UNinvited")
+							//							dispatchReloadTable.leave()
+						}
+						self.inviteesTableView.reloadData()
+					}
+					
+					guard success else { return }
+					
+					//					dispatchReloadTable.notify(queue: .main, execute: {
+					//						friender.isInvited = !friender.isInvited
+					//						self.inviteesTableView.reloadData()
+					//					})
+					
+				}
+			}
+			else {
+				let friender = InviteEventViewController.emailInvitees[indexPath.row - InviteEventViewController.myInvitees.count]
+				
+				cell.inviteeButton.isUserInteractionEnabled = true
+				
+				cell.inviteeButton.isSelected = true
+				InviteEventViewController.emailInvitees = InviteEventViewController.emailInvitees.filter { $0 != friender }
+				print("has been UNinvited")
+				self.inviteesTableView.reloadData()
+				
+			}
+		}
+	}
+	
+
+}
+
 extension InviteEventViewController: InviteEventCellDelegate {
 	func didTapInviteeButton(_ inviteeButton: UIButton, on cell: InviteesCell) {
 		guard let indexPath = inviteesTableView.indexPath(for: cell) else { return }
@@ -312,34 +382,35 @@ extension InviteEventViewController: InviteEventCellDelegate {
 				
 				
 				//friendservice methods
-				let dispatchReloadTable = DispatchGroup()
-				dispatchReloadTable.enter()
+//				let dispatchReloadTable = DispatchGroup()
+//				dispatchReloadTable.enter()
 				FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
 					defer {
 						
 						inviteeButton.isUserInteractionEnabled = true
-						
-						if !friender.isInvited == true { //false, inviting
+						friender.isInvited = !friender.isInvited
+
+						if friender.isInvited == true { //false, inviting
 							cell.inviteeButton.isSelected = false
 							InviteEventViewController.myInvitees.append(friender)
 							print("has been invited")
-							dispatchReloadTable.leave()
+//							dispatchReloadTable.leave()
 						}
-						else if !friender.isInvited == false { //true, uninviting
+						else if friender.isInvited == false { //true, uninviting
 							cell.inviteeButton.isSelected = true
 							InviteEventViewController.myInvitees = InviteEventViewController.myInvitees.filter { $0 != friender }
 							print("has been UNinvited")
-							dispatchReloadTable.leave()
+//							dispatchReloadTable.leave()
 						}
-						
+						self.inviteesTableView.reloadData()
 					}
 					
 					guard success else { return }
 					
-					dispatchReloadTable.notify(queue: .main, execute: {
-						friender.isInvited = !friender.isInvited
-						self.inviteesTableView.reloadData()
-					})
+//					dispatchReloadTable.notify(queue: .main, execute: {
+//						friender.isInvited = !friender.isInvited
+//						self.inviteesTableView.reloadData()
+//					})
 					
 				}
 			}
@@ -356,6 +427,8 @@ extension InviteEventViewController: InviteEventCellDelegate {
 			}
 		}
 	}
+	
+	
 	
 }
 

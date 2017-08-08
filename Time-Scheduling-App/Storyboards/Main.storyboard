@@ -610,6 +610,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="91.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gT1-p3-WY2">
+                                                    <rect key="frame" x="338" y="23" width="45" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="gT1-p3-WY2" secondAttribute="height" multiplier="1:1" id="hNl-NA-n4C"/>
+                                                        <constraint firstAttribute="height" constant="45" id="x6a-C8-gjg"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="friendinvite button"/>
+                                                    <state key="selected" image="unfriend button"/>
+                                                    <connections>
+                                                        <action selector="addButtonTapped:" destination="JCu-SO-Xak" eventType="touchUpInside" id="tJN-lc-oZy"/>
+                                                    </connections>
+                                                </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TCN-Wg-eep">
                                                     <rect key="frame" x="13" y="16" width="160" height="60.333333333333329"/>
                                                     <subviews>
@@ -627,18 +639,6 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gT1-p3-WY2">
-                                                    <rect key="frame" x="338" y="23" width="45" height="45"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="gT1-p3-WY2" secondAttribute="height" multiplier="1:1" id="hNl-NA-n4C"/>
-                                                        <constraint firstAttribute="height" constant="45" id="x6a-C8-gjg"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="friendinvite button"/>
-                                                    <state key="selected" image="unfriend button"/>
-                                                    <connections>
-                                                        <action selector="addButtonTapped:" destination="JCu-SO-Xak" eventType="touchUpInside" id="tJN-lc-oZy"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="TCN-Wg-eep" firstAttribute="leading" secondItem="oXZ-5k-yeZ" secondAttribute="leading" constant="13" id="AdD-Ut-qhw"/>
@@ -1908,7 +1908,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friday, October 31, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-HX-CY1">
-                                                    <rect key="frame" x="104.33333333333331" y="18.666666666666664" width="206.33333333333337" height="20.999999999999993"/>
+                                                    <rect key="frame" x="104.66666666666666" y="18.666666666666664" width="206.33333333333334" height="20.999999999999993"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
