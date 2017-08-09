@@ -28,7 +28,7 @@
 		9E20BC131F29053F0016AA20 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E20BC121F29053F0016AA20 /* Extension.swift */; };
 		9E3B7E7E1F32579D00D57D55 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3B7E7D1F32579D00D57D55 /* TutorialViewController.swift */; };
 		9E3D251E1F34333500DBF2B5 /* tutorial2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9E3D251D1F34333500DBF2B5 /* tutorial2.mp4 */; };
-		9E43AB9F1F3B70B8003B4AEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E43AB9E1F3B70B8003B4AEC /* GoogleService-Info.plist */; };
+		9E43ABA11F3B7D7C003B4AEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E43ABA01F3B7D7C003B4AEC /* GoogleService-Info.plist */; };
 		9E519EAD1F1FE14300E19E75 /* FindFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */; };
 		9E519EAF1F20103700E19E75 /* InviteFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */; };
 		9E519EB11F20134B00E19E75 /* InviteesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E519EB01F20134B00E19E75 /* InviteesCell.swift */; };
@@ -82,7 +82,7 @@
 		9E3B7E801F33CBBB00D57D55 /* Contents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		9E3B7E811F33CBBB00D57D55 /* tutorial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tutorial.mp4; sourceTree = "<group>"; };
 		9E3D251D1F34333500DBF2B5 /* tutorial2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tutorial2.mp4; sourceTree = "<group>"; };
-		9E43AB9E1F3B70B8003B4AEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9E43ABA01F3B7D7C003B4AEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9E519EAC1F1FE14300E19E75 /* FindFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsCell.swift; sourceTree = "<group>"; };
 		9E519EAE1F20103700E19E75 /* InviteFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsCell.swift; sourceTree = "<group>"; };
 		9E519EB01F20134B00E19E75 /* InviteesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteesCell.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		9E1A59AF1F0E00C800792D24 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				9E43AB9E1F3B70B8003B4AEC /* GoogleService-Info.plist */,
+				9E43ABA01F3B7D7C003B4AEC /* GoogleService-Info.plist */,
 				9E0C0B9D1F15F5A20026307C /* Info.plist */,
 				9E0653FE1F1EBA250031E4F5 /* Storyboard+Utility.swift */,
 			);
@@ -345,7 +345,7 @@
 				TargetAttributes = {
 					9EF449851F09A8C8002EA988 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 45VCQ885ZT;
+						DevelopmentTeam = M5H35PZZEH;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -376,7 +376,7 @@
 			files = (
 				9E758A0B1F1181A800D2745C /* SFText-Regular.otf in Resources */,
 				9E1A59A81F0E00A500792D24 /* LaunchScreen.storyboard in Resources */,
-				9E43AB9F1F3B70B8003B4AEC /* GoogleService-Info.plist in Resources */,
+				9E43ABA11F3B7D7C003B4AEC /* GoogleService-Info.plist in Resources */,
 				9E3D251E1F34333500DBF2B5 /* tutorial2.mp4 in Resources */,
 				9E758A071F1181A800D2745C /* SFDisplay-Regular.otf in Resources */,
 				9E1A599F1F0E006900792D24 /* Assets.xcassets in Resources */,
@@ -583,7 +583,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 45VCQ885ZT;
+				DEVELOPMENT_TEAM = M5H35PZZEH;
 				INFOPLIST_FILE = "Time-Scheduling-App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -600,7 +600,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 45VCQ885ZT;
+				DEVELOPMENT_TEAM = M5H35PZZEH;
 				INFOPLIST_FILE = "Time-Scheduling-App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -340,9 +340,7 @@ class EventViewController: UIViewController {
                         let justDate = date.1
                         datesArr.append("\(justDate)")
                     }
-                    print("dates chosen: \(self.datesChosen)")
-                    print("dates array: \(datesArr)")
-                    
+ 
                     if datesArr.isEmpty {
                         self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
                         //unwind to page 1, don't save
@@ -367,8 +365,7 @@ class EventViewController: UIViewController {
                 print("new event")
                 
                 var datesArr = [String]()
-                
-                print("dates chosen is \(self.datesChosen)")
+
                 
                 //changing type date to type string
                 for date in self.datesChosen.enumerated() {
@@ -377,7 +374,6 @@ class EventViewController: UIViewController {
                 }
                 
                 
-                print("dates datesarr is \(datesArr)")
                 if datesArr.isEmpty {
                     self.showError(bigErrorMsg: "Enter a date!", smallErrorMsg: "Please.")
                     //unwind, don't save
@@ -428,7 +424,6 @@ class EventViewController: UIViewController {
                 let eventViewController = EventViewController()
                 item = value
                 eventViewController.newOrderedDict[key] = item
-                print("THIS IS NEW ORDERED DICT \(eventViewController.newOrderedDict)")
             }
         }
         
@@ -486,10 +481,6 @@ extension EventViewController: JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         
-        
-        //        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        
-        //        dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
         dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
         
         dateFormatter.timeZone = Calendar.current.timeZone
@@ -561,7 +552,6 @@ extension EventViewController: JTAppleCalendarViewDelegate {
                 
                 
                 if myDate == dateFormatter4.string(from: dateee!) {
-                    print("array of existing dates \(self.existingDates)")
                     cell.isSelected = true
                     
                     

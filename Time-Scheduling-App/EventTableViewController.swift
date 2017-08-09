@@ -22,7 +22,6 @@ class EventTableViewController: UITableViewController {
 
     
     override func viewDidLoad() {
-    
         reloadTimeline()
 
         refreshCont.addTarget(self, action: #selector(reloadTimeline), for: .valueChanged)
@@ -45,7 +44,6 @@ class EventTableViewController: UITableViewController {
         
         dispatchGroup.enter()
         dispatchGroup.enter()
-        
         
         UserService.events(for: User.current) { (events) in
             self.displayedEvents = events
@@ -93,7 +91,6 @@ class EventTableViewController: UITableViewController {
             }
         }
         tableView.reloadData()
-        print(self.sortedDisplayedEvents)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,10 +113,6 @@ class EventTableViewController: UITableViewController {
         //host + number of invites + date (if finalized then date, else if not finalized then "Date pending"
         
         
-        
-        
-        
-        
         return cell
         
     }
@@ -137,14 +130,8 @@ class EventTableViewController: UITableViewController {
         EventViewController.event = event
         BestDatesEventViewController.thisEvent = event
         
-        
-        //                        print("is host")
         self.performSegue(withIdentifier: "showEventResults", sender: nil)
-        //        }
-        //        else {
-        //            self.performSegue(withIdentifier: "showEventResults", sender: nil)
-        //            //                        print("is not host")
-        //        }
+
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -217,14 +204,6 @@ class EventTableViewController: UITableViewController {
             }
         }
         
-        //
-        //        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        //
-        //        let delete = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        //        alertController.addAction(delete)
-        //
-        //
-        //
-        //        present(alertController, animated: true)
+
     }
 }
