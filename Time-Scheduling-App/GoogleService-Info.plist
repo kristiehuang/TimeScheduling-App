@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>215706551976-r40fn1niq9i31dghv2qnrak8g3l8qopq.apps.googleusercontent.com</string>
+	<string>123809566615-i069r3gpgsd0c2ng147iap92fuu8a0te.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.215706551976-r40fn1niq9i31dghv2qnrak8g3l8qopq</string>
+	<string>com.googleusercontent.apps.123809566615-i069r3gpgsd0c2ng147iap92fuu8a0te</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB--sgt0KsR18zZ-Zhoo0YkSKdKJLqEBxk</string>
+	<string>AIzaSyB-toFFsuhcbdrtBwsPmlAViMfyhqoApGk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>215706551976</string>
+	<string>123809566615</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.makeschool.Time-Scheduling-App</string>
+	<string>com.kunhuang.AirTime</string>
 	<key>PROJECT_ID</key>
-	<string>time-scheduling-app-1a656</string>
+	<string>airtime-5803c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>time-scheduling-app-1a656.appspot.com</string>
+	<string>airtime-5803c.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:215706551976:ios:b47feec233db8d4b</string>
+	<string>1:123809566615:ios:07e67870f796ed05</string>
 	<key>DATABASE_URL</key>
-	<string>https://time-scheduling-app-1a656.firebaseio.com</string>
+	<string>https://airtime-5803c.firebaseio.com</string>
 </dict>
 </plist>
