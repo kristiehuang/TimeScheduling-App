@@ -33,8 +33,7 @@ class InviteEventViewController: UIViewController {
 	
 	
 	static var event: Event?
-	//    var inviteeNames = [String]() //invitee names array
-	//    static var inviteeEmails = [String]() //emails of invitee array
+	
 	
 	var invitees = [String: Bool]() //
 	static var myInvitees = [User]() //actual invitees array in type User
@@ -314,10 +313,7 @@ extension InviteEventViewController: UITableViewDelegate {
 			if InviteEventViewController.myInvitees.count > indexPath.row {
 				let friender = InviteEventViewController.myInvitees[indexPath.row]
 				
-				
-				//friendservice methods
-				//				let dispatchReloadTable = DispatchGroup()
-				//				dispatchReloadTable.enter()
+
 				FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
 					defer {
 						
@@ -341,10 +337,7 @@ extension InviteEventViewController: UITableViewDelegate {
 					
 					guard success else { return }
 					
-					//					dispatchReloadTable.notify(queue: .main, execute: {
-					//						friender.isInvited = !friender.isInvited
-					//						self.inviteesTableView.reloadData()
-					//					})
+
 					
 				}
 			}
@@ -379,11 +372,7 @@ extension InviteEventViewController: InviteEventCellDelegate {
 		if inviteeCount > indexPath.row {
 			if InviteEventViewController.myInvitees.count > indexPath.row {
 				let friender = InviteEventViewController.myInvitees[indexPath.row]
-				
-				
-				//friendservice methods
-//				let dispatchReloadTable = DispatchGroup()
-//				dispatchReloadTable.enter()
+
 				FriendService.setIsInviting(!friender.isInvited, InviteEventViewController.event!, fromCurrentUserTo: friender) { (success) in
 					defer {
 						
@@ -406,11 +395,7 @@ extension InviteEventViewController: InviteEventCellDelegate {
 					}
 					
 					guard success else { return }
-					
-//					dispatchReloadTable.notify(queue: .main, execute: {
-//						friender.isInvited = !friender.isInvited
-//						self.inviteesTableView.reloadData()
-//					})
+
 					
 				}
 			}

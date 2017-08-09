@@ -51,11 +51,7 @@ extension LoginViewController: FUIAuthDelegate {
                 present(alertController, animated: true)
             }
             else if error.localizedDescription.contains("couldn’t be completed") {
-//                    let alertController = UIAlertController(title: "Something went wrong", message: "", preferredStyle: .alert)
-//                    let cancel = UIAlertAction(title: "Try again", style: .cancel, handler: nil)
-//                    alertController.addAction(cancel)
-//                    present(alertController, animated: true)
-//                    assertionFailure("Error signing in: \(error.localizedDescription)")
+
                 print("login cancelled")
 
             }

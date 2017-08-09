@@ -248,12 +248,9 @@ class EditResponseViewController: UIViewController {
                         
                         datesArr.append(justDate)
                     }
-                    print("dates chosen: \(self.datesChosen)")
-                    print("dates array: \(datesArr)")
+
                     datesArr = eventz.dates + datesArr
                     //change datesArr to existing dates + datesArr, then update
-                    print("dates array after adding: \(datesArr)")
-                    
                     
                     
                     if datesArr.isEmpty {
@@ -545,34 +542,7 @@ extension EditResponseViewController: JTAppleCalendarViewDelegate {
             
         }
         else {
-            
-            
-            //            handleCellSelected(view: cell, cellState: cellState)
-            //            handleCellTextColor(view: cell, cellState: cellState)
-            //            handleSelection(cell: cell, cellState: cellState)
-            //
-            //            numberOfDates -= 1
-            //
-            //            if numberOfDates == 1 {
-            //                availableDatesLabel.text = "\(numberOfDates) date chosen"
-            //            } else {
-            //                availableDatesLabel.text = "\(numberOfDates) dates chosen"
-            //            }
-            //
-            //            let dateDeselected = date
-            //
-            //            let dateFormatterGet = DateFormatter()
-            //            dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
-            //
-            //            let dateFormatter = DateFormatter()
-            //            dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
-            //
-            //            let formatDate: Date? = dateFormatterGet.date(from: "\(dateDeselected)")
-            //            print(dateFormatter.string(from: formatDate!))
-            //
-            //            datesChosen = datesChosen.filter { $0 != dateFormatter.string(from: formatDate!) }
-            //
-            //            print("dates chosen array are \(datesChosen.enumerated())")
+
         }
     }
     

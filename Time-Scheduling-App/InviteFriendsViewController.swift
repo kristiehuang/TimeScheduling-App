@@ -119,9 +119,7 @@ extension InviteFriendsViewController: UITableViewDelegate {
         
         cell.inviteButton.isUserInteractionEnabled = false
         let friender = friends[indexPath.row]
-//
-//        //        self.invitees = []
-//        
+
 //        //if empty, give invitees default value. if new invitees, reset & append
 //        
         FriendService.setIsInviting(!friender.isInvited, InviteFriendsViewController.event!, fromCurrentUserTo: friender) { (success) in
@@ -142,12 +140,9 @@ extension InviteFriendsViewController: UITableViewDelegate {
                 
                 
             }
-//            
+        
             guard success else { return }
-//
-//            friender.isInvited = !friender.isInvited
-//            
-//            self.tableView.reloadRows(at: [indexPath], with: .none)
+
         }
     }
 }

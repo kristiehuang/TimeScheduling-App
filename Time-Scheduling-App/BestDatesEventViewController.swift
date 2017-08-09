@@ -123,8 +123,7 @@
                 
             }
         }
-            //        else if BestDatesEventViewController.thisEvent?.bestDate != (BestDatesEventViewController.sortedDict[firstKey!]?.first as? String)! {
-            //        }
+
         else { //user is not host
             //observe from database, set best date
             let ref = Database.database().reference().child("events").child((BestDatesEventViewController.thisEvent?.host)!).child((BestDatesEventViewController.thisEvent?.key)!).child("best date")
@@ -242,7 +241,6 @@
             }
         }
         
-        //print(bestDatesEventViewController.newOrderedDict)
         
         
         var keysArray: [Int] = []
@@ -297,9 +295,7 @@
         
         return BestDatesEventViewController.sortedDict[sectionString]!.count
         
-        //        let dates = BestDatesEventViewController.sortedDict.valueKeySorted[section].1
-        //
-        //        return dates.count
+
         
     }
     
