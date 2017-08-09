@@ -22,9 +22,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="mOp-Q9-1mA">
-                                <rect key="frame" x="100" y="220" width="175" height="227"/>
+                                <rect key="frame" x="100" y="225" width="175" height="217"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="mOp-Q9-1mA" secondAttribute="height" multiplier="280:363" id="6zR-Uk-H16"/>
+                                    <constraint firstAttribute="width" secondItem="mOp-Q9-1mA" secondAttribute="height" multiplier="887:1101" id="6zR-Uk-H16"/>
                                 </constraints>
                             </imageView>
                         </subviews>
